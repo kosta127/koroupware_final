@@ -33,6 +33,7 @@ public class HomeController {
 		return "idPassSearch";
 	}
 	
+	//예시 화면
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
 	public String chat() {
 		return "chatView/chatMain"; // 뷰폴더 / jsp 파일명 쓰면 그 경로로 갑니다.
