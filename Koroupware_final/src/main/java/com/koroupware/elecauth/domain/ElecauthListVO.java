@@ -12,7 +12,22 @@ public class ElecauthListVO {
 	private String emp_name; 
 	private String approval_list_pass;
 	
+	public ElecauthListVO(){}
 	
+	public ElecauthListVO(int elec_auth_no, String elec_auth_title, Date elec_auth_regdate, Date elec_auth_enddate,
+			String doc_title, String dept_name, String emp_name, String approval_list_pass) {
+		super();
+		this.elec_auth_no = elec_auth_no;
+		this.elec_auth_title = elec_auth_title;
+		this.elec_auth_regdate = elec_auth_regdate;
+		this.elec_auth_enddate = elec_auth_enddate;
+		this.doc_title = doc_title;
+		this.dept_name = dept_name;
+		this.emp_name = emp_name;
+		this.approval_list_pass = approval_list_pass;
+	}
+
+
 	public int getElec_auth_no() {
 		return elec_auth_no;
 	}

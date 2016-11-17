@@ -9,11 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.DocVO;
-import com.koroupware.elecauth.domain.ElecauthDetailVO;
+import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthReferrerVO;
 import com.koroupware.elecauth.domain.ElecauthVO;
 import com.koroupware.elecauth.domain.EmpDetailVO;
+import com.koroupware.elecauth.domain.ElecauthReadApprovalVO;
+import com.koroupware.elecauth.domain.ElecauthReadReferrerVO;
 import com.koroupware.elecauth.persistence.ElecauthDAO;
 
 @Service
@@ -29,9 +31,21 @@ public class ElecauthServiceImpl implements ElecauthService {
 	}
 
 	@Override
-	public ElecauthDetailVO elecauthDetail(Integer elec_auth_no) throws Exception {
+	public ElecauthReadVO elecauthRead(Integer elec_auth_no) throws Exception {
 		
-		return dao.elecauthDetail(elec_auth_no);
+		return dao.elecauthRead(elec_auth_no);
+	}
+
+	@Override
+	public List<ElecauthReadApprovalVO> elecauthReadApproval(Integer elec_auth_no) throws Exception {
+		
+		return dao.elecauthReadApproval(elec_auth_no);
+	}
+
+	@Override
+	public List<ElecauthReadReferrerVO> elecauthReadReferrer(Integer elec_auth_no) throws Exception {
+		
+		return dao.elecauthReadReferrer(elec_auth_no);
 	}
 
 	@Transactional

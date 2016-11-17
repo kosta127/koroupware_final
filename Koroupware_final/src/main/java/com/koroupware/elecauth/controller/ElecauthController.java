@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.koroupware.elecauth.domain.ElecauthDetailVO;
+import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthVO;
 import com.koroupware.elecauth.domain.EmpDetailVO;
 import com.koroupware.elecauth.dto.ElecauthDTO;
+import com.koroupware.elecauth.domain.ElecauthReadApprovalVO;
+import com.koroupware.elecauth.domain.ElecauthReadReferrerVO;
 import com.koroupware.elecauth.service.ElecauthService;
 
 @Controller
@@ -36,12 +38,22 @@ public class ElecauthController {
 	}
 	
 	
-	@RequestMapping(value="/elecauthDetail")
-	public String read(Model model, @RequestParam("elec_auth_no") int elec_auth_no) throws Exception{
-		ElecauthDetailVO elecauthDetail=service.elecauthDetail(elec_auth_no);
-		model.addAttribute("elecauthDetail", elecauthDetail);
+	@RequestMapping(value="/elecauthRead", method=RequestMethod.GET)
+	public String elecauthRead(Model model, @RequestParam("elec_auth_no") int elec_auth_no) throws Exception{
 		
-		return "/elecauth/elecauthDetail";
+		ElecauthReadVO elecauthRead=service.elecauthRead(elec_auth_no);
+				
+		List<ElecauthReadApprovalVO> elecauthReadApproval
+		=service.elecauthReadApproval(elec_auth_no);
+		
+		List<ElecauthReadReferrerVO> elecauthReadReferrer
+		=service.elecauthReadReferrer(elec_auth_no);
+		
+		model.addAttribute("elecauthRead", elecauthRead);
+		model.addAttribute("elecauthReadApproval", elecauthReadApproval);
+		model.addAttribute("elecauthReadReferrer", elecauthReadReferrer);
+		
+		return "/elecauth/elecauthRead";
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
@@ -63,10 +75,6 @@ public class ElecauthController {
 		//added by jirung
 		//flag는 0, 1로 구분
 		// 0 = 기본, 1 = 임시저장
-/*		System.out.println("HoHo -> " + dto);
-		System.out.println("Path : " + flag);	
-		for(ApprovalListVO dd : dto.getApprovalList()) System.out.println("\tal -> " + dd);
-		for(ElecauthReferrerVO dd : dto.getElecauthReferrer()) System.out.println("\trf -> " + dd);*/	
 		ElecauthVO ea = new ElecauthVO(dto);
 		if(flag == 1){
 			ea.setElec_auth_temporary_saveYN("Y"); //임시저장

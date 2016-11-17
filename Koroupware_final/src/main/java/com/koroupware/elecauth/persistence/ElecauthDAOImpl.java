@@ -9,11 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.DocVO;
-import com.koroupware.elecauth.domain.ElecauthDetailVO;
+import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthReferrerVO;
 import com.koroupware.elecauth.domain.ElecauthVO;
 import com.koroupware.elecauth.domain.EmpDetailVO;
+import com.koroupware.elecauth.domain.ElecauthReadApprovalVO;
+import com.koroupware.elecauth.domain.ElecauthReadReferrerVO;
 
 @Repository
 public class ElecauthDAOImpl implements ElecauthDAO {
@@ -31,10 +33,26 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 	}
 
 	@Override
-	public ElecauthDetailVO elecauthDetail(Integer elec_auth_no) throws Exception {
-		ElecauthDetailVO elecauthDetail=sqlSession.selectOne(namespace+".elecauthDetail", elec_auth_no);
+	public ElecauthReadVO elecauthRead(Integer elec_auth_no) throws Exception {
+		ElecauthReadVO elecauthRead=sqlSession.selectOne(namespace+".elecauthRead", elec_auth_no);
 		
-		return elecauthDetail;
+		return elecauthRead;
+	}
+
+	@Override
+	public List<ElecauthReadApprovalVO> elecauthReadApproval(Integer elec_auth_no) throws Exception {
+		List<ElecauthReadApprovalVO> elecauthReadApproval
+			=sqlSession.selectList(namespace+".elecauthReadApproval", elec_auth_no);
+		
+		return elecauthReadApproval;
+	}
+
+	@Override
+	public List<ElecauthReadReferrerVO> elecauthReadReferrer(Integer elec_auth_no) throws Exception {
+		List<ElecauthReadReferrerVO> elecauthReadReferrer
+			=sqlSession.selectList(namespace+".elecauthReadReferrer", elec_auth_no);
+		
+		return elecauthReadReferrer;
 	}
 
 	@Override
