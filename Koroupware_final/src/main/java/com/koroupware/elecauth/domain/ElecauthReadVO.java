@@ -2,7 +2,7 @@ package com.koroupware.elecauth.domain;
 
 import java.sql.Date;
 
-public class ElecauthDetailVO {
+public class ElecauthReadVO {
 	private int elec_auth_no;
 	private Date elec_auth_enddate;
 	private Date elec_auth_regdate;
@@ -67,7 +67,6 @@ public class ElecauthDetailVO {
 	}
 	public void setEmp_name(String emp_name) {
 		this.emp_name = emp_name;
-	}
-	
+	}	
 	
 }

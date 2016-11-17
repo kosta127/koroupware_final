@@ -38,21 +38,21 @@
 	<table class="table table-bordered" id="tabel1" border=1 width=60%>
 		<tr>
 			<td width=15%>문서종류</td>
-			<td width=30%>${elec_authDetail.doc_title }</td>
+			<td width=30%>${elecauthRead.doc_title }</td>
 			<td width=15%>결재마감일</td>
-			<td width=30%>${elec_authDetail.elec_auth_enddate }</td>
+			<td width=30%>${elecauthRead.elec_auth_enddate }</td>
 		</tr>
 		<tr>
 			<td>문서번호</td>
-			<td>${elec_authDetail.elec_auth_no }</td>
+			<td>${elecauthRead.elec_auth_no }</td>
 			<td>작성일자</td>
-			<td>${elec_authDetail.elec_auth_regdate }</td>
+			<td>${elecauthRead.elec_auth_regdate }</td>
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td>${elec_authDetail.emp_name }</td>
+			<td>${elecauthRead.emp_name }</td>
 			<td>보존년한</td>
-			<td>${elec_authDetail.elec_auth_con_period }</td>
+			<td>${elecauthRead.elec_auth_con_period }</td>
 		</tr>
 	</table>
 	

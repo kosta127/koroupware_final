@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.koroupware.elecauth.domain.ElecauthDetailVO;
+import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.service.ElecauthService;
 
@@ -30,11 +30,11 @@ public class ElecauthController {
 	}
 	
 	
-	@RequestMapping(value="/elecauthDetail")
+	@RequestMapping(value="/elecauthRead")
 	public String read(Model model, @RequestParam("elec_auth_no") int elec_auth_no) throws Exception{
-		ElecauthDetailVO elecauthDetail=service.elecauthDetail(elec_auth_no);
-		model.addAttribute("elecauthDetail", elecauthDetail);
+		ElecauthReadVO elecauthRead=service.elecauthRead(elec_auth_no);
+		model.addAttribute("elecauthRead", elecauthRead);
 		
-		return "/elecauth/elecauthDetail";
+		return "/elecauth/elecauthRead";
 	}
 }
