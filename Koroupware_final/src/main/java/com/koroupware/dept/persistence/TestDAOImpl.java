@@ -1,11 +1,11 @@
-package com.koroupware.O.persistence;
+package com.koroupware.dept.persistence;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.koroupware.O.domain.Test;
+import com.koroupware.dept.domain.Test;
 
 @Repository
 public class TestDAOImpl implements TestDAO {

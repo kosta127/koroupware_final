@@ -1,11 +1,11 @@
-package com.koroupware.O.service;
+package com.koroupware.dept.service;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.koroupware.O.domain.Test;
-import com.koroupware.O.persistence.TestDAO;
+import com.koroupware.dept.domain.Test;
+import com.koroupware.dept.persistence.TestDAO;
 
 @Service
 public class TestServiceImpl implements TestService {

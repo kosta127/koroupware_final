@@ -1,4 +1,4 @@
-package com.koroupware.O.controller;
+package com.koroupware.dept.controller;
 
 import javax.inject.Inject;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.koroupware.O.service.TestService;
+import com.koroupware.dept.service.TestService;
 
 @Controller
 public class TestController {

@@ -1,4 +1,4 @@
-package com.koroupware.O.controller;
+package com.koroupware.dept.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

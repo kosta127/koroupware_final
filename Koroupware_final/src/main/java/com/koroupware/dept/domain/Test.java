@@ -1,4 +1,4 @@
-package com.koroupware.O.domain;
+package com.koroupware.dept.domain;
 
 public class Test {
 	private int testNum;
