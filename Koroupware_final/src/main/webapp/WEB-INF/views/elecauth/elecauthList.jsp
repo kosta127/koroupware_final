@@ -31,7 +31,7 @@
 							<tr>
 								<td>${i.elec_auth_no }</td>
 								<td>${i.doc_title}</td>
-								<td><a href="elec_authDetail.do?elec_auth_no=${i.elec_auth_no}">${i.elec_auth_title }</a></td>
+								<td><a href="elecauthDetail?elec_auth_no=${i.elec_auth_no}">${i.elec_auth_title }</a></td>
 								<td> ${i.dept_name }</td>
 								<td> ${i.emp_name }</td>
 								<td>${i.elec_auth_regdate }</td>

@@ -17,6 +17,15 @@
 		AND ea.elec_auth_management_dept_no=de.dept_no
 		AND ea.elec_auth_no=appr.elec_auth_no
 	</select>
+	
+	<select id="elecauthDetail" resultType="ElecauthDetailVO">
+		SELECT ea.elec_auth_no, ea.elec_auth_enddate, ea.elec_auth_regdate, ea.elec_auth_con_period,
+			ea.elec_auth_title, ea.elec_auth_contents, ea.emp_no, d.doc_title, e.emp_name
+		FROM elec_auth ea, doc d, emp e
+		WHERE ea.doc_no=d.doc_no
+		AND ea.emp_no=e.emp_no
+		AND ea.elec_auth_no=#{elec_auth_no}
+	</select>
 
 </mapper>  
 
