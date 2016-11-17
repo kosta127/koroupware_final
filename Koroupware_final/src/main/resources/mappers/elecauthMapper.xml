@@ -26,6 +26,25 @@
 		AND ea.emp_no=e.emp_no
 		AND ea.elec_auth_no=#{elec_auth_no}
 	</select>
+	
+	<select id="elecauthReadApproval" resultType="ElecauthReadApprovalVO" parameterType="Integer">
+		SELECT a.elec_auth_no, a.emp_no, a.approval_list_pass, a.approval_list_step, a.approval_list_date,
+			e.emp_name, o.office_name
+		FROM elec_auth ea, approval_list a, emp e, office o
+		WHERE ea.elec_auth_no=a.elec_auth_no
+		AND a.emp_no=e.emp_no
+		AND e.office_no=o.office_no
+		AND ea.elec_auth_no=#{elec_auth_no}
+	</select>
+	
+	<select id="elecauthReadReferrer" resultType="ElecauthReadReferrerVO" parameterType="Integer">
+		SELECT er.elec_auth_referrer_no, ea.elec_auth_no, er.emp_no, e.emp_name, d.dept_name
+		FROM elec_auth ea, elec_auth_referrer er, emp e, dept d
+		WHERE ea.elec_auth_no=er.elec_auth_no
+		AND er.emp_no=e.emp_no
+		AND e.dept_no=d.dept_no
+		AND ea.elec_auth_no=#{elec_auth_no}
+	</select>
 
 </mapper>  
 

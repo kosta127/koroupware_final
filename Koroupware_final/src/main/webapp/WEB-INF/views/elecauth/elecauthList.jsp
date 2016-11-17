@@ -6,6 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<!-- jquery -->
+<script src="/resources/jquery-1.9.1/jquery-1.9.1.min.js"></script>
+<!-- jquery-ui -->
+<link href="/resources/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
+<script src="/resources/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<!-- bootstrap 3.3.2 -->
+<link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,7 +39,8 @@
 							<tr>
 								<td>${i.elec_auth_no }</td>
 								<td>${i.doc_title}</td>
-								<td><a href="elecauthRead?elec_auth_no=${i.elec_auth_no}">${i.elec_auth_title }</a></td>
+								<td><a href="elecauthRead?elec_auth_no=${i.elec_auth_no}">
+								${i.elec_auth_title }</a></td>
 								<td> ${i.dept_name }</td>
 								<td> ${i.emp_name }</td>
 								<td>${i.elec_auth_regdate }</td>

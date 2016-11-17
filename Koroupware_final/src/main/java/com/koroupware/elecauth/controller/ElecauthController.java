@@ -1,6 +1,7 @@
 package com.koroupware.elecauth.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
+import com.koroupware.elecauth.domain.ElecauthReadApprovalVO;
+import com.koroupware.elecauth.domain.ElecauthReadReferrerVO;
 import com.koroupware.elecauth.service.ElecauthService;
 
 @Controller
@@ -30,11 +33,24 @@ public class ElecauthController {
 	}
 	
 	
-	@RequestMapping(value="/elecauthRead")
-	public String read(Model model, @RequestParam("elec_auth_no") int elec_auth_no) throws Exception{
+	@RequestMapping(value="/elecauthRead", method=RequestMethod.GET)
+	public String elecauthRead(Model model, @RequestParam("elec_auth_no") int elec_auth_no) throws Exception{
+		
 		ElecauthReadVO elecauthRead=service.elecauthRead(elec_auth_no);
+				
+		List<ElecauthReadApprovalVO> elecauthReadApproval
+		=service.elecauthReadApproval(elec_auth_no);
+		
+		List<ElecauthReadReferrerVO> elecauthReadReferrer
+		=service.elecauthReadReferrer(elec_auth_no);
+		
 		model.addAttribute("elecauthRead", elecauthRead);
+		model.addAttribute("elecauthReadApproval", elecauthReadApproval);
+		model.addAttribute("elecauthReadReferrer", elecauthReadReferrer);
 		
 		return "/elecauth/elecauthRead";
 	}
+	
+	
+	
 }

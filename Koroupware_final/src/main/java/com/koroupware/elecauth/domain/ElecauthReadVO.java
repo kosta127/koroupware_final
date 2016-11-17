@@ -14,6 +14,23 @@ public class ElecauthReadVO {
 	private String doc_title;
 	private String emp_name;
 	
+	public ElecauthReadVO(){}
+	
+	public ElecauthReadVO(int elec_auth_no, Date elec_auth_enddate, Date elec_auth_regdate, Date elec_auth_con_period,
+			String elec_auth_title, String elec_auth_contents, int emp_no, String doc_title, String emp_name) {
+		super();
+		this.elec_auth_no = elec_auth_no;
+		this.elec_auth_enddate = elec_auth_enddate;
+		this.elec_auth_regdate = elec_auth_regdate;
+		this.elec_auth_con_period = elec_auth_con_period;
+		this.elec_auth_title = elec_auth_title;
+		this.elec_auth_contents = elec_auth_contents;
+		this.emp_no = emp_no;
+		this.doc_title = doc_title;
+		this.emp_name = emp_name;
+	}
+
+
 	public int getElec_auth_no() {
 		return elec_auth_no;
 	}

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
+import com.koroupware.elecauth.domain.ElecauthReadApprovalVO;
+import com.koroupware.elecauth.domain.ElecauthReadReferrerVO;
 import com.koroupware.elecauth.persistence.ElecauthDAO;
 
 @Service
@@ -26,6 +28,18 @@ public class ElecauthServiceImpl implements ElecauthService {
 	public ElecauthReadVO elecauthRead(Integer elec_auth_no) throws Exception {
 		
 		return dao.elecauthRead(elec_auth_no);
+	}
+
+	@Override
+	public List<ElecauthReadApprovalVO> elecauthReadApproval(Integer elec_auth_no) throws Exception {
+		
+		return dao.elecauthReadApproval(elec_auth_no);
+	}
+
+	@Override
+	public List<ElecauthReadReferrerVO> elecauthReadReferrer(Integer elec_auth_no) throws Exception {
+		
+		return dao.elecauthReadReferrer(elec_auth_no);
 	}
 
 }
