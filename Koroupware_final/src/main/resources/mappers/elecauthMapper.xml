@@ -26,6 +26,68 @@
 		AND ea.emp_no=e.emp_no
 		AND ea.elec_auth_no=#{elec_auth_no}
 	</select>
-
+	
+	<!-- 전자결재 등록 added by jirung -->
+	<insert id="elecauthInsert" parameterType="ElecauthVO">
+		INSERT INTO ELEC_AUTH(elec_auth_no, emp_no, elec_auth_management_dept_no,
+                      elec_auth_title, elec_auth_contents,
+                      elec_auth_enddate, 
+                      elec_auth_temporary_saveYN, elec_auth_con_period,
+                      doc_no, elec_auth_regdate)
+        	VALUES(seq_elec_auth.nextval, #{emp_no}, #{elec_auth_management_dept_no},
+        			#{elec_auth_title}, #{elec_auth_contents},
+        			#{elec_auth_enddate},
+        			#{elec_auth_temporary_saveYN}, #{elec_auth_con_period},
+        			#{doc_no}, SYSDATE)
+	</insert>
+	
+	<!-- 전자결재 결재자 리스트 입력 added by jirung -->
+	<insert id="approvalListInsert" parameterType="ApprovalListVO">
+		INSERT INTO APPROVAL_LIST(elec_auth_no, emp_no, approval_list_step)
+               VALUES(seq_elec_auth.currval, #{emp_no}, #{approval_list_step})
+	</insert>
+	
+	<!-- 전자결재 참조자 리스트 입력 added by jirung -->
+	<insert id="elecauthReferrerInsert" parameterType="ElecauthReferrerVO">
+		INSERT INTO ELEC_AUTH_REFERRER(elec_auth_no, emp_no)	
+				VALUES(seq_elec_auth.currval, #{emp_no})
+	</insert>
+	
+	<select id="empDetailSelect" parameterType="int" resultType="EmpDetailVO">
+		SELECT e.emp_no, e.emp_name, e.dept_no, e.emp_email,
+			   e.emp_superior, e.emp_reporter, e.emp_id,
+			   e.emp_address, TO_CHAR(e.emp_hiredate, 'yyyy-mm-dd'),
+			   TO_CHAR(e.emp_resigndate, 'yyyy-mm-dd'), 
+			   e.emp_email_sign, e.emp_elec_auth_signkey,
+			   e.emp_img, e.emp_elec_auth_img,
+			   d.dept_name, o.office_name, p.position_name
+ 		 FROM emp e INNER JOIN dept d ON e.dept_no = d.dept_no
+      		 INNER JOIN office o ON e.office_no = o.office_no
+     		 INNER JOIN position p ON e.position_no = p.position_no
+  		WHERE emp_resigndate IS NULL
+  		AND e.emp_no = #{emp_no}
+	</select>
+	
+	<select id="docListSelect" resultType="DocVO">
+		SELECT doc_title, doc_no, doc_contents
+			FROM doc
+			WHERE doc_formyn = 'Y'
+			AND doc_deldate IS NULL
+			ORDER BY doc_title ASC
+	</select>
+	
+	<select id="empDetailListSelect" resultType="EmpDetailVO">
+		SELECT e.emp_no, e.emp_name, e.dept_no, e.emp_email,
+			   e.emp_superior, e.emp_reporter, e.emp_id,
+			   e.emp_address, TO_CHAR(e.emp_hiredate, 'yyyy-mm-dd'),
+			   TO_CHAR(e.emp_resigndate, 'yyyy-mm-dd'), 
+			   e.emp_email_sign, e.emp_elec_auth_signkey,
+			   e.emp_img, e.emp_elec_auth_img,
+			   d.dept_name, o.office_name, p.position_name
+ 		 FROM emp e INNER JOIN dept d ON e.dept_no = d.dept_no
+      		 INNER JOIN office o ON e.office_no = o.office_no
+     		 INNER JOIN position p ON e.position_no = p.position_no
+  		WHERE emp_resigndate IS NULL
+	</select>
 </mapper>  
 
