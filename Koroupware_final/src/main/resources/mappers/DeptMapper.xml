@@ -31,6 +31,18 @@
 		        AND e.emp_no = #{emp_no}
 		        AND e.emp_resigndate IS NULL
 	</select>
+	
+	<select id="orgChartTreeList" resultType="OrgChartEmpVO">
+		SELECT e.emp_no, e.emp_name, e.emp_email, e.emp_id, e.emp_address, e.emp_hiredate, 
+				e.emp_img, e.emp_superior, e.emp_reporter,
+		        p.position_name, o.office_name, d.dept_name, d.dept_work
+		FROM emp e, position p, office o, dept d
+		WHERE e.position_no = p.position_no
+		        AND e.office_no = o.office_no
+		        AND e.dept_no = d.dept_no
+		        AND e.emp_resigndate IS NULL
+		        AND e.emp_resigndate IS NULL
+	</select>
 </mapper>
 
 

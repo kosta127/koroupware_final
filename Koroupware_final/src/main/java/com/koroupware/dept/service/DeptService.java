@@ -10,4 +10,5 @@ public interface DeptService {
 	public List<DeptVO> deptList() throws Exception;
 	public List<OrgChartDTO> orgChartList() throws Exception;
 	public OrgChartEmpVO orgChartEmpRead(Integer emp_no) throws Exception;
+	public List<OrgChartEmpVO> orgChartTreeList() throws Exception;
 }

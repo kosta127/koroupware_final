@@ -32,4 +32,9 @@ public class DeptDAOImpl implements DeptDAO{
 	public OrgChartEmpVO orgChartEmpSelect(Integer emp_no) throws Exception {
 		return session.selectOne(NAMESPACE + ".orgChartEmpRead", emp_no);
 	}
+
+	@Override
+	public List<OrgChartEmpVO> orgChartTreeList() throws Exception {
+		return session.selectList(NAMESPACE + ".orgChartTreeList");
+	}
 }

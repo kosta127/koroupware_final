@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>조직도</title>
 	
 	<!-- jquery -->
 	<script src="/resources/jquery-1.9.1/jquery-1.9.1.min.js"></script>
@@ -23,13 +23,19 @@
 	<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 	
 	<!-- custom -->
+	<link rel="stylesheet" type="text/css" href="/resources/dept/css/orgChartTree.css">
+	<script type="text/javascript" src="/resources/dept/js/orgChartTree.js"></script>
 	<link rel="stylesheet" type="text/css" href="/resources/dept/css/orgChart.css">
 	<script type="text/javascript" src="/resources/dept/js/orgChart.js"></script>
 </head>
 <body>
 	<div id="container" class="container">
-		<section class="row">
-			<c:forEach items="${orgCharList}" var="orgChart">
+		<nav>
+			<a id="orgChartListSort" href="#">부서별</a>
+			<a id="orgChartTreeSort" href="#">트리</a>
+		</nav>
+		<section id="orgChartListSection" class="row">
+			<c:forEach items="${orgChartList}" var="orgChart">
 				<div class="panel-group">
 					<div id="orgChartModelList" class="panel panel-default">
 						<div class="panel-heading">
@@ -59,7 +65,12 @@
 					</div>
 				</div>
 			</c:forEach>
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			<!-- 모달 전체 윈도우 -->
+		</section>
+		<section id="orgChartTreeSection" class="horizontalTreeTop row hidden">
+		</section>
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -80,8 +91,6 @@
 				</div>
 				<!-- 모달 다이얼로그 -->
 			</div>
-			<!-- 모달 전체 윈도우 -->
-		</section>
 	</div>
 </body>
 </html>

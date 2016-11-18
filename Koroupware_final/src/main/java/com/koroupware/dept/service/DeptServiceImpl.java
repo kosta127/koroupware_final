@@ -54,4 +54,9 @@ public class DeptServiceImpl implements DeptService{
 	public OrgChartEmpVO orgChartEmpRead(Integer emp_no) throws Exception{
 		return dao.orgChartEmpSelect(emp_no);
 	}
+
+	@Override
+	public List<OrgChartEmpVO> orgChartTreeList() throws Exception {
+		return dao.orgChartTreeList();
+	}
 }
