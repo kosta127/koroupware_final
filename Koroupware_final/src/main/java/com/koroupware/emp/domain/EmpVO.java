@@ -15,7 +15,8 @@ public class EmpVO {
 	private String emp_password;
 	private String emp_address;
 	private String emp_approvalyn;
-	private String emp_residentNum;
+	private String emp_residentNum_left;
+	private String emp_residentNum_right;
 	private Date emp_hiredate;
 	private Date emp_resigndate;
 	private String emp_email_sign;
@@ -96,11 +97,17 @@ public class EmpVO {
 	public void setEmp_approvalyn(String emp_approvalyn) {
 		this.emp_approvalyn = emp_approvalyn;
 	}
-	public String getEmp_residentNum() {
-		return emp_residentNum;
+	public String getEmp_residentNum_left() {
+		return emp_residentNum_left;
 	}
-	public void setEmp_residentNum(String emp_residentNum) {
-		this.emp_residentNum = emp_residentNum;
+	public void setEmp_residentNum_left(String emp_residentNum_left) {
+		this.emp_residentNum_left = emp_residentNum_left;
+	}
+	public String getEmp_residentNum_right() {
+		return emp_residentNum_right;
+	}
+	public void setEmp_residentNum_right(String emp_residentNum_right) {
+		this.emp_residentNum_right = emp_residentNum_right;
 	}
 	public Date getEmp_hiredate() {
 		return emp_hiredate;

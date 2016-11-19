@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -19,7 +19,7 @@
 .div-login-form{
  border-radius : 15px;
  margin-top: 130px;
- box-shadow: 5px 5px 5px 5px lightgray; /* ±×¸²ÀÚ */
+ box-shadow: 5px 5px 5px 5px lightgray; /* ê·¸ë¦¼ì */
 }
 
 .main-font{
@@ -132,12 +132,12 @@
  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
  <input type="password" class="form-control input-pass">
  </div>
-<input type="submit" value="·Î±×ÀÎ" class="btn btn-lg btn-block login-submit">
+<input type="submit" value="ë¡œê·¸ì¸" class="btn btn-lg btn-block login-submit">
 </form>
 </div>
 <div class="col-md-12 signUp-idPass">
-<a href="signUp" class="signUp">È¸¿ø°¡ÀÔ</a>
-<a href="idPassSearch" class="idPassSearch">¾ÆÀÌµğ/ºñ¹Ğ¹øÈ£ Ã£±â</a>
+<a href="signUp" class="signUp">íšŒì›ê°€ì…</a>
+<a href="idPassSearch" class="idPassSearch">ì•„ì´ë””/ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a>
 </div>
 <div class="col-md-12"></div>
 </div>

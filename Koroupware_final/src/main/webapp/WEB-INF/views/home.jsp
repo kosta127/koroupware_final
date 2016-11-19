@@ -15,9 +15,6 @@
 <!-- printTool -->
 <script src="/resources/printTool/jQuery.print.js"></script>
 <script>
-$(function(){
-	alert("hello");
-})
 </script>
 <body>
 <h1>

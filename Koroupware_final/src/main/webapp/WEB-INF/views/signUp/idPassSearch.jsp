@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -184,7 +184,7 @@ function cancel() {
 <div class="col-md-12 void-top-div"></div>
 <div class="col-md-12 left-form-top-div">
 <div class="col-md-3 font-div">
-<span>�̸�</span>
+<span>이름</span>
 </div> 
 <div class="col-md-9"> 
 <input type="text" class="form-control">
@@ -192,7 +192,7 @@ function cancel() {
 </div>
 <div class="col-md-12">
 <div class="col-md-3 font-div">
-<span>�ֹε�Ϲ�ȣ</span>
+<span>주민등록번호</span>
 </div>  
 <div class="col-md-4"> 
 <input type="text" class="form-control">
@@ -204,7 +204,7 @@ function cancel() {
 <div class="col-md-12">
 <div class="col-md-4"></div>
 <div class="col-md-8 button-div">
-<button onclick="" class="btn btn-block idSearch-button">���̵� ã��</button>
+<button onclick="" class="btn btn-block idSearch-button">아이디 찾기</button>
 </div>
 <div class="col-md-12 void-div"></div>
 </div> 
@@ -214,7 +214,7 @@ function cancel() {
 <div class="col-md-12 void-top-div"></div>
 <div class="col-md-12 right-form-top-div">
 <div class="col-md-3 font-div">
-<span>���̵�</span> 
+<span>아이디</span> 
 </div>
 <div class="col-md-9">
 <input type="text" class="form-control">
@@ -222,14 +222,14 @@ function cancel() {
 </div>
 <div class="col-md-12">
 <div class="col-md-3 font-div">
-<span>�̸���</span> 
+<span>이메일</span> 
 </div>
 <div class="col-md-9">
 <input type="text" class="form-control">
 </div>
 <div class="col-md-4"></div>
 <div class="col-md-8 button-div">
-<button onclick="" class="btn btn-block passSearch-button">��й�ȣ ã��</button>
+<button onclick="" class="btn btn-block passSearch-button">비밀번호 찾기</button>
 </div>
 <div class="col-md-12 void-div"></div>
 </div>
@@ -240,7 +240,7 @@ function cancel() {
 <div class="col-md-6">
 </div>
 <div class="col-md-6">
-<button onclick="cancel()" class="btn btn-block back-button">���ư���</button>
+<button onclick="cancel()" class="btn btn-block back-button">돌아가기</button>
 </div>
 </div>
 </div>

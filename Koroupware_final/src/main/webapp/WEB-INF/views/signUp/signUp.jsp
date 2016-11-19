@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -11,54 +12,122 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="/resources/jquery-1.9.1/jquery-1.9.1.min.js"></script>
+<!-- jquery-ui -->
+<link href="/resources/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
+<script src="/resources/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script>
-    function sample6_execDaumPostcode() {
+$(function(){
+	
+	$('.emp_id').keyup(function() { //ì‹¤ì‹œê°„ ì•„ì´ë”” ì²´í¬ start
+	 $.getJSON("/signUp/check", function(data) {
+		console.log(data);
+		
+		if($('.emp_id').val().length < 5){
+			$('.idError1').text('');
+			$('.idError2').text('');
+			$('.idError1').html('6ìì´ìƒ ì…ë ¥í•´ì£¼ì„¸ìš”.').addClass("error").removeClass("success");
+			return false;
+		}
+		
+		$(data).each(function() {
+			if(this.toString() != $('.emp_id').val()){
+				$('.idError1').text('');
+				$('.idError2').text('');
+				$('.idError2').html('ì‚¬ìš©ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.').addClass("success").removeClass("error");
+			}else{
+				$('.idError1').text('');
+				$('.idError2').text('');
+				$('.idError1').html('ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.').addClass("error").removeClass("success");
+				return false;
+			}
+		});
+	 });
+	 }); // ì‹¤ì‹œê°„ ì•„ì´ë”” ì²´í¬ end
+		
+	  $('.emp_password1').keyup(function(){ //ë¹„ë°€ë²ˆí˜¸ ì²´í¬ start
+	   $('.passError1').text('');
+	   $('.passError2').text('');
+	  });
+	  
+	  $('.emp_password2').keyup(function(){
+	   if($('.emp_password1').val().length < 3 || 
+			   $('.emp_password2').val().length < 3){
+		   $('.passError1').text('');
+		    $('.passError2').text('');
+		    $('.passError1').html("4ìì´ìƒ ì…ë ¥í•´ì£¼ì„¸ìš”.").addClass("error").removeClass("success");
+	   }
+		  
+	   if($('.emp_password1').val()!=$('.emp_password2').val()){
+	    $('.passError1').text('');
+	    $('.passError2').text('');
+	    $('.passError1').html("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.").addClass("error").removeClass("success");
+	    return false;
+	   }else{
+	    $('.passError1').text('');
+	    $('.passError2').text('');
+	    $('.passError2').html("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤.").addClass("success").removeClass("error");
+	   }
+	  }); //ë¹„ë°€ë²ˆí˜¸ ì²´í¬ end
+});
+
+    function sample6_execDaumPostcode() { //ë‹¤ìŒ ì£¼ì†Œ api 
         new daum.Postcode({
             oncomplete: function(data) {
-                // ÆË¾÷¿¡¼­ °Ë»ö°á°ú Ç×¸ñÀ» Å¬¸¯ÇßÀ»¶§ ½ÇÇàÇÒ ÄÚµå¸¦ ÀÛ¼ºÇÏ´Â ºÎºĞ.
+                // íŒì—…ì—ì„œ ê²€ìƒ‰ê²°ê³¼ í•­ëª©ì„ í´ë¦­í–ˆì„ë•Œ ì‹¤í–‰í•  ì½”ë“œë¥¼ ì‘ì„±í•˜ëŠ” ë¶€ë¶„.
 
-                // °¢ ÁÖ¼ÒÀÇ ³ëÃâ ±ÔÄ¢¿¡ µû¶ó ÁÖ¼Ò¸¦ Á¶ÇÕÇÑ´Ù.
-                // ³»·Á¿À´Â º¯¼ö°¡ °ªÀÌ ¾ø´Â °æ¿ì¿£ °ø¹é('')°ªÀ» °¡Áö¹Ç·Î, ÀÌ¸¦ Âü°íÇÏ¿© ºĞ±â ÇÑ´Ù.
-                var fullAddr = ''; // ÃÖÁ¾ ÁÖ¼Ò º¯¼ö
-                var extraAddr = ''; // Á¶ÇÕÇü ÁÖ¼Ò º¯¼ö
+                // ê° ì£¼ì†Œì˜ ë…¸ì¶œ ê·œì¹™ì— ë”°ë¼ ì£¼ì†Œë¥¼ ì¡°í•©í•œë‹¤.
+                // ë‚´ë ¤ì˜¤ëŠ” ë³€ìˆ˜ê°€ ê°’ì´ ì—†ëŠ” ê²½ìš°ì—” ê³µë°±('')ê°’ì„ ê°€ì§€ë¯€ë¡œ, ì´ë¥¼ ì°¸ê³ í•˜ì—¬ ë¶„ê¸° í•œë‹¤.
+                var fullAddr = ''; // ìµœì¢… ì£¼ì†Œ ë³€ìˆ˜
+                var extraAddr = ''; // ì¡°í•©í˜• ì£¼ì†Œ ë³€ìˆ˜
 
-                // »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò Å¸ÀÔ¿¡ µû¶ó ÇØ´ç ÁÖ¼Ò °ªÀ» °¡Á®¿Â´Ù.
-                if (data.userSelectedType === 'R') { // »ç¿ëÀÚ°¡ µµ·Î¸í ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì
+                // ì‚¬ìš©ìê°€ ì„ íƒí•œ ì£¼ì†Œ íƒ€ì…ì— ë”°ë¼ í•´ë‹¹ ì£¼ì†Œ ê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
+                if (data.userSelectedType === 'R') { // ì‚¬ìš©ìê°€ ë„ë¡œëª… ì£¼ì†Œë¥¼ ì„ íƒí–ˆì„ ê²½ìš°
                     fullAddr = data.roadAddress;
 
-                } else { // »ç¿ëÀÚ°¡ Áö¹ø ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì(J)
+                } else { // ì‚¬ìš©ìê°€ ì§€ë²ˆ ì£¼ì†Œë¥¼ ì„ íƒí–ˆì„ ê²½ìš°(J)
                     fullAddr = data.jibunAddress;
                 }
 
-                // »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò°¡ µµ·Î¸í Å¸ÀÔÀÏ¶§ Á¶ÇÕÇÑ´Ù.
+                // ì‚¬ìš©ìê°€ ì„ íƒí•œ ì£¼ì†Œê°€ ë„ë¡œëª… íƒ€ì…ì¼ë•Œ ì¡°í•©í•œë‹¤.
                 if(data.userSelectedType === 'R'){
-                    //¹ıÁ¤µ¿¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù.
+                    //ë²•ì •ë™ëª…ì´ ìˆì„ ê²½ìš° ì¶”ê°€í•œë‹¤.
                     if(data.bname !== ''){
                         extraAddr += data.bname;
                     }
-                    // °Ç¹°¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù.
+                    // ê±´ë¬¼ëª…ì´ ìˆì„ ê²½ìš° ì¶”ê°€í•œë‹¤.
                     if(data.buildingName !== ''){
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
-                    // Á¶ÇÕÇüÁÖ¼ÒÀÇ À¯¹«¿¡ µû¶ó ¾çÂÊ¿¡ °ıÈ£¸¦ Ãß°¡ÇÏ¿© ÃÖÁ¾ ÁÖ¼Ò¸¦ ¸¸µç´Ù.
+                    // ì¡°í•©í˜•ì£¼ì†Œì˜ ìœ ë¬´ì— ë”°ë¼ ì–‘ìª½ì— ê´„í˜¸ë¥¼ ì¶”ê°€í•˜ì—¬ ìµœì¢… ì£¼ì†Œë¥¼ ë§Œë“ ë‹¤.
                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                 }
 
-                // ¿ìÆí¹øÈ£¿Í ÁÖ¼Ò Á¤º¸¸¦ ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
-               // document.getElementById('sample6_postcode').value = data.zonecode; //5ÀÚ¸® »õ¿ìÆí¹øÈ£ »ç¿ë
+                // ìš°í¸ë²ˆí˜¸ì™€ ì£¼ì†Œ ì •ë³´ë¥¼ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
+               // document.getElementById('sample6_postcode').value = data.zonecode; //5ìë¦¬ ìƒˆìš°í¸ë²ˆí˜¸ ì‚¬ìš©
                 document.getElementById('sample6_address').value = fullAddr;
             }
         }).open();
-    }
+    } //ë‹¤ìŒ ì£¼ì†Œ api 
     
     function cancel() {
     	history.back();
-	}
+	} //ëŒì•„ê°€ê¸°
+   
 </script>
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css); 
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+.success{
+   color : #43A047;
+}
+.error{
+   color: #E64A19;
+} 
+.passError1{
+   text-align: right;
+}
 .main-font1{
    font-family: 'Product Sans', Arial, sans-serif;
    color : #0080c0;
@@ -170,73 +239,81 @@ font-family: 'Noto Sans KR', sans-serif;
 .bottom-void{
  height: 30px;
 }
+.idError{
+ text-align: right;
+}
 </style>
 </head>
 <body>
-<div class="col-md-2"></div> <!-- ¿ŞÂÊ ¿©¹é div -->
+<div class="col-md-2"></div> <!-- ì™¼ìª½ ì—¬ë°± div -->
 <div class="col-md-8">
 <div class="col-md-12 center-form">
 <div class="col-md-12 logo-font">
 <span class="main-font1">K</span><span class="main-font2">o</span><span class="main-font3">r</span><span class="main-font4">o</span><span class="main-font5">u</span><span class="main-font6">p</span><span class="main-font7">w</span><span class="main-font8">a</span><span class="main-font9">r</span><span class="main-font10">e</span>
 </div>
-<form action=""> <!-- Æû ½ÃÀÛ -->
+<form action="signUp" method="post"> <!-- í¼ ì‹œì‘ -->
 <div class="col-md-12"> 
-<div class="col-md-2 font-div"> <!-- ¾ÆÀÌµğ ½ÃÀÛ  -->
-<span>¾ÆÀÌµğ</span> 
-</div> 
+<div class="col-md-2 font-div"> <!-- ì•„ì´ë”” ì‹œì‘  -->
+
+<span>ì•„ì´ë””</span> 
+</div>  
 <div class="col-md-4">
-<input type="text" class="form-control" name="emp_id">
-</div> <!-- ¾ÆÀÌµğ ³¡  -->
-<div class="col-md-2 font-div"> <!-- ÀÌ¸§ ½ÃÀÛ -->
-<span>ÀÌ¸§</span>
+<input type="text" class="form-control emp_id" name="emp_id">
+<div class="idError">
+<div class="col-md-12 idError1 idError2"></div>
+</div>
+</div>
+<!-- ì•„ì´ë”” ë  -->
+<div class="col-md-2 font-div"> <!-- ì´ë¦„ ì‹œì‘ -->
+<span>ì´ë¦„</span>
 </div>
 <div class="col-md-4">
 <input type="text" class="form-control" name="emp_name">
 </div>
-</div> <!-- ÀÌ¸§ ³¡ -->
-<div class="col-md-12"> <!-- ºñ¹Ğ¹øÈ£ ½ÃÀÛ -->
+</div> <!-- ì´ë¦„ ë -->
+<div class="col-md-12"> <!-- ë¹„ë°€ë²ˆí˜¸ ì‹œì‘ -->
 <div class="col-md-2 font-div">
-<span>ºñ¹Ğ¹øÈ£</span>
+<span>ë¹„ë°€ë²ˆí˜¸</span>
 </div>
 <div class="col-md-4">
- <input type="password" class="form-control emp_password1" name="emp_password">
+ <input type="password" class="form-control emp_password1" maxlength="10" name="emp_password">
 </div>
 <div class="col-md-2 font-div"> 
-<span>ºñ¹Ğ¹øÈ£ È®ÀÎ</span>
+<span>ë¹„ë°€ë²ˆí˜¸ í™•ì¸</span>
 </div> 
 <div class="col-md-4">
-<input type="password" class="form-control emp_password2">
+<input type="password" class="form-control emp_password2" maxlength="15">
 </div>
-</div> <!-- ºñ¹Ğ¹øÈ£ ³¡ -->
-<div class="col-md-12 passError"></div> <!-- ºñ¹Ğ¹øÈ£ ¿¡·¯Ä­ -->
-<div class="col-md-12"> <!-- ÁÖ¹Î¹øÈ£ ½ÃÀÛ -->
+</div> <!-- ë¹„ë°€ë²ˆí˜¸ ë -->
+<div class="col-md-12"><div class="col-md-12"><div class="col-md-6"></div><div class="col-md-6 passError1 passError2"></div></div></div> <!-- ë¹„ë°€ë²ˆí˜¸ ì—ëŸ¬ì¹¸ -->
+<div class="col-md-12"> <!-- ì£¼ë¯¼ë²ˆí˜¸ ì‹œì‘ -->
 <div class="col-md-2 font-div">
-<span>ÁÖ¹Îµî·Ï¹øÈ£</span>
+<span>ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸</span>
 </div>
 <div class="col-md-5">
-<input type="text" class="form-control" name="emp_residentnumber_left"> 
+<input type="text" class="form-control" maxlength="6" name="emp_residentNum_left"> 
 </div>
 <div class="col-md-5">
-<input type="password" class="form-control" name="emp_residentnumber_right">
+<input type="password" class="form-control" maxlength="7" name="emp_residentNum_right">
 </div>
-</div> <!-- ÁÖ¹Î¹øÈ£ ³¡ -->
-<div class="col-md-12"> <!-- ÀÌ¸ŞÀÏ ½ÃÀÛ  -->
+</div> <!-- ì£¼ë¯¼ë²ˆí˜¸ ë -->
+<div class="col-md-12"> <!-- ì´ë©”ì¼ ì‹œì‘  -->
 <div class="col-md-2 font-div">
-<span>ÀÌ¸ŞÀÏ</span>
+<span>ì´ë©”ì¼</span>
 </div>
 <div class="col-md-4">
   <input type="text" class="form-control" name="emp_email">
 </div>
 <div class="col-md-2 font-div">
-<span >°áÀç»çÀÎÅ°</span>
+<span >ê²°ì¬ì‚¬ì¸í‚¤</span>
 </div>
 <div class="col-md-4">
-<input type="password" class="form-control" name="emp_elec_auth_signkey">
+<input type="password" class="form-control emp_elec_auth_signkey" name="emp_elec_auth_signkey">
 </div>
-</div> <!-- ÀÌ¸ŞÀÏ ³¡ -->
-<div class="col-md-12"> <!-- ÀüÈ­¹øÈ£ ½ÃÀÛ  -->
+</div> <!-- ì´ë©”ì¼ ë -->
+<div class="col-md-12"> <!-- ì „í™”ë²ˆí˜¸ ì‹œì‘  -->
 <div class="col-md-2 font-div">
-<span>ÀüÈ­¹øÈ£</span>
+<span>ì „í™”ë²ˆí˜¸</span>
 </div>
 <div class="col-md-2"> 
  <input type="text" maxlength="3" class="form-control inputs" name="tel_telephone_left">  
@@ -246,17 +323,17 @@ font-family: 'Noto Sans KR', sans-serif;
 </div>
 <div class="col-md-4"> 
  <input type="text" maxlength="4" class="form-control" name="tel_telephone_right">
-</div> <!-- ÀüÈ­¹øÈ£ ³¡ --> 
+</div> <!-- ì „í™”ë²ˆí˜¸ ë --> 
 </div>
 <div class="col-md-12">
 <div class="col-md-2 font-div">
-<span>ÁÖ¼Ò</span>
+<span>ì£¼ì†Œ</span>
 </div>
 <div class="col-md-8">
 <input type="text" id="sample6_address" class="form-control" name="emp_address">
 </div>
 <div class="col-md-2">
-<input type="button" onclick="sample6_execDaumPostcode()" value="ÁÖ¼ÒÃ£±â" class="btn btn-block addressSearch-button"> <!-- buttoÅÂ±×·Î ÇÏ¸é ¾ÈµÊ -->
+<input type="button" onclick="sample6_execDaumPostcode()" value="ì£¼ì†Œì°¾ê¸°" class="btn btn-block addressSearch-button"> <!-- buttoíƒœê·¸ë¡œ í•˜ë©´ ì•ˆë¨ -->
 </div>
 </div>
 <div class="col-md-12 center-form-bottom">
@@ -266,16 +343,16 @@ font-family: 'Noto Sans KR', sans-serif;
 </div>
 <div class="col-md-2"></div>
 <div class="col-md-2">
-<input type="submit" class="btn btn-block signUp-submit" value="È®ÀÎ"> <!-- Æû ³¡ -->
+<input type="submit" class="btn btn-block signUp-submit" value="í™•ì¸"> <!-- í¼ ë -->
 </div>
 <div class="col-md-2">
-<input type="button" onclick="cancel()" value="Ãë¼Ò" class="btn btn-block cancel-button"> <!-- Ãë¼Ò ¹öÆ° -->
+<input type="button" onclick="cancel()" value="ì·¨ì†Œ" class="btn btn-block cancel-button"> <!-- ì·¨ì†Œ ë²„íŠ¼ -->
 </div>
 </div> 
 </form>
 <div class="col-md-12 bottom-void"></div>
 </div>
 </div>
-<div class="col-md-2"></div> <!-- ¿À¸¥ÂÊ ¿©¹é div -->
+<div class="col-md-2"></div> <!-- ì˜¤ë¥¸ìª½ ì—¬ë°± div -->
 </body>
 </html>

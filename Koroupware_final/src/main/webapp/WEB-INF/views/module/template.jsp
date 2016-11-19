@@ -13,30 +13,21 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</head>
-<style>
-.main-body{
- height : 500px;
- border: 1px solid black;
-}
+<link href="/resources/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
+<script src="/resources/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<style type="text/css">
 .main-header{
- border: 1px solid black;
- text-align: center;
+    box-shadow: 0px 0px 0.3px 0.3px lightgray; 
 }
-.main-footer{
- border: 1px solid black;
-}
-
 .main-leftMenubar{
- height : 500px;
- border : 1px solid black;
+ box-shadow: 0px 0.3px 0.3px 0px lightgray; 
 }
 </style>
-<body>
+</head>
+<body> 
 	<!-- 헤더영역 -->
 	<div class="main-header col-md-12">
 	<tiles:insertAttribute name="header"/>
-	여기가 헤더
 	</div>
 	<!-- 왼쪽 메뉴바 -->
 	<div class="main-leftMenubar col-md-2">

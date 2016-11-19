@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
  
@@ -42,19 +42,19 @@
 <div class="col-md-8">
 <div class="col-md-10">
 <div class="canvas-canvas">
- ±×¸² ±×¸®´Â °÷
+ ê·¸ë¦¼ ê·¸ë¦¬ëŠ” ê³³
 </div>
 </div>
 <div class="col-md-2 canvas-menu">
- <button class="canvas-size">Å©±âÁ¶Àý</button>
- <button class="canvas-color">»ö»óÁ¶Àý</button>
- <button class="canvas-write">±Û¾²±â</button>
- <button class="canvas-img">»çÁøÃ·ºÎ</button>
- <button class="canvas-capture">È­¸éÄ¸Ã³</button>
+ <button class="canvas-size">í¬ê¸°ì¡°ì ˆ</button>
+ <button class="canvas-color">ìƒ‰ìƒì¡°ì ˆ</button>
+ <button class="canvas-write">ê¸€ì“°ê¸°</button>
+ <button class="canvas-img">ì‚¬ì§„ì²¨ë¶€</button>
+ <button class="canvas-capture">í™”ë©´ìº¡ì²˜</button>
 </div>
 <div class="col-md-12 chat-people">
-<button class="man1">»ç¶÷1</button>
-<button class="man2">»ç¶÷2</button>
+<button class="man1">ì‚¬ëžŒ1</button>
+<button class="man2">ì‚¬ëžŒ2</button>
 </div>
 </div>
 <div class="col-md-4">
@@ -62,7 +62,7 @@
  </div>
  <div class="col-md-12 chat-write">
  <input type="text" name="chatWrite" class="col-md-9 chat-write">
- <button class="col-md-3 chat-submit btn btn-primary">Àü¼Û</button>
+ <button class="col-md-3 chat-submit btn btn-primary">ì „ì†¡</button>
  </div>
 </div>
 </body>

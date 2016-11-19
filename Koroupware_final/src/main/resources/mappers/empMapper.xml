@@ -7,15 +7,23 @@
 
 	<insert id="signUp" parameterType="EmpVO">
 	 insert into emp(
-	 	emp_no, dept_no, office_no, posittion_no, emp_superior, emp_reporter,
-	 	emp_name, emp_email, emp_id, emp_password, emp_address, emp_approvalyn,
-	 	emp_residentNum, emp_hiredate, emp_email_sign, emp_elec_auth_signkey, emp_img, emp_elec_auth_img
-	 ) values(
-	 	seq_emp.nextval, 0, 0, 0, 0, 0, #{emp_name}, #{emp_email}, #{emp_id}, #{emp_password}, N,
+	 	emp_no, dept_no, office_no, position_no, emp_superior, emp_reporter, emp_name, emp_email, emp_id, emp_password, emp_address, emp_approvalyn,
+	 	emp_residentnumber, emp_hiredate, emp_email_sign, emp_elec_auth_signkey, emp_img, emp_elec_auth_img
+	 ) values(	
+	 	seq_emp.nextval, 1, 1, 1, 1, 1, #{emp_name}, #{emp_email}, #{emp_id}, #{emp_password}, #{emp_address}, 'N',
 	 	#{emp_residentNum_left}||#{emp_residentNum_right}, sysdate, '안녕하세요'||#{emp_name}||'입니다.',
 		#{emp_elec_auth_signkey}, 'emp_img.jpg', 'emp_elec_auth_img.jpg'
 	 )
 	</insert>
 	
+	<select id="empData" resultType="String" parameterType="EmpVO">
+	  select emp_id from emp 
+	</select>
+	
+	<update id="empDataUpdate" parameterType="EmpVO">
+	  update emp set emp_name = #{emp_name}, emp_password = #{emp_password}, emp_email = #{emp_email}, emp_address = #{emp_address},
+	  			emp_img = #{emp_img}, emp_elec_auth_img = #{emp_elec_auth_img}, emp_elec_auth_signkey = #{emp_elec_auth_signkey}
+	  			where emp_no = #{emp_no}
+	</update>
 </mapper>  
 

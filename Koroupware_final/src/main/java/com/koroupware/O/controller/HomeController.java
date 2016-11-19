@@ -17,15 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String home() {
+		return "home";
+	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String start() {
 		return "login";
-	}
-	
-	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
-	public String signUp() {
-		return "signUp";
 	}
 	
 	@RequestMapping(value = "/idPassSearch", method = RequestMethod.GET)
@@ -38,4 +37,6 @@ public class HomeController {
 	public String chat() {
 		return "chatView/chatMain"; // 뷰폴더 / jsp 파일명 쓰면 그 경로로 갑니다.
 	}
+	
+	
 }
