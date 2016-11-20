@@ -74,7 +74,7 @@ $(function(){
 						  str ="<div><a href=empDataUpdate/displayFile?fileName="+getImageLink(data)+">"
 								  +"<img src='empDataUpdate/displayFile?fileName="+data+"'/>"
 								  +"</a><small data-src="+data+">X</small>"
-								  +"<input type='hidden' name='emp_img' value='"+getOriginalName(data)+"'>"
+								  +"<input type='hidden' name='emp_img' value='"+getImageLink(data)+"'>"
 								  +"</div>";
 						  $('#emp-img-fileDrop').hide();
 					  }else{
@@ -135,7 +135,7 @@ $(function(){
 							  str ="<div><a href=empDataUpdate/displayFile?fileName="+getImageLink(data)+">"
 									  +"<img src='empDataUpdate/displayFile?fileName="+data+"'/>"
 									  +"</a><small data-src="+data+">X</small>"
-									  +"<input type='hidden' name='emp_img' value='"+getOriginalName(data)+"'>"
+									  +"<input type='hidden' name='emp_elec_auth_img' value='"+getImageLink(data)+"'>"
 									  +"</div>";
 							  $('#emp-elec-auth-img-fileDrop').hide();
 						  }
