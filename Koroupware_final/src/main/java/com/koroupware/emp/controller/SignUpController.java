@@ -28,7 +28,7 @@ public class SignUpController {
 	@RequestMapping(value = "/signUp/check", method = RequestMethod.GET)
 	@ResponseBody
 	public List<String> idCheck() throws Exception { //회원가입 중에 중복아이디 체크 에이작스
-		return empTelService.empList();
+		return empTelService.empIdList();
 	}
 
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
