@@ -23,8 +23,8 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public List<String> EmpAll() throws Exception {
-		return sqlSession.selectList(namespace+".empData");
+	public List<String> empId() throws Exception {
+		return sqlSession.selectList(namespace+".empId");
 	}
 
 	@Override

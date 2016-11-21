@@ -29,8 +29,8 @@ public class EmpTelServiceImpl implements EmpTelService {
 	}
 
 	@Override
-	public List<String> empList() throws Exception { //전체 회원 아이디 목록
-		return empDao.EmpAll();
+	public List<String> empIdList() throws Exception { //전체 회원 아이디 목록
+		return empDao.empId();
 	}
 
 	@Override

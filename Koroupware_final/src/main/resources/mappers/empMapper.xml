@@ -16,7 +16,7 @@
 	 )
 	</insert>
 	
-	<select id="empData" resultType="String" parameterType="EmpVO">
+	<select id="empId" resultType="String" parameterType="EmpVO">
 	  select emp_id from emp 
 	</select>
 	
