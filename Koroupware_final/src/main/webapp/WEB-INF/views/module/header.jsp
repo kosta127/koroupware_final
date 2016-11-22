@@ -5,11 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-<script type="text/javascript">
-function empDataUpdate() {
-	location.href = "/empDataUpdate";
-}
-</script>
 <style>
 .main-font{
 	margin-top : 5px;
@@ -194,7 +189,7 @@ font-family: 'Noto Sans KR', sans-serif;
 <span class="header-emp-img block">회원사진</span>
 </div>
 <div class="col-md-3 emp_name">
-<a href="empDataUpdate"><span class="header-emp-name block">회원이름</span></a>
+<a href="empDataUpdate?emp_no=1"><span class="header-emp-name block">회원이름</span></a>
 </div>
 <div class="col-md-3 header-button">
 <button onclick="logout()" class="btn btn-block logout-button btn-lg"><i class="glyphicon glyphicon-off"></i></button>

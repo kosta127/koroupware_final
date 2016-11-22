@@ -58,5 +58,10 @@ public class EmpTelServiceImpl implements EmpTelService {
 		telDao.deleteTel(tel_no);
 	}
 
+	@Override
+	public EmpVO empList(int emp_no) throws Exception {
+		return empDao.empList(emp_no);
+	}
+
 
 }

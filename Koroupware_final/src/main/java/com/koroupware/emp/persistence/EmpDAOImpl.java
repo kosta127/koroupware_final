@@ -32,4 +32,9 @@ public class EmpDAOImpl implements EmpDAO {
 		sqlSession.update(namespace+".empDataUpdate", empVo);
 	}
 
+	@Override
+	public EmpVO empList(int emp_no) throws Exception {
+		return sqlSession.selectOne(namespace+".empList", emp_no);
+	}
+
 }

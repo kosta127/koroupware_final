@@ -16,6 +16,10 @@
 	 )
 	</insert>
 	
+	<select id="empList" resultType="EmpVO" parameterType="int">
+	  select * from emp where emp_no = #{emp_no}
+	</select>
+	
 	<select id="empId" resultType="String" parameterType="EmpVO">
 	  select emp_id from emp 
 	</select>

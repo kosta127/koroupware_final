@@ -23,7 +23,6 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <p> Test values : ${test.testNum } & ${test.testStr }</p>
-
 <button class="btn btn-primary">TEST BTN</button>
 </body>
 </html>

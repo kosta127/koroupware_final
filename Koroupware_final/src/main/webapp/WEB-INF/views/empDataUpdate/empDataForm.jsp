@@ -20,7 +20,9 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(function(){
-		
+	
+	getTelList();
+	
 	  $('.emp_password1').keyup(function(){ //비밀번호 체크 start
 	   $('.passError1').text('');
 	   $('.passError2').text('');
@@ -71,15 +73,15 @@ $(function(){
 					var str = "";
 					 
 					 if(checkImageType(data)){
-						 alert(data);
 						  str ="<div><a href=empDataUpdate/displayFile?fileName="+getImageLink(data)+">"
 								  +"<img src='empDataUpdate/displayFile?fileName="+data+"'/>"
 								  +"</a><small data-src="+data+">X</small>"
 								  +"<input type='hidden' name='emp_img' value='"+getImageLink(data)+"'>"
 								  +"</div>";
 						  $('#emp-img-fileDrop').hide();
-					  }else{
-						  str = "<div>지원하지 않는 형식의 파일입니다.</div>";
+						  $('.notFile').remove();
+					 }else{
+						  str = "<div class='notFile'>지원하지 않는 형식의 파일입니다.</div>";
 					  }
 					$("#emp-img-uploadedFile").append(str);
 					
@@ -132,13 +134,17 @@ $(function(){
 						var str = "";
 						 
 						 if(checkImageType(data)){
-							 alert(data);
+							 console.log(getImageLink(data));
+							 console.log(data);
 							  str ="<div><a href=empDataUpdate/displayFile?fileName="+getImageLink(data)+">"
 									  +"<img src='empDataUpdate/displayFile?fileName="+data+"'/>"
 									  +"</a><small data-src="+data+">X</small>"
 									  +"<input type='hidden' name='emp_elec_auth_img' value='"+getImageLink(data)+"'>"
 									  +"</div>";
 							  $('#emp-elec-auth-img-fileDrop').hide();
+							  $('.notFile').remove();
+						 }else{
+							  str = "<div class='notFile'>지원하지 않는 형식의 파일입니다.</div>";
 						  }
 						$("#emp-elec-auth-img-uploadedFile").append(str);
 
@@ -164,7 +170,38 @@ $(function(){
 				});
 				
 			});
-});
+	
+			
+			
+			function getTelList(){
+				var emp_no = ${emp.emp_no};	
+				$.getJSON("/empDataUpdate/tel/"+ emp_no, function(data){
+					
+					var str = "";
+					console.log(data);
+					$(data).each(
+							
+						function() {
+							str += "<div class='col-md-3'>"
+							str + "<span>"+this.tel_type+"</span>"
+							str + "</div>"
+							str + "<div class='col-md-7'>"
+							str + "<span>"+this.tel_telephone+"</span>"
+							str + "</div>"
+							str + "<div class='col-md-2'>"
+							str + "<button>삭제</button>"
+							str + "</div>";
+						});
+					
+					$('.tel-list').append(str);
+				});
+			}
+			
+			
+
+		});
+		
+
 
 function checkImageType(fileName){
 	
@@ -241,12 +278,20 @@ function main() {
 </script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-.top-span, .middle-span{
+.top-span{
 	margin-top:30px;
 	margin-bottom: 50px;
 	text-align: center;
 	font-family: 'Noto Sans KR', sans-serif; 
   	font-size: 25px;
+}
+
+.middle-span{
+margin-top:30px;
+	margin-bottom: 50px;
+	text-align: center;
+	font-family: 'Noto Sans KR', sans-serif; 
+  	font-size: 20px;
 }
 .success{
    color : #43A047;
@@ -267,17 +312,29 @@ function main() {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.font-center{
+	text-align: center;
+}
 .emp-update-bottom-void{
   margin-bottom: 30px;
 }
 .font-div{
   margin-top: 15px;
   font-family: 'Noto Sans KR', sans-serif; 
-  font-size: 15px; 
+  font-size: 13px; 
 }
 .btn-block{
   font-family: 'Noto Sans KR', sans-serif; 
   font-size: 15px; 
+}
+.tel-list-font{
+  padding-bottom: 15px;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 15px; 
+  border-bottom: 1px dotted gray;
 }
 .emp-img-fileDrop, .emp-elec-auth-img-fileDrop{
   font-family: 'Noto Sans KR', sans-serif; 
@@ -299,7 +356,7 @@ function main() {
 </div>
 <div class="col-md-4"></div>
 </div>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="empDataUpdate" method="post">
 <div class="col-md-12">
 <div class="col-md-2 font-div">
 <span>비밀번호</span>
@@ -320,14 +377,14 @@ function main() {
 <span>이름</span>
 </div>
 <div class="col-md-4">
-<input type="text" class="form-control" name="emp_name">
+<input type="text" class="form-control" name="emp_name" value="${emp.emp_name }">
 </div>
 
 <div class="col-md-2 font-div">
 <span>이메일</span>
 </div>
 <div class="col-md-4">
-<input type="text" class="form-control" name="emp_email">
+<input type="text" class="form-control" name="emp_email" value="${emp.emp_email }">
 </div>
 </div>
 <div class="col-md-12">
@@ -335,7 +392,7 @@ function main() {
 <span>주소</span>
 </div>
 <div class="col-md-6">
-<input type="text" class="form-control" id="sample6_address" name="emp_address">
+<input type="text" class="form-control" id="sample6_address" name="emp_address" value="${emp.emp_address }">
 </div>
 <div class="col-md-4">
 <input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block" value="주소찾기">
@@ -345,16 +402,34 @@ function main() {
 <div class="col-md-2 font-div">
 <span>사진</span>
 </div>
-<div class="col-md-4"> 
+<div class="col-md-4">
+ <c:if test="${emp.emp_img eq null }"> 
 <div class="emp-img-fileDrop" id="emp-img-fileDrop"><span class="img-text">사진을 넣어주세요.</span></div>
 <div class="emp-img-uploadedFile" id="emp-img-uploadedFile"></div>
+</c:if>
+<c:if test="${emp.emp_img ne null }">
+<div><a href="empDataUpdate/displayFile?fileName=${emp.emp_img }">
+								 <img src="empDataUpdate/displayFile?fileName=${emp.emp_img }"/>
+								  </a><small data-src="${emp.emp_img }">X</small>
+								  <input type='hidden' name='emp_img' value="${emp.emp_img }">
+								  </div>
+</c:if>
 </div>
 <div class="col-md-2 font-div">
 <span>결재사진</span>
 </div>
 <div class="col-md-4">
+<c:if test="${emp.emp_img eq null }"> 
 <div class="emp-elec-auth-img-fileDrop" id="emp-elec-auth-img-fileDrop"><span class="img-text">사진을 넣어주세요.</span></div>
 <div class="emp-elec-auth-img-uploadedFile" id="emp-elec-auth-img-uploadedFile"></div>
+</c:if>
+<c:if test="${emp.emp_img ne null }">
+<div><a href="empDataUpdate/displayFile?fileName=${emp.emp_elec_auth_img }">
+								 <img src="empDataUpdate/displayFile?fileName=${emp.emp_elec_auth_img }"/>
+								  </a><small data-src="${emp.emp_elec_auth_img }">X</small>
+								  <input type='hidden' name='emp_img' value="${emp.emp_elec_auth_img }">
+								  </div>
+</c:if>
 </div>
 </div>
 <div class="col-md-12">
@@ -377,22 +452,41 @@ function main() {
 <span>용도</span>
 </div>
 <div class="col-md-2">
-<input type="text" class="form-control" name="tel_type">
+<input type="text" class="form-control tel_type" name="tel_type">
 </div>
 <div class="col-md-1 font-div">
 <span>번호</span>
 </div>
 <div class="col-md-2"> 
- <input type="text" maxlength="3" class="form-control inputs" name="tel_telephone_left">  
+ <input type="text" maxlength="3" class="form-control tel-telephone-left" name="tel_telephone_left">  
 </div> 
 <div class="col-md-2"> 
- <input type="text" maxlength="4" class="form-control inputs" name="tel_telephone_center">
+ <input type="text" maxlength="4" class="form-control tel-telephone-center" name="tel_telephone_center">
 </div>
 <div class="col-md-2"> 
- <input type="text" maxlength="4" class="form-control" name="tel_telephone_right">
+ <input type="text" maxlength="4" class="form-control tel-telephone-right" name="tel_telephone_right">
 </div>
 <div class="col-md-2">
-<input type="button" onclick="addTel()" class="btn btn-block" value="추가">
+<input type="button" class="btn btn-block addTel" value="추가">
+</div>
+<div class="col-md-12 tel-list-font">
+ <span>전화번호 목록</span>
+</div>
+<div class="col-md-12 tel-list">
+<div class="col-md-12">
+<div class="col-md-3 font-div font-center">
+<span>용도</span>
+</div>
+<div class="col-md-7 font-div font-center">
+<span>번호</span>
+</div>
+<div class="col-md-2"></div>
+</div>
+<div class="col-md-3"></div>
+<div class="col-md-7"></div>
+<div class="col-md-2">
+ <button class="btn btn-block deleteTel">삭제</button>
+</div>
 </div>
 </div>
 <div class="col-md-6">

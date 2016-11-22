@@ -13,4 +13,5 @@ public interface EmpTelService {
   public void addTel(TelVO telVo) throws Exception;
   public void updateTel(TelVO telVo) throws Exception;
   public void deleteTel(int tel_no) throws Exception;
+  public EmpVO empList(int emp_no) throws Exception;
 }

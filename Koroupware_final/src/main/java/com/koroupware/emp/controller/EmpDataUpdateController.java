@@ -14,9 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,7 +38,10 @@ public class EmpDataUpdateController {
 	private EmpTelService empTelService;
 	
 	@RequestMapping(value="/empDataUpdate", method=RequestMethod.GET)
-	public String empDataUpdatePage() throws Exception{ //회원정보수정 페이지
+	public String empDataUpdatePage(@RequestParam("emp_no") int emp_no, Model model) throws Exception{ //회원정보수정 페이지
+		System.out.println(emp_no);
+		System.out.println(empTelService.empList(emp_no).getEmp_name());
+		model.addAttribute("emp", empTelService.empList(emp_no));
 		return "empDataUpdate/empDataForm";
 	}
 	
@@ -103,5 +109,63 @@ public class EmpDataUpdateController {
 			new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
 
 			return new ResponseEntity<String>("deleted", HttpStatus.OK);
+		}
+		
+		@RequestMapping(value="/empDataUpdate/addTel", method=RequestMethod.POST)
+		@ResponseBody
+		public ResponseEntity<String> addTel(@RequestBody TelVO telVo) throws Exception{
+			ResponseEntity<String> entity = null;
+			try {
+				empTelService.addTel(telVo);
+				entity = new ResponseEntity<String>("SUECCESS", HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
+		
+
+		@RequestMapping(value="/empDataUpdate/tel/{emp_no}", method=RequestMethod.GET)
+		@ResponseBody
+		public ResponseEntity<List<TelVO>> telList(@PathVariable Integer emp_no) throws Exception{
+			ResponseEntity<List<TelVO>> entity = null;
+			try {
+				entity = new ResponseEntity<>(empTelService.telList(emp_no), HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
+		
+		@RequestMapping(value="/{tel_no}",method=RequestMethod.PATCH)
+		public ResponseEntity<String> updateTel(
+				@PathVariable("tel_no") Integer tel_no, @RequestBody TelVO telVo){
+			ResponseEntity<String> entity = null;
+			try {
+				telVo.setTel_no(tel_no);
+				empTelService.updateTel(telVo);
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<String>(
+						e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
+		
+		@RequestMapping(value="/{tel_no}", method=RequestMethod.DELETE)
+		public ResponseEntity<String> removeTel(@PathVariable("tel_no") Integer tel_no){
+			ResponseEntity<String> entity = null;
+			try {
+				empTelService.deleteTel(tel_no);
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<>(
+						e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			return entity;
 		}
 }
