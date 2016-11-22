@@ -14,7 +14,7 @@
 	
  	<select id="login" resultType="EmpDTO">
  		select * from emp
- 			where emp_id= #{emp_id} and emp_password = #{emp_password}
+ 			where emp_id= #{emp_id} and emp_password = #{emp_password} and emp_resigndate is null
  	</select>
  	
  	<select id="find_Email" resultType="EmpVO">
