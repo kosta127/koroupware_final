@@ -9,7 +9,7 @@ public class ApprovalListVO implements Serializable{
 	private String approval_list_pass;
 	private int approval_list_step ;
 	private Date approval_list_date;
-	
+	 
 	public ApprovalListVO(){}
 	
 	public ApprovalListVO(int elec_auth_no, int emp_no, String approval_list_pass, int approval_list_step, Date approval_list_date) {
