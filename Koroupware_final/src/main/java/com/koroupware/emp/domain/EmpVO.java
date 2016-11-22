@@ -24,18 +24,13 @@ public class EmpVO {
 	private String emp_img;
 	private String emp_elec_auth_img;
 	private Date emp_login;
-	private String emp_residentnumber = emp_residentNum_left + emp_residentNum_right;
+	
 	private int emp_point; // 세션에 보관
 	
 	public int getEmp_point() {
 		return emp_point;
-	}
-	public String getEmp_residentnumber() {
-		return emp_residentnumber;
-	}
-	public void setEmp_residentnumber(String emp_residentnumber) {
-		this.emp_residentnumber = emp_residentnumber;
-	}
+	} 
+
 	public void setEmp_point(int emp_point) {
 		this.emp_point = emp_point;
 	}

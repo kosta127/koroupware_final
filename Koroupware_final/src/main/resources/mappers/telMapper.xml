@@ -9,10 +9,11 @@
 	 insert into tel(
 	  	tel_no, emp_no, tel_type, tel_telephone
 	 ) values(
-	 	seq_tel.nextval, seq_emp.currval, '개인전화', #{tel_telephone_left}||#{tel_telephone_center}||#{tel_telephone_right}
+	 	seq_tel.nextval, (SELECT MAX(emp_no) FROM emp), '개인전화', #{tel_telephone_left}||#{tel_telephone_center}||#{tel_telephone_right}
 	 )
 	</insert>
 	
+
 	<select id="telList" parameterType="int">
 		select * from tel where emp_no = #{emp_no}
 	</select>

@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService{
 	private MemberDAO dao;
 
 	// 아이디 찾기 서비스
-	@Override
+/*	@Override
 	public String findId(EmpVO empVO) throws Exception {
 		String empVO_id=null;
 		List<EmpVO> list= dao.FindId_ListEmp(empVO);
@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return 0;
 	}
-
+*/
 	//회원가입 서비스
 	@Override
 	public void SignUp(EmpVO empVO) throws Exception {
@@ -72,4 +72,17 @@ public class MemberServiceImpl implements MemberService{
 		dao.updatePwd(vo);	
 	}
 
+	@Override
+	public String findId(EmpVO emp) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer findNo(EmpVO emp) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
+ 
