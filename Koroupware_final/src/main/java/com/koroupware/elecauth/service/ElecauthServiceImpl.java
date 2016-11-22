@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
+import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
 import com.koroupware.elecauth.domain.DocVO;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
@@ -78,6 +79,24 @@ public class ElecauthServiceImpl implements ElecauthService {
 	public List<EmpDetailVO> empListSelect() throws Exception {
 		// 사원 목록 조회
 		return dao.empDetailList();
+	}
+
+	@Override
+	public void elecauthDelete(int elec_auth_no) throws Exception {
+		//전자결재 삭제
+		dao.elecauthDelete(elec_auth_no);
+	}
+
+	@Override
+	public void elecauthOkReport(ApprovalPrimaryVO elecauthOkReport) throws Exception {
+		// 전자결재 승인
+		dao.elecauthOkReport(elecauthOkReport);
+	}
+
+	@Override
+	public void elecauthNoReport(ApprovalPrimaryVO elecauthNoReport) throws Exception {
+		// 전자결재 거절
+		dao.elecauthNoReport(elecauthNoReport);
 	}
 	
 	

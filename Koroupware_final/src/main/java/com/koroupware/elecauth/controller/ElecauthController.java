@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.ParseConversionEvent;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
@@ -88,4 +90,28 @@ public class ElecauthController {
 	public @ResponseBody List<EmpDetailVO> empDetailListAsJson() throws Exception{
 		return service.empListSelect();
 	}
+	
+	//삭제처리하기 by moonyong
+	@RequestMapping(value="/elecauthDelete/{elec_auth_no}")
+	public String elecauthDelete(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
+		service.elecauthDelete(elec_auth_no);
+		
+		return "redirect:/elecauth/elecauthList";
+	}
+	
+	//승인처리하기 by moonyong
+	@RequestMapping(value="/elecauthOkReport")
+	public String elecauthOkReport(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
+
+		
+		return "redirect:/elecauth/elecauthList";
+	}
+	
+	//거부처리하기 by moonyong
+	public String elecauthNoReport(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
+		
+		return "redirect:/elecauth/elecauthList";
+	}
+	
+	
 }

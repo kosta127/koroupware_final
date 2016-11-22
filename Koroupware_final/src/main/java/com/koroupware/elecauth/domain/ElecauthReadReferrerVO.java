@@ -1,7 +1,6 @@
 package com.koroupware.elecauth.domain;
 
 public class ElecauthReadReferrerVO {
-	private int elec_auth_referrer_no;
 	private int elec_auth_no;
 	private int emp_no;
 	private String emp_name;
@@ -9,23 +8,15 @@ public class ElecauthReadReferrerVO {
 	
 	public ElecauthReadReferrerVO(){}
 	
-	public ElecauthReadReferrerVO(int elec_auth_referrer_no, int elec_auth_no, int emp_no, String emp_name,
+	public ElecauthReadReferrerVO(int elec_auth_no, int emp_no, String emp_name,
 			String dept_name) {
 		super();
-		this.elec_auth_referrer_no = elec_auth_referrer_no;
 		this.elec_auth_no = elec_auth_no;
 		this.emp_no = emp_no;
 		this.emp_name = emp_name;
 		this.dept_name = dept_name;
 	}
 
-
-	public int getElec_auth_referrer_no() {
-		return elec_auth_referrer_no;
-	}
-	public void setElec_auth_referrer_no(int elec_auth_referrer_no) {
-		this.elec_auth_referrer_no = elec_auth_referrer_no;
-	}
 	public int getElec_auth_no() {
 		return elec_auth_no;
 	}

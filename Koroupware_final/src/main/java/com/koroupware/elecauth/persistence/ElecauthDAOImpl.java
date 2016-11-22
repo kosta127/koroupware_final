@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
+import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
 import com.koroupware.elecauth.domain.DocVO;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
@@ -93,5 +94,23 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 	public List<EmpDetailVO> empDetailList() throws Exception {
 		return sqlSession.selectList(namespace+".empDetailListSelect");
 	}
+
+	@Override
+	public void elecauthDelete(int elec_auth_no) throws Exception {
+		//전자결재 삭제처리
+		sqlSession.update(namespace+".elecauthDelete", elec_auth_no);
+	}
+
+	@Override
+	public void elecauthOkReport(ApprovalPrimaryVO elecauthOkReport) throws Exception {
+		sqlSession.update(namespace+".elecauthOkReport", elecauthOkReport);
+	}
+
+	@Override
+	public void elecauthNoReport(ApprovalPrimaryVO elecauthNoReport) throws Exception {
+		sqlSession.update(namespace+".elecauthNoReport", elecauthNoReport);		
+	}
+
+	
 
 }

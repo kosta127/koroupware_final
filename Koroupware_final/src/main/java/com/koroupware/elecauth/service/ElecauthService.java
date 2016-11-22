@@ -3,6 +3,7 @@ package com.koroupware.elecauth.service;
 import java.util.List;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
+import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
 import com.koroupware.elecauth.domain.DocVO;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
@@ -20,6 +21,11 @@ public interface ElecauthService {
 	public List<ElecauthReadApprovalVO> elecauthReadApproval(Integer elec_auth_no) throws Exception;
 	
 	public List<ElecauthReadReferrerVO> elecauthReadReferrer(Integer elec_auth_no) throws Exception;
+	
+	public void elecauthDelete(int elec_auth_no) throws Exception;
+	
+	public void elecauthOkReport(ApprovalPrimaryVO elecauthOkReport) throws Exception;
+	public void elecauthNoReport(ApprovalPrimaryVO elecauthNoReport) throws Exception;
 	
 	public void elecauthRegist(ElecauthVO ea, 
 			List<ApprovalListVO> approvals,
