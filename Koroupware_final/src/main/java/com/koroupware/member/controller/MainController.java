@@ -44,6 +44,9 @@ public class MainController {
 	//로그인 jsp에서  정보 입력시 ---> loginPost로 옴  :: 데이터와 일치시 메인으로 이동
 	@RequestMapping(value="/loginPost", method=RequestMethod.POST)
 	public String loginPost(EmpVO vo, Model model, HttpSession session)throws Exception{
+		System.out.println("가지고 온 아디"+vo.getEmp_id());
+		System.out.println("가지고 온 비번"+vo.getEmp_password());
+		System.out.println("fffff");
 		EmpDTO dto = service.login(vo);
 		if(dto == null){
 			System.out.println("로그인 실패");

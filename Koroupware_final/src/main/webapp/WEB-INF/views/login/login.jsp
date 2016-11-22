@@ -130,7 +130,7 @@
  </div>
 <div class="input-group">
  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
- <input type="password" class="form-control input-pass" name="emp_pass">
+ <input type="password" class="form-control input-pass" name="emp_password">
  </div>
 <input type="submit" value="로그인" class="btn btn-lg btn-block login-submit">
 </form>
