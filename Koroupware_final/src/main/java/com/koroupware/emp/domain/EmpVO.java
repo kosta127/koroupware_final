@@ -24,20 +24,12 @@ public class EmpVO {
 	private String emp_img;
 	private String emp_elec_auth_img;
 	private Date emp_login;
-<<<<<<< HEAD
-	
-=======
 	private String emp_residentnumber;
->>>>>>> refs/remotes/origin/sdc_merge01
 	private int emp_point; // 세션에 보관
 	
 	public int getEmp_point() {
 		return emp_point;
-<<<<<<< HEAD
-	} 
-=======
 	}
->>>>>>> refs/remotes/origin/sdc_merge01
 
 	public void setEmp_point(int emp_point) {
 		this.emp_point = emp_point;
