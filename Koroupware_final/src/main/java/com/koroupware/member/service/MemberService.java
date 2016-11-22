@@ -3,7 +3,7 @@ package com.koroupware.member.service;
 import java.util.Map;
 
 import com.koroupware.member.domain.EmailVO;
-import com.koroupware.member.domain.EmpVO;
+import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.dto.EmpDTO;
 
 

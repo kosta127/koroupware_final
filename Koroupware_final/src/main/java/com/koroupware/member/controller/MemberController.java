@@ -14,17 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.koroupware.member.domain.EmpVO;
+import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.service.MemberService;
 
 
 @Controller
-@RequestMapping("/member/*")
 public class MemberController {
 
 	@Inject
 	private MemberService service;
-
+ 
 	@Inject
 	private JavaMailSender mailSender;
 	private String from = "sdc337dc@naver.com";
@@ -36,9 +35,10 @@ public class MemberController {
 	
 	/* 아이디 & 비밀번호 찾기 컨트롤 */	
 	@RequestMapping(value = "/findUser", method = RequestMethod.GET)
-	public void findUserGET() throws Exception {
+	public String findUserGET() throws Exception {
 		// 아이디/비밀번호 찾기 --> findUser.jsp로 이동
-	}
+		return "idPassSearch";
+	} 
 
 	/* 아이디 & 비밀번호 찾기 --> 아이디찾기 컨트롤*/
 	@RequestMapping(value = "/FindId", method = RequestMethod.POST)
@@ -47,7 +47,7 @@ public class MemberController {
 		String emp_id = service.findId(emp);
 		model.addAttribute("emp_id", emp_id);
 
-		return "/member/findIdResult";
+		return "member/findIdResult";
 	}
 
 	
@@ -58,19 +58,6 @@ public class MemberController {
 		model.addAttribute("empVO_no", emp_no);
 
 		return "redirect:/member/email";
-	}
-
-	/* 회원 가입 jsp 컨트롤*/
-	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
-	public String signUpGET() throws Exception {
-		return "/member/signUp";
-	}
-
-	/* 회원가입jsp -> 회원가입 컨트롤 */
-	@RequestMapping(value = "/SignUpAction.do", method = RequestMethod.POST)
-	public String signUpPost(EmpVO empVO) throws Exception {
-		service.SignUp(empVO);
-		return "redirect:/";
 	}
 
 	/* 비밀번호 찾기 후 --> smtp메일 전송을 위한 사용자 이메일 찾기 컨트롤 */

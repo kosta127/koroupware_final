@@ -8,13 +8,13 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.koroupware.member.domain.EmailVO;
-import com.koroupware.member.domain.EmpVO;
+import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.dto.EmpDTO;
 import com.koroupware.member.persistence.MemberDAO;
 
 @Service
 public class MemberServiceImpl implements MemberService{
-	
+	 
 	@Inject
 	private MemberDAO dao;
 
@@ -40,6 +40,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		for(int i=0; i<list.size(); i++){
 			if(list.get(i).getEmp_residentnumber().equals(empVO.getEmp_residentnumber()) && list.get(i).getEmp_id().equals(empVO.getEmp_id())){
+				System.out.println(list.get(i).getEmp_no());
 				return list.get(i).getEmp_no();
 			}
 		}

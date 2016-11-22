@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.koroupware.member.domain.EmpVO;
+import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.dto.EmpDTO;
 import com.koroupware.search.domain.Criteria;
 import com.koroupware.search.domain.SearchVO;

@@ -12,17 +12,6 @@
 		select emp_id, emp_residentnumber, emp_no from emp
 	</select>
 	
-	<insert id="SignUp" parameterType="EmpVO">
-			insert into EMP(
-			emp_no, emp_name, dept_no, emp_email, emp_id, emp_password, emp_address, emp_approvalyn, 
-				emp_residentnumber, emp_hiredate, emp_img, emp_elec_auth_img, emp_superior, 
-				emp_reporter, position_no, office_no, emp_elec_auth_signkey) 
-			values( 
-				seq_emp.NEXTVAL, #{emp_name}, 1, #{emp_email}, #{emp_id}, #{emp_password}, #{emp_address}, 'N', 
-				#{emp_residentnumber}, SYSDATE, #{emp_img}, #{emp_elec_auth_img}, 1, 1, 1, 1, #{emp_elec_auth_signkey}
-				) 
-	</insert>
-	
  	<select id="login" resultType="EmpDTO">
  		select * from emp
  			where emp_id= #{emp_id} and emp_password = #{emp_password}

@@ -126,13 +126,13 @@
 <form action="">
 <div class="input-group">
  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
- <input type="text" class="form-control input-id">
+ <input type="text" class="form-control input-id" name="emp_id">
  </div>
 <div class="input-group">
  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
- <input type="password" class="form-control input-pass">
+ <input type="password" class="form-control input-pass" name="emp_pass">
  </div>
-<input type="submit" value="로그인" class="btn btn-lg btn-block login-submit">
+<input type="submit" onclick="loginPost" value="로그인" class="btn btn-lg btn-block login-submit">
 </form>
 </div>
 <div class="col-md-12 signUp-idPass">

@@ -186,10 +186,10 @@ font-family: 'Noto Sans KR', sans-serif;
 <div class="col-md-4">
 <div class="col-md-3"></div>
 <div class="col-md-3 emp_img">
-<span class="header-emp-img block">회원사진</span>
+<span class="header-emp-img block">${login.emp_img }</span>
 </div>
 <div class="col-md-3 emp_name">
-<a href="empDataUpdate?emp_no=1"><span class="header-emp-name block">회원이름</span></a>
+<a href="empDataUpdate?emp_no=${login.emp_no }"><span class="header-emp-name block">${login.emp_name }</span></a>
 </div>
 <div class="col-md-3 header-button">
 <button onclick="logout()" class="btn btn-block logout-button btn-lg"><i class="glyphicon glyphicon-off"></i></button>

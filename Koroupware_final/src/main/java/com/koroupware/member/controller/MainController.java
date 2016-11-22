@@ -17,23 +17,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
-import com.koroupware.member.domain.EmpVO;
+import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.dto.EmpDTO;
 import com.koroupware.member.service.MemberService;
 
 
 @Controller
-@RequestMapping("/")
 public class MainController {
 
 	@Inject
 	private MemberService service;
 	
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-	
 	/* 처음 시작시 "/" 로 uri 접근 --> login.jsp로 접근 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(/*Locale locale, Model model*/) {
+		System.out.println("처음");
 		return "login";
 	}
 	
@@ -54,7 +52,7 @@ public class MainController {
 		model.addAttribute("loginDTO", dto);
 		System.out.println("로그인 성공");
 		
-		return "main";
+		return "home";
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
@@ -77,18 +75,20 @@ public class MainController {
 			}
 		}
 		System.out.println("?????????????????");
-		return "/login";
+		return "login";
 	}
 	
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String loginGET()throws Exception{
-		return "main";
+		return "home";
 	}
 	
-
+	@RequestMapping(value = "/idPassSearch", method = RequestMethod.GET)
+	public String idPassSearch() {
+		return "idPassSearch";
+	}
 	
-
 	
 	
 	

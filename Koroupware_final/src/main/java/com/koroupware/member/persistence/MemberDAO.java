@@ -2,7 +2,7 @@ package com.koroupware.member.persistence;
 
 import java.util.List;
 
-import com.koroupware.member.domain.EmpVO;
+import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.dto.EmpDTO;
 
 
