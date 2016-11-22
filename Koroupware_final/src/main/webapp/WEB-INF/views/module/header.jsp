@@ -5,6 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
+<script type="text/javascript">
+function logout() {
+	   location.href='/logout';
+	   }
+</script>
 <style>
 .main-font{
 	margin-top : 5px;
@@ -162,10 +167,10 @@ font-family: 'Noto Sans KR', sans-serif;
 </style>
 <body>
 <div class="col-md-1 main-font">
-<a href="main" class="hidden-xs hidden-sm">
+<a href="/main" class="hidden-xs hidden-sm">
 <span class="main-font1">K</span><span class="main-font2">o</span><span class="main-font3">r</span><span class="main-font4">o</span><span class="main-font5">u</span><span class="main-font6">p</span><span class="main-font7">w</span><span class="main-font8">a</span><span class="main-font9">r</span><span class="main-font10">e</span>
 </a>
-<a href="main" class="hidden-md hidden-lg">
+<a href="/main" class="hidden-md hidden-lg">
 <span class="main-font1-1">K</span><span class="main-font2-1">o</span><span class="main-font3-1">r</span><span class="main-font4-1">o</span><span class="main-font5-1">u</span><span class="main-font6-1">p</span><span class="main-font7-1">w</span><span class="main-font8-1">a</span><span class="main-font9-1">r</span><span class="main-font10-1">e</span>
 </a>
 </div>
@@ -189,7 +194,7 @@ font-family: 'Noto Sans KR', sans-serif;
 <span class="header-emp-img block">${login.emp_img }</span>
 </div>
 <div class="col-md-3 emp_name">
-<a href="empDataUpdate?emp_no=${login.emp_no }"><span class="header-emp-name block">${login.emp_name }</span></a>
+<a href="/empDataUpdate?emp_no=${login.emp_no }"><span class="header-emp-name block">${login.emp_name }</span></a>
 </div>
 <div class="col-md-3 header-button">
 <button onclick="logout()" class="btn btn-block logout-button btn-lg"><i class="glyphicon glyphicon-off"></i></button>
