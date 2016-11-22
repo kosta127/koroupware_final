@@ -13,7 +13,7 @@ public class TestController {
 	
 	@Inject
 	private TestService service;
-	
+	 
 	@RequestMapping("/test")
 	public String testPage(Model model){
 		model.addAttribute("test", service.testRead());
