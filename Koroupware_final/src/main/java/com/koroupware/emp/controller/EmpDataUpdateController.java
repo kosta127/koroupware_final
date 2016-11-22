@@ -166,6 +166,6 @@ public class EmpDataUpdateController {
 				entity = new ResponseEntity<>(
 						e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
-			return entity;
+			return entity; 
 		}
 }
