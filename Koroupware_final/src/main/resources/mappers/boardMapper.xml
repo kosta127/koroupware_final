@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.board.mappers.BoardMapper">
+
+	<insert id="insertBoard" parameterType="BoardVO">
+		insert into board(
+			board_no, board_title, board_contents, board_regdate, board_hit
+		)
+		values(
+			#{board_no}, #{board_title}, #{board_contents}, SYSDATE, 0
+		)
+	</insert>
+	
+	<select id="listBoard" resultType="BoardVO">
+	<![CDATA[
+		select * from board where board_no > 0 and board_deldate is null
+	]]>
+		<include refid="search"></include>
+	<![CDATA[
+		order by board_no desc
+	]]>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'c'.toString()">
+				and board_contents like '%'|| #{keyword}||'%'
+			</if>
+			<if test="searchType == 't'.toString()">
+				and board_title like '%'|| #{keyword}||'%'
+			</if>
+		<!-- 	<if test="searchType == 'w'.toString()">
+				and board_writer like '%'|| #{keyword}||'%'
+			</if> -->
+			<if test="searchType == 'tc'.toString()">
+				and ( board_title like '%'|| #{keyword}||'%' OR board_contents like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<!-- <if test="searchType == 'cw'.toString()">
+				and ( content like '%'|| #{keyword}||'%' OR writer like
+				'%'||
+				#{keyword}||'%')
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( title like '%'|| #{keyword}||'%'
+				OR
+				content like
+				'%'|| #{keyword}||'%'
+				OR
+				writer like '%'|| #{keyword}||'%')
+			</if> -->
+		</if>
+	</sql>
+	
+	
+	<update id="updateBoard" parameterType="BoardVO">
+		update board set board_title = #{board_title}, board_contents = #{board_contents}
+			where board_no=#{board_no}
+	</update>
+	
+	<update id="deleteBoard">
+		update board set board_deldate=SYSDATE where board_no = #{board_no}
+	</update>
+	
+	<select id="detailBoard" resultType="BoardVO">
+		select * from board where board_no = #{board_no}
+	</select>
+	
+	<select id="maxNumber" resultType="Integer">
+		select max(board_no) from board
+	</select>
+		
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+			select count(board_no) from board where board_no > 0
+		]]>
+		
+		<include refid="search"></include>
+	</select>
+	
+	<update id="updateViewCnt">
+		update board set board_hit = board_hit +1 where board_no = #{board_no}
+	</update>
+	
+	<insert id="fileInsert" parameterType="BoardFileVO">
+		insert into board_file(
+			fullname, board_no
+		)
+		values(
+			#{fullName}, #{board_no}
+		)
+	</insert>
+	
+	<select id="getAttach" resultType="string">
+		select fullname from board_file where board_no = #{board_no} order by regdate
+	</select>
+	
+	<delete id="deleteAttach">
+		delete from board_file where board_no = #{board_no}
+	</delete>
+	
+	<select id="updateRecCnt" parameterType="recommendVO">
+		select COUNT(distinction) from recommend
+	</select>
+</mapper>  
+

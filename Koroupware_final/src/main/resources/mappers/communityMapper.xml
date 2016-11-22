@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.board.mappers.CommunityMapper">
+
+	<insert id="communityInsert" parameterType="CommunityVO">
+		insert into community(
+			community_no, community_name, community_regdate, emp_no
+		)
+		values(
+			seq_community.NEXTVAL, #{community_name}, SYSDATE, #{emp_no}
+		)
+	</insert>
+	
+	<select id="communityList" resultType="CommunityVO">
+		select * from community
+	</select>	
+	
+	<select id="maxNumber" resultType="int">
+		select MAX(community_no) from community
+	</select>
+	
+</mapper>  
+
