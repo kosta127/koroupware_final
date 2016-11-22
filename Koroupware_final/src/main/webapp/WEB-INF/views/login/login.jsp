@@ -123,16 +123,16 @@
 <div class="col-md-12 main-font">
 <span class="main-font1">K</span><span class="main-font2">o</span><span class="main-font3">r</span><span class="main-font4">o</span><span class="main-font5">u</span><span class="main-font6">p</span><span class="main-font7">w</span><span class="main-font8">a</span><span class="main-font9">r</span><span class="main-font10">e</span>
 <div class="col-md-12">
-<form action="">
+<form action="loginPost" method="post">
 <div class="input-group">
  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
  <input type="text" class="form-control input-id" name="emp_id">
  </div>
 <div class="input-group">
  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
- <input type="password" class="form-control input-pass" name="emp_pass">
+ <input type="password" class="form-control input-pass" name="emp_password">
  </div>
-<input type="submit" onclick="loginPost" value="로그인" class="btn btn-lg btn-block login-submit">
+<input type="submit"value="로그인" class="btn btn-lg btn-block login-submit">
 </form>
 </div>
 <div class="col-md-12 signUp-idPass">

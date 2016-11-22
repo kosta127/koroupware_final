@@ -3,39 +3,34 @@ package com.koroupware.emp.domain;
 import java.sql.Date;
 
 public class EmpVO {
-	private int emp_no;
-	private int dept_no;
-	private int office_no;
-	private int position_no;
-	private int emp_superior;
-	private int emp_reporter;
-	private String emp_name;
-	private String emp_email;
-	private String emp_id;
-	private String emp_password;
-	private String emp_address;
-	private String emp_approvalyn;
+	private int emp_no;//
+	private int dept_no;//
+	private int office_no;//
+	private int position_no;//
+	private int emp_superior;//
+	private int emp_reporter;//
+	private String emp_name;//
+	private String emp_email;//
+	private String emp_id;//
+	private String emp_password;//
+	private String emp_address;//
+	private String emp_approvalyn;//
 	private String emp_residentNum_left;
 	private String emp_residentNum_right;
-	private Date emp_hiredate;
+	private Date emp_hiredate;//
 	private Date emp_resigndate;
-	private String emp_email_sign;
+	private String emp_email_sign;//
 	private String emp_elec_auth_signkey;
 	private String emp_img;
 	private String emp_elec_auth_img;
 	private Date emp_login;
-	private String emp_residentnumber = emp_residentNum_left + emp_residentNum_right;
+	private String emp_residentnumber;
 	private int emp_point; // 세션에 보관
 	
 	public int getEmp_point() {
 		return emp_point;
 	}
-	public String getEmp_residentnumber() {
-		return emp_residentnumber;
-	}
-	public void setEmp_residentnumber(String emp_residentnumber) {
-		this.emp_residentnumber = emp_residentnumber;
-	}
+
 	public void setEmp_point(int emp_point) {
 		this.emp_point = emp_point;
 	}
@@ -123,6 +118,12 @@ public class EmpVO {
 	}
 	public void setEmp_residentNum_right(String emp_residentNum_right) {
 		this.emp_residentNum_right = emp_residentNum_right;
+	}
+	public String getEmp_residentnumber() {
+		return emp_residentnumber;
+	}
+	public void setEmp_residentnumber(String emp_residentnumber) {
+		this.emp_residentnumber = emp_residentnumber;
 	}
 	public Date getEmp_hiredate() {
 		return emp_hiredate;

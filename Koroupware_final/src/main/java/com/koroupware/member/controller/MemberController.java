@@ -36,14 +36,16 @@ public class MemberController {
 	/* 아이디 & 비밀번호 찾기 컨트롤 */	
 	@RequestMapping(value = "/findUser", method = RequestMethod.GET)
 	public String findUserGET() throws Exception {
-		// 아이디/비밀번호 찾기 --> findUser.jsp로 이동
 		return "idPassSearch";
 	} 
 
 	/* 아이디 & 비밀번호 찾기 --> 아이디찾기 컨트롤*/
 	@RequestMapping(value = "/FindId", method = RequestMethod.POST)
 	public String findUserIdPOST(EmpVO emp, Model model) throws Exception {
-		
+		System.out.println("처음 입력한 주민"+emp.getEmp_residentNum_left());
+		System.out.println("두번째 입력한 주민"+emp.getEmp_residentNum_right());
+		emp.setEmp_residentnumber(emp.getEmp_residentNum_left()+emp.getEmp_residentNum_right());
+		System.out.println("최종 입력한 주민"+emp.getEmp_residentnumber());
 		String emp_id = service.findId(emp);
 		model.addAttribute("emp_id", emp_id);
 
