@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.mappers.ElecauthMapper">
+	
+	<!-- 전자결재 리스트 조회 added by moonyong -->
+	<select id="elecauthList" resultType="ElecauthListVO">
+		SELECT 
+		DISTINCT ea.elec_auth_no, ea.elec_auth_title, ea.elec_auth_regdate,
+		ea.elec_auth_enddate,
+		do.doc_title, de.dept_name, e.emp_name, appr.approval_list_pass
+		
+		FROM elec_auth ea, doc do, dept de, emp e, approval_list appr
+		WHERE ea.emp_no=e.emp_no
+		AND ea.doc_no=do.doc_no
+		AND ea.elec_auth_management_dept_no=de.dept_no
+		AND ea.elec_auth_no=appr.elec_auth_no
+		AND ea.elec_auth_deldate IS NULL
+	</select>
+	
+	<!-- 전자결재 상세정보 조회 added by moonyong -->
+	<select id="elecauthRead" resultType="ElecauthReadVO">
+		SELECT ea.elec_auth_no, ea.elec_auth_enddate, ea.elec_auth_regdate, ea.elec_auth_con_period,
+			ea.elec_auth_title, ea.elec_auth_contents, ea.emp_no, d.doc_title, e.emp_name
+		FROM elec_auth ea, doc d, emp e
+		WHERE ea.doc_no=d.doc_no
+		AND ea.emp_no=e.emp_no
+		AND ea.elec_auth_no=#{elec_auth_no}
+	</select>
+	
+	<!-- 전자결재 결재자 조회 added by moonyong -->
+	<select id="elecauthReadApproval" resultType="ElecauthReadApprovalVO" parameterType="Integer">
+		SELECT a.elec_auth_no, a.emp_no, a.approval_list_pass, a.approval_list_step, a.approval_list_date,
+			e.emp_name, o.office_name
+		FROM elec_auth ea, approval_list a, emp e, office o
+		WHERE ea.elec_auth_no=a.elec_auth_no
+		AND a.emp_no=e.emp_no
+		AND e.office_no=o.office_no
+		AND ea.elec_auth_no=#{elec_auth_no}
+	</select>
+	
+	<!-- 전자결재 참조자 조회 added by moonyong -->
+	<select id="elecauthReadReferrer" resultType="ElecauthReadReferrerVO" parameterType="Integer">
+		SELECT ea.elec_auth_no, er.emp_no, e.emp_name, d.dept_name
+		FROM elec_auth ea, elec_auth_referrer er, emp e, dept d
+		WHERE ea.elec_auth_no=er.elec_auth_no
+		AND er.emp_no=e.emp_no
+		AND e.dept_no=d.dept_no
+		AND ea.elec_auth_no=#{elec_auth_no}
+	</select>
+	
+	<!-- 전자결재 등록 added by jirung -->
+	<insert id="elecauthInsert" parameterType="ElecauthVO">
+		INSERT INTO ELEC_AUTH(elec_auth_no, emp_no, elec_auth_management_dept_no,
+                      elec_auth_title, elec_auth_contents,
+                      elec_auth_enddate, 
+                      elec_auth_temporary_saveYN, elec_auth_con_period,
+                      doc_no, elec_auth_regdate)
+        	VALUES(seq_elec_auth.nextval, #{emp_no}, #{elec_auth_management_dept_no},
+        			#{elec_auth_title}, #{elec_auth_contents},
+        			#{elec_auth_enddate},
+        			#{elec_auth_temporary_saveYN}, #{elec_auth_con_period},
+        			#{doc_no}, SYSDATE)
+	</insert>
+	
+	<!-- 전자결재 결재자 리스트 입력 added by jirung -->
+	<insert id="approvalListInsert" parameterType="ApprovalListVO">
+		INSERT INTO APPROVAL_LIST(elec_auth_no, emp_no, approval_list_step)
+               VALUES(seq_elec_auth.currval, #{emp_no}, #{approval_list_step})
+	</insert>
+	
+	<!-- 전자결재 참조자 리스트 입력 added by jirung -->
+	<insert id="elecauthReferrerInsert" parameterType="ElecauthReferrerVO">
+		INSERT INTO ELEC_AUTH_REFERRER(elec_auth_no, emp_no)	
+				VALUES(seq_elec_auth.currval, #{emp_no})
+	</insert>
+	
+	<select id="empDetailSelect" parameterType="int" resultType="EmpDetailVO">
+		SELECT e.emp_no, e.emp_name, e.dept_no, e.emp_email,
+			   e.emp_superior, e.emp_reporter, e.emp_id,
+			   e.emp_address, TO_CHAR(e.emp_hiredate, 'yyyy-mm-dd'),
+			   TO_CHAR(e.emp_resigndate, 'yyyy-mm-dd'), 
+			   e.emp_email_sign, e.emp_elec_auth_signkey,
+			   e.emp_img, e.emp_elec_auth_img,
+			   d.dept_name, o.office_name, p.position_name
+ 		 FROM emp e INNER JOIN dept d ON e.dept_no = d.dept_no
+      		 INNER JOIN office o ON e.office_no = o.office_no
+     		 INNER JOIN position p ON e.position_no = p.position_no
+  		WHERE emp_resigndate IS NULL
+  		AND e.emp_no = #{emp_no}
+	</select>
+	
+	<select id="docListSelect" resultType="DocVO">
+		SELECT doc_title, doc_no, doc_contents
+			FROM doc
+			WHERE doc_formyn = 'Y'
+			AND doc_deldate IS NULL
+			ORDER BY doc_title ASC
+	</select>
+	
+	<select id="empDetailListSelect" resultType="EmpDetailVO">
+		SELECT e.emp_no, e.emp_name, e.dept_no, e.emp_email,
+			   e.emp_superior, e.emp_reporter, e.emp_id,
+			   e.emp_address, TO_CHAR(e.emp_hiredate, 'yyyy-mm-dd'),
+			   TO_CHAR(e.emp_resigndate, 'yyyy-mm-dd'), 
+			   e.emp_email_sign, e.emp_elec_auth_signkey,
+			   e.emp_img, e.emp_elec_auth_img,
+			   d.dept_name, o.office_name, p.position_name
+ 		 FROM emp e INNER JOIN dept d ON e.dept_no = d.dept_no
+      		 INNER JOIN office o ON e.office_no = o.office_no
+     		 INNER JOIN position p ON e.position_no = p.position_no
+  		WHERE emp_resigndate IS NULL
+	</select>
+	
+	<!-- 삭제 처리 by moonyong -->
+	<update id="elecauthDelete" parameterType="int">
+		UPDATE elec_auth
+		SET elec_auth_deldate=SYSDATE
+		WHERE elec_auth_no=#{elec_auth_no}
+	</update>
+	
+	<!-- 전자결재 승인 처리 by moonyong -->
+	<update id="elecauthOkReport" parameterType="ApprovalPrimaryVO">
+		UPDATE approval_list
+		SET approval_list_pass='Y', approval_list_date=SYSDATE
+		WHERE elec_auth_no=#{elec_auth_no}
+		AND emp_no=#{emp_no}
+	</update>
+	
+	<!-- 전자결재 거부 처리 by moonyong -->
+	<update id="elecauthNoReport" parameterType="ApprovalPrimaryVO">
+		UPDATE approval_list
+		SET approval_list_pass='N', approval_list_date=SYSDATE
+		WHERE elec_auth_no=#{elec_auth_no}
+		AND emp_no=#{emp_no}
+	</update>
+	
+</mapper>  
+

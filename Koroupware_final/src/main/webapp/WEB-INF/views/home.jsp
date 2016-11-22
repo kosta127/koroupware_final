@@ -15,9 +15,6 @@
 <!-- printTool -->
 <script src="/resources/printTool/jQuery.print.js"></script>
 <script>
-$(function(){
-	alert("hello");
-})
 </script>
 <body>
 <h1>
@@ -26,7 +23,6 @@ $(function(){
 
 <P>  The time on the server is ${serverTime}. </P>
 <p> Test values : ${test.testNum } & ${test.testStr }</p>
-
 <button class="btn btn-primary">TEST BTN</button>
 </body>
 </html>
