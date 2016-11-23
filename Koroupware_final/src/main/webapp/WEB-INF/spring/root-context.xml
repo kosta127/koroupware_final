@@ -44,4 +44,15 @@
 	<context:component-scan base-package="com.koroupware.O.domain"/>
 	<context:component-scan base-package="com.koroupware.O.service"/>
 	<context:component-scan base-package="com.koroupware.O.persistence"/>
+	<context:component-scan base-package="com.koroupware.doc.domain" />
+	<context:component-scan base-package="com.koroupware.doc.service" />
+	<context:component-scan base-package="com.koroupware.doc.persistence" />
+	<context:component-scan base-package="com.koroupware.doc.interceptor" />
+	<context:component-scan base-package="com.koroupware.doc.dto" />
+	<context:component-scan base-package="com.koroupware.common.util" />
+	<context:component-scan base-package="com.koroupware.message.service" />
+	<context:component-scan base-package="com.koroupware.message.domain" />
+	<context:component-scan base-package="com.koroupware.message.persistence" />
+	<context:component-scan base-package="com.koroupware.emp.domain" />
+	
 </beans>
