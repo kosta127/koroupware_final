@@ -63,6 +63,11 @@
 		<interceptor>
 			<mapping path="/search/searchDoc" />
 			<mapping path="/search/Person"/>
+			
+			<mapping path="/elecauth/eleauthList"/>
+			<mapping path="/elecauth/regist"/>			
+			<mapping path="/elecauth/elecauthRead"/>			
+						
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 	</interceptors>
