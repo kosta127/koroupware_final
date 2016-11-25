@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.mappers.DocHisMapper">
+	
+	<insert id="insertDoc_his" parameterType="DocHisVO">
+		insert into doc_his (
+			doc_his_no, emp_no, doc_no, doc_his_reason_change, doc_his_moddate, doc_his_revise
+		)
+		values(
+			seq_doc_his.NEXTVAL, #{emp_no}, #{doc_no}, #{doc_his_reason_change}, SYSDATE, #{doc_his_revise}
+		)
+	</insert>
+	
+	<select id="listDocHis" resultType="DocHisVO">
+		select * from doc_his
+	</select>
+	
+
+</mapper>
