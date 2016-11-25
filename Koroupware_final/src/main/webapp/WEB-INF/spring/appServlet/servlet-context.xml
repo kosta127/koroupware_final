@@ -21,13 +21,55 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />	
+		<beans:property name="order" value="1" />
 	</beans:bean>
 	
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="C:\upload2" />
 	</beans:bean>
+	<!-- 로그인을 할 때 사용하는 인터셉터 -->
+	<beans:bean id="loginInterceptor"
+		class="com.koroupware.member.interceptor.LoginInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/loginPost"/>
+			<beans:ref bean="loginInterceptor" />
+			
+		</interceptor>
+	</interceptors>
+	
+	<beans:bean id="authInterceptor" class = "com.koroupware.member.interceptor.AuthInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/search/searchDoc" />
+			<mapping path="/search/Person"/>
+			
+			<mapping path="/elecauth/eleauthList"/>
+			<mapping path="/elecauth/regist"/>			
+			<mapping path="/elecauth/elecauthRead"/>			
+						
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+	</interceptors>
+
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+		<beans:property name="username" value="sdc337dc@gmail.com" />
+		<beans:property name="password" value="tnwla7845!@" />
+
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
 	<!-- Component scan -->
-	<context:component-scan base-package="com.koroupware.doc.controller" />
-	<context:component-scan base-package="com.koroupware.message.controller" />
+	
+	<context:component-scan base-package="com.koroupware." />
 </beans:beans>
