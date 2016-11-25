@@ -5,10 +5,9 @@
 <configuration>
 
   <typeAliases>
-    <package name="com.koroupware.O.domain"/>
-    <package name="com.koroupware.doc.domain" />
-    <package name="com.koroupware.message.domain" />
-    <package name="com.koroupware.emp.domain" />
+    <package name="com.koroupware"/>
+   
+   
   </typeAliases>
 
 
