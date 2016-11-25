@@ -7,10 +7,11 @@ import com.koroupware.message.domain.MessageVO;
 
 public interface MessageService {
 	public void messageRegist(MessageVO vo);
-	public List<MessageVO> listreceivedMessage(int message_receiver_no);
-	public List<MessageVO> listsendedMessage(int message_sender_no);
+	public List<MessageVO> receivedmessageList(int message_receiver_no);
+	public List<MessageVO> sendedmessageList(int message_sender_no);
 	public String sender_nameGet(int emp_no);
 	public String receiver_nameGet(int emp_no);
-	public List<EmpVO> searchEmp(String searchKeyword);
+	public List<EmpVO> empSearch(String searchKeyword);
+	public void messageRemove(int message_no);
 	
 }

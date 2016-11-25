@@ -45,4 +45,9 @@ public class MessageDAOImpl implements MessageDAO {
 		return sqlSession.selectList(namespace+".listsendedMessage",message_sender_no);
 	}
 
+	@Override
+	public void deleteMessage(int message_no) {
+		sqlSession.delete(namespace+".deleteMessage",message_no);
+	}
+
 }

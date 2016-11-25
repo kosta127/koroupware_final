@@ -46,4 +46,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on dept.DEPT_NO = emp.DEPT_NO
 		where emp.EMP_NAME like #{searchKeyword}||'%'
 	</select>
+	
+	<delete id="deleteMessage" parameterType="int">
+		delete from message where message_no = #{message_no}
+	</delete>
 </mapper>

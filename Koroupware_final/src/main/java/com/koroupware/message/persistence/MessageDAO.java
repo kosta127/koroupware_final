@@ -17,4 +17,5 @@ public interface MessageDAO {
 	public List<MessageVO> listreceivedMessage(int message_receiver_no);
 	public List<MessageVO> listsendedMessage(int message_sender_no);
 	public List<EmpVO> searchEmp(String searchKeyword); 
+	public void deleteMessage(int message_no);
 }

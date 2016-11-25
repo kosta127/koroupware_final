@@ -20,7 +20,7 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<MessageVO> listreceivedMessage(int message_receiver_no) {
+	public List<MessageVO> receivedmessageList(int message_receiver_no) {
 		return messageDAO.listreceivedMessage(message_receiver_no);
 	}
 
@@ -35,13 +35,18 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<EmpVO> searchEmp(String searchKeyword) {
+	public List<EmpVO> empSearch(String searchKeyword) {
 		return messageDAO.searchEmp(searchKeyword);
 	}
 
 	@Override
-	public List<MessageVO> listsendedMessage(int message_sender_no) {
+	public List<MessageVO> sendedmessageList(int message_sender_no) {
 		return messageDAO.listsendedMessage(message_sender_no);
+	}
+
+	@Override
+	public void messageRemove(int message_no) {
+		messageDAO.deleteMessage(message_no);
 	}
 
 }
