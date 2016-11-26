@@ -97,7 +97,7 @@ public class MessageController {
 		for(int i=0;i<message_no.length;i++){
 			service.messageRemove(message_no[i]);
 		}
-		return "redirect:/message/receivedmessageList/"+emp_no;
+		return "redirect:/message/sendedmessageList/"+emp_no;
 	}
 	
 }

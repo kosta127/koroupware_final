@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<form action="/message/messageRemove/sended/${emp_no}" method="post" class="messageForm">
+	<button>삭제</button>
 	<table width="600">
 		<tr>
 			<th width="30">선택</th>
@@ -18,7 +20,8 @@
 		</tr>
 		<c:forEach var="messageVO" items="${list }">
 			<tr>
-				<td width="30"><input type="hidden" name="message_no" value="${messageVO.message_no }"></td>
+				<%-- <td width="30"><input type="hidden" name="message_no" value="${messageVO.message_no }"></td> --%>
+				<td width="50"><input type="checkbox" name="message_no" class="message_no" value="${messageVO.message_no}"></td>
 				<td width="110">${messageVO.message_receiver_name }</td>
 				<td width="350">${messageVO.message_contents }</td>
 				<td width="110">${messageVO.message_senddate }</td>
@@ -26,5 +29,6 @@
 		</c:forEach>
 		
 	</table>
+	</form>
 </body>
 </html>
