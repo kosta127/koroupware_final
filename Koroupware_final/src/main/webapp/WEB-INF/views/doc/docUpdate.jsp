@@ -21,7 +21,7 @@
 </head>
 <body>
 		
-			<form action="/doc/doc_hisRegist/${doc_no}/${doc_box_no}/${emp_no}" method="get">
+			<form action="/doc/doc_hisRegist/${doc_no}/${emp_no}/${doc_box_no}" method="get">
 				문서명 : <input type="text" name="doc_title"><br>
 				문서설명 : <input type="text" name="doc_explain"><br>
 				문서내용 : <input type="text" name="doc_contents"><br>

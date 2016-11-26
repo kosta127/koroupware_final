@@ -5,12 +5,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+function fn_messageRegist(){
+	location.href="/message/messageRegist/"+${emp_no};
+}
 
+function fn_receivedmessageList(){
+	location.href="/message/receivedmessageList/"+${emp_no};
+}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
 	<form action="/message/messageRemove/sended/${emp_no}" method="post" class="messageForm">
-	<button>삭제</button>
+	<input type="button" value="쪽지쓰기" onclick="fn_messageRegist()">
+	<input type="button" value="받은쪽지" onclick="fn_receivedmessageList()">
+	<input type="submit" value="삭제">
 	<table width="600">
 		<tr>
 			<th width="30">선택</th>

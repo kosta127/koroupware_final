@@ -1,21 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- jquery -->
+<script src="/resources/jquery-1.9.1/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
-	$("button").on("click",function(){
+	function fn_messageRegist(){
+		location.href="/message/messageRegist/"+${emp_no};
+	}
 	
-		$(".messageForm").submit();
-	})
+	function fn_sendedmessageList(){
+		location.href="/message/sendedmessageList/"+${emp_no};
+	}
+	
+	
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+	
 	<form action="/message/messageRemove/received/${emp_no}" method="post" class="messageForm">
-	<button>삭제</button>
+	<input type="button" value="쪽지쓰기" onclick="fn_messageRegist()">
+	<input type="button" value="보낸쪽지" onclick="fn_sendedmessageList()">
+	<input type="submit" value="삭제">
 	
 	<table width="600">
 	

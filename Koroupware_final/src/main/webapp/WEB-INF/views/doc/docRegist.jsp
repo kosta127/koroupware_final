@@ -128,7 +128,6 @@
 </style>
 </head>
 <body>
-		
 		<h1>문서 등록</h1>
 		<form id="registerForm" action="/doc/docRegist/${emp_no}/${doc_box_no}" method="post"
 			enctype="multipart/form-data">

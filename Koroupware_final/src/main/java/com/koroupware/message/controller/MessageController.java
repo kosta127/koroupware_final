@@ -56,6 +56,7 @@ public class MessageController {
 	@RequestMapping(value="messageSearch",method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<List<EmpVO>> messageSearchPOST(String searchKeyword){
+		
 		List<EmpVO> list = service.empSearch(searchKeyword);
 		
 		return new ResponseEntity<List<EmpVO>>(list,HttpStatus.OK);

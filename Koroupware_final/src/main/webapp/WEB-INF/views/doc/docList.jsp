@@ -29,7 +29,6 @@
 </head>
 <body>
 		
-		
 		<form action="/doc/doc_managementRegist/${doc_box_no}/${emp_no}" method="post">
 		<table border="1" cellpadding="0" cellspacing="0" id="checklist" class="table table-hover">
 			<tr height="30">

@@ -8,7 +8,9 @@
 <script src="/resources/jquery-1.9.1/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 var receiverEmpNo;
-		
+function fn_receivedmessageList(){
+	location.href="/message/receivedmessageList/"+${emp_no};
+}		
 $(document).ready(function(){
 		$("form .search").on("click",function(event){
 			var emp_no = ${emp_no};
@@ -37,6 +39,7 @@ function receiver(receiver){
 		<button class="search">검색</button><br>
 		<textarea name="message_contents" rows="5" cols="55" title="쪽지내용 입력"></textarea>
 		<input type="submit" value="전송">
+		<input type="button" value="돌아가기" onclick="fn_receivedmessageList()">
 	</form>
 	
 </body>

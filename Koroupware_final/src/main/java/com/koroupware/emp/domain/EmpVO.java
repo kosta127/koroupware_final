@@ -26,7 +26,17 @@ public class EmpVO {
 	private Date emp_login;
 	private String emp_residentnumber;
 	private int emp_point; // 세션에 보관
+	private String dept_name;
 	
+	
+	public String getDept_name() {
+		return dept_name;
+	}
+
+	public void setDept_name(String dept_name) {
+		this.dept_name = dept_name;
+	}
+
 	public int getEmp_point() {
 		return emp_point;
 	}

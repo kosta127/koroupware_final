@@ -80,10 +80,10 @@
       <div class="nav-sidebar">
         	<ul class="nav tabs">
           <li class="sidebar-blue"><a href="/elecauth/elecauthList">전자결재</a></li>
-          <li class="sidebar-red"><a href="">문서</a></li>
+          <li class="sidebar-red"><a href="/doc/doc_boxList/${login.emp_no}">문서</a></li>
           <li class="sidebar-green"><a href="">게시판</a></li>
           <li class="sidebar-orange"><a href="">조직도</a></li> 
-          <li class="sidebar-blue"><a href="">쪽지</a></li>    
+          <li class="sidebar-blue"><a href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>    
            <li class="sidebar-red"><a href="">화상회의</a></li>
           <li class="sidebar-green"><a href="">그림회의</a></li>
           <li class="sidebar-orange"><a href="">이메일</a></li>                           

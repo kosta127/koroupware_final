@@ -9,14 +9,15 @@
 	$(document).ready(function(){
 		$(".search").on("click",function(event){
 			event.preventDefault();
-			var searchKeyword = $("input").val();
+			var searchKeyword = $("#searchKeyword").val();
+			alert(searchKeyword);
 			  $.ajax({
 				url : "/message/messageSearch",
 				type : "post",
 				dataType : "json",
 				data : "searchKeyword="+searchKeyword,
 				success : function(data){
-						 
+						 alert(data[1].emp_name);
 						 var html ="";
 						 $.each(data,function(i){
 							 
@@ -58,7 +59,7 @@
 
 </head>
 <body>
-				<input type="text" name="searchKeyword" id="recevier_name">
+				<input type="text" name="searchKeyword" id="searchKeyword">
 				<button class="search">검색</button>
 				<div id="resultSearch"></div>
 				

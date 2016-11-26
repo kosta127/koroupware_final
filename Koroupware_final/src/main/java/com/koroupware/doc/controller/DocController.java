@@ -42,7 +42,7 @@ public class DocController {
 		return "/doc/docRead";
 	}
 	
-	@RequestMapping("/docList/{doc_box_no}/{emp_no}")
+	@RequestMapping("/docList/{emp_no}/{doc_box_no}")
 	public String listDoc(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
 		List<DocVO> list = service.docList();
 		model.addAttribute("list",list);
@@ -63,7 +63,7 @@ public class DocController {
 	public String docRegistPOST(DocVO vo,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no) throws Exception{
 		System.out.println(vo.getDoc_contents());
 		service.docRegist(vo);
-		return "redirect:/doc/docList/"+doc_box_no+"/"+emp_no;
+		return "redirect:/doc/docList/"+emp_no+"/"+doc_box_no;
 	}
 	
 	@RequestMapping("/docRemove/{doc_no}/{doc_box_no}/{emp_no}")
