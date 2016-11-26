@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -135,8 +136,9 @@ font-family: 'Noto Sans KR', sans-serif;
 
 .emp_img{
 font-family: 'Noto Sans KR', sans-serif; 
-  margin-top: 20px;
-  text-align: center; 
+ margin-top: 5px;
+ margin-bottom: 5px;
+  text-align: right; 
 }
 
 .main-font a:hover{
@@ -164,6 +166,11 @@ font-family: 'Noto Sans KR', sans-serif;
 .update-button{
  font-family: 'Noto Sans KR', sans-serif; 
 }
+.sumnail{
+    border-radius: 5px;
+	height: 60px;
+	width: 50px;
+}
 </style>
 <body>
 <div class="col-md-1 main-font">
@@ -190,9 +197,16 @@ font-family: 'Noto Sans KR', sans-serif;
 </div>
 <div class="col-md-4">
 <div class="col-md-3"></div>
+<c:if test="${login.emp_img eq null }">
 <div class="col-md-3 emp_img">
-<span class="header-emp-img block">${login.emp_img }</span>
+<span class="header-emp-img block">사진없음</span>
 </div>
+</c:if>
+<c:if test="${login.emp_img ne null }">
+<div class="col-md-3 emp_img">
+<img class="header-emp-img block sumnail" src="http://localhost:8081/empDataUpdate/displayFile?fileName=${login.emp_img }"></img>
+</div>
+</c:if>
 <div class="col-md-3 emp_name">
 <a href="/empDataUpdate?emp_no=${login.emp_no }"><span class="header-emp-name block">${login.emp_name }</span></a>
 </div>

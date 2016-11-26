@@ -9,7 +9,7 @@
 .nav-sidebar .sidebar-blue a { 
     cursor: default;
     background-color: #fff; 
-    color: black; 
+    color: black;  
 }
 .nav-sidebar .sidebar-blue a:hover {
     background-color: #0080c0;
@@ -86,7 +86,8 @@
           <li class="sidebar-blue"><a href="">쪽지</a></li>    
            <li class="sidebar-red"><a href="">화상회의</a></li>
           <li class="sidebar-green"><a href="">그림회의</a></li>
-          <li class="sidebar-orange"><a href="">이메일</a></li>                           
+          <li class="sidebar-orange"><a href="">이메일</a></li> 
+          <li class="sidebar-blue"><a href="">출석부</a></li>                          
 		</ul>
       </div>
       <div class="col-md-12 sidebar-center-void"></div>

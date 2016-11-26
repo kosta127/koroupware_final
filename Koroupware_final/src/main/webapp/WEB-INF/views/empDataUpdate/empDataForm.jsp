@@ -20,7 +20,8 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(function(){
-	
+	var emp_no = ${login.emp_no};	
+	console.log(emp_no);
 	getTelList();
 	
 	  $('.emp_password1').keyup(function(){ //비밀번호 체크 start
@@ -170,34 +171,79 @@ $(function(){
 				});
 				
 			});
-	
+			
 			
 			
 			function getTelList(){
-				var emp_no = ${emp.emp_no};	
-				$.getJSON("/empDataUpdate/tel/"+ emp_no, function(data){
-					
+			
+				$.getJSON("/empDataUpdate/"+ emp_no, function(data){
 					var str = "";
-					console.log(data);
+					console.log("나는 겟텔리스트야");
+					//console.log(data);
 					$(data).each(
-							
 						function() {
-							str += "<div class='col-md-3'>"
-							str + "<span>"+this.tel_type+"</span>"
-							str + "</div>"
-							str + "<div class='col-md-7'>"
-							str + "<span>"+this.tel_telephone+"</span>"
-							str + "</div>"
-							str + "<div class='col-md-2'>"
-							str + "<button>삭제</button>"
-							str + "</div>";
+							str += "<div class='telFontList'><div class='col-md-3 tel-center'>"
+							+ "<span class='tel-font'>"+this.tel_type+"</span>"
+							+ "</div>"
+						    + "<div class='col-md-7 font-center'>"
+							+ "<span class='tel-font'>"+telInMinus(this.tel_telephone)+"</span>"
+						 	+ "</div>"
+							+ "<div data-tel-no='" + this.tel_no + "' class='col-md-2 font-center'>"
+							+ "<input type='button' class='btn btn-block telDelete' value='삭제'>"
+							+ "</div><div>";
 						});
-					
-					$('.tel-list').append(str);
-				});
+					$('#telList').html(str);
+				}); 
+				
 			}
 			
+		$('#telList').on("click", ".telDelete", function() {
+			var tel_no_parent = $(this).parent();
+			var tel_no = tel_no_parent.attr("data-tel-no");
+			console.log(tel_no);
 			
+			$.ajax({
+				type : "delete",
+				url : "/empDataUpdate/" + tel_no,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "DELETE"
+				},
+				dataType : "text",
+				success : function(result){
+					if (result === "SUCCESS"){
+						console.log("삭제");
+						getTelList();
+					}
+				}
+			});
+		});
+		
+		$('#addTel').on("click", function() {
+			var telType = $('.tel-type').val();
+			var telephone = $('.tel-telephone-left').val()+$('.tel-telephone-center').val()+$('.tel-telephone-right').val();
+
+			$.ajax({
+				type : "post",
+				url : "/empDataUpdate/addTel",
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType : "text", 
+				data : JSON.stringify({
+					emp_no : emp_no,
+					tel_type : telType,
+					tel_telephone : telephone
+				}),
+				success : function(data) {
+					if(data == "SUCCESS"){
+						console.log("성공");
+						getTelList();
+					}
+				}
+			});
+		});
 
 		});
 		
@@ -270,6 +316,22 @@ function sample6_execDaumPostcode() { //다음 주소 api
     }).open();
 } //다음 주소 api 
 
+function telInMinus(telephone){ //전화번호 짝대기 붙히기 
+	if(telephone.substr(0, 2) === "02"){
+		if(telephone.length == 9){
+			return telephone.substr(0, 2)+"-"+telephone.substr(2, 3)+"-"+telephone.substr(5, 4);
+		}else{
+			return telephone.substr(0, 2)+"-"+telephone.substr(2, 4)+"-"+telephone.substr(6, 4);
+		}
+	}else{
+		if(telephone.length == 11){
+			return telephone.substr(0, 3)+"-"+telephone.substr(3, 4)+"-"+telephone.substr(7, 4);
+		}else{
+			return telephone.substr(0, 3)+"-"+telephone.substr(3, 3)+"-"+telephone.substr(6, 4);
+		}
+	}
+}
+
 function main() {
 	location.href= "main";
 }
@@ -278,6 +340,15 @@ function main() {
 </script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+.tel-center{
+	text-align: center;
+}
+
+.tel-font{
+  margin-top: 15px;
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 13px; 
+}
 .top-span{
 	margin-top:30px;
 	margin-bottom: 50px;
@@ -344,6 +415,10 @@ margin-top:30px;
 	border: 1px dotted black;
 	padding-top: 40px;
 }
+.img-div img{
+	height: 100px;
+	with: 100px;
+}
 </style>
 </head>
 <body>
@@ -356,8 +431,9 @@ margin-top:30px;
 </div>
 <div class="col-md-4"></div>
 </div>
-<form action="empDataUpdate" method="post">
+<form action="empDataUpdate/update" method="post">
 <div class="col-md-12">
+<input type="hidden" name="emp_no" value="${login.emp_no }">
 <div class="col-md-2 font-div">
 <span>비밀번호</span>
 </div>
@@ -377,14 +453,14 @@ margin-top:30px;
 <span>이름</span>
 </div>
 <div class="col-md-4">
-<input type="text" class="form-control" name="emp_name" value="${emp.emp_name }">
+<input type="text" class="form-control" name="emp_name" value="${login.emp_name }">
 </div>
 
 <div class="col-md-2 font-div">
 <span>이메일</span>
 </div>
 <div class="col-md-4">
-<input type="text" class="form-control" name="emp_email" value="${emp.emp_email }">
+<input type="text" class="form-control" name="emp_email" value="${login.emp_email }">
 </div>
 </div>
 <div class="col-md-12">
@@ -392,45 +468,49 @@ margin-top:30px;
 <span>주소</span>
 </div>
 <div class="col-md-6">
-<input type="text" class="form-control" id="sample6_address" name="emp_address" value="${emp.emp_address }">
+<input type="text" class="form-control" id="sample6_address" name="emp_address" value="${login.emp_address }">
 </div>
 <div class="col-md-4">
 <input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-block" value="주소찾기">
 </div>
 </div>
-<div class="col-md-12">
-<div class="col-md-2 font-div">
+<div class="col-md-12 img-div">
+<c:if test="${login.emp_img eq null }">
+<div class="col-md-2 font-div"> 
 <span>사진</span>
 </div>
-<div class="col-md-4">
- <c:if test="${emp.emp_img eq null }"> 
+<div class="col-md-4 img-div">
 <div class="emp-img-fileDrop" id="emp-img-fileDrop"><span class="img-text">사진을 넣어주세요.</span></div>
 <div class="emp-img-uploadedFile" id="emp-img-uploadedFile"></div>
-</c:if>
-<c:if test="${emp.emp_img ne null }">
-<div><a href="empDataUpdate/displayFile?fileName=${emp.emp_img }">
-								 <img src="empDataUpdate/displayFile?fileName=${emp.emp_img }"/>
-								  </a><small data-src="${emp.emp_img }">X</small>
-								  <input type='hidden' name='emp_img' value="${emp.emp_img }">
-								  </div>
-</c:if>
 </div>
+</c:if>
+<c:if test="${login.emp_img ne null }">
+<div class="col-md-2 font-div"> 
+<span>사진</span>
+</div>
+<div class="col-md-4 img-div">
+<img src="http://localhost:8081/empDataUpdate/displayFile?fileName=${login.emp_img }">
+<input type="hidden" value="${login.emp_img }" name="emp_img">
+</div>
+</c:if>
+<c:if test="${login.emp_elec_auth_img eq null }"> 
 <div class="col-md-2 font-div">
 <span>결재사진</span>
 </div>
 <div class="col-md-4">
-<c:if test="${emp.emp_img eq null }"> 
 <div class="emp-elec-auth-img-fileDrop" id="emp-elec-auth-img-fileDrop"><span class="img-text">사진을 넣어주세요.</span></div>
 <div class="emp-elec-auth-img-uploadedFile" id="emp-elec-auth-img-uploadedFile"></div>
-</c:if>
-<c:if test="${emp.emp_img ne null }">
-<div><a href="empDataUpdate/displayFile?fileName=${emp.emp_elec_auth_img }">
-								 <img src="empDataUpdate/displayFile?fileName=${emp.emp_elec_auth_img }"/>
-								  </a><small data-src="${emp.emp_elec_auth_img }">X</small>
-								  <input type='hidden' name='emp_img' value="${emp.emp_elec_auth_img }">
-								  </div>
-</c:if>
 </div>
+</c:if>
+<c:if test="${login.emp_elec_auth_img ne null }">
+<div class="col-md-2 font-div"> 
+<span>결재사진</span>
+</div>
+<div class="col-md-4">
+<img src="http://localhost:8081/empDataUpdate/displayFile?fileName=${login.emp_elec_auth_img }">
+<input type="hidden" value="${login.emp_elec_auth_img }" name="emp_elec_auth_img">
+</div>
+</c:if>
 </div>
 <div class="col-md-12">
 <div class="col-md-2 font-div">
@@ -452,7 +532,7 @@ margin-top:30px;
 <span>용도</span>
 </div>
 <div class="col-md-2">
-<input type="text" class="form-control tel_type" name="tel_type">
+<input type="text" class="form-control tel-type" name="tel_type">
 </div>
 <div class="col-md-1 font-div">
 <span>번호</span>
@@ -467,13 +547,13 @@ margin-top:30px;
  <input type="text" maxlength="4" class="form-control tel-telephone-right" name="tel_telephone_right">
 </div>
 <div class="col-md-2">
-<input type="button" class="btn btn-block addTel" value="추가">
+<input type="button" class="btn btn-block" id="addTel" value="추가">
 </div>
 <div class="col-md-12 tel-list-font">
  <span>전화번호 목록</span>
 </div>
-<div class="col-md-12 tel-list">
 <div class="col-md-12">
+<div class="col-md-12" id ="telList">
 <div class="col-md-3 font-div font-center">
 <span>용도</span>
 </div>
@@ -481,11 +561,6 @@ margin-top:30px;
 <span>번호</span>
 </div>
 <div class="col-md-2"></div>
-</div>
-<div class="col-md-3"></div>
-<div class="col-md-7"></div>
-<div class="col-md-2">
- <button class="btn btn-block deleteTel">삭제</button>
 </div>
 </div>
 </div>

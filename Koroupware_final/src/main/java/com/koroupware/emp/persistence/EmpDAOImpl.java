@@ -33,7 +33,7 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public EmpVO empList(int emp_no) throws Exception {
+	public EmpVO empList(Integer emp_no) throws Exception {
 		return sqlSession.selectOne(namespace+".empList", emp_no);
 	}
 
