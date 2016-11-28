@@ -1,10 +1,9 @@
 package com.koroupware.elecauth.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
-public class DocVO implements Serializable{
+public class DocVO{
 	private int doc_no;
 	private String doc_title;
 	private String doc_explain;

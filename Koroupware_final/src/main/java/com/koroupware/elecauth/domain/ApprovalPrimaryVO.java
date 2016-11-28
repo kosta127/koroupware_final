@@ -16,5 +16,12 @@ public class ApprovalPrimaryVO {
 		this.emp_no = emp_no;
 	}
 	
+	public ApprovalPrimaryVO(){}
+	public ApprovalPrimaryVO(int elec_auth_no, int emp_no) {
+		super();
+		this.elec_auth_no = elec_auth_no;
+		this.emp_no = emp_no;
+	}
+	
 	
 }

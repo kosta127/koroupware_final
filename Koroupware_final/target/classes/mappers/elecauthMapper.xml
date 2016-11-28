@@ -12,12 +12,13 @@
 		ea.elec_auth_enddate,
 		do.doc_title, de.dept_name, e.emp_name, appr.approval_list_pass
 		
-		FROM elec_auth ea, doc do, dept de, emp e, approval_list appr
+		FROM elec_auth ea, doc do, dept de, emp e, approval_list appr, elec_auth_referrer ear
 		WHERE ea.emp_no=e.emp_no
 		AND ea.doc_no=do.doc_no
 		AND ea.elec_auth_management_dept_no=de.dept_no
 		AND ea.elec_auth_no=appr.elec_auth_no
 		AND ea.elec_auth_deldate IS NULL
+		AND (ea.emp_no=#{emp_no} OR appr.emp_no=#{emp_no} OR ear.emp_no=#{emp_no})
 	</select>
 	
 	<!-- 전자결재 상세정보 조회 added by moonyong -->
@@ -119,6 +120,7 @@
 		UPDATE elec_auth
 		SET elec_auth_deldate=SYSDATE
 		WHERE elec_auth_no=#{elec_auth_no}
+		AND emp_no=#{emp_no}
 	</update>
 	
 	<!-- 전자결재 승인 처리 by moonyong -->

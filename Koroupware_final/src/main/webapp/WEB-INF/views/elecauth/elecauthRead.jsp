@@ -25,6 +25,7 @@
 <body>
 	<input type="hidden" name="elec_auth_no" value=${elecauthRead.elec_auth_no }>
 	<input type="hidden" name="emp_no" value=${login.emp_no }>
+	
 	<table class="table table-bordered" id="tabel1" border=1 width=60%>
 		<tr>
 			<td width=15%>문서종류</td>
@@ -57,10 +58,18 @@
 				<td>${elecauthRead.elec_auth_contents }</td>
 		</table><br> 
 		
-		<input type="button" id="okReport" class="btn btn-info" value="승인">
-		<input type="button" id="noReport" class="btn btn-danger" value="거부">
+		<!-- <form>
+			<input type="submit" id="okReport" class="btn btn-info" value="승인">
+			<input type="submit" id="noReport" class="btn btn-danger" value="거부">
+		</form> -->
 		
-		<input type="button" id="removeReport" class="btn btn-warning" value="삭제">
+		<c:if test="${login.emp_no== elecauthRead.emp_no}">
+			<form action="elecauthDelete">
+			<input type="hidden" name="elec_auth_no" value=${elecauthRead.elec_auth_no }>
+			<input type="hidden" name="emp_no" value=${login.emp_no }>
+			<input type="button" id="removeReport" class="btn btn-warning" value="삭제">
+			</form>
+		</c:if>		
 		<br>
 		
 		<h3>@결재 진행 상태</h3>

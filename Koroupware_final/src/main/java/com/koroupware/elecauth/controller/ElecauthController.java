@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.ParseConversionEvent;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koroupware.elecauth.domain.ElecauthReadVO;
+import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthVO;
 import com.koroupware.elecauth.domain.EmpDetailVO;
@@ -23,6 +25,7 @@ import com.koroupware.elecauth.dto.ElecauthDTO;
 import com.koroupware.elecauth.domain.ElecauthReadApprovalVO;
 import com.koroupware.elecauth.domain.ElecauthReadReferrerVO;
 import com.koroupware.elecauth.service.ElecauthService;
+import com.koroupware.member.dto.EmpDTO;
 
 @Controller
 @RequestMapping("/elecauth")
@@ -32,8 +35,12 @@ public class ElecauthController {
 	private ElecauthService service;
 	
 	@RequestMapping(value="/elecauthList", method=RequestMethod.GET)
-	public String elecauthList(Model model)throws Exception{
-		List<ElecauthListVO> elecauthList=service.elecauthList();
+	public String elecauthList(Model model, HttpSession session)throws Exception{
+		Object obj=session.getAttribute("login");
+		EmpDTO dto = (EmpDTO) obj;
+		int emp_no=dto.getEmp_no();
+		
+		List<ElecauthListVO> elecauthList=service.elecauthList(emp_no);
 		model.addAttribute("elecauthList", elecauthList);
 		
 		return "/elecauth/elecauthList";
@@ -94,15 +101,17 @@ public class ElecauthController {
 	//삭제처리하기 by moonyong
 	@RequestMapping(value="/elecauthDelete/{elec_auth_no}")
 	public String elecauthDelete(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
-		service.elecauthDelete(elec_auth_no);
+		//service.elecauthDelete(elec_auth_no);
 		
 		return "redirect:/elecauth/elecauthList";
 	}
 	
 	//승인처리하기 by moonyong
 	@RequestMapping(value="/elecauthOkReport")
-	public String elecauthOkReport(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
-
+	public String elecauthOkReport(@RequestParam("elec_auth_no") int elec_auth_no,
+			@RequestParam("emp_no") int emp_no)throws Exception{
+		ApprovalPrimaryVO elecauthOkReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
+		service.elecauthOkReport(elecauthOkReport);
 		
 		return "redirect:/elecauth/elecauthList";
 	}

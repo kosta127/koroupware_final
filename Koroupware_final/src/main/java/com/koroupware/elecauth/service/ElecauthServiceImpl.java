@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
 import com.koroupware.elecauth.domain.DocVO;
+import com.koroupware.elecauth.domain.ElecauthDeleteVO;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthReferrerVO;
@@ -26,9 +27,9 @@ public class ElecauthServiceImpl implements ElecauthService {
 	private ElecauthDAO dao;
 
 	@Override
-	public List<ElecauthListVO> elecauthList() throws Exception {
+	public List<ElecauthListVO> elecauthList(int emp_no) throws Exception {
 		
-		return dao.elecauthList();
+		return dao.elecauthList(emp_no);
 	}
 
 	@Override
@@ -82,9 +83,9 @@ public class ElecauthServiceImpl implements ElecauthService {
 	}
 
 	@Override
-	public void elecauthDelete(int elec_auth_no) throws Exception {
+	public void elecauthDelete(ElecauthDeleteVO elecauthDelete) throws Exception {
 		//전자결재 삭제
-		dao.elecauthDelete(elec_auth_no);
+		dao.elecauthDelete(elecauthDelete);
 	}
 
 	@Override
