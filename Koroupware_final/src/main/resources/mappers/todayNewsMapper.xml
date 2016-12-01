@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.mappers.TodayNewsMapper">
+
+	<resultMap id="newsResultMap" type="NewsDTO">
+		<result property="title" column="news_clipping_title"/>
+		<result property="description" column="news_clipping_contents"/>
+		<result property="link" column="news_clipping_link"/>
+		<result property="pubDate" column="news_clipping_date"/>
+		<result property="author" column="news_clipping_author"/>
+		<result property="category" column="news_clipping_category"/>
+	</resultMap>
+	
+	<insert id="newsInsert" parameterType="NewsVO">
+		INSERT INTO NEWS_CLIPPING(
+			NEWS_CLIPPING_NO, EMP_NO, NEWS_CLIPPING_TITLE, NEWS_CLIPPING_CONTENTS,
+			NEWS_CLIPPING_LINK, NEWS_CLIPPING_DATE, NEWS_CLIPPING_AUTHOR, 
+			NEWS_CLIPPING_CATEGORY, NEWS_CLIPPING_REGDATE
+		)VALUES(
+			SEQ_NEWS_CLIPPING.NEXTVAL, #{emp_no}, #{news_clipping_title}, #{news_clipping_contents},
+			#{news_clipping_link}, #{news_clipping_date}, #{news_clipping_author},
+			#{news_clipping_category}, SYSDATE
+		)
+	</insert>
+	
+	<select id="newsCountAsLink" parameterType="NewsVO" resultType="int">
+		SELECT COUNT(*) CNT 
+			FROM NEWS_CLIPPING 
+			WHERE NEWS_CLIPPING_LINK = #{news_clipping_link}
+			AND EMP_NO = #{emp_no}
+			AND NEWS_CLIPPING_DELDATE IS NULL
+	</select>
+	
+	<update id="newsDelete" parameterType="NewsVO">
+		UPDATE NEWS_CLIPPING
+			SET NEWS_CLIPPING_DELDATE = SYSDATE
+			WHERE EMP_NO = #{emp_no}
+			AND NEWS_CLIPPING_LINK = #{news_clipping_link}
+	</update>
+	
+	<select id="myNewsList" parameterType="int" resultType="NewsVO">
+		SELECT *
+			FROM NEWS_CLIPPING
+			WHERE EMP_NO = #{emp_no}
+			AND NEWS_CLIPPING_DELDATE IS NULL
+	</select>
+</mapper>

@@ -6,6 +6,8 @@
 
   <typeAliases>
     <package name="com.koroupware.O.domain"/>
+    <package name="com.koroupware.news.domain"/>
+    <package name="com.koroupware.news.dto"/>
   </typeAliases>
 
 
