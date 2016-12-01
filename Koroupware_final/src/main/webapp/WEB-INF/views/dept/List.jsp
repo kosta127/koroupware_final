@@ -67,7 +67,7 @@
 			</c:forEach>
 			<!-- 모달 전체 윈도우 -->
 		</section>
-		<section id="orgChartTreeSection" class="horizontalTreeTop row hidden">
+		<section id="orgChartTreeSection" class="horizontalTreeTop row hidden orgChartTreeSection">
 		</section>
 		
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"

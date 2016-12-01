@@ -1,5 +1,6 @@
 package com.koroupware.dept.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,12 +34,6 @@ import com.koroupware.dept.service.DeptService;
 public class DeptController {
 	@Inject
 	private DeptService service;
-	
-	@RequestMapping(value="/Test")
-	public void test() throws Exception{
-		//test
-		
-	}
 	
 	@ResponseBody
 	@RequestMapping(value="/ReadTree", method={RequestMethod.GET})
@@ -120,18 +115,24 @@ public class DeptController {
 		
 		try {
 			HttpHeaders headers = new HttpHeaders();
-			in = new FileInputStream(uploadPath + "\\" + fileName);
+			File file = new File(uploadPath + "\\" + fileName);
+			
+			if(file.exists()){
+				in = new FileInputStream(file);
 
-			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-			headers.add("Content-Disposition",
-					"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Disposition",
+						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
 
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+				entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 		} finally {
-		      in.close();
+			if(ETC.isNotNull(in)){
+				in.close();
+			}
 	    }
 		
 		return entity;
