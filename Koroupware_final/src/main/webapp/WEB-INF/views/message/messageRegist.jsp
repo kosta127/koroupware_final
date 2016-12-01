@@ -22,6 +22,16 @@ $(document).ready(function(){
 			
 			window.open("/message/messageSearch/"+emp_no,"test","width=600,height=300,location=yes");
 		})
+		$("#emp_name").click(function(){
+			if($(this).is(":checked")){
+				$(".receiver_name").attr("value","${emp_name}");
+				var html = "<input type='hidden' name='message_receiver_no' value="+${emp_no}+">";
+				$("form").prepend(html);
+			}
+			else {
+				$(".receiver_name").attr("value","");
+			}
+		});
 	});
 		
 function receiver(receiver){
@@ -35,7 +45,8 @@ function receiver(receiver){
 <body>
 	<form action="/message/messageRegist/${emp_no}" method="post">
 
-		받는사람 : <input type="text" name="message_receiver_name" class="receiver_name">
+		받는사람 : <input type="checkbox" name="emp_name" id="emp_name"> 내게 쓰기
+		<input type="text" name="message_receiver_name" class="receiver_name">
 		<button class="search">검색</button><br>
 		<textarea name="message_contents" rows="5" cols="55" title="쪽지내용 입력"></textarea>
 		<input type="submit" value="전송">

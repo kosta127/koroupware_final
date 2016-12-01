@@ -38,7 +38,7 @@
 			<th>보존 년한</th>
 			<th></th>
 		</tr>
-		<c:forEach var="doc" items="${list }">
+		<c:forEach var="doc" items="${list}">
 			<tr height="30">
 				<td><a href="/doc/docRead/${doc.doc_no}/${doc_box_no}/${emp_no}">${doc.doc_title }</a></td>
 				<td>${doc.doc_con_period }</td>

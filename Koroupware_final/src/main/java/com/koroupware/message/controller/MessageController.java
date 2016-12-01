@@ -28,7 +28,9 @@ public class MessageController {
 	
 	@RequestMapping(value="messageRegist/{emp_no}",method=RequestMethod.GET)
 	public String messageRegistGET(@PathVariable("emp_no") int emp_no,Model model){
+		String emp_name = service.receiver_nameGet(emp_no);
 		model.addAttribute("emp_no",emp_no);
+		model.addAttribute("emp_name",emp_name);
 		return "/message/messageRegist";
 	}
 	@RequestMapping(value="messageRegist/{emp_no}",method=RequestMethod.POST)

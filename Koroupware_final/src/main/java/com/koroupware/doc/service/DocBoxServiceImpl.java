@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 import com.koroupware.doc.domain.DocBoxVO;
 import com.koroupware.doc.domain.DocVO;
 import com.koroupware.doc.persistence.DocBoxDAO;
+import com.koroupware.doc.persistence.DocManagementDAO;
 
 @Service
 public class DocBoxServiceImpl implements DocBoxService {
 
 	@Inject
 	private DocBoxDAO docboxDAO;
+	@Inject
+	private DocManagementDAO docmanagementDAO;
 	
 	@Override
 	public void doc_boxRegist(DocBoxVO vo) {
@@ -45,6 +48,7 @@ public class DocBoxServiceImpl implements DocBoxService {
 	
 	@Override
 	public void doc_boxRemove(int doc_box_no) {
+		docmanagementDAO.doc_boxDelete(doc_box_no);
 		docboxDAO.doc_boxDelete(doc_box_no);
 	}
 

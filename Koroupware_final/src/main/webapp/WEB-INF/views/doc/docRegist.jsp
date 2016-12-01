@@ -129,7 +129,7 @@
 </head>
 <body>
 		<h1>문서 등록</h1>
-		<form id="registerForm" action="/doc/docRegist/${emp_no}/${doc_box_no}" method="post"
+		<form id="registerForm" action="/doc/docRegist/${doc_box_no}/${emp_no}" method="post"
 			enctype="multipart/form-data">
 		
 		문서명 : <input type="text" name="doc_title"><br>

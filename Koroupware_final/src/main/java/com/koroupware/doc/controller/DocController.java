@@ -42,7 +42,7 @@ public class DocController {
 		return "/doc/docRead";
 	}
 	
-	@RequestMapping("/docList/{emp_no}/{doc_box_no}")
+	@RequestMapping("/docList/{doc_box_no}/{emp_no}")
 	public String listDoc(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
 		List<DocVO> list = service.docList();
 		model.addAttribute("list",list);
@@ -51,7 +51,7 @@ public class DocController {
 		return "/doc/docList";
 	}
 	
-	@RequestMapping(value="/docRegist/{emp_no}/{doc_box_no}",method=RequestMethod.GET)
+	@RequestMapping(value="/docRegist/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
 	public String docRegistGET(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
 		System.out.println("dd");
 		model.addAttribute("emp_no",emp_no);
@@ -59,7 +59,7 @@ public class DocController {
 		return "/doc/docRegist";
 	}
 	
-	@RequestMapping(value="/docRegist/{emp_no}/{doc_box_no}",method=RequestMethod.POST)
+	@RequestMapping(value="/docRegist/{doc_box_no}/{emp_no}",method=RequestMethod.POST)
 	public String docRegistPOST(DocVO vo,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no) throws Exception{
 		System.out.println(vo.getDoc_contents());
 		service.docRegist(vo);

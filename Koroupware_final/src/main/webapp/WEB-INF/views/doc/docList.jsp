@@ -16,10 +16,10 @@
 
 <script type="text/javascript">
 	function fn_addDoc(){
-		location.href="/doc/docRegist/"+${emp_no}+"/"+${doc_box_no};
+		location.href="/doc/docRegist/"+${doc_box_no}+"/"+${emp_no};
 	}
 	function fn_listDocHis(){
-		location.href="/doc/doc_hisList/"+${emp_no}+"/"+${doc_box_no};
+		location.href="/doc/doc_hisList/"+${doc_box_no}+"/"+${emp_no};
 	}
 	function fn_detailDoc_box(){
 		location.href="/doc/doc_boxRead/"+${doc_box_no}+"/"+${emp_no};
@@ -42,7 +42,7 @@
 			<c:forEach var="doc" items="${list}">
 			<c:if test="${doc.doc_deldate == null }">
 			<tr>
-				<td><input type="checkbox" name="doc_no" value=${doc.doc_no }></td>
+				<td><input type="checkbox" name="doc_no" value="${doc.doc_no}"></td>
 				<td>${doc.doc_no }</td>
 				<td><a href="/doc/docRead/${doc.doc_no}/${doc_box_no}/${emp_no}">${doc.doc_title }</a></td>
 				<td>${doc.doc_con_period }</td>

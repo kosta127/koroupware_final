@@ -72,6 +72,7 @@ public class DocBoxController {
 	
 	@RequestMapping(value="doc_boxRemove/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
 	public String doc_boxRemove(@PathVariable("doc_box_no") int doc_box_no,@PathVariable("emp_no") int emp_no){
+		System.out.println(doc_box_no);
 		service.doc_boxRemove(doc_box_no);
 		return "redirect:/doc/doc_boxList/"+emp_no;
 	}
