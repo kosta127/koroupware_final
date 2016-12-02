@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.koroupware.dept.domain.EmpVO;
-
 public class SimpleCORSFilter implements Filter{
 	@Override
 	public void destroy() {

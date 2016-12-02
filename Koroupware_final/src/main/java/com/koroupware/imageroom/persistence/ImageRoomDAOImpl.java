@@ -7,8 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.koroupware.dept.domain.EmpVO;
-import com.koroupware.imageroom.domain.EmpDTO;
+import com.koroupware.imageroom.domain.EmpImageRoomDTO;
 import com.koroupware.imageroom.domain.ImageRoomVO;
 
 @Repository
@@ -39,7 +38,7 @@ public class ImageRoomDAOImpl implements ImageRoomDAO{
 	}
 	*/
 	@Override
-	public EmpDTO empSelect(Integer emp_no) {
+	public EmpImageRoomDTO empSelect(Integer emp_no) {
 		return session.selectOne(NAMESPACE + ".empSelect", emp_no);
 	}
 }

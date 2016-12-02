@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.koroupware.dept.domain.EmpVO;
-import com.koroupware.imageroom.domain.EmpDTO;
+import com.koroupware.imageroom.domain.EmpImageRoomDTO;
 import com.koroupware.imageroom.domain.ImageRoomVO;
 import com.koroupware.imageroom.service.ImageRoomService;
 
@@ -77,16 +76,16 @@ public class ImageRoomController {
 
 	@ResponseBody
 	@RequestMapping(value="/getEmp")
-	public ResponseEntity<EmpDTO> getEmp(@RequestParam("emp_no") Integer emp_no){
-		ResponseEntity<EmpDTO> entity = null;
+	public ResponseEntity<EmpImageRoomDTO> getEmp(@RequestParam("emp_no") Integer emp_no){
+		ResponseEntity<EmpImageRoomDTO> entity = null;
 		
 		try {
-			EmpDTO emp = service.empRead(emp_no);
-			
-			entity = new ResponseEntity<EmpDTO>(emp, HttpStatus.OK);
+			EmpImageRoomDTO emp = service.empRead(emp_no);
+			System.out.println(emp);
+			entity = new ResponseEntity<EmpImageRoomDTO>(emp, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<EmpDTO>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<EmpImageRoomDTO>(HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;

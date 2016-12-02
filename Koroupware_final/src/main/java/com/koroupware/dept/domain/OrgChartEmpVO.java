@@ -3,6 +3,8 @@ package com.koroupware.dept.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.koroupware.emp.domain.EmpVO;
+
 public class OrgChartEmpVO extends EmpVO implements Serializable{
 	private String position_name;
 	private String office_name;

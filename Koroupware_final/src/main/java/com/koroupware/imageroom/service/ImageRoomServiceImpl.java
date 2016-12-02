@@ -6,8 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.koroupware.dept.domain.EmpVO;
-import com.koroupware.imageroom.domain.EmpDTO;
+import com.koroupware.imageroom.domain.EmpImageRoomDTO;
 import com.koroupware.imageroom.domain.ImageRoomVO;
 import com.koroupware.imageroom.persistence.ImageRoomDAO;
 
@@ -41,7 +40,7 @@ public class ImageRoomServiceImpl implements ImageRoomService{
 	}
 	*/
 	@Override
-	public EmpDTO empRead(Integer emp_no) {
+	public EmpImageRoomDTO empRead(Integer emp_no) {
 		return dao.empSelect(emp_no);
 	}
 	

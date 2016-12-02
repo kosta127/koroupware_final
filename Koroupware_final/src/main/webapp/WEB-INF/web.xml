@@ -43,4 +43,14 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- CORS 처리 -->
+	<filter>
+	    <filter-name>cors</filter-name>
+	    <filter-class>com.koroupware.common.filter.SimpleCORSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>cors</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

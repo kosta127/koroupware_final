@@ -22,7 +22,7 @@
 		FROM image_room
 	</select>
 	
-	<select id="empSelect" resultType="EmpDTO">
+	<select id="empSelect" resultType="EmpImageRoomDTO">
 		SELECT e.emp_no, e.dept_no, e.office_no, e.emp_superior, e.emp_reporter, e.emp_name, e.emp_email,
         e.emp_id, e.emp_password, e.emp_address, e.emp_approvalYN, e.emp_residentnumber, e.emp_hiredate,
         e.emp_resigndate, e.emp_email_sign, e.emp_elec_auth_signkey, e.emp_img, e.emp_elec_auth_img,
