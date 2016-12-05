@@ -53,7 +53,7 @@ public class DocController {
 	
 	@RequestMapping(value="/docRegist/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
 	public String docRegistGET(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
-		System.out.println("dd");
+		
 		model.addAttribute("emp_no",emp_no);
 		model.addAttribute("doc_box_no",doc_box_no);
 		return "/doc/docRegist";
@@ -61,7 +61,7 @@ public class DocController {
 	
 	@RequestMapping(value="/docRegist/{doc_box_no}/{emp_no}",method=RequestMethod.POST)
 	public String docRegistPOST(DocVO vo,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no) throws Exception{
-		System.out.println(vo.getDoc_contents());
+		
 		service.docRegist(vo);
 		return "redirect:/doc/docList/"+emp_no+"/"+doc_box_no;
 	}
@@ -119,9 +119,9 @@ public class DocController {
 					}
 					result += str + "<br/>";
 			}
-			System.out.println(result);
+			
 			result = URLEncoder.encode(result, "utf-8");
-			System.out.println(result);
+			
 			return new ResponseEntity<String>(result,HttpStatus.OK);
 }
 }
