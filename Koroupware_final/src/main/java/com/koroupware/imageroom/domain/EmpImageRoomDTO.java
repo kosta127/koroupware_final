@@ -6,7 +6,7 @@ import com.koroupware.emp.domain.EmpVO;
 
 public class EmpImageRoomDTO extends EmpVO{
 	private String office_name;
-	private String position_name;	
+	private String position_name;
 	
 	public EmpImageRoomDTO(){}
 	public EmpImageRoomDTO(String office_name, String position_name) {
@@ -35,6 +35,19 @@ public class EmpImageRoomDTO extends EmpVO{
 				emp_resigndate, emp_email_sign, emp_elec_auth_signkey, emp_img, emp_elec_auth_img, emp_login,
 				emp_residentnumber, emp_point, dept_name);
 		this.office_name = office_name;
+		this.position_name = position_name;
+	}
+	
+	public String getOffice_name() {
+		return office_name;
+	}
+	public void setOffice_name(String office_name) {
+		this.office_name = office_name;
+	}
+	public String getPosition_name() {
+		return position_name;
+	}
+	public void setPosition_name(String position_name) {
 		this.position_name = position_name;
 	}
 	

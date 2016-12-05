@@ -4,11 +4,24 @@
 
 
 <mapper namespace="com.koroupware.mappers.ImageRoomMapper">
+	<select id="imageRoomList" resultType="ImageRoomDTO">
+		SELECT i.image_room_no, i.image_room_name, i.image_room_regdate, i.image_room_deldate, 
+		        	e.emp_no, e.emp_name, d.dept_name, p.position_name, o.office_name
+		FROM image_room i, emp e, dept d, position p, office o
+		WHERE i.emp_no = e.emp_no
+		        AND e.dept_no = d.dept_no
+		        AND e.position_no = p.position_no
+		        AND e.office_no = o.office_no
+		        AND image_room_deldate IS NULL 
+		        AND e.emp_resigndate IS NULL
+	</select>
+	<!-- 
 	<select id="imageRoomList" resultType="ImageRoomVO">
 		SELECT * 
 		FROM image_room
 		WHERE image_room_deldate IS NULL 
 	</select>
+	 -->
 	<insert id="imageRoomInsert" parameterType="ImageRoomVO">
 		INSERT INTO image_room(image_room_no, image_room_name, emp_no)
 		VALUES(#{image_room_no}, #{image_room_name}, #{emp_no})
@@ -35,13 +48,10 @@
                 AND e.emp_no = #{emp_no}
 	</select>
 	
-	<select id="joinList">
-	
-	</select>
-	
-	<select id="imageCaptureList">
-	
-	</select>
+	<delete id="imageRoomDelete" parameterType="int">
+		DELETE FROM image_room
+		WHERE image_room_no = #{image_room_no}
+	</delete>
 </mapper>
 
 

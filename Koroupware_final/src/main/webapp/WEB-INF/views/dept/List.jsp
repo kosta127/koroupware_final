@@ -30,6 +30,27 @@
 </head>
 <body>
 	<div id="container" class="container">
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">검색중</h4>
+					</div>
+					<div class="modal-body" id="modalBody">
+						<p>뜨는중</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+				<!-- 모달 콘텐츠 -->
+			</div>
+			<!-- 모달 다이얼로그 -->
+		</div>
 		<nav>
 			<a id="orgChartListSort" href="#">부서별</a>
 			<a id="orgChartTreeSort" href="#">트리</a>
@@ -69,28 +90,6 @@
 		</section>
 		<section id="orgChartTreeSection" class="horizontalTreeTop row hidden orgChartTreeSection">
 		</section>
-		
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-					aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel">검색중</h4>
-						</div>
-						<div class="modal-body" id="modalBody">
-							<p>뜨는중</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						</div>
-					</div>
-					<!-- 모달 콘텐츠 -->
-				</div>
-				<!-- 모달 다이얼로그 -->
-			</div>
 	</div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <script type="text/javascript">
 function logout() {
 	   location.href='/logout';
-	   }
+   }
 </script>
 <style>
 .main-font{
