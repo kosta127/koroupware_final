@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.koroupware.member.dto.EmpDTO;
-import com.koroupware.search.domain.Criteria;
 import com.koroupware.search.domain.SearchVO;
 
 @Repository

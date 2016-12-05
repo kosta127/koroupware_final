@@ -3,11 +3,11 @@ package com.koroupware.board.domain;
 public class Criteria {
 
   private int page=1;
-  private int perPageNum=2;
+  private int perPageNum=10;
 
   public Criteria() {
     this.page = 1;
-    this.perPageNum = 2;
+    this.perPageNum = 10;
   }
 
   public void setPage(int page) {
@@ -23,7 +23,7 @@ public class Criteria {
   public void setPerPageNum(int perPageNum) {
 
     if (perPageNum <= 0 || perPageNum > 100) {
-      this.perPageNum = 2;
+      this.perPageNum = 10;
       return;
     }
 

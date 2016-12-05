@@ -32,7 +32,7 @@ public class BoardServiceImpl implements BoardService {
 		if(files==null){
 			return;
 		}
-		
+		 
 		for(String fileName:files){
 			filevo.setFullName(fileName);
 			dao.fileInsert(filevo);
@@ -40,8 +40,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> boardList() throws Exception {
-		return dao.boardList();
+	public List<BoardVO> boardList(int category_no) throws Exception {
+		return dao.boardList(category_no);
 	}
 
 	@Override
@@ -60,6 +60,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO boardRead(int board_no) throws Exception {
 		dao.updateViewCnt(board_no);
+		dao.updateRecCnt(board_no);
 		
 		return dao.boardSelect(board_no);
 	}

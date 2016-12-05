@@ -1,6 +1,6 @@
 package com.koroupware.search.domain;
 
-public class SearchVO extends Criteria{
+public class SearchVO extends S_Criteria{
 	private String keyField;
 	private String search_content;
 	public String getKeyField() {

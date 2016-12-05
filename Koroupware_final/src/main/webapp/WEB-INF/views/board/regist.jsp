@@ -18,8 +18,7 @@
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 	
-<!-- 사용자 js -->
-  
+<!-- 사용자 js -->  
 <script type="text/javascript">
 	$(function(){
 		CKEDITOR.replace("board_contents");
@@ -132,15 +131,23 @@ $(document).ready(function(){
 </head>
 <body>
 
-<form id="registerForm" method="post">
+<form action="regist" method="post">
+	<input type="hidden" value="${category_no }" name="category_no" id="category_no"/>
 	<table>
 		<tr>
+			<td width="70" align="center">작성자</td>
+			<td>
+				<input type="hidden" value="${emp_no}" name="emp_no">
+				${emp_name}
+			</td>
+		</tr>
+		<tr>
 			<td width="70" align="center">제목</td>
-			<td><input type="text" name="board_title"></td>
+			<td><input type="text" name="board_title" id="board_title"></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><textarea rows="10" cols="5" name="board_contents"></textarea> </td>
+			<td><textarea rows="10" cols="5" name="board_contents" id="board_contents"></textarea> </td>
 		</tr>
 	</table>
 	
@@ -155,9 +162,9 @@ $(document).ready(function(){
 			<hr>
 		</div>
 		
-		<ul class="mailbox-attachments clearfix uploadedList"></ul>
+		<ul id="file" class="mailbox-attachments clearfix uploadedList"></ul>
 		
-		<button type="submit" class="btn btn-primary">등록</button>
+		<button id="create" type="submit" class="btn btn-primary">등록</button>
 		<button type="submit" class="btn btn-primary" onclick="cancel()">취소</button>
 	</div>
 </form>

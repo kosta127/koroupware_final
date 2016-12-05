@@ -14,11 +14,14 @@
 		)
 	</insert>
 	
-	<select id="communityList" resultType="CommunityVO">
-		select * from community
+	<select id="communityList" resultType="CommunityVO" parameterType="int">
+		select c.community_name, c.community_no
+		from community c, emp e
+ 		where e.emp_no=c.emp_no
+  			and e.emp_no = #{emp_no}
 	</select>	
 	
-	<select id="maxNumber" resultType="int">
+	<select id="maxNumber" resultType="Integer">
 		select MAX(community_no) from community
 	</select>
 	

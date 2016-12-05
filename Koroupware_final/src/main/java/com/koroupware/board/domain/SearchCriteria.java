@@ -4,7 +4,14 @@ public class SearchCriteria extends Criteria{
 
 	private String searchType;
 	private String keyword;
+	private int category_no;
 	
+	public int getCategory_no() {
+		return category_no;
+	}
+	public void setCategory_no(int category_no) {
+		this.category_no = category_no;
+	}
 	public String getSearchType() {
 		return searchType;
 	}

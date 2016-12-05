@@ -16,14 +16,13 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public void communityRegist(CommunityVO community) throws Exception {
-		System.out.println("service");
 		dao.communityInsert(community);
 		
 	}
 
 	@Override
-	public List<CommunityVO> communityList() throws Exception {
-		return dao.communityList();
+	public List<CommunityVO> communityList(int emp_no) throws Exception {
+		return dao.communityList(emp_no);
 	}
 	
 	

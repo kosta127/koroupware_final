@@ -19,12 +19,16 @@ public class CommunityDAOImpl implements CommunityDAO {
 
 	@Override
 	public int communityInsert(CommunityVO community) {
-		System.out.println("dao");
-		return sqlSession.insert(namespace+".insertCommunity", community);
+		return sqlSession.insert(namespace+".communityInsert", community);
 	}
 
 	@Override
-	public List<CommunityVO> communityList() {
-		return sqlSession.selectList(namespace+".listCommunity");
+	public List<CommunityVO> communityList(int emp_no) {
+		return sqlSession.selectList(namespace+".communityList", emp_no);
+	}
+
+	@Override
+	public int getCommunityNo() throws Exception {
+		return sqlSession.selectOne(namespace+".maxNumber");
 	}
 }

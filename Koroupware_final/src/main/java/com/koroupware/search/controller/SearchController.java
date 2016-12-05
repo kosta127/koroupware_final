@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koroupware.member.dto.EmpDTO;
-import com.koroupware.search.domain.Criteria;
-import com.koroupware.search.domain.PageMaker;
+import com.koroupware.search.domain.S_PageMaker;
 import com.koroupware.search.domain.SearchVO;
 import com.koroupware.search.service.SearchService;
 
@@ -48,7 +47,7 @@ public class SearchController {
 		cri.setSearch_content(searchContent);
 		List<EmpDTO> list = service.listSearchPerson(cri);
 		
-		PageMaker pageMaker = new PageMaker();
+		S_PageMaker pageMaker = new S_PageMaker();
 		pageMaker.setCri(cri);
 		/*pageMaker.setTotalCount(20);*/
 		pageMaker.setTotalCount(service.listCountCriteria(cri));
@@ -63,7 +62,7 @@ public class SearchController {
 		cri.setSearch_content(searchContent);
 		List<EmpDTO> list = service.listSearchDoc(cri);
 		
-		PageMaker pageMaker = new PageMaker();
+		S_PageMaker pageMaker = new S_PageMaker();
 		pageMaker.setCri(cri);
 		/*pageMaker.setTotalCount(20);*/
 		pageMaker.setTotalCount(service.listCountCriteria(cri));

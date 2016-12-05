@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.dto.EmpDTO;
-import com.koroupware.search.domain.Criteria;
 import com.koroupware.search.domain.SearchVO;
 
 public interface SearchService {

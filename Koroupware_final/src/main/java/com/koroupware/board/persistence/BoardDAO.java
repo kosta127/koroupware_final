@@ -10,7 +10,7 @@ import com.koroupware.board.domain.SearchCriteria;
 public interface BoardDAO {
 
 	public void boardInsert(BoardVO vo)throws Exception;
-	public List<BoardVO> boardList()throws Exception;
+	public List<BoardVO> boardList(int category_no)throws Exception;
 	public void boardUpdate(BoardVO vo)throws Exception;
 	public void boardDelete(int board_no)throws Exception;
 	public BoardVO boardSelect(int board_no)throws Exception;

@@ -7,20 +7,25 @@
 
 	<insert id="insertBoard" parameterType="BoardVO">
 		insert into board(
-			board_no, board_title, board_contents, board_regdate, board_hit
+			board_no, board_title, board_contents, board_regdate, board_hit, category_no, emp_no
 		)
 		values(
-			#{board_no}, #{board_title}, #{board_contents}, SYSDATE, 0
+			#{board_no}, #{board_title}, #{board_contents}, SYSDATE, 0, #{category_no}, #{emp_no}
 		)
 	</insert>
 	
-	<select id="listBoard" resultType="BoardVO">
+	<select id="listBoard" resultType="BoardDTO" parameterType="SearchCriteria">
 	<![CDATA[
-		select * from board where board_no > 0 and board_deldate is null
+		select b.board_no, b.board_title, e.emp_name, b.board_regdate, b.board_hit 
+		from board b, category c, emp e 
 	]]>
 		<include refid="search"></include>
 	<![CDATA[
-		order by board_no desc
+		where b.category_no = c.category_no 
+			and e.emp_no = b.emp_no
+			and b.board_no > 0 
+			and b.board_deldate is null 
+			and b.category_no = #{category_no} order by board_no desc
 	]]>
 	</select>
 	
@@ -67,7 +72,7 @@
 	</update>
 	
 	<select id="detailBoard" resultType="BoardVO">
-		select * from board where board_no = #{board_no}
+		select * from board	where board_no = #{board_no}
 	</select>
 	
 	<select id="maxNumber" resultType="Integer">
@@ -76,7 +81,7 @@
 		
 	<select id="countPaging" resultType="int">
 		<![CDATA[
-			select count(board_no) from board where board_no > 0
+			select count(board_no) from board where board_no > 0 and category_no = #{category_no}
 		]]>
 		
 		<include refid="search"></include>
@@ -103,8 +108,6 @@
 		delete from board_file where board_no = #{board_no}
 	</delete>
 	
-	<select id="updateRecCnt" parameterType="recommendVO">
-		select COUNT(distinction) from recommend
-	</select>
+
 </mapper>  
 

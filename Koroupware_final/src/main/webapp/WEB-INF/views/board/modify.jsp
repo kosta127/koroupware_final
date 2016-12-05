@@ -27,7 +27,8 @@
 
 <script type="text/javascript">
 	function modify_success(){
-		location.href = "list?page=${cri.page}&perPageNum=&{cri.perPageNum}"+"&searchType=${cri.searchType}&keyword=${cri.keyword}";
+		location.href = "list?page=${cri.page}&perPageNum=&{cri.perPageNum}"+"&searchType=${cri.searchType}&keyword=${cri.keyword}"
+									+"category_no=${cri.category_no}";
 	}
 	function modify_cancel(){
 		location.href = "list";

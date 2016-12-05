@@ -3,7 +3,7 @@ package com.koroupware.search.domain;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class PageMaker {
+public class S_PageMaker {
 	
 	private int totalCount;
 	private int startPage;
@@ -13,9 +13,9 @@ public class PageMaker {
 	
 	private int displayPageNum =10;
 	
-	private Criteria cri;
+	private S_Criteria cri;
 
-	public void setCri(Criteria cri) {
+	public void setCri(S_Criteria cri) {
 		this.cri = cri;
 	}
 
@@ -82,11 +82,13 @@ public class PageMaker {
 		return totalCount;
 	}
 
-	public Criteria getCri() {
+	
+	
+	  public S_Criteria getCri() {
 		return cri;
 	}
-	
-	  public String makeSearch(int page){
+
+	public String makeSearch(int page){
 		    // 1번 알아야 할 내용
 		    UriComponents uriComponents =
 		              UriComponentsBuilder.newInstance()

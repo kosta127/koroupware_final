@@ -48,4 +48,8 @@
 	<context:component-scan base-package="com.koroupware.board.domain"/>
 	<context:component-scan base-package="com.koroupware.board.service"/>
 	<context:component-scan base-package="com.koroupware.board.persistence"/>
+	
+	<context:component-scan base-package="com.koroupware.schedule.domain"/>
+	<context:component-scan base-package="com.koroupware.schedule.service"/>
+	<context:component-scan base-package="com.koroupware.schedule.persistence"/>
 </beans>

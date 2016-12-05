@@ -1,11 +1,11 @@
 package com.koroupware.search.domain;
 
-public class Criteria {
+public class S_Criteria {
 	
 	private int page;
 	private int perPageNum;
 	
-	public Criteria(){
+	public S_Criteria(){
 		this.page = 1;
 		this.perPageNum = 10;
 	}

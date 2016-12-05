@@ -9,7 +9,7 @@ import com.koroupware.board.domain.SearchCriteria;
 public interface BoardService {
 
 	public void boardRegist(BoardVO board)throws Exception;
-	public List<BoardVO> boardList()throws Exception;
+	public List<BoardVO> boardList(int category_no)throws Exception;
 	public void boardModify(BoardVO board)throws Exception;
 	public void boardRemove(int board_no)throws Exception;
 	public BoardVO boardRead(int board_no)throws Exception;

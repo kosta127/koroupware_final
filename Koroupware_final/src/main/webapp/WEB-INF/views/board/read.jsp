@@ -20,13 +20,13 @@
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script type="text/javascript">
 	function board_modify() {
-		location.href="modify?board_no=${boardVO.board_no}";
+		location.href="modify?board_no=${boardVO.board_no}&category_no=${cri.category_no}";
 	}
 	function board_list() {
-		location.href="list?page=${cri.page}&perPageNum=${cri.perPageNum}";
+		location.href="list?page=${cri.page}&perPageNum=${cri.perPageNum}&category_no=${cri.category_no}";
 	}
 	function board_delete() {
-		location.href="remove?board_no=${boardVO.board_no}&page=${cri.page}&perPageNum=${cri.perPageNum}";
+		location.href="remove?board_no=${boardVO.board_no}&page=${cri.page}&perPageNum=${cri.perPageNum}&category_no=${cri.category_no}";
 	}
 	function reply_add(){
 		var replytextObj=$("#replyContents");
@@ -239,7 +239,6 @@
 			num1 = $(".countUp:eq("+countDown+")").val(count)-1;
 		});
 		
-		
 	});
 </script>
 
@@ -281,11 +280,13 @@
 	<form method="post" action="modify">
 		<input type="hidden" name="board_no" value="${boardVO.board_no }">
 		<input type="hidden" name="page" value="${cri.page}">
-		<input	type="hidden" name="perPageNum" value="${cri.perPageNum}"> 
-		<input	type="hidden" name="searchType" value="${cri.searchType}"> 
-		<input	type="hidden" name="keyword" value="${cri.keyword}">
+		<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> 
+		<input type="hidden" name="searchType" value="${cri.searchType}"> 
+		<input type="hidden" name="keyword" value="${cri.keyword}">
+		<input type="hidden" name="category_no" value="${cri.category_no }">
 	</form>
 
+	
 	<table border="1">
 		<tr height="30">
 			<td width="100" align="center">NO</td>

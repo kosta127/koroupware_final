@@ -35,9 +35,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> boardList() throws Exception {
+	public List<BoardVO> boardList(int category_no) throws Exception {
 		
-		return sqlSession.selectList(namespace+".listBoard");
+		return sqlSession.selectList(namespace+".listBoard", category_no);
 	}
 
 	@Override

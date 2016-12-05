@@ -10,6 +10,7 @@ public class CommunityVO {
 	private Timestamp community_regdate;
 	private Timestamp community_deldate;
 	private String community_aprovalYN;
+	
 	public int getCommunity_no() {
 		return community_no;
 	}
