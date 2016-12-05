@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.ParseConversionEvent;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
@@ -35,15 +33,28 @@ public class ElecauthController {
 	private ElecauthService service;
 	
 	@RequestMapping(value="/elecauthList", method=RequestMethod.GET)
-	public String elecauthList(Model model, HttpSession session)throws Exception{
+	public String elecauthList(Model model, HttpSession session, HttpServletRequest request,
+			@RequestParam(value="receive", required=false) String rFlag, 
+			@RequestParam(value="flag", required=false) String flag)throws Exception{
+		if(flag==null){
+			flag="";
+		}
+		
 		Object obj=session.getAttribute("login");
 		EmpDTO dto = (EmpDTO) obj;
-		int emp_no=dto.getEmp_no();
+		int emp_no=dto.getEmp_no();		
 		
-		List<ElecauthListVO> elecauthList=service.elecauthList(emp_no);
-		model.addAttribute("elecauthList", elecauthList);
+		List<ElecauthListVO> elecauthList=service.elecauthList(emp_no, (rFlag!=null)?true:false, flag);
 		
-		return "/elecauth/elecauthList";
+		if(elecauthList != null){
+			request.setAttribute("recieve", rFlag);
+			request.setAttribute("elecauthList", elecauthList);
+			model.addAttribute("elecauthList", elecauthList);
+			return "/elecauth/elecauthList";
+		}else{
+			return "redirect:/elecauth/elecauthList";
+		}
+		
 	}
 	
 	

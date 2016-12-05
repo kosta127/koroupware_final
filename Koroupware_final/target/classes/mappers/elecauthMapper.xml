@@ -6,19 +6,42 @@
 <mapper namespace="com.koroupware.mappers.ElecauthMapper">
 	
 	<!-- 전자결재 리스트 조회 added by moonyong -->
-	<select id="elecauthList" resultType="ElecauthListVO">
-		SELECT 
-		DISTINCT ea.elec_auth_no, ea.elec_auth_title, ea.elec_auth_regdate,
-		ea.elec_auth_enddate,
-		do.doc_title, de.dept_name, e.emp_name, appr.approval_list_pass
-		
-		FROM elec_auth ea, doc do, dept de, emp e, approval_list appr, elec_auth_referrer ear
-		WHERE ea.emp_no=e.emp_no
-		AND ea.doc_no=do.doc_no
-		AND ea.elec_auth_management_dept_no=de.dept_no
-		AND ea.elec_auth_no=appr.elec_auth_no
+	<select id="elecauthList" resultType="ElecauthListVO" parameterType="ElecauthListCond">
+		SELECT ea.elec_auth_no, ea.elec_auth_title, ea.elec_auth_regdate, ea.elec_auth_enddate,
+			do.doc_title, de.dept_name, e.emp_name, (CASE WHEN 
+         																 (SELECT count(*)
+          																  FROM approval_list al
+          																  WHERE ea.elec_auth_no = al.elec_auth_no) 
+          																  =(SELECT count(*)
+         																	 FROM approval_list al
+          																	 WHERE ea.elec_auth_no = al.elec_auth_no
+           																	 AND al.approval_list_pass='Y') THEN '진행완료'
+           															    WHEN  TRUNC(SYSDATE-ea.elec_auth_enddate)>0
+           																	 THEN '진행부결' ELSE '결재중'
+         															         END ) approval_list_pass
+		FROM elec_auth ea, doc do, dept de, emp e
+		<if test="isReceive == true">, approval_list appr, elec_auth_referrer ref</if>
+		WHERE ea.doc_no = do.doc_no
+		AND ea.elec_auth_management_dept_no = de.dept_no
+		AND ea.emp_no = e.emp_no		
 		AND ea.elec_auth_deldate IS NULL
-		AND (ea.emp_no=#{emp_no} OR appr.emp_no=#{emp_no} OR ear.emp_no=#{emp_no})
+		<choose>
+			<when test="isReceive == true">
+			    AND ea.elec_auth_no = appr.elec_auth_no(+)
+			    AND ea.elec_auth_no = ref.elec_auth_no(+)
+			    AND (appr.emp_no = #{emp_no} or ref.emp_no = #{emp_no})				
+			</when>
+			<otherwise>
+				AND ea.emp_no = #{emp_no}
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="condition == 5">AND elec_auth_temporary_saveyn = 'Y'</when>
+			<otherwise>AND elec_auth_temporary_saveyn = 'N'</otherwise>
+		</choose>
+		ORDER BY ea.elec_auth_no DESC
+		
+		<!-- AND (ea.emp_no=#{emp_no} OR appr.emp_no=#{emp_no} OR ear.emp_no=#{emp_no}) -->
 	</select>
 	
 	<!-- 전자결재 상세정보 조회 added by moonyong -->

@@ -16,94 +16,85 @@
 <link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$("#write").on("click", function(){
-			self.location="regist";
-		});
-	})
-</script>
+<script src="/resources/js/elecauthList.js"></script>
+<link href="/resources/css/elecauthList.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
 	<input type="hidden" name="emp_no" value=${login.emp_no }>
-	<div class="container">
-		<div class="col-md-2">
-			<div id="elec_auth_box">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<a href="elec_authList.do">내가 올린 결재</a>
-						</h3>
-					</div>
-					<div class="panel-body">
-						<ul id="write_list" class="nav nav-pills nav-stacked">
-							<li><a href="elec_authList.do?">진행중인 결재</a></li>
-							<li><a href="elec_authList.do?">완료된 결재</a></li>
-							<li><a href="elec_authList.do?">부결/반려된 결재</a></li>
-							<li><a href="elec_authList.do?">임시저장 결재</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<a href="elec_authList.do?">내가 받은 결재</a>
-						</h3>
-					</div>
-					<div class="panel-body">
-						<ul id="receive_list" class="nav nav-pills nav-stacked">
-							<li><a href="elec_authList.do?">결재대기중인
-									결재</a></li>
-							<li><a href="elec_authList.do?">진행중인
-									결재</a></li>
-							<li><a href="elec_authList.do?">완료된
-									결재</a></li>
-							<li><a href="elec_authList.do?">부결/반려한
-									결재</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+	<c:choose>
+		<c:when test="${receive != null}">
+			<c:set var="pageUrl" value="elecauthList?receive=ok"></c:set>
+		</c:when>
+		<c:otherwise>
+			<c:set var="pageUrl" value="elecauthList?"></c:set>
+		</c:otherwise>
+	</c:choose>
 
-		<div class="col-md-10">
-			<div class="elecauthList">
-				<div class="page-header">
-					<h3>결재문서 목록</h3>
-				</div>
-				<table border="1" class="table table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>문서번호</th>
-							<th>문서종류</th>
-							<th>제목</th>
-							<th>관리부서</th>
-							<th>기안자</th>
-							<th>기안일</th>
-							<th>결재 마감일</th>
-							<th>결재 단계</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="i" items="${elecauthList }">
-							<tr>
-								<td>${i.elec_auth_no }</td>
-								<td>${i.doc_title}</td>
-								<td><a href="elecauthRead?elec_auth_no=${i.elec_auth_no}">
-										${i.elec_auth_title }</a></td>
-								<td>${i.dept_name }</td>
-								<td>${i.emp_name }</td>
-								<td>${i.elec_auth_regdate }</td>
-								<td>${i.elec_auth_enddate }</td>
-								<td>${i.approval_list_pass }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+	<div class="col-md-12">
+		<div class="elecauthList">
+			<div class="page-header">
+				<h3>결재문서 목록</h3>
 			</div>
-			<input type="button" id="write" class="btn btn-primary pull-right" value="결재작성">
+			<ul id="elecauth_list" class="nav nav-tabs">
+				<li id="receive" class="active"><a
+					href="elecauthList?receive=ok">내가 받은 결재</a></li>
+				<li id="write1"><a href="elecauthList">내가 보낸 결재</a></li>
+			</ul>
+			<div>
+				<div id="receive_list" class="left-top-padding">
+					<ul id="receive_ul" class="nav nav-pills">
+						<li class="active"><a
+							href="elecauthList?receive=ok&flag=wait">결재대기중인 결재</a></li>
+						<li><a href="elecauthList?receive=ok&flag=ing">진행중인 결재</a></li>
+						<li><a href="elecauthList?receive=ok&flag=done">완료된 결재</a></li>
+						<li><a href="elecauthList?receive=ok&flag=ret">부결/반려한 결재</a></li>
+					</ul>
+				</div>
+				<div id="write_list" class="left-padding">
+					<ul id="write_ul" class="nav nav-pills">
+						<li class="active"><a href="elecauthList?flag=ing">진행중인
+								결재</a></li>
+						<li><a href="elecauthList?flag=done">완료된 결재</a></li>
+						<li><a href="elecauthList?flag=ret">부결/반려된 결재</a></li>
+						<li><a href="elecauthList?flag=temp">임시저장 결재</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<table border="1" class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>문서번호</th>
+						<th>문서종류</th>
+						<th>제목</th>
+						<th>관리부서</th>
+						<th>기안자</th>
+						<th>기안일</th>
+						<th>결재 마감일</th>
+						<th>결재 단계</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="i" items="${elecauthList }">
+						<tr>
+							<td>${i.elec_auth_no }</td>
+							<td>${i.doc_title}</td>
+							<td><a href="elecauthRead?elec_auth_no=${i.elec_auth_no}">
+									${i.elec_auth_title }</a></td>
+							<td>${i.dept_name }</td>
+							<td>${i.emp_name }</td>
+							<td>${i.elec_auth_regdate }</td>
+							<td>${i.elec_auth_enddate }</td>
+							<td>${i.approval_list_pass }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
+		<input type="button" id="write" class="btn btn-primary pull-right"
+			value="결재작성">
+	</div>
 	</div>
 </body>
 </html>

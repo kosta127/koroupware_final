@@ -11,6 +11,7 @@ import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
 import com.koroupware.elecauth.domain.DocVO;
 import com.koroupware.elecauth.domain.ElecauthDeleteVO;
+import com.koroupware.elecauth.domain.ElecauthListCond;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthReferrerVO;
@@ -28,8 +29,8 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 	private static final String namespace="com.koroupware.mappers.ElecauthMapper";
 
 	@Override
-	public List<ElecauthListVO> elecauthList(int emp_no) throws Exception {
-		List<ElecauthListVO> elecauthList=sqlSession.selectList(namespace+".elecauthList", emp_no);
+	public List<ElecauthListVO> elecauthList(ElecauthListCond elecauthListCond) throws Exception {
+		List<ElecauthListVO> elecauthList=sqlSession.selectList(namespace+".elecauthList", elecauthListCond);
 		
 		return elecauthList;
 	}

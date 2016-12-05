@@ -11,6 +11,7 @@ import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
 import com.koroupware.elecauth.domain.DocVO;
 import com.koroupware.elecauth.domain.ElecauthDeleteVO;
+import com.koroupware.elecauth.domain.ElecauthListCond;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthReferrerVO;
@@ -27,9 +28,10 @@ public class ElecauthServiceImpl implements ElecauthService {
 	private ElecauthDAO dao;
 
 	@Override
-	public List<ElecauthListVO> elecauthList(int emp_no) throws Exception {
+	public List<ElecauthListVO> elecauthList(int emp_no, boolean isReceive, String flag) throws Exception {
+		ElecauthListCond elecauthListCond=new ElecauthListCond(emp_no, isReceive, flag);
 		
-		return dao.elecauthList(emp_no);
+		return dao.elecauthList(elecauthListCond);
 	}
 
 	@Override

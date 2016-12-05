@@ -15,7 +15,7 @@ import com.koroupware.elecauth.domain.ElecauthReadApprovalVO;
 import com.koroupware.elecauth.domain.ElecauthReadReferrerVO;
 
 public interface ElecauthService {
-	public List<ElecauthListVO> elecauthList(int emp_no) throws Exception;
+	public List<ElecauthListVO> elecauthList(int emp_no, boolean isReceive, String flag) throws Exception;
 	
 	public ElecauthReadVO elecauthRead(Integer elec_auth_no) throws Exception;
 	
