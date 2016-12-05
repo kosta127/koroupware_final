@@ -1,0 +1,124 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+.success{
+   color : #43A047;
+}
+.error{
+   color: #E64A19;
+} 
+.passError1{
+   text-align: right;
+}
+.main-font1{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color : #0080c0;
+   font-size: 55px;
+}
+
+.main-font2{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color : #E64A19;
+   font-size: 50px;
+}
+.main-font3{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color : #43A047;
+   font-size: 50px;
+}
+.main-font4{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color : #F9A825;
+   font-size: 50px;
+}
+.main-font5{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color : #E64A19;
+   font-size: 50px;
+}
+.main-font6{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color : #0080c0;
+   font-size: 50px;
+}
+.main-font7{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color : #43A047;
+   font-size: 50px;
+}
+.main-font8{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color: #F9A825;
+   font-size: 50px;
+}
+.main-font9{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color: #0080c0;
+   font-size: 50px;
+}
+.main-font10{
+   font-family: 'Product Sans', Arial, sans-serif;
+   color : #E64A19;
+   font-size: 50px;
+} 
+.logo-font{
+ text-align: center;
+ margin-top: 30px;
+ margin-bottom: 30px; 
+}
+input{
+ margin-top: 6px;
+ margin-bottom: 6px;
+}
+span{
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 15px;
+}
+.signUp-submit{
+background-color : #0080c0;
+color : white;
+font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 13px;
+}
+.signUp-submit:hover{
+background-color : #0080c0;
+color : white;
+font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 13px;
+}
+.cancel-button{
+background-color : #E64A19;
+color : white;
+font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 13px;
+}
+.cancel-button:hover{
+background-color : #E64A19;
+color : white;
+font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 13px;
+}
+.addressSearch-button{
+font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 13px;
+} 
+.font-div{
+ text-align : center;
+ margin-top: 10px; 
+}
+  
+.center-form{
+ border-radius: 15px;
+ margin-top : 30px;
+ box-shadow: 5px 5px 5px 5px lightgray; 
+}
+
+.center-form-bottom{
+ margin-top: 40px;
+ margin-bottom: 20px; 
+}
+
+.bottom-void{
+ height: 30px;
+}
+.idError{
+ text-align: right;
+}

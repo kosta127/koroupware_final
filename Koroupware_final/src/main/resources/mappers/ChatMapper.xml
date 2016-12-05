@@ -15,6 +15,7 @@
 				AND e.dept_no = d.dept_no
 				AND h.image_room_his_deldate IS NULL
 				AND h.image_room_no = #{image_room_no}
+		ORDER BY image_room_his_regdate
 	</select>
 
 	<select id="imageRoomHisList" parameterType="int" resultType="imageRoomHisVO">

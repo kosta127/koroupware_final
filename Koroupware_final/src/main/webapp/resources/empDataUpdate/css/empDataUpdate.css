@@ -1,0 +1,78 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+.tel-center{
+	text-align: center;
+}
+.tel-font{
+  margin-top: 15px;
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 13px; 
+}
+.top-span{
+	margin-top:30px;
+	margin-bottom: 50px;
+	text-align: center;
+	font-family: 'Noto Sans KR', sans-serif; 
+  	font-size: 25px;
+}
+.middle-span{
+margin-top:30px;
+	margin-bottom: 50px;
+	text-align: center;
+	font-family: 'Noto Sans KR', sans-serif; 
+  	font-size: 20px;
+}
+.success{
+   color : #43A047;
+}
+.error{
+   color: #E64A19;
+} 
+.passError1{
+   text-align: right;
+}
+.top-span{
+  color: #0080c0;
+}
+.middle-span{
+  color: #43A047; 
+}
+.center-form input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.font-center{
+	text-align: center;
+}
+.emp-update-bottom-void{
+  margin-bottom: 30px;
+}
+.font-div{
+  margin-top: 15px;
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 13px; 
+}
+.btn-block{
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 15px; 
+}
+.tel-list-font{
+  padding-bottom: 15px;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 15px; 
+  border-bottom: 1px dotted gray;
+}
+.emp-img-fileDrop, .emp-elec-auth-img-fileDrop{
+  font-family: 'Noto Sans KR', sans-serif; 
+  font-size: 15px; 
+	text-align: center;
+	height : 100px;
+	border: 1px dotted black;
+	padding-top: 40px;
+}
+.img-div img{
+	height: 100px;
+	with: 100px;
+}

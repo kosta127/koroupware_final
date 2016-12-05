@@ -64,6 +64,8 @@ public class ImageRoomController {
 	public ResponseEntity<String> createRoom(ImageRoomVO imageRoom){
 		ResponseEntity<String> entity = null;
 		
+		System.out.println(imageRoom);
+		
 		try {
 			service.imageRoomRegist(imageRoom);
 			
@@ -83,7 +85,7 @@ public class ImageRoomController {
 		
 		try {
 			Integer image_room_no = service.nextRoomNoRead();
-			
+
 			entity = new ResponseEntity<Integer>(image_room_no, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

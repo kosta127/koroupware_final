@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+function webrtc() {
+   window.open("http://localhost:8082/webrtc", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=10000,width=400,height=400");
+}
+</script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 .nav-sidebar .sidebar-blue a { 
@@ -84,7 +89,7 @@
           <li class="sidebar-green"><a href="">게시판</a></li>
           <li class="sidebar-orange"><a href="/dept/List">조직도</a></li> 
           <li class="sidebar-blue"><a href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>    
-           <li class="sidebar-red"><a href="http://localhost:8082/webrtc">화상회의</a></li>
+           <li class="sidebar-red"><a onclick="webrtc()">화상회의</a></li>
           <li class="sidebar-green"><a href="http://localhost:8082/imageroom/lobby?emp_no=${login.emp_no}">그림회의</a></li>
           <li class="sidebar-orange"><a href="">이메일</a></li>                           
 		</ul>

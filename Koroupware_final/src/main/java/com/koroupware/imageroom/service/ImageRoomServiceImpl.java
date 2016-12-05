@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.koroupware.imageroom.domain.EmpImageRoomDTO;
 import com.koroupware.imageroom.domain.ImageRoomDTO;
@@ -16,10 +17,10 @@ public class ImageRoomServiceImpl implements ImageRoomService{
 	@Inject
 	private ImageRoomDAO dao;
 
+	@Transactional
 	@Override
 	public void imageRoomRegist(ImageRoomVO imageRoom) {
-		int image_room_no = dao.nextRoomNoSelect();
-		
+		Integer image_room_no = nextRoomNoRead();
 		imageRoom.setImage_room_no(image_room_no);
 		
 		dao.imageRoomInsert(imageRoom);
@@ -39,7 +40,13 @@ public class ImageRoomServiceImpl implements ImageRoomService{
 	
 	@Override
 	public Integer nextRoomNoRead() {
-		return dao.nextRoomNoSelect();
+		Integer image_room_no = dao.nextRoomNoSelect();
+		
+		if(image_room_no == null){
+			image_room_no = 1;
+		}
+		
+		return image_room_no;
 	}
 	/*
 	@Override
