@@ -2,6 +2,9 @@ package com.koroupware.news.dto;
 
 
 public class NewsDTO {
+	private int newsno;
+	private int empno;
+	private int company; //뉴스사
 	private String title; //제목
 	private String link; //항목의 URL
 	private String description; //항목의 내용 
@@ -10,7 +13,28 @@ public class NewsDTO {
  	private String comments; //항목과 관련된 설명 페이지 URL
 	private String guid; //고유하게 항목을 식별할 수 있는 문자열
 	private String pubDate; //항목발행시간
+	private String regDate; //등록일
 	
+	
+	
+	public int getNewsno() {
+		return newsno;
+	}
+	public void setNewsno(int newsno) {
+		this.newsno = newsno;
+	}
+	public int getEmpno() {
+		return empno;
+	}
+	public void setEmpno(int empno) {
+		this.empno = empno;
+	}
+	public int getCompany() {
+		return company;
+	}
+	public void setCompany(int company) {
+		this.company = company;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -58,6 +82,13 @@ public class NewsDTO {
 	}
 	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;
+	}
+	
+	public String getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 	@Override
 	public String toString() {

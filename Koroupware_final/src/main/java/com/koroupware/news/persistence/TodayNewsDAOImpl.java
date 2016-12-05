@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.koroupware.news.domain.NewsCompanyVO;
 import com.koroupware.news.domain.NewsVO;
 import com.koroupware.news.dto.NewsDTO;
 
@@ -33,8 +34,13 @@ public class TodayNewsDAOImpl implements TodayNewsDAO {
 	}
 
 	@Override
-	public List<NewsVO> myNewsList(int empno) throws Exception {
+	public List<NewsDTO> myNewsList(int empno) throws Exception {
 		return sqlSession.selectList(namespace + ".myNewsList", empno);
+	}
+
+	@Override
+	public List<NewsCompanyVO> newsCompanylist() throws Exception {
+		return sqlSession.selectList(namespace + ".newsCompanyList");
 	}
 
 }

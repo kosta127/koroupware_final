@@ -33,7 +33,7 @@
 		
 		<!-- 내가 스크랩한 뉴스 -->
 		<div id="myclip_div">
-			<table class="table">
+			<table class="table table-hover">
 				<thead id="myclip_thead">
 					<tr>
 						<td>번호</td>

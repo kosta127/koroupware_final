@@ -1,6 +1,8 @@
 package com.koroupware.news.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koroupware.news.domain.NewsCompanyVO;
 import com.koroupware.news.domain.NewsVO;
 import com.koroupware.news.dto.NewsDTO;
 import com.koroupware.news.service.TodayNewsService;
@@ -27,15 +30,20 @@ public class TodayNewsController {
 		return "/todaynews/todaynews";
 	}
 	
+	@RequestMapping(value="/newsCompanyList")
+	public @ResponseBody List<NewsCompanyVO> newsCompanyList() throws Exception{
+		return service.newsCompanyList();
+	}
+	
 	@RequestMapping(value="/newsList")
 	public @ResponseBody List<NewsDTO> newsList(
-			@RequestParam("rssUrl") String url){
+			NewsCompanyVO newsCompany) throws Exception{
 		RSSReader rssr = new RSSReader();
-		return rssr.read(url);
+		return rssr.read(newsCompany.getNews_company_rssurl());
 	}
 	
 	@RequestMapping(value="/myNewsList")
-	public @ResponseBody List<NewsVO> myNewsList() throws Exception{
+	public @ResponseBody List<NewsDTO> myNewsList() throws Exception{
 		//@@@ 사원정보 세션에서갖구와야함 @@@@
 		int empno = 4;
 		return service.myNewsList(empno);
@@ -43,8 +51,8 @@ public class TodayNewsController {
 	
 	@RequestMapping(value="/newsRead", produces="application/html; charset=utf8")
 	public @ResponseBody String newsRead(
-			@RequestParam("newsUrl") String newsUrl){
-		return NewsReader.newsReader(newsUrl);
+			@RequestParam("newsUrl") String newsUrl, @RequestParam("charset") String charset){
+		return NewsReader.newsReader(newsUrl, charset);
 	}
 	
 	@RequestMapping(value="/newsRegist",method=RequestMethod.POST)

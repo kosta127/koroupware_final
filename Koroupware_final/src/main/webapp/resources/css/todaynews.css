@@ -94,6 +94,10 @@ div.recommend{
 	display: none;
 }
 
+#newsCompany_div{
+	margin-top: 10px;
+}
+
 /** magnific popup customize */
 
 /* Styles for dialog window */

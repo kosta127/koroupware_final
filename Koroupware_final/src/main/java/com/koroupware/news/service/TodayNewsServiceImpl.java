@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.koroupware.news.domain.NewsCompanyVO;
 import com.koroupware.news.domain.NewsVO;
 import com.koroupware.news.dto.NewsDTO;
 import com.koroupware.news.persistence.TodayNewsDAO;
@@ -31,8 +32,13 @@ public class TodayNewsServiceImpl implements TodayNewsService {
 	}
 
 	@Override
-	public List<NewsVO> myNewsList(int empno) throws Exception {
+	public List<NewsDTO> myNewsList(int empno) throws Exception {
 		return dao.myNewsList(empno);
+	}
+
+	@Override
+	public List<NewsCompanyVO> newsCompanyList() throws Exception {
+		return dao.newsCompanylist();
 	}
 
 }

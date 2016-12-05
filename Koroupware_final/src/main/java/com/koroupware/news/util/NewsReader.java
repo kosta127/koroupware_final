@@ -4,19 +4,22 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class NewsReader {
 	//뉴스읽어옴
-	public static String newsReader(String urlStr){
+	public static String newsReader(String urlStr, String charset){
 		BufferedReader br = null;
 		URL url = null;
+		URLConnection uc = null;
 		InputStream is = null;
 		StringBuffer sb = new StringBuffer();
 		try {
 			url = new URL(urlStr);
-			is = url.openStream();
+			uc = url.openConnection();
+			is = uc.getInputStream();
 			br = new BufferedReader(
-					new InputStreamReader(is, "UTF-8"));
+					new InputStreamReader(is, charset));
 			String rl = "";
 			while((rl = br.readLine()) != null){
 				sb.append(rl);
@@ -29,7 +32,6 @@ public class NewsReader {
 				is.close();
 			} catch (Exception e2) {}
 		}
-		System.out.println(sb);
 		return sb.toString();
 	}
 }

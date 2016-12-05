@@ -1,24 +1,82 @@
-// mbc : "http://imnews.imbc.com/rss/news/news_00.xml" utf-8
-// sbs : "http://api.sbs.co.kr/xml/news/rss.jsp?pmDiv=all" utf-8
-//조선뉴스 : "http://www.chosun.com/site/data/rss/rss.xml" euc-kr
-//노컷뉴스 : "http://rss.nocutnews.co.kr/nocutnews.xml" utf-8
-//동아뉴스 : "http://rss.donga.com/total.xml"
-
-var rss_url = 'http://rss.donga.com/total.xml';
+var rss_url = 'http://www.chosun.com/site/data/rss/rss.xml';
 
 $(function(){
-	$.ajax({
-		url: '/todaynews/newsList',
-		type: 'post',
-		dataType: 'json',
-		data : {rssUrl : rss_url},
-		success: showNews	
-	});
-	
 	var selectedNews = null;
 	var selectedNewsDetail = null;
+	var selectedNewsCompany = null;
+	var newsCompanyList = null;
+	
+	getNewsCompanyList();
+	
+	//뉴스사 목록 가져오기
+	function getNewsCompanyList(){
+		$.ajax({
+			url: '/todaynews/newsCompanyList',
+			type: 'post',
+			dataType: 'json',
+			success: makeNewsCompanyList	
+		});
+	}
+	
+	//번호로 뉴스사 가져오기
+	function getNewsCompany(newsCompanyNo){
+		if(newsCompanyList == null) return;
+		for(var i=0; i< newsCompanyList.length; i++){
+			if(newsCompanyList[i].news_company_no == newsCompanyNo){
+				return newsCompanyList[i];
+			}
+		}
+	}
+	
+	//뉴스사 목록 만들기
+	function makeNewsCompanyList(newsCompanies){
+		newsCompanyList = newsCompanies;
+		
+		var $wrapdiv = $('<div>').attr('id', 'newsCompany_div')
+								.addClass('form-group').appendTo('#todaynews_div');
+		var $label = $('<label>').attr('for', 'newsCompanyList')
+							.text('뉴스사').appendTo($wrapdiv);
+		var $selectList = $('<select>').attr('id', 'newsCompanyList')
+								.addClass('form-control')
+								.appendTo($wrapdiv);
+		for(var i=0; i < newsCompanies.length; i++){
+			$('<option>').val(newsCompanies[i].news_company_no)
+						.text(newsCompanies[i].news_company_name)
+						.appendTo($selectList);
+		}
+		
+		$selectList.on('change', function(){
+			$('#todaynews_div').find('div.newsdesc').remove();
+			var newsComp = getNewsCompany($(this).val());
+			selectedNewsCompany = newsComp;
+			getNewsList(newsComp.news_company_no, newsComp.news_company_rssurl);
+		});
+		
+		//뉴스사 하나를 기본으로 선택한다
+		if(newsCompanyList != null && newsCompanyList.length >= 1){
+			selectedNewsCompany = newsCompanyList[0];
+			getNewsList(selectedNewsCompany.news_company_no, 
+					selectedNewsCompany.news_company_rssurl);
+		}
+	}
+	
+	function getNewsList(newsCompanyNo, rssUrl){
+		console.log('get news list -> ' + newsCompanyNo )
+		var newsListAttr = {
+				url: '/todaynews/newsList',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					news_company_no : ((newsCompanyNo==null)?-1:newsCompanyNo),
+					news_company_rssurl : rssUrl
+				},
+				success: showNews	
+			};		
+		$.ajax(newsListAttr);
+	}
 	
 	function showNews(data){
+		//뉴스목록만듦
 		$.each(data, function(idx, item){
 			var category = (item.category==null)?'':item.category;
 			var newsHtml = '<div class="newsdesc">';
@@ -36,28 +94,40 @@ $(function(){
 					url: '/todaynews/newsRead',
 					type: 'post',
 					dataType: 'html',
-					data: {'newsUrl' : item.link},
+					data: {
+						'newsUrl' : item.link,
+						'charset' : selectedNewsCompany.news_company_charset
+					},
 					//async: false,
 					success: showNewsDetail
 				});
 			})
 		});
-	}	
+	}
 	
 	
+	
+	/************************************************************************************/
 	/** News Detail Items */
+	/************************************************************************************/
 	/* 스크랩 버튼 */
 	var $scrapbtn = $('<a>').attr('id', 'clip_btn').addClass('btn btn-default margin_left').text("이 기사를 스크랩");
 	/* 스크랩 취소 버튼 */
 	var $scrap_cancelbtn = $('<a>').attr('id', 'clip_cancel_btn').addClass('btn btn-danger margin_left').text("스크랩 취소");
 	
 	function showNewsDetail(data){
-		selectedNewsDetail = $(data).find('div .article_txt'); //동아뉴스
+		selectedNewsDetail = $(data).find(selectedNewsCompany.news_company_filter_pattern);
+		
+		console.log(selectedNewsDetail.html());
 		
 		/** remove things */
 		selectedNewsDetail.find('script').remove();
 		selectedNewsDetail.find('div.recommend').remove();
 		selectedNewsDetail.find('div.article_relation').remove();
+		selectedNewsDetail.find('div#articleText table').removeAttr('style');
+		selectedNewsDetail.find('div').removeAttr('style');
+		selectedNewsDetail.find('img').removeAttr('width').removeAttr('height');
+		selectedNewsDetail.find('b:contains("▲")').remove(); //조선뉴스
 		
 		/** pop up */
 		makeNewsView(selectedNews.title, selectedNews.pubDate, 
@@ -69,7 +139,7 @@ $(function(){
 		/** start making */
 		var $wrapper = $('<div>').attr('id', 'white-popup-block').addClass('zoom-anim-dialog');
 		var $title = $('<h1>').addClass('news_title').text(title);
-		var $pubdate = $('<span>').addClass('detail_pubdate').text(pubdate);
+		var $pubdate = $('<span>').addClass('detail_pubdate').text((pubdate==null)?'':pubdate);
 		$wrapper.append($('<div>').attr('id', 'detail_top').addClass('pull-right padding_topbottom').append($pubdate));
 		$wrapper.append($('<div>').addClass('detail_title padding_bottom').append($title));
 		$wrapper.append(contents);
@@ -106,6 +176,7 @@ $(function(){
 			type: 'post',
 			dataType: 'text',
 			data: {
+				company: selectedNewsCompany.news_company_no,
 				title: selectedNews.title,
 				link: selectedNews.link,
 				description: selectedNewsDetail.html().trim(),
@@ -113,7 +184,7 @@ $(function(){
 				category: selectedNews.category,
 				comments: selectedNews.comments,
 				guid: selectedNews.guid,
-				pubDate: selectedNews.pubDate
+				pubDate: (selectedNews.pubDate==null)?'':selectedNews.pubDate
 			},
 			success: changeBtnStatus
 		});
@@ -121,6 +192,9 @@ $(function(){
 	
 	//스크랩 취소 버튼 클릭 
 	$('body').on('click', '#clip_cancel_btn', function(){
+		console.log('clicked');
+		console.log(selectedNews)
+		
 		$.ajax({
 			url: '/todaynews/newsDelete',
 			type: 'post',
@@ -156,7 +230,9 @@ $(function(){
 		}
 	}
 
+	/************************************************************************************/
 	/****** 내가 스크랩한 뉴스 ******/
+	/************************************************************************************/
 	$('#myclip_div').hide(); // 처음엔 내 뉴스 안보이게,
 	
 	$('#news_tab').find('#news_latest').addClass('active'); //탭
@@ -191,19 +267,20 @@ $(function(){
 	//스크랩한 뉴스 목록 만듦
 	function makeMyClipList(data){
 		console.log(data);
-		var $tbody = $('#myclip_tbody')
+		var $tbody = $('#myclip_tbody').html('');
 		$.each(data, function(idx, item){
 			$('<tr>').append($('<td>').text(idx+1))
-					.append($('<td>').text((item.news_clipping_category==null)?
-							"":item.news_clipping_category))
-					.append($('<td>').text(item.news_clipping_title))
-					.append($('<td>').text(item.news_clipping_regdate))
+					.append($('<td>').text((item.category==null)?
+							"":item.category))
+					.append($('<td>').text(item.title))
+					.append($('<td>').text(item.regDate))
 					.on('click', function(){
 						/** pop up */
-						makeNewsView(item.news_clipping_title,
-								item.news_clipping_date,
-								item.news_clipping_contents,
-								item.news_clipping_link)
+						makeNewsView(item.title,
+								item.pubDate,
+								item.description,
+								item.link)
+						selectedNews = item;
 					})
 					.appendTo($tbody);
 		});

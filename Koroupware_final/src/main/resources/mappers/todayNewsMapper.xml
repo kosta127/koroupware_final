@@ -6,23 +6,26 @@
 <mapper namespace="com.koroupware.mappers.TodayNewsMapper">
 
 	<resultMap id="newsResultMap" type="NewsDTO">
+		<result property="empno" column="emp_no"/>
+		<result property="company" column="news_company_no"/>
 		<result property="title" column="news_clipping_title"/>
 		<result property="description" column="news_clipping_contents"/>
 		<result property="link" column="news_clipping_link"/>
 		<result property="pubDate" column="news_clipping_date"/>
 		<result property="author" column="news_clipping_author"/>
 		<result property="category" column="news_clipping_category"/>
+		<result property="regDate" column="news_clipping_regdate"/> 
 	</resultMap>
 	
 	<insert id="newsInsert" parameterType="NewsVO">
 		INSERT INTO NEWS_CLIPPING(
 			NEWS_CLIPPING_NO, EMP_NO, NEWS_CLIPPING_TITLE, NEWS_CLIPPING_CONTENTS,
 			NEWS_CLIPPING_LINK, NEWS_CLIPPING_DATE, NEWS_CLIPPING_AUTHOR, 
-			NEWS_CLIPPING_CATEGORY, NEWS_CLIPPING_REGDATE
+			NEWS_CLIPPING_CATEGORY, NEWS_CLIPPING_REGDATE, NEWS_COMPANY_NO
 		)VALUES(
 			SEQ_NEWS_CLIPPING.NEXTVAL, #{emp_no}, #{news_clipping_title}, #{news_clipping_contents},
 			#{news_clipping_link}, #{news_clipping_date}, #{news_clipping_author},
-			#{news_clipping_category}, SYSDATE
+			#{news_clipping_category}, SYSDATE, #{news_company_no}
 		)
 	</insert>
 	
@@ -41,10 +44,17 @@
 			AND NEWS_CLIPPING_LINK = #{news_clipping_link}
 	</update>
 	
-	<select id="myNewsList" parameterType="int" resultType="NewsVO">
+	<select id="myNewsList" parameterType="int" resultMap="newsResultMap">
 		SELECT *
 			FROM NEWS_CLIPPING
 			WHERE EMP_NO = #{emp_no}
 			AND NEWS_CLIPPING_DELDATE IS NULL
+			ORDER BY NEWS_CLIPPING_REGDATE DESC
+	</select>
+	
+	<select id="newsCompanyList" resultType="NewsCompanyVO">
+		SELECT *
+			FROM NEWS_COMPANY
+			ORDER BY NEWS_COMPANY_NAME
 	</select>
 </mapper>

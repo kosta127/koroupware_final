@@ -7,6 +7,7 @@ import com.koroupware.news.dto.NewsDTO;
 public class NewsVO {
 	private int news_clipping_no;
 	private int emp_no;
+	private int news_company_no;
 	private String news_clipping_title;
 	private String news_clipping_contents;
 	private String news_clipping_link;
@@ -19,6 +20,7 @@ public class NewsVO {
 	public NewsVO(){ }
 	
 	public NewsVO(NewsDTO dto){
+		this.news_company_no = dto.getCompany();
 		this.news_clipping_title = (dto.getTitle()==null)?"":dto.getTitle();
 		this.news_clipping_contents = (dto.getDescription()==null)?"":dto.getDescription();
 		this.news_clipping_link = (dto.getLink()==null)?"":dto.getLink();
@@ -39,6 +41,14 @@ public class NewsVO {
 	public void setEmp_no(int emp_no) {
 		this.emp_no = emp_no;
 	}
+	
+	public int getNews_company_no() {
+		return news_company_no;
+	}
+	public void setNews_company_no(int news_company_no) {
+		this.news_company_no = news_company_no;
+	}
+
 	public String getNews_clipping_title() {
 		return news_clipping_title;
 	}
