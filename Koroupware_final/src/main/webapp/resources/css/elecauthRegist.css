@@ -1,0 +1,50 @@
+
+#elec_auth_approval_list {
+	/*border: solid 1px #800080;*/
+}
+
+#elec_auth_referrer_list{
+	/*border: solid 1px #8000ff;*/
+}
+
+#elec_auth_form .error{
+	/*display: inline; */
+	color: red;
+}
+
+/*결재자 참조자 목록*/
+#elec_auth_approval_list{
+	float:right;
+	list-style-type: decimal;
+}
+
+#elec_auth_approval_list a{
+	text-decoration: none;
+}
+
+#elec_auth_referrer_list{
+	float:right;
+}
+
+#elec_auth_referrer_list a{ 
+	text-decoration: none;
+}
+
+.emp_detail{
+}
+
+.emp_detail .emp_name{
+	font-weight: bold;
+}	
+
+.emp_detail .emp_dept{
+	
+}
+
+.emp_detail .emp_position{
+	left: 5px;
+}
+
+.emp_detail .emp_contract{
+	color: gray;
+}
