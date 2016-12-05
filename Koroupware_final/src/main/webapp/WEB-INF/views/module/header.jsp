@@ -18,12 +18,6 @@
 		location.href = '/logout';
 	}
 	
-	function attendList(){
-		var emp_no = document.getElementById("hidden").value;
-		location.href = "/attend/attendList/"+emp_no; 
-	}
-
-	
 	/* 출석 에이작스 */
 	function attend() {
 		alert(document.getElementById("hidden").value);
