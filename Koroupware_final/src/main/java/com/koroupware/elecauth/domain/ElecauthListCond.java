@@ -3,7 +3,7 @@ package com.koroupware.elecauth.domain;
 public class ElecauthListCond {
 	private int emp_no;
 	private boolean isReceive;
-	private String condition;
+	private int condition;
 	
 	public final static int AUTH_ING = 1; //결재진행
 	public final static int AUTH_DONE = 2; //결재완료
@@ -16,7 +16,7 @@ public class ElecauthListCond {
 		super();
 		this.emp_no = emp_no;
 		this.isReceive = isReceive;
-		this.condition = condition;
+		setCondition(condition);
 	}
 	
 	public int getEmp_no() {
@@ -32,27 +32,39 @@ public class ElecauthListCond {
 		this.isReceive = isReceive;
 	}
 	
-	public String getCondition() {
+	public int getCondition() {
 		return condition;
 	}
+
 	public void setCondition(String condition) {
-		this.condition = condition;
+	      switch (condition) {
+	      case "ing": //결재진행
+	         this.condition = AUTH_ING;
+	         break;
+	      case "done": //결재완료
+	         this.condition = AUTH_DONE;
+	         break;
+	      case "ret": //반려/부결
+	         this.condition = AUTH_RETURN;
+	         break;
+	      case "wait": //결재대기
+	         this.condition = AUTH_WAIT;
+	         break;
+	      case "temp": //임시저장
+	         this.condition = AUTH_TEMPSAVE;
+	         break;
+	      default:
+	         this.condition = 0;
+	         break;
+	      }
+	   }
+	   
+	   public void setCondition(int condition){
+	      this.condition = condition;
+	   }
+	   
+	@Override
+	public String toString() {
+		return "ElecauthListCond [emp_no=" + emp_no + ", isReceive=" + isReceive + ", condition=" + condition + "]";
 	}
-	public static int getAuthIng() {
-		return AUTH_ING;
-	}
-	public static int getAuthDone() {
-		return AUTH_DONE;
-	}
-	public static int getAuthReturn() {
-		return AUTH_RETURN;
-	}
-	public static int getAuthWait() {
-		return AUTH_WAIT;
-	}
-	public static int getAuthTempsave() {
-		return AUTH_TEMPSAVE;
-	}
-	
-	
 }

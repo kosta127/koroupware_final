@@ -29,9 +29,7 @@ public class ElecauthServiceImpl implements ElecauthService {
 
 	@Override
 	public List<ElecauthListVO> elecauthList(int emp_no, boolean isReceive, String flag) throws Exception {
-		ElecauthListCond elecauthListCond=new ElecauthListCond(emp_no, isReceive, flag);
-		
-		return dao.elecauthList(elecauthListCond);
+		return dao.elecauthList(new ElecauthListCond(emp_no, isReceive, flag));
 	}
 
 	@Override
@@ -52,17 +50,23 @@ public class ElecauthServiceImpl implements ElecauthService {
 		return dao.elecauthReadReferrer(elec_auth_no);
 	}
 
-	@Transactional
 	@Override
+	@Transactional
 	public void elecauthRegist(ElecauthVO ea, List<ApprovalListVO> approvals, List<ElecauthReferrerVO> referrers)
 			throws Exception {
 		// 전자 결재 등록
 		// added by jirung
+		int elecauthNo = getElecauthNo();
+		ea.setElec_auth_no(elecauthNo);
 		dao.elecauthInsert(ea);
-		for(ApprovalListVO al : approvals) 
+		for(ApprovalListVO al : approvals){
+			al.setElec_auth_no(elecauthNo);
 			dao.approvalListInsert(al);
-		for(ElecauthReferrerVO ref : referrers) 
+		}
+		for(ElecauthReferrerVO ref : referrers) {
+			ref.setElec_auth_no(elecauthNo);
 			dao.elecauthReferrerInsert(ref);
+		}
 	}
 
 	@Override
@@ -100,6 +104,11 @@ public class ElecauthServiceImpl implements ElecauthService {
 	public void elecauthNoReport(ApprovalPrimaryVO elecauthNoReport) throws Exception {
 		// 전자결재 거절
 		dao.elecauthNoReport(elecauthNoReport);
+	}
+
+	@Override
+	public int getElecauthNo() throws Exception {
+		return dao.getElecauthNo();
 	}
 	
 	

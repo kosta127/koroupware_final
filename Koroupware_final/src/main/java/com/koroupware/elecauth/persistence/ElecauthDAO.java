@@ -30,6 +30,7 @@ public interface ElecauthDAO {
 	public void elecauthOkReport(ApprovalPrimaryVO elecauthOkReport) throws Exception;
 	public void elecauthNoReport(ApprovalPrimaryVO elecauthNoReport) throws Exception;
 	
+	public int getElecauthNo() throws Exception;
 	public void elecauthInsert(ElecauthVO ea) throws Exception; //added by jirung
 	public void approvalListInsert(ApprovalListVO al) throws Exception; //added by jirung
 	public void elecauthReferrerInsert(ElecauthReferrerVO ref) throws Exception; //added by jirung

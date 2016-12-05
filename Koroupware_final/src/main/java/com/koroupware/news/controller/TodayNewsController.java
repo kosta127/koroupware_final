@@ -1,10 +1,9 @@
 package com.koroupware.news.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koroupware.member.dto.EmpDTO;
 import com.koroupware.news.domain.NewsCompanyVO;
 import com.koroupware.news.domain.NewsVO;
 import com.koroupware.news.dto.NewsDTO;
@@ -43,9 +43,9 @@ public class TodayNewsController {
 	}
 	
 	@RequestMapping(value="/myNewsList")
-	public @ResponseBody List<NewsDTO> myNewsList() throws Exception{
-		//@@@ 사원정보 세션에서갖구와야함 @@@@
-		int empno = 4;
+	public @ResponseBody List<NewsDTO> myNewsList(HttpSession session) throws Exception{
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		int empno = dto.getEmp_no();	
 		return service.myNewsList(empno);
 	}
 	
@@ -56,33 +56,32 @@ public class TodayNewsController {
 	}
 	
 	@RequestMapping(value="/newsRegist",method=RequestMethod.POST)
-	public @ResponseBody String newsRegist(NewsDTO news) throws Exception{ //뉴스클리핑
-		System.out.println("hello : "+ news);
-		
+	public @ResponseBody String newsRegist(NewsDTO news, HttpSession session) throws Exception{ //뉴스클리핑
 		NewsVO vo = new NewsVO(news);
-		System.out.println("hoho : " + vo);
-		//@@@ 사원정보 세션에서갖구와야함 @@@@
-		vo.setEmp_no(4);
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		vo.setEmp_no(dto.getEmp_no());
 		service.newsRegist(vo);
 		return "reg_ok";
 	}
 	
 	@RequestMapping(value="/newsDelete",method=RequestMethod.POST)
-	public @ResponseBody String newsDelete(@RequestParam("link") String link) throws Exception{
+	public @ResponseBody String newsDelete(@RequestParam("link") String link,
+			HttpSession session) throws Exception{
 		NewsVO news = new NewsVO();
 		news.setNews_clipping_link(link);
-		//@@@ 사원정보 세션에서갖구와야함 @@@@
-		news.setEmp_no(4);
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		news.setEmp_no(dto.getEmp_no());
 		service.newsDelete(news);
 		return "del_ok";
 	}
 	
 	@RequestMapping(value="/newsCheck",method=RequestMethod.POST)
-	public @ResponseBody String newsCheck(@RequestParam("link") String link) throws Exception{
+	public @ResponseBody String newsCheck(@RequestParam("link") String link,
+			HttpSession session) throws Exception{
 		NewsVO news = new NewsVO();
 		news.setNews_clipping_link(link);
-		//@@@ 사원정보 세션에서갖구와야함 @@@@
-		news.setEmp_no(4);
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		news.setEmp_no(dto.getEmp_no());
 		return service.newsCountAsLink(news); // result : exist / none
 	}
 }

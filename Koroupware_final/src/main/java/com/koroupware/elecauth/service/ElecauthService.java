@@ -34,4 +34,6 @@ public interface ElecauthService {
 	public EmpDetailVO empDetailRead(int emp_no) throws Exception; //added by jirung
 	public List<DocVO> docListSelect() throws Exception; //added by jirung
 	public List<EmpDetailVO> empListSelect() throws Exception; //added by jirung
+	
+	public int getElecauthNo() throws Exception; 
 }

@@ -23,6 +23,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<br>
 	<input type="hidden" name="elec_auth_no" value=${elecauthRead.elec_auth_no }>
 	<input type="hidden" name="emp_no" value=${login.emp_no }>
 	

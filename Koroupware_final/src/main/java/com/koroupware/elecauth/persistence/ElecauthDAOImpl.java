@@ -30,9 +30,7 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 
 	@Override
 	public List<ElecauthListVO> elecauthList(ElecauthListCond elecauthListCond) throws Exception {
-		List<ElecauthListVO> elecauthList=sqlSession.selectList(namespace+".elecauthList", elecauthListCond);
-		
-		return elecauthList;
+		return sqlSession.selectList(namespace+".elecauthList", elecauthListCond);
 	}
 
 	@Override
@@ -111,6 +109,12 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 	@Override
 	public void elecauthNoReport(ApprovalPrimaryVO elecauthNoReport) throws Exception {
 		sqlSession.update(namespace+".elecauthNoReport", elecauthNoReport);		
+	}
+
+	@Override
+	public int getElecauthNo() throws Exception {
+		//전자결재 번호 가져온다
+		return sqlSession.selectOne(namespace+".getElecauthNo");
 	}
 
 	

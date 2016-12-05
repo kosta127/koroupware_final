@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+ <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -21,48 +21,37 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<input type="hidden" name="emp_no" value=${login.emp_no }>
-	<c:choose>
-		<c:when test="${receive != null}">
-			<c:set var="pageUrl" value="elecauthList?receive=ok"></c:set>
-		</c:when>
-		<c:otherwise>
-			<c:set var="pageUrl" value="elecauthList?"></c:set>
-		</c:otherwise>
-	</c:choose>
-
+	<form id="flag_form">
+		<input type="hidden" id="kind" name="kind" value="${kind }">
+		<input type="hidden" id="receive" name="receive" value="${receive }">
+	</form>
+	<br>
 	<div class="col-md-12">
 		<div class="elecauthList">
-			<div class="page-header">
-				<h3>결재문서 목록</h3>
-			</div>
 			<ul id="elecauth_list" class="nav nav-tabs">
-				<li id="receive" class="active"><a
-					href="elecauthList?receive=ok">내가 받은 결재</a></li>
-				<li id="write1"><a href="elecauthList">내가 보낸 결재</a></li>
+				<li id="receive_li"><a href="#">내가 받은 결재</a></li>
+				<li id="write_li"><a href="#">내가 보낸 결재</a></li>
 			</ul>
-			<div>
+			<div id="category_list">
 				<div id="receive_list" class="left-top-padding">
 					<ul id="receive_ul" class="nav nav-pills">
-						<li class="active"><a
-							href="elecauthList?receive=ok&flag=wait">결재대기중인 결재</a></li>
-						<li><a href="elecauthList?receive=ok&flag=ing">진행중인 결재</a></li>
-						<li><a href="elecauthList?receive=ok&flag=done">완료된 결재</a></li>
-						<li><a href="elecauthList?receive=ok&flag=ret">부결/반려한 결재</a></li>
+						<li><a href="wait/ok">결재대기중인 결재</a></li>
+						<li><a href="ing/ok">진행중인 결재</a></li>
+						<li><a href="done/ok">완료된 결재</a></li>
+						<li><a href="ret/ok">부결/반려한 결재</a></li>
 					</ul>
 				</div>
 				<div id="write_list" class="left-padding">
 					<ul id="write_ul" class="nav nav-pills">
-						<li class="active"><a href="elecauthList?flag=ing">진행중인
-								결재</a></li>
-						<li><a href="elecauthList?flag=done">완료된 결재</a></li>
-						<li><a href="elecauthList?flag=ret">부결/반려된 결재</a></li>
-						<li><a href="elecauthList?flag=temp">임시저장 결재</a></li>
+						<li><a href="ing/no">진행중인 결재</a></li>
+						<li><a href="done/no">완료된 결재</a></li>
+						<li><a href="ret/no">부결/반려된 결재</a></li>
+						<li><a href="temp/no">임시저장 결재</a></li>
 					</ul>
 				</div>
 			</div>
 
-			<table border="1" class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
 						<th>문서번호</th>

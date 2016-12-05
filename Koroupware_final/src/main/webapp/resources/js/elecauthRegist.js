@@ -10,7 +10,7 @@ $(function(){
 	
 	$value.on('click',function(){
 		var form = $('#elec_auth_form');
-		form.attr('action', 'elecauth/regist/1');
+		form.attr('action', '/elecauth/regist/1');
 		form.submit();
 	});
 	

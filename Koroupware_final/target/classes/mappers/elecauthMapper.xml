@@ -29,7 +29,7 @@
 			<when test="isReceive == true">
 			    AND ea.elec_auth_no = appr.elec_auth_no(+)
 			    AND ea.elec_auth_no = ref.elec_auth_no(+)
-			    AND (appr.emp_no = #{emp_no} or ref.emp_no = #{emp_no})				
+			    AND (appr.emp_no = #{emp_no} or ref.emp_no = #{emp_no})	
 			</when>
 			<otherwise>
 				AND ea.emp_no = #{emp_no}
@@ -82,7 +82,7 @@
                       elec_auth_enddate, 
                       elec_auth_temporary_saveYN, elec_auth_con_period,
                       doc_no, elec_auth_regdate)
-        	VALUES(seq_elec_auth.nextval, #{emp_no}, #{elec_auth_management_dept_no},
+        	VALUES(#{elec_auth_no}, #{emp_no}, #{elec_auth_management_dept_no},
         			#{elec_auth_title}, #{elec_auth_contents},
         			#{elec_auth_enddate},
         			#{elec_auth_temporary_saveYN}, #{elec_auth_con_period},
@@ -92,13 +92,13 @@
 	<!-- 전자결재 결재자 리스트 입력 added by jirung -->
 	<insert id="approvalListInsert" parameterType="ApprovalListVO">
 		INSERT INTO APPROVAL_LIST(elec_auth_no, emp_no, approval_list_step)
-               VALUES(seq_elec_auth.currval, #{emp_no}, #{approval_list_step})
+               VALUES(#{elec_auth_no}, #{emp_no}, #{approval_list_step})
 	</insert>
 	
 	<!-- 전자결재 참조자 리스트 입력 added by jirung -->
 	<insert id="elecauthReferrerInsert" parameterType="ElecauthReferrerVO">
 		INSERT INTO ELEC_AUTH_REFERRER(elec_auth_no, emp_no)	
-				VALUES(seq_elec_auth.currval, #{emp_no})
+				VALUES(#{elec_auth_no}, #{emp_no})
 	</insert>
 	
 	<select id="empDetailSelect" parameterType="int" resultType="EmpDetailVO">
@@ -162,5 +162,9 @@
 		AND emp_no=#{emp_no}
 	</update>
 	
+	<!-- 전자결재 번호 가져오기 -->
+	<select id="getElecauthNo" resultType="int">
+		select seq_elec_auth.nextval next_no from dual
+	</select>
 </mapper>  
 

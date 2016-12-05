@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,29 +33,33 @@ public class ElecauthController {
 	@Inject
 	private ElecauthService service;
 	
-	@RequestMapping(value="/elecauthList", method=RequestMethod.GET)
+	@RequestMapping(value="/elecauthList")
 	public String elecauthList(Model model, HttpSession session, HttpServletRequest request,
-			@RequestParam(value="receive", required=false) String rFlag, 
-			@RequestParam(value="flag", required=false) String flag)throws Exception{
-		if(flag==null){
-			flag="";
+			 @RequestParam(value="kind", required=false) String kindFlag, 
+			 @RequestParam(value="receive", required=false) String receiveFlag)throws Exception{
+		
+		System.out.println("kind -> "+kindFlag );
+		System.out.println("receive -> "+receiveFlag);
+		
+		//default
+		if(kindFlag==null){
+			kindFlag = "wait";
+		}
+		if(receiveFlag==null){
+			receiveFlag = "ok";
 		}
 		
-		Object obj=session.getAttribute("login");
-		EmpDTO dto = (EmpDTO) obj;
-		int emp_no=dto.getEmp_no();		
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		int emp_no = dto.getEmp_no();		
 		
-		List<ElecauthListVO> elecauthList=service.elecauthList(emp_no, (rFlag!=null)?true:false, flag);
+		List<ElecauthListVO> elecauthList = 
+				service.elecauthList(emp_no, receiveFlag.equals("ok"), kindFlag);
+
+		model.addAttribute("kind", kindFlag);
+		model.addAttribute("receive", receiveFlag);
+		model.addAttribute("elecauthList", elecauthList);
 		
-		if(elecauthList != null){
-			request.setAttribute("recieve", rFlag);
-			request.setAttribute("elecauthList", elecauthList);
-			model.addAttribute("elecauthList", elecauthList);
-			return "/elecauth/elecauthList";
-		}else{
-			return "redirect:/elecauth/elecauthList";
-		}
-		
+		return "/elecauth/elecauthList";
 	}
 	
 	
@@ -77,13 +82,15 @@ public class ElecauthController {
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
-	public String registGET(Model model) throws Exception{
+	public String registGET(Model model, HttpSession session) throws Exception{
 		//added by jirung
-		
 		//양식으로 쓸 문서 목록
 		model.addAttribute("docFormList", service.docListSelect());
-		//@@ TEMP @@ 원래는 세션같은곳에서 가져와야 한는 정보 : 사원정보
-		model.addAttribute("empDetail", service.empDetailRead(4));
+		
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		int emp_no = dto.getEmp_no();	
+		
+		model.addAttribute("empDetail", service.empDetailRead(emp_no));
 		
 		return "/elecauth/elecauthRegist";
 	}
