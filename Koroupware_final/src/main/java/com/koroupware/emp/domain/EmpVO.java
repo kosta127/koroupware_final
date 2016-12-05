@@ -28,7 +28,39 @@ public class EmpVO {
 	private int emp_point; // 세션에 보관
 	private String dept_name;
 	
-	
+	public EmpVO(){}
+	public EmpVO(int emp_no, int dept_no, int office_no, int position_no, int emp_superior, int emp_reporter,
+			String emp_name, String emp_email, String emp_id, String emp_password, String emp_address,
+			String emp_approvalyn, String emp_residentNum_left, String emp_residentNum_right, Date emp_hiredate,
+			Date emp_resigndate, String emp_email_sign, String emp_elec_auth_signkey, String emp_img,
+			String emp_elec_auth_img, Date emp_login, String emp_residentnumber, int emp_point, String dept_name) {
+		super();
+		this.emp_no = emp_no;
+		this.dept_no = dept_no;
+		this.office_no = office_no;
+		this.position_no = position_no;
+		this.emp_superior = emp_superior;
+		this.emp_reporter = emp_reporter;
+		this.emp_name = emp_name;
+		this.emp_email = emp_email;
+		this.emp_id = emp_id;
+		this.emp_password = emp_password;
+		this.emp_address = emp_address;
+		this.emp_approvalyn = emp_approvalyn;
+		this.emp_residentNum_left = emp_residentNum_left;
+		this.emp_residentNum_right = emp_residentNum_right;
+		this.emp_hiredate = emp_hiredate;
+		this.emp_resigndate = emp_resigndate;
+		this.emp_email_sign = emp_email_sign;
+		this.emp_elec_auth_signkey = emp_elec_auth_signkey;
+		this.emp_img = emp_img;
+		this.emp_elec_auth_img = emp_elec_auth_img;
+		this.emp_login = emp_login;
+		this.emp_residentnumber = emp_residentnumber;
+		this.emp_point = emp_point;
+		this.dept_name = dept_name;
+	}
+
 	public String getDept_name() {
 		return dept_name;
 	}
@@ -178,5 +210,3 @@ public class EmpVO {
 		this.emp_login = emp_login;
 	}
 }
-
-

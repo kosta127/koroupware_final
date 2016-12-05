@@ -49,9 +49,4 @@ public class MessageServiceImpl implements MessageService {
 		messageDAO.deleteMessage(message_no);
 	}
 
-	@Override
-	public MessageVO messageRead(int message_no) {
-		return messageDAO.selectMessage(message_no);
-	}
-
 }

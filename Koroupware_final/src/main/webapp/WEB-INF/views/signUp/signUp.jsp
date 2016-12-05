@@ -6,16 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- jquery -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="/resources/jquery-1.9.1/jquery-1.9.1.min.js"></script>
 <!-- jquery-ui -->
 <link href="/resources/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
 <script src="/resources/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-<!-- bootstrap 3.3.2 -->
-<link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<!-- printTool -->
-<script src="/resources/printTool/jQuery.print.js"></script>
 <script>
 $(function(){
 	

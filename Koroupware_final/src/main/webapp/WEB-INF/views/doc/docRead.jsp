@@ -64,8 +64,7 @@
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				success: function(data){
 					var decode = decodeURIComponent(data);
-					var div = $("<div style='overflow:scroll;' class='content'></div>");
-					$(".uploadedList div").remove();
+					var div = $("<div style='overflow:scroll;' class='test'></div>");
 					div.html(decode).appendTo(".uploadedList");
 				}
 				
@@ -74,7 +73,7 @@
 			
 	});
 		
-		$(".uploadedList").on("click",".content", function(){
+		$(".uploadedList").on("click",".test", function(){
 			$(this).remove();
 		});
 	});

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,22 +17,17 @@
 		history.back(-1);
 	}
 </script>
-
 <title>Insert title here</title>
 </head>
 <body>
 		
 			<form action="/doc/doc_hisRegist/${doc_no}/${emp_no}/${doc_box_no}" method="get">
-				 <div class="row">
-		  		<div class="col-sm-3 text">
 				문서명 : <input type="text" name="doc_title"><br>
 				문서설명 : <input type="text" name="doc_explain"><br>
 				문서내용 : <input type="text" name="doc_contents"><br>
 				보존년한 : <input type="text" name="doc_con_period"><br>
 				문서양식 : <input type="text" name="doc_formYN"><br>
 				<br>
-				</div>
-				</div>
 				<input type="submit" value="수정" class="btn btn-default">
 				<input type="button" value="돌아가기" class="btn btn-default" onclick="fn_back()">
 			</form>

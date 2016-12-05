@@ -47,13 +47,7 @@ public class MessageDAOImpl implements MessageDAO {
 
 	@Override
 	public void deleteMessage(int message_no) {
-		sqlSession.update(namespace+".deleteMessage",message_no);
-	}
-
-	@Override
-	public MessageVO selectMessage(int message_no) {
-		
-		return sqlSession.selectOne(namespace+".selectMessage",message_no);
+		sqlSession.delete(namespace+".deleteMessage",message_no);
 	}
 
 }

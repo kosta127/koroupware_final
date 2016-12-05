@@ -22,11 +22,7 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	function fn_back(){
-		history.go(-1);
-	}
-</script>
+<title>Insert title here</title>
 
 </head>
 <body>
@@ -37,7 +33,6 @@
 		<input type="text" name="doc_box_name" class="form-control">
 		<br>
 		<input type="submit" value="생성" class="btn btn-default">
-		<input type="button" value="돌아가기" class="btn btn-default" onclick="fn_back()">
 		</form>
 
 	
