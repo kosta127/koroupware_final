@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koroupware.mappers.AttendMapper">
+	<!-- 인설트를 시작함 다시 디비 수정 필요 -->
+	<insert id="attendInsert" parameterType="AttendVO">
+		INSERT INTO ATTEND(emp_no,ATTEND_DATE,late)
+		VALUES(#{emp_no},#{attend_date},#{late})
+	</insert>
+
+	<select id="attendCheck" resultType="AttendVO">
+		select emp_no, to_char(attend_date,'yyyy/MM/dd') attend_date from attend
+		where emp_no=#{emp_no} and attend_date=#{attend_date}
+	</select>
+
+	<select id="attendList" parameterType="Integer" resultType="AttendDTO">
+		select emp_no,ATTEND_CHK, TO_CHAR(ATTEND_DATE,'yyyy/MM/dd')
+		attend_date from ATTEND where emp_no = #{emp_no}
+	</select>
+
+</mapper>
+
+

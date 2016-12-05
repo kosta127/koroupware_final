@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.mappers.TelMapper">
+
+	<insert id="signUpTel" parameterType="TelVO">
+	 insert into tel(
+	  	tel_no, emp_no, tel_type, tel_telephone
+	 ) values(
+	 	seq_tel.nextval, (SELECT MAX(emp_no) FROM emp), '개인전화', #{tel_telephone_left}||#{tel_telephone_center}||#{tel_telephone_right}
+	 )
+	</insert>
+	
+
+	<select id="telList" parameterType="int">
+		select * from tel where emp_no = #{emp_no}
+	</select>
+	
+	<insert id="addTel" parameterType="TelVO">
+	 insert into tel(
+	  	tel_no, emp_no, tel_type, tel_telephone
+	 ) values(
+	 	seq_tel.nextval, #{emp_no}, #{tel_type}, #{tel_telephone_left}||#{tel_telephone_center}||#{tel_telephone_right}
+	 )
+	</insert>
+	
+	<update id="updateTel" parameterType="TelVO">
+	 update tel set tel_type = #{tel_type}, tel_telepone = #{tel_telephone_left}||#{tel_telephone_center}||#{tel_telephone_right}
+	  	where tel_no = #{tel_no}
+	</update>
+	
+	<delete id="deleteTel" parameterType="int">
+		delete from tel where tel_no = #{tel_no}
+	</delete>
+</mapper>  
+

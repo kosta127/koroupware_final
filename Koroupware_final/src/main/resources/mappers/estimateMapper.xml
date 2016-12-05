@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koroupware.mappers.EstimateMapper">
+
+	<select id="attendQuaterList" resultType="ResultVO">
+		select a.emp_no, a.result_year, a.quarterfirst, a.quartersecond,
+		a.quarterthird, a.quarterforth, a.finalquarter, b.emp_name, a.future_quater
+		from attend_result a
+		inner
+		join emp b
+		on b.emp_no = a.emp_no
+	</select>
+
+	<select id="attendQuaterDTOList" resultType="ResultDTO">
+		select a.emp_no, a.result_year, a.quarterfirst, a.quartersecond,
+		a.quarterthird, a.quarterforth, a.finalquarter, b.emp_name, a.future_quater
+		from attend_result a
+		inner
+		join emp b
+		on b.emp_no = a.emp_no
+	</select>
+
+	<select id="attendDept_EmpList" parameterType="Integer"
+		resultType="EmpDTO">
+		select emp_no
+		from emp
+		where dept_no = #{dept_no}
+	</select>
+
+	<select id="empCount" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(emp_no) from emp where dept_no=#{dept_no}
+	</select>
+
+	<select id="attendCount" parameterType="AttendVO" resultType="Integer">
+		SELECT COUNT(ATTEND_CHK)
+		FROM ATTEND
+		WHERE ATTEND_CHK=1
+		AND
+		EMP_NO=#{emp_no}
+		and
+		concat(TO_CHAR(concat('20',substr(attend_date,0,2))),(case when
+		substr(attend_date,4,1)=0 then replace(substr(attend_date,3,3),0,'')
+		else substr(attend_date,3,3) end ))=#{attend_date}
+	</select>
+
+	<insert id="insertAttendQuater" parameterType="ResultVO">
+		INSERT INTO Attend_Result (EMP_NO, result_year, quarterfirst, quartersecond,
+		quarterthird, quarterforth, finalquarter, future_quater)
+		VALUES(#{emp_no}, #{result_year},#{quarterfirst}, #{quartersecond}, #{quarterthird},
+		#{quarterforth}, #{finalquarter},#{future_quater})
+	</insert>
+</mapper>
