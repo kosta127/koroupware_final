@@ -1,3 +1,4 @@
+
 package com.koroupware.O.controller;
 
 import java.text.DateFormat;
@@ -17,23 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+
+	//예시 화면
+	@RequestMapping(value = "/chat", method = RequestMethod.GET)
+	public String chat() {
+		return "chatView/chatMain"; // 뷰폴더 / jsp 파일명 쓰면 그 경로로 갑니다.
 	}
+
+	
+	
 	
 }
