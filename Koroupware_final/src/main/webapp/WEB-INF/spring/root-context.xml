@@ -40,8 +40,6 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 	
-	<context:component-scan base-package="com.koroupware.elecauth.domain"/>
-	<context:component-scan base-package="com.koroupware.elecauth.dto"/>
-	<context:component-scan base-package="com.koroupware.elecauth.service"/>
-	<context:component-scan base-package="com.koroupware.elecauth.persistence"/>
+	<!-- component scan -->
+	<context:component-scan base-package="com.koroupware."/>
 </beans>

@@ -193,8 +193,7 @@
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>${org.springframework-version}</version>
-		</dependency>
-		
+		</dependency>		
 		
 								<!-- 서동찬 추가 한 라이브러리  -->
 								
