@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -125,19 +124,23 @@ public class ElecauthController {
 	}
 	
 	//승인처리하기 by moonyong
-	@RequestMapping(value="/elecauthOkReport")
+	@RequestMapping(value="/elecauthOkReport", method=RequestMethod.POST)
 	public String elecauthOkReport(@RequestParam("elec_auth_no") int elec_auth_no,
 			@RequestParam("emp_no") int emp_no)throws Exception{
 		ApprovalPrimaryVO elecauthOkReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
 		service.elecauthOkReport(elecauthOkReport);
 		
-		return "redirect:/elecauth/elecauthList";
+		return "/elecauth/elecauthList";
 	}
 	
 	//거부처리하기 by moonyong
-	public String elecauthNoReport(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
+	@RequestMapping(value="/elecauthNoReport", method=RequestMethod.POST)
+	public String elecauthNoReport(@RequestParam("elec_auth_no") int elec_auth_no,
+			@RequestParam("emp_no") int emp_no)throws Exception{
+		ApprovalPrimaryVO elecauthNoReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
+		service.elecauthNoReport(elecauthNoReport);
 		
-		return "redirect:/elecauth/elecauthList";
+		return "/elecauth/elecauthList";
 	}
 	
 	
