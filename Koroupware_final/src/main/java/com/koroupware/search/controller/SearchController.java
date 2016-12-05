@@ -31,7 +31,7 @@ public class SearchController {
 	
 	@RequestMapping(value="/search", method=RequestMethod.POST)
 	public String SearchProcess(SearchVO searchVO, Model model){
-		System.out.println("시발 또 왜 안되");
+		
 		String uri = null;
 		if(searchVO.getKeyField().equals("emp_name")){
 			searchContent = searchVO.getSearch_content();

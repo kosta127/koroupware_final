@@ -21,10 +21,7 @@
 		var emp_no = document.getElementById("hidden").value;
 		location.href = "/attend/attendList/"+emp_no; 
 	}
-	function attendCount(){
-		var emp_no = document.getElementById("hidden").value;
-		location.href = "/estimate/attendCount/";
-	}
+
 	
 	/* 출석 에이작스 */
 	function attend() {

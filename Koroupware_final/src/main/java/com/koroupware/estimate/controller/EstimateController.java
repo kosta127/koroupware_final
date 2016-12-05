@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koroupware.attend.domain.AttendVO;
 import com.koroupware.common.util.AttendAccountUtils;
+import com.koroupware.estimate.domain.EstimateVO;
 import com.koroupware.estimate.domain.ResultVO;
 import com.koroupware.estimate.dto.ResultDTO;
 import com.koroupware.estimate.service.EstimateService;
@@ -25,9 +26,29 @@ public class EstimateController {
 	@Inject
 	private EstimateService service;
 	
-	@RequestMapping(value = "/attendCount", method = RequestMethod.GET)
-	public String attendCount(AttendVO attendVO, Model model) throws Exception {
-		int dept_no =1;//부서
+	@RequestMapping(value = "/est_do", method = RequestMethod.GET)
+	public String est_start(){
+		System.out.println("머냐??");
+		return "/estimate/est_start";
+		
+	}
+	@RequestMapping(value = "/attendCount", method = RequestMethod.POST)
+	public String attendCount(AttendVO attendVO, Model model, EstimateVO estimateVO) throws Exception {
+		int dept_no =0;//부서
+		if(estimateVO.getKeyField().equals("dept_1")){
+				dept_no=1;
+			}else if(estimateVO.getKeyField().equals("dept_2")){
+				dept_no=2;
+			}else if(estimateVO.getKeyField().equals("dept_3")){
+				dept_no=3;
+			}else if(estimateVO.getKeyField().equals("dept_4")){
+				dept_no=4;
+			}else{
+				dept_no=5;
+			}
+		
+	
+		
 		AttendAccountUtils totalResult = new AttendAccountUtils();
 		ResultVO resultVO = new ResultVO();
 		List<EmpDTO> attendDept_EmpList = service.attendDept_EmpList(dept_no);
