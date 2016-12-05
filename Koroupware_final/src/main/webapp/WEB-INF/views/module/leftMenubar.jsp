@@ -84,7 +84,7 @@
           <li class="sidebar-green"><a href="">게시판</a></li>
           <li class="sidebar-orange"><a href="">조직도</a></li> 
           <li class="sidebar-blue"><a href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>    
-           <li class="sidebar-red"><a href="/webrtc">화상회의</a></li>
+           <li class="sidebar-red"><a href="">화상회의</a></li>
           <li class="sidebar-green"><a href="">그림회의</a></li>
           <li class="sidebar-orange"><a href="">이메일</a></li> 
           <li class="sidebar-blue"><a href="">출석부</a></li>                          
