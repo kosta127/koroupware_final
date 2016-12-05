@@ -5,156 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<style type="text/css">
-.map_wrap, .map_wrap * {
-	margin: 0;
-	padding: 0;
-	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
-	font-size: 12px;
-}
+<!-- jquery -->
+<script src="/resources/jquery-1.9.1/jquery-1.9.1.min.js"></script>
+<!-- jquery-ui -->
+<link href="/resources/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
+<script src="/resources/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<!-- bootstrap 3.3.2 -->
+<link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 
-.map_wrap {
-	position: relative;
-	width: 100%;
-	height: 350px;
-}
 
-#category {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	border-radius: 5px;
-	border: 1px solid #909090;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-	background: #fff;
-	overflow: hidden;
-	z-index: 2;
-}
-
-#category li {
-	float: left;
-	list-style: none;
-	width: 50px; px;
-	border-right: 1px solid #acacac;
-	padding: 6px 0;
-	text-align: center;
-	cursor: pointer;
-}
-
-#category li.on {
-	background: #eee;
-}
-
-#category li:hover {
-	background: #ffe6e6;
-	border-left: 1px solid #acacac;
-	margin-left: -1px;
-}
-
-#category li:last-child {
-	margin-right: 0;
-	border-right: 0;
-}
-
-#category li span {
-	display: block;
-	margin: 0 auto 3px;
-	width: 27px;
-	height: 28px;
-}
-
-#category li .category_bg {
-	background:
-		url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png)
-		no-repeat;
-}
-
-#category li .subway {
-	background-position: -10px 0;
-}
-
-#category li .cafe {
-	background-position: -10px -36px;
-}
-
-#category li.on .category_bg {
-	background-position-x: -46px;
-}
-
-.placeinfo_wrap {
-	position: absolute;
-	bottom: 28px;
-	left: -150px;
-	width: 300px;
-}
-
-.placeinfo {
-	position: relative;
-	width: 100%;
-	border-radius: 6px;
-	border: 1px solid #ccc;
-	border-bottom: 2px solid #ddd;
-	padding-bottom: 10px;
-	background: #fff;
-}
-
-.placeinfo:nth-of-type(n) {
-	border: 0;
-	box-shadow: 0px 1px 2px #888;
-}
-
-.placeinfo_wrap .after {
-	content: '';
-	position: relative;
-	margin-left: -12px;
-	left: 50%;
-	width: 22px;
-	height: 12px;
-	background:
-		url('http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-}
-
-.placeinfo a, .placeinfo a:hover, .placeinfo a:active {
-	color: #fff;
-	text-decoration: none;
-}
-
-.placeinfo a, .placeinfo span {
-	display: block;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-.placeinfo span {
-	margin: 5px 5px 0 5px;
-	cursor: default;
-	font-size: 13px;
-}
-
-.placeinfo .title {
-	font-weight: bold;
-	font-size: 14px;
-	border-radius: 6px 6px 0 0;
-	margin: -1px -1px 0 -1px;
-	padding: 10px;
-	color: #fff;
-	background: #d95050;
-	background: #d95050
-		url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
-		no-repeat right 14px center;
-}
-
-.placeinfo .tel {
-	color: #0f7833;
-}
-
-.placeinfo .jibun {
-	color: #999;
-	font-size: 11px;
-	margin-top: 0;
-}
-</style>
+<link href="/resources/css/map.css" rel="stylesheet">
 </head>
 <body>
 	<div class="map_wrap">
@@ -165,17 +26,19 @@
 			<li id="CE7"><span class="category_bg cafe"></span> 카페</li>
 		</ul>
 	</div>
-
+	<br>
+	
 	<!-- 지도를 표시할 div 입니다 -->
-	<p>
+	<!-- <p>
 		<button onclick="setCenter()">지도 중심좌표 이동시키기</button>
-	</p>
-	<p>
+	</p> -->
+	<!-- <p>
 		<button onclick="hideMarkers()">마커 감추기</button>
 		<button onclick="showMarkers()">마커 보이기</button>
-	</p>
+	</p> -->
+	
 	<p>
-		<button onclick="findMidPosition()">중간지점 탐색</button>
+		<button class="btn btn-primary" onclick="findMidPosition()">중간지점 탐색</button>
 	</p>
 
 
@@ -214,13 +77,13 @@
 		// 장소 검색 객체를 생성합니다
 		var ps = new daum.maps.services.Places(map);
 
-		function setCenter() {
+		/* function setCenter() {
 			// 이동할 위도 경도 위치를 생성합니다 
 			var moveLatLon = new daum.maps.LatLng(37.478855, 126.881176);
 
 			// 지도 중심을 이동 시킵니다
 			map.setCenter(moveLatLon);
-		}
+		} */
 
 		//지도 확대 축소--------------------------------------------------------------------------------------
 		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
@@ -316,7 +179,7 @@
 			}
 		}
 
-		// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+		/* // "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
 		function showMarkers() {
 			setMarkers(map)
 		}
@@ -324,7 +187,7 @@
 		// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
 		function hideMarkers() {
 			setMarkers(null);
-		}
+		} */
 
 		var midPoint = [];
 
