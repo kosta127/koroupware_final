@@ -8,5 +8,5 @@ public interface EmpDAO {
 	public void create(EmpVO empVo)throws Exception;
 	public List<String> empId() throws Exception;
 	public void update(EmpVO empVo) throws Exception;
-	public EmpVO empList(int emp_no) throws Exception;
+	public EmpVO empList(Integer emp_no) throws Exception;
 }

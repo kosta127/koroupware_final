@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.koroupware.emp.domain.TelDTO;
 import com.koroupware.emp.domain.TelVO;
 
 @Repository
@@ -23,22 +24,17 @@ public class TelDAOImpl implements TelDAO {
 	}
 	
 	@Override
-	public List<TelVO> telList(int emp_no) throws Exception {
-		return sqlSession.selectList(namespace+".telList");
+	public List<TelDTO> telList(Integer emp_no) throws Exception {
+		return sqlSession.selectList(namespace+".telList", emp_no);
 	}
 
 	@Override
-	public void addTel(TelVO telVo) throws Exception {
-		sqlSession.insert(namespace+".addTel", telVo);
+	public void addTel(TelDTO telDTO) throws Exception {
+		sqlSession.insert(namespace+".addTel", telDTO);
 	}
 
 	@Override
-	public void updateTel(TelVO telVo) throws Exception {
-		sqlSession.update(namespace+".updateTel", telVo);
-	}
-
-	@Override
-	public void deleteTel(int tel_no) throws Exception {
+	public void deleteTel(Integer tel_no) throws Exception {
 		sqlSession.delete(namespace+".deleteTel", tel_no);	
 	}
 
