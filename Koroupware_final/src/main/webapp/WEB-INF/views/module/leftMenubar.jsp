@@ -93,19 +93,20 @@
 }
 </style>
 </head>
-<body>
-	<div class="nav-sidebar">
-		<ul class="nav tabs">
-			<li class="sidebar-blue"><a href="/elecauth/elecauthList">전자결재</a></li>
-			<li class="sidebar-red"><a href="">문서</a></li>
-			<li class="sidebar-green"><a href="">게시판</a></li>
-			<li class="sidebar-orange"><a href="">조직도</a></li>
-			<li class="sidebar-blue"><a href="">쪽지</a></li>
-			<li class="sidebar-red"><a href="">화상회의</a></li>
-			<li class="sidebar-green"><a href="">그림회의</a></li>
-			<li class="sidebar-orange"><a href="">이메일</a></li>
-			<li class="sidebar-brown"><a href="/attend/attendList/${login.emp_no}">출석확인</a></li>
-			<li class="sidebar-red"><a href="/estimate/est_do">인사평가</a></li>
+
+<body> 
+      <div class="nav-sidebar">
+        	<ul class="nav tabs">
+          <li class="sidebar-blue"><a href="/elecauth/elecauthList">전자결재</a></li>
+          <li class="sidebar-red"><a href="/doc/doc_boxList/${login.emp_no}">문서</a></li>
+          <li class="sidebar-green"><a href="">게시판</a></li>
+          <li class="sidebar-orange"><a href="/dept/List">조직도</a></li> 
+          <li class="sidebar-blue"><a href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>    
+           <li class="sidebar-red"><a href="http://localhost:8082/webrtc">화상회의</a></li>
+          <li class="sidebar-green"><a href="http://localhost:8082/imageroom/lobby?emp_no=${login.emp_no}">그림회의</a></li>
+          <li class="sidebar-orange"><a href="">이메일</a></li>  
+          			<li class="sidebar-brown"><a href="/attend/attendList/${login.emp_no}">출석확인</a></li>
+			<li class="sidebar-red"><a href="/estimate/est_do">인사평가</a></li>                         
 		</ul>
 	</div>
 	<div class="col-md-12 sidebar-center-void"></div>

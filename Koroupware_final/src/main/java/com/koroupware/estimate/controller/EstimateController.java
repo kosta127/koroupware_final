@@ -19,6 +19,7 @@ import com.koroupware.estimate.dto.ResultDTO;
 import com.koroupware.estimate.service.EstimateService;
 import com.koroupware.member.dto.EmpDTO;
 
+
 @Controller
 @RequestMapping("/estimate/*")
 public class EstimateController {
@@ -57,7 +58,7 @@ public class EstimateController {
 		List<ResultVO> AttendQuaterList = service.AttendQuaterList();
 		System.out.println(AttendQuaterList);
 
-		   
+
 		int emp_count = service.empCount(dept_no); // 해당 부서에 인원 수 파악	
 		
 		int year = 2016;

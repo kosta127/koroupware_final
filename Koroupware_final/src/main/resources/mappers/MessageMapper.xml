@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.mappers.MessageMapper">
+	<!-- <select id="">
+		select *
+		from message
+		where message_sender_no = #{message_sender_no}
+		and message_receiver_no = #{message_receiver_no}
+		and message_deldate IS NULL
+	</select> -->
+	
+	<insert id="insertMessage" parameterType="MessageVO">
+		insert into message
+		values(
+			seq_message.nextval,#{message_contents},sysdate,null,#{message_sender_no},#{message_receiver_no}
+		)
+	</insert>
+	
+	<select id="getReceiver" parameterType="int" resultType="string">
+		select emp_name from emp
+		where emp_no = #{message_receiver_no}
+	</select>
+	
+	<select id="getSender" parameterType="int" resultType="string">
+		select emp_name from emp
+		where emp_no = #{message_sender_no}
+	</select>
+	
+	<select id="listreceivedMessage" resultType="MessageVO" parameterType="int">
+		select * from message
+		where message_receiver_no = #{message_receiver_no}
+	</select>
+	
+	<select id="listsendedMessage" resultType="MessageVO" parameterType="int">
+		select * from message
+		where message_sender_no = #{message_sender_no}
+	</select>
+	
+	
+	<select id="searchEmp"  parameterType="string" resultType="EmpVO">
+		select emp.emp_no, dept.dept_name, emp.EMP_NAME, emp.EMP_ID, emp.EMP_ADDRESS, emp.EMP_EMAIL, emp.EMP_HIREDATE  
+		from dept Inner Join emp 
+		on dept.DEPT_NO = emp.DEPT_NO
+		where emp.EMP_NAME like #{searchKeyword}||'%'
+	</select>
+	
+	<delete id="deleteMessage" parameterType="int">
+		delete from message where message_no = #{message_no}
+	</delete>
+</mapper>
