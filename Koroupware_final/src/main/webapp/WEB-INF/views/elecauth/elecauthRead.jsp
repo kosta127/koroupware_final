@@ -73,14 +73,21 @@
 		<c:if test="${ea.approval_list_pass ==null }">
 			<c:forEach var="c" items="${elecauthReadApproval }">
 			<c:if test="${login.emp_no==c.emp_no }">
-				<form>
+				<form action="elecauthOkReport">
+					<input type="hidden" name="emp_no" value="${c.emp_no }">
+					<input type="hidden" name="elec_auth_no" value="${elecauthRead.elec_auth_no }">
+					<div>
+						<input type="submit" class="btn btn-info" value="승인">
+					</div>				
+				</form>	
+				<form action="elecauthNoReport">
 					<input type="hidden" name="emp_no" value="c.emp_no">
 					<input type="hidden" name="elec_auth_no" value="${elecauthRead.elec_auth_no }">
 					<div>
-						<input type="submit" id="elecauthOkReport" class="btn btn-info" value="승인">
-						<input type="submit" id="elecauthNoReport" class="btn btn-danger" value="거부">	
+						<input type="submit" class="btn btn-danger" value="거부">	
 					</div>				
-				</form>				
+				</form>	
+							
 			</c:if>
 			</c:forEach>
 		</c:if>
@@ -88,10 +95,9 @@
 
 	<c:if test="${login.emp_no== elecauthRead.emp_no}">
 		<form action="elecauthDelete">
-			<input type="hidden" name="elec_auth_no"
-				value=${elecauthRead.elec_auth_no }> <input type="hidden"
-				name="emp_no" value=${login.emp_no }> <input type="button"
-				id="removeReport" class="btn btn-warning" value="삭제">
+			<input type="hidden" name="elec_auth_no" value=${elecauthRead.elec_auth_no }>
+			 <input type="hidden" name="emp_no" value=${login.emp_no }> 
+			 <input type="submit" class="btn btn-warning" value="삭제">
 		</form>
 	</c:if>
 	<br>

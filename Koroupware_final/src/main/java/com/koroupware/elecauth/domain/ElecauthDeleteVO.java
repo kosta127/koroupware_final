@@ -4,7 +4,12 @@ public class ElecauthDeleteVO {
 	private int elec_auth_no;
 	private int emp_no;
 	
-	
+	public ElecauthDeleteVO(){}
+	public ElecauthDeleteVO(int elec_auth_no, int emp_no) {
+		super();
+		this.elec_auth_no = elec_auth_no;
+		this.emp_no = emp_no;
+	}
 	public int getElec_auth_no() {
 		return elec_auth_no;
 	}

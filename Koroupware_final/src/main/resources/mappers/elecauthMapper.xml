@@ -139,7 +139,7 @@
 	</select>
 	
 	<!-- 삭제 처리 by moonyong -->
-	<update id="elecauthDelete" parameterType="int">
+	<update id="elecauthDelete" parameterType="ElecauthDeleteVO">
 		UPDATE elec_auth
 		SET elec_auth_deldate=SYSDATE
 		WHERE elec_auth_no=#{elec_auth_no}

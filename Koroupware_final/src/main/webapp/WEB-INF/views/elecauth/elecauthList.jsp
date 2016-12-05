@@ -84,6 +84,5 @@
 		<input type="button" id="write" class="btn btn-primary pull-right"
 			value="결재작성">
 	</div>
-	</div>
 </body>
 </html>

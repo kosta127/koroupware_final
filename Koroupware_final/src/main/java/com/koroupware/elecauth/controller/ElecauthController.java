@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
+import com.koroupware.elecauth.domain.ElecauthDeleteVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthVO;
 import com.koroupware.elecauth.domain.EmpDetailVO;
@@ -116,15 +117,17 @@ public class ElecauthController {
 	}
 	
 	//삭제처리하기 by moonyong
-	@RequestMapping(value="/elecauthDelete/{elec_auth_no}")
-	public String elecauthDelete(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
-		//service.elecauthDelete(elec_auth_no);
+	@RequestMapping(value="/elecauthDelete")
+	public String elecauthDelete(@RequestParam("elec_auth_no") int elec_auth_no,
+			@RequestParam("emp_no") int emp_no)throws Exception{
+		ElecauthDeleteVO elecauthDelete=new ElecauthDeleteVO(elec_auth_no, emp_no);
+		service.elecauthDelete(elecauthDelete);
 		
-		return "redirect:/elecauth/elecauthList";
+		return "/elecauth/elecauthList";
 	}
 	
 	//승인처리하기 by moonyong
-	@RequestMapping(value="/elecauthOkReport", method=RequestMethod.POST)
+	@RequestMapping(value="/elecauthOkReport")
 	public String elecauthOkReport(@RequestParam("elec_auth_no") int elec_auth_no,
 			@RequestParam("emp_no") int emp_no)throws Exception{
 		ApprovalPrimaryVO elecauthOkReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
@@ -134,7 +137,7 @@ public class ElecauthController {
 	}
 	
 	//거부처리하기 by moonyong
-	@RequestMapping(value="/elecauthNoReport", method=RequestMethod.POST)
+	@RequestMapping(value="/elecauthNoReport")
 	public String elecauthNoReport(@RequestParam("elec_auth_no") int elec_auth_no,
 			@RequestParam("emp_no") int emp_no)throws Exception{
 		ApprovalPrimaryVO elecauthNoReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
