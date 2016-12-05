@@ -132,7 +132,7 @@
 				<td>${d.emp_name }</td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table> 
 
 	<input id="printButton" type="button" class="btn btn-success"
 		name="print2" value="ÀÎ¼â">
