@@ -123,7 +123,7 @@ public class ElecauthController {
 		ElecauthDeleteVO elecauthDelete=new ElecauthDeleteVO(elec_auth_no, emp_no);
 		service.elecauthDelete(elecauthDelete);
 		
-		return "/elecauth/elecauthList";
+		return "redirect:/elecauth/elecauthList";
 	}
 	
 	//승인처리하기 by moonyong
