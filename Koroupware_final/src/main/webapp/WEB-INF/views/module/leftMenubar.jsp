@@ -87,6 +87,7 @@ function webrtc() {
           <li class="sidebar-blue"><a href="/elecauth/elecauthList">전자결재</a></li>
           <li class="sidebar-red"><a href="/doc/doc_boxList/${login.emp_no}">문서</a></li>
           <li class="sidebar-green"><a href="/community/list">커뮤니티</a></li>
+<<<<<<< HEAD
           <li class="sidebar-orange"><a href="/dept/List">조직도</a></li> 
           <li class="sidebar-blue"><a href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>    
            <li class="sidebar-red"><a onclick="webrtc()">화상회의</a></li>
@@ -94,6 +95,15 @@ function webrtc() {
           <li class="sidebar-orange"><a href="">이메일</a></li>  
           <li class="sidebar-blue"><a href="/schedule/view">일정</a></li>                           
       </ul>
+=======
+          <li class="sidebar-orange"><a href="">조직도</a></li> 
+          <li class="sidebar-blue"><a href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>    
+           <li class="sidebar-red"><a href="">화상회의</a></li>
+          <li class="sidebar-green"><a href="">그림회의</a></li>
+          <li class="sidebar-orange"><a href="">이메일</a></li>     
+          <li class="sidebar-blue"><a href="/schedule/view">일정</a></li>                                       
+		</ul>
+>>>>>>> refs/remotes/origin/lks_2016/12/07_test
       </div>
       <div class="col-md-12 sidebar-center-void"></div>
       

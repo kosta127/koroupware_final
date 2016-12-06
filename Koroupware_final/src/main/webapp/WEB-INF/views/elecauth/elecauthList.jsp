@@ -26,6 +26,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<input type="hidden" name="emp_no" value=${login.emp_no }>
 	<div class="container">
 		<div class="col-md-2">
 			<div id="elec_auth_box">

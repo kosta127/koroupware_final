@@ -47,6 +47,9 @@ public class CommunityController {
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void list(HttpSession session, Model model)throws Exception{
+
+		System.out.println("fff");
+
 		EmpDTO emp = (EmpDTO)session.getAttribute("login");
 		
 		model.addAttribute("list", service.communityList(emp.getEmp_no()));

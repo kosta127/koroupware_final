@@ -13,9 +13,8 @@
 	
 	<definition name="login" template="/WEB-INF/views/login/login.jsp">
 	</definition>
+	<definition name="/message/messageSearch" template="/WEB-INF/views/message/messageSearch.jsp"></definition>
 	
-	<definition name="/message/messageSearch" template="/WEB-INF/views/message/messageSearch.jsp">
-	</definition>
 	
 	<definition name="signUp" template="/WEB-INF/views/signUp/signUp.jsp">
 	</definition>

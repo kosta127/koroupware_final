@@ -11,7 +11,11 @@
 <form method="post" action="regist">
 	<input type="hidden" value="${community_no}" name="community_no" id="community_no"/> 
 	<p>카테고리명</p>
+<<<<<<< HEAD
 	<input type="text" name="category_name" id="category_name" class="form-control">
+=======
+	<input type="text" name="category_name" id="category_name">
+>>>>>>> refs/remotes/origin/lks_2016/12/07_test
 	<input id="create" type="submit" value="생성" class="btn btn-primary">
 	
 </form>

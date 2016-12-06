@@ -24,6 +24,7 @@
 </head>
 <body>
 	<input type="hidden" name="elec_auth_no" value=${elecauthRead.elec_auth_no }>
+	<input type="hidden" name="emp_no" value=${login.emp_no }>
 	<table class="table table-bordered" id="tabel1" border=1 width=60%>
 		<tr>
 			<td width=15%>문서종류</td>
