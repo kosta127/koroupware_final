@@ -63,7 +63,7 @@ public class DocController {
 	public String docRegistPOST(DocVO vo,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no) throws Exception{
 		
 		service.docRegist(vo);
-		return "redirect:/doc/docList/"+emp_no+"/"+doc_box_no;
+		return "redirect:/doc/docList/"+doc_box_no+"/"+emp_no;
 	}
 	
 	@RequestMapping("/docRemove/{doc_no}/{doc_box_no}/{emp_no}")
@@ -76,6 +76,7 @@ public class DocController {
 	@RequestMapping(value="/docUpdate/{doc_no}/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
 	public String docUpdateGET(@PathVariable("doc_no") int doc_no,@PathVariable("doc_box_no") int doc_box_no,
 				@PathVariable("emp_no") int emp_no,Model model){
+		System.out.println("dfsfs");
 		model.addAttribute("doc_no",doc_no);
 		model.addAttribute("doc_box_no",doc_box_no);
 		model.addAttribute("emp_no",emp_no);
@@ -85,8 +86,9 @@ public class DocController {
 	@RequestMapping(value="/docUpdate/{doc_no}/{doc_box_no}/{emp_no}",method=RequestMethod.POST)
 	public String docUpdatePOST(DocVO vo,@PathVariable("emp_no") int emp_no,
 			@PathVariable("doc_no") int doc_no,@PathVariable("doc_box_no") int doc_box_no) throws Exception{
+		
 		service.docModify(vo);
-		return "/doc/doc_hisRegist/"+doc_no+"/"+emp_no+"/"+doc_box_no;
+		return "/doc/doc_hisRegist/"+doc_no+"/"+doc_box_no+"/"+emp_no;
 	}
 	
 	@RequestMapping("/getAttach/{doc_no}")

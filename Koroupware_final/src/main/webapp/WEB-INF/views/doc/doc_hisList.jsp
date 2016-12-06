@@ -39,7 +39,7 @@
 				</tr>
 			</table>
 			</c:forEach>
-			<form action="/doc/docList/${emp_no }/${doc_box_no}" method="get">
+			<form action="/doc/docList/${doc_box_no}/${emp_no}" method="get">
 					<input type="submit" value="돌아가기" class="btn btn-default">
 			</form>
 		

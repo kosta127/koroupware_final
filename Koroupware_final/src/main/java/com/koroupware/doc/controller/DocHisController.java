@@ -19,7 +19,7 @@ public class DocHisController {
 	@Inject
 	private DocHisService service;
 	
-	@RequestMapping(value="/doc_hisList/{emp_no}/{doc_box_no}",method=RequestMethod.GET)
+	@RequestMapping(value="/doc_hisList/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
 	public String doc_hisList(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
 		System.out.println("dfd");
 		List<DocHisVO> list = service.doc_hisList();
@@ -27,7 +27,7 @@ public class DocHisController {
 		return "/doc/doc_hisList";
 	}
 	
-	@RequestMapping(value="/doc_hisRegist/{doc_no}/{emp_no}/{doc_box_no}",method=RequestMethod.GET)
+	@RequestMapping(value="/doc_hisRegist/{doc_no}/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
 	public String doc_hisRegistGET(Model model,@PathVariable("emp_no") int emp_no,
 			@PathVariable("doc_box_no") int doc_box_no,@PathVariable("doc_no") int doc_no){
 		model.addAttribute("doc_no",doc_no);
@@ -36,10 +36,10 @@ public class DocHisController {
 		return "/doc/doc_hisRegist";
 	}
 	
-	@RequestMapping(value="/doc_hisRegist/{doc_no}/{emp_no}/{doc_box_no}",method=RequestMethod.POST)
+	@RequestMapping(value="/doc_hisRegist/{doc_no}/{doc_box_no}/{emp_no}",method=RequestMethod.POST)
 	public String doc_hisRegistPOST(@PathVariable("emp_no") int emp_no,
 			@PathVariable("doc_box_no") int doc_box_no,DocHisVO vo){
 		service.doc_hisRegist(vo);
-		return "redirect:/doc/doc_hisList/"+emp_no+"/"+doc_box_no;
+		return "redirect:/doc/doc_hisList/"+doc_box_no+"/"+emp_no;
 	}
 }

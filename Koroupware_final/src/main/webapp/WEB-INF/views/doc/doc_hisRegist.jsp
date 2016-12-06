@@ -19,8 +19,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<h1>${emp_no}</h1>
-			<form action="/doc/doc_hisRegist/${doc_no}/${emp_no}/${doc_box_no}" method="post">
+
+			<form action="/doc/doc_hisRegist/${doc_no}/${doc_box_no}/${emp_no}" method="post">
 			
 				변경사유 : <input type="text" name="doc_his_reason_change"><br>
 				재개정여부 : <input type="text" name="doc_his_revise"><br>
