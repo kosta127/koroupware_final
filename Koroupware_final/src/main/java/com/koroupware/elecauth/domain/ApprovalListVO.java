@@ -1,9 +1,8 @@
 package com.koroupware.elecauth.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-public class ApprovalListVO implements Serializable{
+public class ApprovalListVO{
 	private int elec_auth_no;
 	private int emp_no;
 	private String approval_list_pass;

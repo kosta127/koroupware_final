@@ -1,8 +1,6 @@
 package com.koroupware.elecauth.domain;
 
-import java.io.Serializable;
-
-public class ElecauthReferrerVO implements Serializable{
+public class ElecauthReferrerVO{
 	private int elec_auth_no;
 	private int emp_no;
 	

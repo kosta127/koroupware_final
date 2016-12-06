@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.koroupware.mappers.ChatMapper">
+	<select id="chaingList" parameterType="int" resultType="ChatingDTO">
+		SELECT h.image_room_his_no, h.image_room_his_contents, h.image_room_his_regdate, h.image_room_no, h.emp_no,
+				e.emp_name, p.position_name, o.office_name, d.dept_name
+		FROM image_room_his h, emp e, position p, office o, dept d
+		WHERE h.emp_no = e.emp_no
+				AND e.emp_resigndate IS NULL
+				AND e.position_no = p.position_no
+				AND e.office_no = o.office_no
+				AND e.dept_no = d.dept_no
+				AND h.image_room_his_deldate IS NULL
+				AND h.image_room_no = #{image_room_no}
+		ORDER BY image_room_his_regdate
+	</select>
+
+	<select id="imageRoomHisList" parameterType="int" resultType="imageRoomHisVO">
+		SELECT * 
+		FROM image_room_his
+		WHERE image_room_no = #{image_room_no}
+				AND image_room_his_deldate IS NULL
+	</select>
+	<insert id="imageRoomHisInsert" parameterType="imageRoomHisVO">
+		INSERT INTO image_room_his(image_room_his_no, image_room_his_contents, image_room_his_regdate, 
+									image_room_no, emp_no)
+		VALUES (#{image_room_his_no}, #{image_room_his_contents}, #{image_room_his_regdate}, #{image_room_no}, #{emp_no})
+	</insert>
+	<select id="nextImageRoomHisNoSelect" resultType="int">
+		SELECT MAX(image_room_his_no) + 1
+		FROM image_room_his
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

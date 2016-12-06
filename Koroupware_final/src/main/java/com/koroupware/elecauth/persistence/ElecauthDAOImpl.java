@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
-import com.koroupware.doc.domain.DocVO;
+import com.koroupware.elecauth.domain.DocVO;
+import com.koroupware.elecauth.domain.ElecauthDeleteVO;
+import com.koroupware.elecauth.domain.ElecauthListCond;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthReferrerVO;
@@ -27,10 +29,8 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 	private static final String namespace="com.koroupware.mappers.ElecauthMapper";
 
 	@Override
-	public List<ElecauthListVO> elecauthList() throws Exception {
-		List<ElecauthListVO> elecauthList=sqlSession.selectList(namespace+".elecauthList");
-		
-		return elecauthList;
+	public List<ElecauthListVO> elecauthList(ElecauthListCond elecauthListCond) throws Exception {
+		return sqlSession.selectList(namespace+".elecauthList", elecauthListCond);
 	}
 
 	@Override
@@ -96,9 +96,9 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 	}
 
 	@Override
-	public void elecauthDelete(int elec_auth_no) throws Exception {
+	public void elecauthDelete(ElecauthDeleteVO elecauthDelete) throws Exception {
 		//전자결재 삭제처리
-		sqlSession.update(namespace+".elecauthDelete", elec_auth_no);
+		sqlSession.update(namespace+".elecauthDelete", elecauthDelete);
 	}
 
 	@Override
@@ -109,6 +109,12 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 	@Override
 	public void elecauthNoReport(ApprovalPrimaryVO elecauthNoReport) throws Exception {
 		sqlSession.update(namespace+".elecauthNoReport", elecauthNoReport);		
+	}
+
+	@Override
+	public int getElecauthNo() throws Exception {
+		//전자결재 번호 가져온다
+		return sqlSession.selectOne(namespace+".getElecauthNo");
 	}
 
 	
