@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.koroupware.board.domain.PageMaker;
 import com.koroupware.member.dto.EmpDTO;
-import com.koroupware.search.domain.Criteria;
-import com.koroupware.search.domain.PageMaker;
 import com.koroupware.search.domain.SearchVO;
 import com.koroupware.search.service.SearchService;
 
