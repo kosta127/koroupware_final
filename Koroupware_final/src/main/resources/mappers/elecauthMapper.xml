@@ -7,41 +7,92 @@
 	
 	<!-- 전자결재 리스트 조회 added by moonyong -->
 	<select id="elecauthList" resultType="ElecauthListVO" parameterType="ElecauthListCond">
+	<![CDATA[ 
 		SELECT ea.elec_auth_no, ea.elec_auth_title, ea.elec_auth_regdate, ea.elec_auth_enddate,
-			do.doc_title, de.dept_name, e.emp_name, (CASE WHEN 
-         																 (SELECT count(*)
-          																  FROM approval_list al
-          																  WHERE ea.elec_auth_no = al.elec_auth_no) 
-          																  =(SELECT count(*)
-         																	 FROM approval_list al
-          																	 WHERE ea.elec_auth_no = al.elec_auth_no
-           																	 AND al.approval_list_pass='Y') THEN '진행완료'
-           															    WHEN  TRUNC(SYSDATE-ea.elec_auth_enddate)>0
-           																	 THEN '진행부결' ELSE '결재중'
-         															         END ) approval_list_pass
-		FROM elec_auth ea, doc do, dept de, emp e
-		<if test="isReceive == true">, approval_list appr, elec_auth_referrer ref</if>
-		WHERE ea.doc_no = do.doc_no
-		AND ea.elec_auth_management_dept_no = de.dept_no
-		AND ea.emp_no = e.emp_no		
-		AND ea.elec_auth_deldate IS NULL
-		<choose>
-			<when test="isReceive == true">
-			    AND ea.elec_auth_no = appr.elec_auth_no(+)
-			    AND ea.elec_auth_no = ref.elec_auth_no(+)
-			    AND (appr.emp_no = #{emp_no} or ref.emp_no = #{emp_no})	
-			</when>
-			<otherwise>
-				AND ea.emp_no = #{emp_no}
-			</otherwise>
+			do.doc_title, de.dept_name, e.emp_name,
+			(CASE ]]>
+			<if test="isReceive == true"><if test="condition == 4"> <![CDATA[ WHEN al.approval_list_pass IS NULL THEN '결재대기중' ]]> </if></if>
+			<![CDATA[ 
+			WHEN ea.elec_auth_temporary_saveyn = 'Y' THEN '임시저장'
+            WHEN (TRUNC(SYSDATE-ea.elec_auth_enddate) <= 0 AND ing_al.cnt>0 AND no_al.cnt IS NULL) THEN '결재진행중' 
+            WHEN (ing_al.cnt IS NULL AND no_al.cnt IS NULL) THEN '결재완료'
+            WHEN (TRUNC(SYSDATE-ea.elec_auth_enddate) > 0 AND ing_al.cnt > 0) THEN '결재만료' 
+            WHEN no_al.cnt > 0 THEN '결재부결'
+            ELSE '몰라' END) approval_list_pass
+		FROM elec_auth ea 
+    INNER JOIN doc do ON ea.doc_no = do.doc_no
+    INNER JOIN dept de ON ea.elec_auth_management_dept_no = de.dept_no
+    INNER JOIN emp e ON ea.emp_no = e.emp_no
+    ]]>
+    <if test="isReceive == true">
+    <![CDATA[
+      INNER JOIN approval_list al ON ea.elec_auth_no = al.elec_auth_no
+      LEFT JOIN elec_auth_referrer ref ON ea.elec_auth_no = ref.elec_auth_no
+    ]]>
+    </if>
+    <![CDATA[
+    LEFT JOIN (SELECT elec_auth_no, count(*) cnt from approval_list where approval_list_pass is null group by elec_auth_no) ing_al ON ea.elec_auth_no = ing_al.elec_auth_no
+    LEFT JOIN (SELECT elec_auth_no, count(*) cnt from approval_list where approval_list_pass = 'N' group by elec_auth_no) no_al ON ea.elec_auth_no = no_al.elec_auth_no
+		WHERE ea.elec_auth_deldate IS NULL
+	]]>
+	<choose>
+  		<when test="condition == 1 || condition == 4"> <!-- 진행중 -->
+  		<![CDATA[
+        AND TRUNC(SYSDATE-ea.elec_auth_enddate) <= 0
+        AND ing_al.cnt > 0 
+        AND no_al.cnt IS NULL
+        ]]>
+      </when>
+      <when test="condition == 2"> <!-- 완료 -->
+      <![CDATA[
+        AND ing_al.cnt IS NULL
+        AND no_al.cnt IS NULL
+        ]]>
+      </when>
+      <when test="condition == 3"> <!-- 결재만료/부결 -->
+      <![CDATA[
+        AND ((TRUNC(SYSDATE-ea.elec_auth_enddate) > 0 AND ing_al.cnt > 0) 
+        OR no_al.cnt > 0)
+        ]]>
+      </when>
+    </choose>
+    <choose>
+      <when test="isReceive == true">
+      	<choose>
+      		<when test="condition == 4">
+      		<![CDATA[
+	  		  AND al.emp_no = #{emp_no}
+	  		  AND al.approval_list_pass IS NULL
+	  		  ]]>
+      		</when>
+      		<otherwise>
+      			<![CDATA[
+        		AND (al.emp_no = #{emp_no} OR ref.emp_no = #{emp_no}) 
+        		]]>
+      		</otherwise>
+      	</choose>
+  		</when>
+  		<otherwise>
+  		<![CDATA[
+  		  AND ea.emp_no = #{emp_no}
+  		  ]]>
+  		</otherwise>
 		</choose>
 		<choose>
-			<when test="condition == 5">AND elec_auth_temporary_saveyn = 'Y'</when>
-			<otherwise>AND elec_auth_temporary_saveyn = 'N'</otherwise>
-		</choose>
+  		<when test="condition == 5"> <!-- 임시저장 -->
+  		<![CDATA[
+  		  AND ea.elec_auth_temporary_saveyn = 'Y'
+  		  ]]>
+  		</when>
+  		<otherwise>
+  		<![CDATA[
+  		  AND ea.elec_auth_temporary_saveyn = 'N'
+  		  ]]>
+  		</otherwise>
+		</choose>		
+		<![CDATA[
 		ORDER BY ea.elec_auth_no DESC
-		
-		<!-- AND (ea.emp_no=#{emp_no} OR appr.emp_no=#{emp_no} OR ear.emp_no=#{emp_no}) -->
+		]]>
 	</select>
 	
 	<!-- 전자결재 상세정보 조회 added by moonyong -->

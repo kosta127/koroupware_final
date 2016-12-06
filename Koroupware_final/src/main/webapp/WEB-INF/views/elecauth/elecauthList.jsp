@@ -38,7 +38,7 @@
 						<li><a href="wait/ok">결재대기중인 결재</a></li>
 						<li><a href="ing/ok">진행중인 결재</a></li>
 						<li><a href="done/ok">완료된 결재</a></li>
-						<li><a href="ret/ok">부결/반려한 결재</a></li>
+						<li><a href="ret/ok">부결/반려된 결재</a></li>
 					</ul>
 				</div>
 				<div id="write_list" class="left-padding">
