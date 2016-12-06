@@ -73,6 +73,7 @@
 		<c:forEach var="c" items="${elecauthReadApproval }">
 			<c:if test="${c.approval_list_pass ==null }">
 			<c:if test="${login.emp_no==c.emp_no }">
+			<c:if test="${elecauthRead.elec_auth_enddate>SYSDATE }">
 				<form action="elecauthOkReport">
 					<input type="hidden" name="emp_no" value="${c.emp_no }">
 					<input type="hidden" name="elec_auth_no" value="${elecauthRead.elec_auth_no }">
@@ -87,7 +88,7 @@
 						<input type="submit" class="btn btn-danger" value="°ÅºÎ">	
 					</div>				
 				</form>	
-							
+			</c:if>				
 			</c:if>
 			</c:if>
 		</c:forEach>		
