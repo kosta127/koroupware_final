@@ -16,6 +16,7 @@
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <!-- printTool -->
 <script src="/resources/printTool/jQuery.print.js"></script>
+
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script type="text/javascript">
@@ -42,7 +43,7 @@
 			},
 			dataType:'text',
 			data:JSON.stringify({
-				board_no:board_no, 
+				board_no:board_no,
 				reply_contents:reply_contents,
 				emp_no:emp_no
 				}),
@@ -52,8 +53,9 @@
 				if(result=='SUCCESS'){
 					alert("등록");
 					replytextObj.val("");
-					location.reload();
 				}
+
+				location.reload();
 			}
 		});
 		
@@ -77,6 +79,8 @@
 				if(result=='SUCCESS'){
 					alert("삭제완료");
 				}
+
+				location.reload();
 			}
 		});
 	}
@@ -215,7 +219,7 @@
 	});
 </script>
 
-<script>
+<!-- <script>
 	$(document).ready(function(){
 		var board_no = ${boardVO.board_no};
 		
@@ -240,7 +244,7 @@
 		});
 		
 	});
-</script>
+</script> -->
 
 <style type="text/css">
 .popup {
@@ -272,61 +276,64 @@
 </style>
 </head>
 <body>
-	<div class='popup back' style="display: none;"></div>
-	<div id="popup_front" class='popup front' style="display: none;">
-		<img id="popup_img">
-	</div>
-
-	<form method="post" action="modify">
-		<input type="hidden" name="board_no" value="${boardVO.board_no }">
-		<input type="hidden" name="page" value="${cri.page}">
-		<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> 
-		<input type="hidden" name="searchType" value="${cri.searchType}"> 
-		<input type="hidden" name="keyword" value="${cri.keyword}">
-		<input type="hidden" name="category_no" value="${cri.category_no }">
-	</form>
-
-	
-	<table border="1">
-		<tr height="30">
-			<td width="100" align="center">NO</td>
-			<td width="300">${boardVO.board_no }</td>
-		</tr>
-		<tr height="30">
-			<td width="100" align="center">제목</td>
-			<td width="300">${boardVO.board_title}</td>
-		</tr>
-
-		<tr height="30">
-			<td width="100" align="center">작성날짜</td>
-			<td width="300"><fmt:formatDate
-					value="${boardVO.board_regdate }" pattern="yyyy-MM-dd" /></td>
-		</tr>
-		<tr height="30">
-			<td width="300" colspan="2">${boardVO.board_contents }</td>
-		</tr>
-
-	</table>
-
-	<ul class="mailbox-attachments clearfix uploadedList"></ul>
-
-	<input type="button" class="btn btn-default" value="수정"
-		onclick="board_modify()">
-	<input type="button" class="btn btn-default" value="목록"
-		onclick="board_list()">
-	<input type="button" class="btn btn-default" value="삭제"
-		onclick="board_delete()">
-	<input type="button" class="btn btn-default" value="댓글"
-		onclick="show_list()">&nbsp;&nbsp;
-
-	
+<div class="table-responsive">
+	<div class="readTable">
+		<div class="col-md-4"></div>
+			<!-- <div class='popup back' style="display: none;"></div>
+			<div id="popup_front" class='popup front' style="display: none;">
+				<img id="popup_img">
+			</div> -->
+			<div class="col-md-4">
+				<form method="post" action="modify">
+					<input type="hidden" name="board_no" value="${boardVO.board_no }">
+					<input type="hidden" name="page" value="${cri.page}">
+					<input type="hidden" name="perPageNum" value="${cri.perPageNum}"> 
+					<input type="hidden" name="searchType" value="${cri.searchType}"> 
+					<input type="hidden" name="keyword" value="${cri.keyword}">
+					<input type="hidden" name="category_no" value="${cri.category_no }">
+				</form>
+			
+				<table class="able table-bordered" border="1">
+					<tr height="30">
+						<td width="100" align="center">NO</td>
+						<td width="300">${boardVO.board_no }</td>
+					</tr>
+					<tr height="30">
+						<td width="100" align="center">제목</td>
+						<td width="300">${boardVO.board_title}</td>
+					</tr>
+			
+					<tr height="30">
+						<td width="100" align="center">작성날짜</td>
+						<td width="300"><fmt:formatDate
+								value="${boardVO.board_regdate }" pattern="yyyy-MM-dd" /></td>
+					</tr>
+					<tr height="30">
+						<td width="300" colspan="2">${boardVO.board_contents }</td>
+					</tr>
+			
+				</table>
+			
+				<ul class="mailbox-attachments clearfix uploadedList"></ul>
+			
+				<input type="button" class="btn btn-default" value="수정"
+					onclick="board_modify()">
+				<input type="button" class="btn btn-default" value="목록"
+					onclick="board_list()">
+				<input type="button" class="btn btn-default" value="삭제"
+					onclick="board_delete()">
+				<input type="button" class="btn btn-default" value="댓글"
+					onclick="show_list()">&nbsp;&nbsp;
+			</div>
+		<div class="col-md-4"></div>
+	</div>	
 	<!-- <span>
 		<input type="button" value="좋아요" onclick="update_rec($(boardVO.board_no))">
 		<input value="0" class="countUp">
 		<input type="button" value="싫어요" onclick="update_rec($(boardVO.board_no))">
 		<input value="0" class="countDown">
 	</span> -->
-	<form action="read" method="post">
+	<%-- <form action="read" method="post">
 	<input type="hidden" name="board_no" value="${boardVO.board_no }">
 		<span id="like">좋아요
 			<input name="distinction" type="text" value="0" class="countUp">
@@ -334,35 +341,39 @@
 		<span id="unlike">싫어요
 			<input name="distinction" type="text" value="0" class="countDown">
 		</span>
-	</form>
+	</form> --%>
 	
-	<h2>댓글</h2>
-
-	<div>
-		<div id="replyList">
-			<label>NO</label> <label>contents</label>
-			<ul id="replies">
-				<c:forEach var="replyVO" items="${replyVO }">
-					<input type="hidden" name="reply_no" value="${replyVO.reply_no }">
-	
-					<div class="reply_contents">
-						<div>${replyVO.reply_contents }</div>
-						<div>${replyVO.reply_regdate }</div>
-						<div>
-							<a name="replyDelete" onclick="reply_delete(${replyVO.reply_no})">삭제</a>
-						</div>
-					</div>
-
-				</c:forEach>
-			</ul>
-
+	<div class="reply">
+		<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<h2>댓글</h2>
 			
-
-			내용 <input type="text" name="reply_contents" id="replyContents" value="${replyVO.reply_contents }">
-
+				<div>
+					<div id="replyList">
+						<label>NO</label> <label>contents</label>
+						<form action="regist">
+							<input type="hidden" name="reply_no" value="${replyVO.reply_no }">
+								<ul id="replies">
+									<c:forEach var="replyVO" items="${replyVO }">
+										<div class="reply_contents">
+											<div>${replyVO.reply_contents }</div>
+											<div>${replyVO.reply_regdate }</div>
+											<div>
+												<a name="replyDelete" onclick="reply_delete(${replyVO.reply_no})">삭제</a>
+											</div>
+										</div>
+									</c:forEach>
+									
+								</ul>
+						</form>
+						내용 <input type="text" name="reply_contents" id="replyContents" value="${replyVO.reply_contents }">			
+					</div>
+			
+					<button id="replyAdd" onclick="reply_add()" class="btn btn-default">추가</button>
+				</div>
+			<div class="col-md-4"></div>	
 		</div>
-
-		<button id="replyAdd" onclick="reply_add()">추가</button>
 	</div>
+</div>	
 </body>
 </html>
