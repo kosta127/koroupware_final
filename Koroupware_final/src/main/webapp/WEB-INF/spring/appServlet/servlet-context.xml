@@ -36,7 +36,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 		<beans:property name="order" value="1" />
-	</beans:bean>
+	</beans:bean> 
 	
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
