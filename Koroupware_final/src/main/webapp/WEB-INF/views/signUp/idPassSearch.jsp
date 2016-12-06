@@ -223,7 +223,7 @@ input {
 						<span>이름</span>
 					</div>
 					<div class="col-md-9">
-						<input type="text" class="form-control">
+						<input type="text" name="emp_name" class="form-control">
 					</div>
 				</div>
 				<div class="col-md-12">
@@ -252,6 +252,8 @@ input {
 			</div>
 		</form>
 		<div class="col-md-1"></div>
+		
+		<form action="FindPwd" method="post">
 		<div class="col-md-5 right-form">
 			<div class="col-md-12 void-top-div"></div>
 			<div class="col-md-12 right-form-top-div">
@@ -259,7 +261,7 @@ input {
 					<span>아이디</span>
 				</div>
 				<div class="col-md-9">
-					<input type="text" class="form-control">
+					<input type="text" name ="emp_id" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-12">
@@ -267,7 +269,7 @@ input {
 					<span>이메일</span>
 				</div>
 				<div class="col-md-9">
-					<input type="text" class="form-control">
+					<input type="text" name="emp_email" class="form-control">
 				</div>
 				<div class="col-md-4"></div>
 				<div class="col-md-8 button-div">
@@ -277,6 +279,7 @@ input {
 				<div class="col-md-12 void-div"></div>
 			</div>
 		</div>
+		</form>
 		<div class="col-md-6"></div>
 		<div class="col-md-6">
 			<div class="col-md-12 other-button-div">

@@ -10,9 +10,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.service.MemberService;
@@ -45,8 +47,10 @@ public class MemberController {
 		System.out.println("처음 입력한 주민"+emp.getEmp_residentNum_left());
 		System.out.println("두번째 입력한 주민"+emp.getEmp_residentNum_right());
 		emp.setEmp_residentnumber(emp.getEmp_residentNum_left()+emp.getEmp_residentNum_right());
+		emp.setEmp_name(emp.getEmp_name());
 		System.out.println("최종 입력한 주민"+emp.getEmp_residentnumber());
 		String emp_id = service.findId(emp);
+		System.out.println("서비스에서 디비에 가지고온 값을 가지고 있는가?? : "+emp_id );
 		model.addAttribute("emp_id", emp_id);
 
 		return "member/findIdResult";
@@ -56,27 +60,11 @@ public class MemberController {
 	/* 아이디 & 비밀번호 찾기 --> 비밀번호 찾기 컨트롤*/
 	@RequestMapping(value = "/FindPwd", method = RequestMethod.POST)
 	public String findUserPwdPost(EmpVO empVO, Model model) throws Exception {
+		System.out.println("사원의 이메일 : "+ empVO.getEmp_email());
+		System.out.println("사원의 아이디 : "+ empVO.getEmp_id());
 		int emp_no = service.findNo(empVO);
 		model.addAttribute("empVO_no", emp_no);
-
-		return "redirect:/member/email";
-	}
-
-	/* 비밀번호 찾기 후 --> smtp메일 전송을 위한 사용자 이메일 찾기 컨트롤 */
-	@RequestMapping(value = "/email", method = RequestMethod.GET)
-	public String sendMail(@RequestParam int empVO_no, Model model) {
-		EmpVO vo = service.findEmail(empVO_no);
-		String email = vo.getEmp_email();
-		model.addAttribute("email", email);
-		return "redirect:/member/randPwd";
-	}
-	
-	
-	/* 찾은 이메일로 smtp+임시비밀번호 전송 컨트롤 */
-	@RequestMapping(value="/randPwd",  method = RequestMethod.GET)
-	public String randPwd(@RequestParam String email, Model model){
-		EmpVO vo = new EmpVO();
-		vo.setEmp_email(email);
+		System.out.println("출력한 사원 번호는??? :: "+emp_no);
 		
 		String randomChar = null;
 		String Array[];
@@ -202,15 +190,16 @@ public class MemberController {
 		}
 		String value = Array[0] + Array[1] + Array[2] + Array[3] + Array[4] + Array[5] + Array[6] + Array[7];
 		
-		vo.setEmp_password(value);
-		service.updatePwd(vo);
+		empVO.setEmp_password(value);
+		empVO.setEmp_no(emp_no);
+		service.updatePwd(empVO);
 	
 		
 		// smtp메일 전송하기
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-			messageHelper.setTo(email);
+			messageHelper.setTo(empVO.getEmp_email());
 			messageHelper.setText(value);
 			messageHelper.setFrom(from);
 			messageHelper.setSubject(subject);	
@@ -220,8 +209,8 @@ public class MemberController {
 			System.out.println(e);
 		}
 		
-		model.addAttribute("email", email);
+		model.addAttribute("email", empVO.getEmp_email());
 		return "/member/findPwdResult";
-		
 	}
+
 }

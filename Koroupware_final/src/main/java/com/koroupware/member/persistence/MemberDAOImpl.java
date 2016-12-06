@@ -21,13 +21,16 @@ public class MemberDAOImpl implements MemberDAO {
 	//아이디 찾기 다오
 	@Override
 	public List FindId_ListEmp(EmpVO empVO) throws Exception {
+		System.out.println("다오에 이름이 들어갔는가??? : "+empVO.getEmp_name());
+		System.out.println("다오에 주민번호가 들어갔는가??? : "+empVO.getEmp_residentnumber());
 		return sqlSession.selectList(namespace + ".FindId_ListEmp", empVO);
 	}
 	
 	// 회원 번호 찾기 다오
 	@Override
 	public List FindNo_ListEmp(EmpVO empVO) throws Exception {
-
+		System.out.println("다오에 아이디 들어갔는가??? : "+empVO.getEmp_id());
+		System.out.println("다오에 이메일ㅣ 들어갔는가??? : "+empVO.getEmp_email());
 		return sqlSession.selectList(namespace + ".FindNo_ListEmp", empVO);
 	}
 

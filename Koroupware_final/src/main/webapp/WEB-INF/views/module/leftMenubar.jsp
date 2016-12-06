@@ -91,7 +91,9 @@ function webrtc() {
           <li class="sidebar-blue"><a href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>    
            <li class="sidebar-red"><a onclick="webrtc()">화상회의</a></li>
           <li class="sidebar-green"><a href="http://localhost:8082/imageroom/lobby?emp_no=${login.emp_no}">그림회의</a></li>
-          <li class="sidebar-orange"><a href="">이메일</a></li>                           
+          <li class="sidebar-orange"><a href="">이메일</a></li>
+          <li class="sidebar-blue"><a href="/attend/attendList/${login.emp_no}">출석확인</a></li>
+			<li class="sidebar-red"><a href="/estimate/est_do">인사평가</a></li>                            
 		</ul>
       </div>
       <div class="col-md-12 sidebar-center-void"></div>
