@@ -18,7 +18,7 @@
 <body>
 <h1>인사평가</h1>
 <div class="col-md-6">
-		<form action="/estimate/attendCount/" method="post">
+		<form action="/estimate/estimate_output/" method="get">
 			<div class="col-md-12 header-est-div">
 				<div class="col-md-4 header-est">
 				
@@ -31,7 +31,7 @@
 				</div>
 				<div class="col-md-2">
 				<input type="submit" class="btn btn-primary" value="출석 평가">
-				</div>
+				</div>	 
 			</div>
 				</form>
 		</div>
