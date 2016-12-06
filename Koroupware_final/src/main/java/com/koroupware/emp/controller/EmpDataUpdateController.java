@@ -73,7 +73,7 @@ public class EmpDataUpdateController {
 
             HttpHeaders headers = new HttpHeaders();
 
-            in = new FileInputStream(uploadPath + fileName);
+            in = new FileInputStream(uploadPath + "\\" + fileName);
 
             if (mType != null) {
                headers.setContentType(mType);
