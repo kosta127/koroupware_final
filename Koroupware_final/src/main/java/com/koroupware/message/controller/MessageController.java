@@ -1,5 +1,6 @@
 package com.koroupware.message.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,16 +36,26 @@ public class MessageController {
 	}
 	@RequestMapping(value="messageRegist/{emp_no}",method=RequestMethod.POST)
 	public String messageRegistPOST(@PathVariable("emp_no") int emp_no,MessageVO vo,
-			@RequestParam("message_receiver_no") int message_receiver_no,Model model){
-		String receiver_name = service.receiver_nameGet(message_receiver_no);
+			@RequestParam("message_receiver_no") int[] message_receiver_no,Model model){
+		List<String> receiver_name_list = new ArrayList<String>();
+		for(int i=0;i<message_receiver_no.length;i++){
+			receiver_name_list.add(service.receiver_nameGet(message_receiver_no[i]));
+			System.out.println(message_receiver_no[i]);
+		}
 		String sender_name = service.sender_nameGet(emp_no);
-		vo.setMessage_receiver_name(receiver_name);
-		vo.setMessage_sender_no(emp_no);
-		vo.setMessage_sender_name(sender_name);
-		model.addAttribute("message_receiver_no",message_receiver_no);
-		model.addAttribute("receiver_name",receiver_name);
-		model.addAttribute("emp_no",emp_no);
-		service.messageRegist(vo);
+		for(int i=0;i<receiver_name_list.size();i++){
+			vo.setMessage_receiver_name(receiver_name_list.get(i));
+			vo.setMessage_sender_no(emp_no);
+			vo.setMessage_sender_name(sender_name);
+			vo.setMessage_receiver_no(message_receiver_no[i]);
+			service.messageRegist(vo);
+		}
+		
+		
+		//model.addAttribute("message_receiver_no",message_receiver_no);
+		//model.addAttribute("receiver_name",receiver_name);
+		//model.addAttribute("emp_no",emp_no);
+		
 		
 		
 		return "/message/messageRegist";
@@ -103,4 +114,24 @@ public class MessageController {
 		return "redirect:/message/sendedmessageList/"+emp_no;
 	}
 	
+	@RequestMapping(value="receivedmessageRead/{message_no}", method=RequestMethod.GET)
+	public String receivedmessageRead(@PathVariable("message_no") int message_no,Model model){
+		MessageVO vo = service.messageRead(message_no);
+	
+		vo.setMessage_sender_name(service.sender_nameGet(vo.getMessage_sender_no()));
+		model.addAttribute("messageVO",vo);
+	
+		return "/message/receivedmessageRead";
+	}
+	
+	@RequestMapping(value="sendedmessageRead/{message_no}", method=RequestMethod.GET)
+	public String messageRead(@PathVariable("message_no") int message_no,Model model){
+		System.out.println("check");
+		MessageVO vo = service.messageRead(message_no);
+		
+		vo.setMessage_receiver_name(service.receiver_nameGet(vo.getMessage_receiver_no()));
+		model.addAttribute("messageVO",vo);
+		System.out.println(vo);
+		return "/message/sendedmessageRead";
+	}
 }

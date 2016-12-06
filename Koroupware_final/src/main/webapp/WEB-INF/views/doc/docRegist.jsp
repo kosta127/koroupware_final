@@ -17,7 +17,13 @@
     <link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.css"/>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i' rel='stylesheet' type='text/css'>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script id="template" type="text/x-handlebars-template">
 <li>
   <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
@@ -125,27 +131,43 @@
 		background-color: lightslategrey;
 		margin: auto;
 	}
+	.text {
+		margin-left: 150px;
+	}
+	form{
+		margin-top:  50px;
+	}
+	.button{
+		margin-left: 100px;
+	}
 </style>
 </head>
 <body>
-		<h1>문서 등록</h1>
+		
 		<form id="registerForm" action="/doc/docRegist/${doc_box_no}/${emp_no}" method="post"
 			enctype="multipart/form-data">
+		 <div class="row">
+		  <div class="col-sm-3 text">	 
+		문서명 : <input type="text" name="doc_title" class="form-control"><br>
+		문서설명: <input type="text" name="doc_explain" class="form-control"><br>
+		문서내용 : <input type="text" name="doc_contents" class="form-control"><br>
+		보존년한 : <input type="text" name="doc_con_period" class="form-control"><br>
+		문서양식 : <input type="text" name="doc_formYN" class="form-control"><br>
+		</div>
+		</div>
+		 
 		
-		문서명 : <input type="text" name="doc_title"><br>
-		문서설명: <input type="text" name="doc_explain"><br>
-		문서내용 : <input type="text" name="doc_contents"><br>
-		보존년한 : <input type="text" name="doc_con_period"><br>
-		문서양식 : <input type="text" name="doc_formYN"><br>
 		
 		
 		<div class="fileDrop"></div>
 		
 		<ul class="uploadedList">
 		</ul>
+		<div class="button">
+		<input type="submit" value="등록" class="btn btn-default">
+		<input type="button" value="돌아가기" onclick="fn_back()" class="btn btn-default">
+		</div>
 		
-		<input type="submit" value="등록">
-		<input type="button" value="돌아가기" onclick="fn_back()">
 		
 		
 		</form>

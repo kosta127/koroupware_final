@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,31 +12,27 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+<script src="/resources/jquery-1.9.1/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 	function fn_back(){
-		history.back(-1);
+		history.go(-1);
 	}
 </script>
-
-<title>Insert title here</title>
 </head>
 <body>
-		
-			<form action="/doc/docUpdate/${doc_no}/${doc_box_no}/${emp_no}" method="post">
-				 <div class="row">
-		  		<div class="col-sm-3 text">
-				문서명 : <input type="text" name="doc_title" class="form-control"><br>
-				문서설명 : <input type="text" name="doc_explain" class="form-control"><br>
-				문서내용 : <input type="text" name="doc_contents" class="form-control"><br>
-				보존년한 : <input type="text" name="doc_con_period" class="form-control"><br>
-				문서양식 : <input type="text" name="doc_formYN" class="form-control"><br>
-				<br>
-				</div>
-				</div>
-				<input type="submit" value="수정" class="btn btn-default">
-				<input type="button" value="돌아가기" class="btn btn-default" onclick="fn_back()">
-			</form>
-		
+	<div>
+		<label>받은 사람</label>&nbsp;&nbsp;
+		<label>${messageVO.message_receiver_name}</label>
+		<br>
+		<label>보낸 시간</label>&nbsp;&nbsp;
+		<label>${messageVO.message_senddate}</label>
+	</div>
+	<hr>
+	<div>
+		${messageVO.message_contents}
+	</div>
+	
+	<input type="button" value="보낸 쪽지함" onclick="fn_back()" class="btn btn-default">
 	
 </body>
 </html>
