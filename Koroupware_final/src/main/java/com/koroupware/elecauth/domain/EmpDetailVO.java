@@ -1,9 +1,8 @@
 package com.koroupware.elecauth.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-public class EmpDetailVO implements Serializable{
+public class EmpDetailVO{
 	private int emp_no;
 	private String emp_name;
 	private int dept_no;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.ParseConversionEvent;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koroupware.elecauth.domain.ElecauthReadVO;
+import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
+import com.koroupware.elecauth.domain.ElecauthDeleteVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthVO;
 import com.koroupware.elecauth.domain.EmpDetailVO;
@@ -23,6 +24,7 @@ import com.koroupware.elecauth.dto.ElecauthDTO;
 import com.koroupware.elecauth.domain.ElecauthReadApprovalVO;
 import com.koroupware.elecauth.domain.ElecauthReadReferrerVO;
 import com.koroupware.elecauth.service.ElecauthService;
+import com.koroupware.member.dto.EmpDTO;
 
 @Controller
 @RequestMapping("/elecauth")
@@ -31,9 +33,30 @@ public class ElecauthController {
 	@Inject
 	private ElecauthService service;
 	
-	@RequestMapping(value="/elecauthList", method=RequestMethod.GET)
-	public String elecauthList(Model model)throws Exception{
-		List<ElecauthListVO> elecauthList=service.elecauthList();
+	@RequestMapping(value="/elecauthList")
+	public String elecauthList(Model model, HttpSession session, HttpServletRequest request,
+			 @RequestParam(value="kind", required=false) String kindFlag, 
+			 @RequestParam(value="receive", required=false) String receiveFlag)throws Exception{
+		
+		System.out.println("kind -> "+kindFlag );
+		System.out.println("receive -> "+receiveFlag);
+		
+		//default
+		if(kindFlag==null){
+			kindFlag = "wait";
+		}
+		if(receiveFlag==null){
+			receiveFlag = "ok";
+		}
+		
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		int emp_no = dto.getEmp_no();		
+		
+		List<ElecauthListVO> elecauthList = 
+				service.elecauthList(emp_no, receiveFlag.equals("ok"), kindFlag);
+
+		model.addAttribute("kind", kindFlag);
+		model.addAttribute("receive", receiveFlag);
 		model.addAttribute("elecauthList", elecauthList);
 		
 		return "/elecauth/elecauthList";
@@ -59,13 +82,15 @@ public class ElecauthController {
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
-	public String registGET(Model model) throws Exception{
+	public String registGET(Model model, HttpSession session) throws Exception{
 		//added by jirung
-		
 		//양식으로 쓸 문서 목록
 		model.addAttribute("docFormList", service.docListSelect());
-		//@@ TEMP @@ 원래는 세션같은곳에서 가져와야 한는 정보 : 사원정보
-		model.addAttribute("empDetail", service.empDetailRead(4));
+		
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		int emp_no = dto.getEmp_no();	
+		
+		model.addAttribute("empDetail", service.empDetailRead(emp_no));
 		
 		return "/elecauth/elecauthRegist";
 	}
@@ -92,23 +117,31 @@ public class ElecauthController {
 	}
 	
 	//삭제처리하기 by moonyong
-	@RequestMapping(value="/elecauthDelete/{elec_auth_no}")
-	public String elecauthDelete(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
-		service.elecauthDelete(elec_auth_no);
+	@RequestMapping(value="/elecauthDelete")
+	public String elecauthDelete(@RequestParam("elec_auth_no") int elec_auth_no,
+			@RequestParam("emp_no") int emp_no)throws Exception{
+		ElecauthDeleteVO elecauthDelete=new ElecauthDeleteVO(elec_auth_no, emp_no);
+		service.elecauthDelete(elecauthDelete);
 		
 		return "redirect:/elecauth/elecauthList";
 	}
 	
 	//승인처리하기 by moonyong
 	@RequestMapping(value="/elecauthOkReport")
-	public String elecauthOkReport(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
-
+	public String elecauthOkReport(@RequestParam("elec_auth_no") int elec_auth_no,
+			@RequestParam("emp_no") int emp_no)throws Exception{
+		ApprovalPrimaryVO elecauthOkReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
+		service.elecauthOkReport(elecauthOkReport);
 		
 		return "redirect:/elecauth/elecauthList";
 	}
 	
 	//거부처리하기 by moonyong
-	public String elecauthNoReport(@PathVariable("elec_auth_no") int elec_auth_no)throws Exception{
+	@RequestMapping(value="/elecauthNoReport")
+	public String elecauthNoReport(@RequestParam("elec_auth_no") int elec_auth_no,
+			@RequestParam("emp_no") int emp_no)throws Exception{
+		ApprovalPrimaryVO elecauthNoReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
+		service.elecauthNoReport(elecauthNoReport);
 		
 		return "redirect:/elecauth/elecauthList";
 	}

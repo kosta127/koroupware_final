@@ -9,7 +9,7 @@ function webrtc() {
    window.open("http://localhost:8082/webrtc", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=10000,width=400,height=400");
 }
 </script>
-<style type="text/css">
+<style type="text/css">	
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 .nav-sidebar .sidebar-blue a { 
     cursor: default;
@@ -76,7 +76,8 @@ function webrtc() {
 
 .sidebar-center-void{
 	margin-top: 30px;
-	margin-bottom: 30px
+	margin-bottom: 200px;
+	
 }
 
 </style>

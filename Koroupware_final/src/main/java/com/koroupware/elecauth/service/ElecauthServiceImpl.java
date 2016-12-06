@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
-import com.koroupware.doc.domain.DocVO;
+import com.koroupware.elecauth.domain.ElecauthDocVO;
+import com.koroupware.elecauth.domain.ElecauthDeleteVO;
+import com.koroupware.elecauth.domain.ElecauthListCond;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
 import com.koroupware.elecauth.domain.ElecauthReferrerVO;
@@ -26,9 +28,8 @@ public class ElecauthServiceImpl implements ElecauthService {
 	private ElecauthDAO dao;
 
 	@Override
-	public List<ElecauthListVO> elecauthList() throws Exception {
-		
-		return dao.elecauthList();
+	public List<ElecauthListVO> elecauthList(int emp_no, boolean isReceive, String flag) throws Exception {
+		return dao.elecauthList(new ElecauthListCond(emp_no, isReceive, flag));
 	}
 
 	@Override
@@ -49,17 +50,23 @@ public class ElecauthServiceImpl implements ElecauthService {
 		return dao.elecauthReadReferrer(elec_auth_no);
 	}
 
-	@Transactional
 	@Override
+	@Transactional
 	public void elecauthRegist(ElecauthVO ea, List<ApprovalListVO> approvals, List<ElecauthReferrerVO> referrers)
 			throws Exception {
 		// 전자 결재 등록
 		// added by jirung
+		int elecauthNo = getElecauthNo();
+		ea.setElec_auth_no(elecauthNo);
 		dao.elecauthInsert(ea);
-		for(ApprovalListVO al : approvals) 
+		for(ApprovalListVO al : approvals){
+			al.setElec_auth_no(elecauthNo);
 			dao.approvalListInsert(al);
-		for(ElecauthReferrerVO ref : referrers) 
+		}
+		for(ElecauthReferrerVO ref : referrers) {
+			ref.setElec_auth_no(elecauthNo);
 			dao.elecauthReferrerInsert(ref);
+		}
 	}
 
 	@Override
@@ -70,7 +77,7 @@ public class ElecauthServiceImpl implements ElecauthService {
 	}
 
 	@Override
-	public List<DocVO> docListSelect() throws Exception {
+	public List<ElecauthDocVO> docListSelect() throws Exception {
 		// 양식으로 쓸 문서 목록 조회
 		return dao.docListSelect();
 	}
@@ -82,9 +89,9 @@ public class ElecauthServiceImpl implements ElecauthService {
 	}
 
 	@Override
-	public void elecauthDelete(int elec_auth_no) throws Exception {
+	public void elecauthDelete(ElecauthDeleteVO elecauthDelete) throws Exception {
 		//전자결재 삭제
-		dao.elecauthDelete(elec_auth_no);
+		dao.elecauthDelete(elecauthDelete);
 	}
 
 	@Override
@@ -97,6 +104,11 @@ public class ElecauthServiceImpl implements ElecauthService {
 	public void elecauthNoReport(ApprovalPrimaryVO elecauthNoReport) throws Exception {
 		// 전자결재 거절
 		dao.elecauthNoReport(elecauthNoReport);
+	}
+
+	@Override
+	public int getElecauthNo() throws Exception {
+		return dao.getElecauthNo();
 	}
 	
 	

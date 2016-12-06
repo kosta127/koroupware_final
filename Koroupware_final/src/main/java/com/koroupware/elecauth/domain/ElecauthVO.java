@@ -1,13 +1,12 @@
 package com.koroupware.elecauth.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.koroupware.elecauth.dto.ElecauthDTO;
 
-public class ElecauthVO implements Serializable {
+public class ElecauthVO{
 	private int elec_auth_no;
 	private int emp_no;
 	private int doc_no;

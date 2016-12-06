@@ -164,6 +164,11 @@ font-family: 'Noto Sans KR', sans-serif;
 .update-button{
  font-family: 'Noto Sans KR', sans-serif; 
 }
+.header-emp-img{
+	width: 60px;
+	height: 60px;
+	margin-top: -17px;
+}
 </style>
 <body>
 <div class="col-md-1 main-font">
@@ -191,7 +196,7 @@ font-family: 'Noto Sans KR', sans-serif;
 <div class="col-md-4">
 <div class="col-md-3"></div>
 <div class="col-md-3 emp_img">
-<span class="header-emp-img block">${login.emp_img }</span>
+<img class="header-emp-img block img-rounded" src="/displayFile?fileName=${login.emp_img}"/>
 </div>
 <div class="col-md-3 emp_name">
 <a href="/empDataUpdate?emp_no=${login.emp_no }"><span class="header-emp-name block">${login.emp_name }</span></a>
