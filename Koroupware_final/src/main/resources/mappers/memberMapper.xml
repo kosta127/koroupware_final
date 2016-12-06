@@ -5,11 +5,11 @@
 
 <mapper namespace="com.koroupware.member.mapper.memberMapper">
 	<select id = "FindId_ListEmp" resultType="EmpVO">
-		select emp_id, emp_residentnumber from emp 
+		select emp_id, emp_residentnumber, emp_name from emp 
 	</select>
 	
 	<select id="FindNo_ListEmp" resultType="EmpVO">
-		select emp_id, emp_residentnumber, emp_no from emp
+		select emp_id, emp_email, emp_no from emp
 	</select>
 	
  	<select id="login" resultType="EmpDTO">
@@ -18,12 +18,12 @@
  	</select>
  	
  	<select id="find_Email" resultType="EmpVO">
- 		select emp_email from emp
+ 		select emp_email, emp_no from emp
  			where emp_no = #{emp_no}
  	</select>
  	
  	<update id="updatePwd">
- 		UPDATE emp SET EMP_PASSWORD = #{emp_password} where EMP_EMAIL= #{emp_email}
+ 		UPDATE emp SET EMP_PASSWORD = #{emp_password} where EMP_EMAIL= #{emp_email} and emp_no=#{emp_no}
  	</update>
 
 </mapper>

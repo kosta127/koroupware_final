@@ -97,6 +97,8 @@ function webrtc() {
 				href="http://localhost:8082/imageroom/lobby?emp_no=${login.emp_no}">그림회의</a></li>
 			<li class="sidebar-orange"><a href="">이메일</a></li>
 			<li class="sidebar-blue"><a href="/schedule/view">일정</a></li>
+			<li class="sidebar-red"><a href="/attend/attendList/${login.emp_no}">출석확인</a></li>
+			<li class="sidebar-green"><a href="/estimate/est_do">인사평가</a></li>      
 		</ul>
 	</div>
 	<div class="col-md-12 sidebar-center-void"></div>

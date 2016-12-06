@@ -1,8 +1,9 @@
 package com.koroupware.search.domain;
 
 import com.koroupware.board.domain.Criteria;
+import com.koroupware.board.domain.SearchCriteria;
 
-public class SearchVO extends Criteria{
+public class SearchVO extends SearchCriteria{
 	private String keyField;
 	private String search_content;
 	public String getKeyField() {

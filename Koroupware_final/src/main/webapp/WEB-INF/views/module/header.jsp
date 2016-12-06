@@ -4,11 +4,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
 <script type="text/javascript">
-function logout() {
-	   location.href='/logout';
-   }
+	function logout() {
+		location.href = '/logout';
+	}
+	function attendList() {
+		var emp_no = document.getElementById("hidden").value;
+		location.href = "/attend/attendList/" + emp_no;
+	}
+
+	/* 출석 에이작스 */
+	function attend() {
+		alert(document.getElementById("hidden").value);
+		var emp_no = document.getElementById("hidden").value;
+		/* location.href = '/attend/attendStart/'+emp_no; */
+		$.ajax({
+			url : '/attend/attendStart/' + emp_no, //컨트롤러 갈 주소   ... 화면은 그데로 + 혼자 가서 컨토롤로 감
+			type : 'get',
+			dataType : 'text', //받을 값 : 제이손 -> json / String : text / ... 기타 등등이 있음
+			success : check, //받을 값까지 다 성공 했을 때 이동 할 함수(그 함수는 파라메터로 data를 자동으로 가지고 옴)
+			async : false
+		//(기본은 true) false -> 동기, true -> 비동기   [비동기 :: 한번 수행, 동기 :: 내가 정한코딩데로 수행]
+		});
+
+	}
+
+	function check(data) {
+		if (data == "already") {
+			alert("이미 출석 했습니다.");
+		} else if (data == "attend") {
+			alert("정상 출근");
+		} else if (data == "late") {
+			alert("지각");
+		} else if (data = "restday") {
+			alert("주말");
+		}
+
+	}
 </script>
 <style>
 .main-font{
@@ -170,6 +202,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	margin-top: -17px;
 }
 </style>
+</head>
 <body>
 <div class="col-md-1 main-font">
 <a href="/main" class="hidden-xs hidden-sm">
@@ -181,23 +214,34 @@ font-family: 'Noto Sans KR', sans-serif;
 </div>
 <div class="col-md-1"></div>
 <div class="col-md-6">
-<div class="col-md-12 header-search-div">
-<div class="col-md-4 header-search">
-   <span class="header-search-span">회원/부서 검색</span>
-  </div>    
-      <div class="col-md-6">
-      <input type="text" class="form-control search-text">
-      </div>
-      <div class="col-md-2">
-      <button class="btn btn-block search-button"><i class="glyphicon glyphicon-search"></i></button>
-      </div>
-</div>      
-</div>
+		<form action="/search/search" method="post">
+			<div class="col-md-12 header-search-div">
+				<div class="col-md-4 header-search">
+					<span class="header-search-span">회원/부서 검색</span>
+					<select name="keyField">
+					<option value="emp_name">사원</option>
+					<option value="doc_name">문서</option>
+				</select>
+				</div>
+				
+				<div class="col-md-6">
+					<input type="text" class="form-control search-text" name="search_content">
+				</div>
+				<div class="col-md-2">
+					<input type="submit" class="btn btn-block search-button"><i
+						class="glyphicon glyphicon-search"><input type="button" class="btn btn-info" onclick="attend()" value="출석체크"></i>
+						
+				</div>
+			</div>
+				</form>
+				
+		</div>
 <div class="col-md-4">
 <div class="col-md-3"></div>
 <div class="col-md-3 emp_img">
 <img class="header-emp-img block img-rounded" src="/displayFile?fileName=${login.emp_img}"/>
 </div>
+<input id="hidden" type="hidden" value=${login.emp_no }>
 <div class="col-md-3 emp_name">
 <a href="/empDataUpdate?emp_no=${login.emp_no }"><span class="header-emp-name block">${login.emp_name }</span></a>
 </div>
