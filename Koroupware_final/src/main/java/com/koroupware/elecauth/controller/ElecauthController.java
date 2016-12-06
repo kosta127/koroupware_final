@@ -133,7 +133,7 @@ public class ElecauthController {
 		ApprovalPrimaryVO elecauthOkReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
 		service.elecauthOkReport(elecauthOkReport);
 		
-		return "/elecauth/elecauthList";
+		return "redirect:/elecauth/elecauthList";
 	}
 	
 	//거부처리하기 by moonyong
@@ -143,7 +143,7 @@ public class ElecauthController {
 		ApprovalPrimaryVO elecauthNoReport=new ApprovalPrimaryVO(elec_auth_no, emp_no);
 		service.elecauthNoReport(elecauthNoReport);
 		
-		return "/elecauth/elecauthList";
+		return "redirect:/elecauth/elecauthList";
 	}
 	
 	
