@@ -32,51 +32,51 @@
 
 						});
 
-				/* $('#newBtn').on("click", function(evt) {
+				$('#newBtn').on("click", function(evt) {
 
 					self.location = "regist";
 
-				}); */
+				}); 
 
 			});
 </script>
 </head>
 <body>
+	<br><br>                        
 	<h1>게시판</h1>
+	<br><br>   
+	<form action="list">
+	<input type="hidden" value="${category_no }" name="category_no">
+		<div class='box-body'>
+			<div class="col-xs-2">
+				<select name="searchType" class="form-control">
+					<option value="n"
+						<c:out value="${cri.searchType == null?'selected':''}"/>>
+						---</option>
+					<option value="t"
+						<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+						Title</option>
+					<option value="c"
+						<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+						Content</option>
+					<option value="tc"
+						<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
+						Title OR Content</option>
+				</select> 
+			</div>
+			<div class="col-xs-2">
+				<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }' class="form-control">
+			</div>
+			<div class="col-xs-2">
+				<button id='searchBtn' class="btn btn-default">검색</button>
+			</div>
+		</div>
+	</form>	
+	  
 	<form action="regist" method="get">
 	<input type="hidden" value="${category_no }" name="category_no">
-		
-	<div class='box-body'>
-		
-			<select name="searchType">
-				<option value="n"
-					<c:out value="${cri.searchType == null?'selected':''}"/>>
-					---</option>
-				<option value="t"
-					<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-					Title</option>
-				<option value="c"
-					<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-					Content</option>
-				<option value="w"
-					<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
-					Writer</option>
-				<option value="tc"
-					<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-					Title OR Content</option>
-				<option value="cw"
-					<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
-					Content OR Writer</option>
-				<option value="tcw"
-					<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-					Title OR Content OR Writer</option>
-			</select> <input type="text" name='keyword' id="keywordInput"
-				value='${cri.keyword }'>
-			<button id='searchBtn'>검색</button>
-			<button id='newBtn'>게시판 생성</button>
-		
-	</div>
-	<table>
+	<br><br><br>
+	<table class="table table-bordered table-hover">
 		<tr height="30">
 			<td width="50" align="center">NO</td>
 			<td width="300" align="center">제목</td>
@@ -98,7 +98,7 @@
 
 		</c:forEach>
 	</table>
-
+	<button id='newBtn' class="btn btn-default">게시판 생성</button>
 	<!-- 페이징처리 -->
 	<div class="box-footer">
 

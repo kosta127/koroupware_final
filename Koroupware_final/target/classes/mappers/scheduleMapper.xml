@@ -18,8 +18,8 @@
 	</select>
 	
 	<select id="listSchedule" resultType="ScheduleVO">
-		select * from schedule s
-			where emp_no = #{emp_no}
+		select * from schedule
+			and emp_no = #{emp_no}
 			and schedule_start = #{schedule_start}
 	</select>
 </mapper>  

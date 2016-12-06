@@ -93,8 +93,7 @@ public class BoardController {
 	
 	@RequestMapping(value="/read", method=RequestMethod.GET)
 	public void detail(HttpSession session, @RequestParam("board_no") int board_no, 
-						@ModelAttribute("cri") SearchCriteria cri, Model model,
-						@RequestParam("distinction") String distinction)throws Exception{
+						@ModelAttribute("cri") SearchCriteria cri, Model model)throws Exception{
 		
 		EmpDTO emp = new EmpDTO();
 		
@@ -107,13 +106,13 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping(value="/read/{board_no}", method=RequestMethod.POST)
+	/*@RequestMapping(value="/read/{board_no}", method=RequestMethod.POST)
 	public String detailPOST(@RequestParam("board_no") int board_no, Model model)throws Exception{
 		service.recModifyCnt(board_no);
 	
 		
 		return "redirect:/board/list";
-	}
+	}*/
 	
 	@RequestMapping(value="/remove", method = {RequestMethod.GET, RequestMethod.POST})
 	public String remove(@RequestParam("board_no") int board_no, 

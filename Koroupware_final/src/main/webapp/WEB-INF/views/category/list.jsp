@@ -7,18 +7,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+.category-list-div{
+  padding-top: 5px;
+  height : 50px;
+  border-radius:15px;
+  box-shadow: 2px 2px 2px 2px lightgray; 
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+}
+li{
+  list-style: none;
+}
+.atag{
+   font-family: 'Noto Sans KR', sans-serif; 
+   font-size: 30px;
+} 
+#category_name{
+	margin-right: 20px;
+}
+.com-name:hover, #category_name:hover{
+ background-color: #fef763;
+ cursor: default;
+  text-decoration: none;
+  }
+</style>
 </head>
 
 <body>
 	<h1>카테고리</h1>
 	<form action="regist" method="get">
 	<input type="hidden" value="${community_no }" name="community_no">
-	<button id="createCategory">카테고리 생성</button>
+	<button id="createCategory" class="btn btn-default" style="color: #F9A825"><b>카테고리 생성</b></button>
 	<ul id="categories">
 		<c:forEach items="${list }" var="categoryVO">	
-			<div class="category_name">
-				<div><a href="../board/list?category_no=${categoryVO.category_no }">${categoryVO.category_name}</a></div>
+			<div id="category_name" class="nav-sidebar category-list-div col-md-5">
+				<li class="atag"><a class="com-name" href="../board/list?category_no=${categoryVO.category_no }">${categoryVO.category_name}</a></li>
 			</div>
 		</c:forEach>
 	</ul>

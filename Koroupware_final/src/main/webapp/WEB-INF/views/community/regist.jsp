@@ -59,7 +59,7 @@ $(document).ready(function(){
 		<tr height="10">
 			<td align="center">커뮤티니 명:</td>
 			<td>
-				<textarea cols="40" rows="1" name="community_name" id="communityName"></textarea>
+				<textarea cols="40" rows="1" name="community_name" id="communityName" class="form-control"></textarea>
 			</td>
 			<td colspan="4">
 				<input id="create" type="submit" value="생성" class="btn btn-primary">

@@ -17,12 +17,10 @@
 	<select id="listBoard" resultType="BoardDTO" parameterType="SearchCriteria">
 	<![CDATA[
 		select b.board_no, b.board_title, e.emp_name, b.board_regdate, b.board_hit 
-		from board b, category c, emp e 
+		from board b, category c, emp e where b.category_no = c.category_no and e.emp_no = b.emp_no
 	]]>
 		<include refid="search"></include>
 	<![CDATA[
-		where b.category_no = c.category_no 
-			and e.emp_no = b.emp_no
 			and b.board_no > 0 
 			and b.board_deldate is null 
 			and b.category_no = #{category_no} order by board_no desc
@@ -37,27 +35,12 @@
 			<if test="searchType == 't'.toString()">
 				and board_title like '%'|| #{keyword}||'%'
 			</if>
-		<!-- 	<if test="searchType == 'w'.toString()">
-				and board_writer like '%'|| #{keyword}||'%'
-			</if> -->
 			<if test="searchType == 'tc'.toString()">
 				and ( board_title like '%'|| #{keyword}||'%' OR board_contents like
 				'%'||
 				#{keyword}||'%')
 			</if>
-			<!-- <if test="searchType == 'cw'.toString()">
-				and ( content like '%'|| #{keyword}||'%' OR writer like
-				'%'||
-				#{keyword}||'%')
-			</if>
-			<if test="searchType == 'tcw'.toString()">
-				and ( title like '%'|| #{keyword}||'%'
-				OR
-				content like
-				'%'|| #{keyword}||'%'
-				OR
-				writer like '%'|| #{keyword}||'%')
-			</if> -->
+			
 		</if>
 	</sql>
 	

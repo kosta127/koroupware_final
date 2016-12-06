@@ -12,6 +12,7 @@ public class BoardDTO {
 	private int emp_no; 
 	private int category_no;
 	private String emp_name;
+	
 	public int getBoard_no() {
 		return board_no;
 	}

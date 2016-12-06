@@ -26,7 +26,6 @@ import com.koroupware.common.util.UploadFileUtils;
 
 
 @Controller
-@RequestMapping("/board")
 public class UploadController {
 
 	@Resource(name="uploadPath")

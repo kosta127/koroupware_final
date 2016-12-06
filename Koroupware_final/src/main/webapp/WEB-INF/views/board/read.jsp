@@ -29,6 +29,7 @@
 	function board_delete() {
 		location.href="remove?board_no=${boardVO.board_no}&page=${cri.page}&perPageNum=${cri.perPageNum}&category_no=${cri.category_no}";
 	}
+	
 	function reply_add(){
 		var replytextObj=$("#replyContents");
 		var reply_contents = $("#replyContents").val();
@@ -263,14 +264,33 @@
 .front {
 	z-index: 1110;
 	opacity: 1;
-	boarder: 1px;
 	margin: auto;
 }
+.able{
+ margin: 30px 0px 10px 10px;
+ box-shadow: 2px 2px 2px 2px lightgray; 
+}
 
-.show {
-	position: relative;
+.borders{
+ padding-top : 5px;
+ height:30px;
+ border-bottom: 1px solid gray;
+}
+.show { 
+	position: relative; 
 	max-width: 1200px;
 	max-height: 800px;
+	overflow: auto;
+}
+.read-span-right-margin{
+	margin-left: 50px;
+}
+.span-size{
+ 	width: 100px;
+}
+.read-content{
+	height: 400px;
+	padding: 10px;
 	overflow: auto;
 }
 </style>
@@ -278,12 +298,11 @@
 <body>
 <div class="table-responsive">
 	<div class="readTable">
-		<div class="col-md-4"></div>
 			<!-- <div class='popup back' style="display: none;"></div>
 			<div id="popup_front" class='popup front' style="display: none;">
 				<img id="popup_img">
 			</div> -->
-			<div class="col-md-4">
+			<div class="col-md-8">
 				<form method="post" action="modify">
 					<input type="hidden" name="board_no" value="${boardVO.board_no }">
 					<input type="hidden" name="page" value="${cri.page}">
@@ -293,26 +312,25 @@
 					<input type="hidden" name="category_no" value="${cri.category_no }">
 				</form>
 			
-				<table class="able table-bordered" border="1">
-					<tr height="30">
-						<td width="100" align="center">NO</td>
-						<td width="300">${boardVO.board_no }</td>
-					</tr>
-					<tr height="30">
-						<td width="100" align="center">제목</td>
-						<td width="300">${boardVO.board_title}</td>
-					</tr>
+				<div class="able table-bordered col-md-12">
+					<div class="borders">
+						<span class="col-md-3">NO</span>
+						<span class="read-span-right-margin">${boardVO.board_no }</span>
+					</div>
+					<div class="borders">
+						<span class="col-md-3">제목</span>
+						<span class="read-span-right-margin">${boardVO.board_title}</span>
+					</div>
+					<div class="borders">
+						<span class="col-md-3">작성날짜</span>
+						<span class="read-span-right-margin"><fmt:formatDate
+								value="${boardVO.board_regdate }" pattern="yyyy-MM-dd" /></span>
+					</div>
+					<div class="read-content">
+						<span class="col-md-10">${boardVO.board_contents }</span>
+					</div>
 			
-					<tr height="30">
-						<td width="100" align="center">작성날짜</td>
-						<td width="300"><fmt:formatDate
-								value="${boardVO.board_regdate }" pattern="yyyy-MM-dd" /></td>
-					</tr>
-					<tr height="30">
-						<td width="300" colspan="2">${boardVO.board_contents }</td>
-					</tr>
-			
-				</table>
+				</div>
 			
 				<ul class="mailbox-attachments clearfix uploadedList"></ul>
 			
@@ -345,7 +363,7 @@
 	
 	<div class="reply">
 		<div class="col-md-4"></div>
-			<div class="col-md-4">
+			<div class="col-md-8">
 				<h2>댓글</h2>
 			
 				<div>
@@ -366,7 +384,7 @@
 									
 								</ul>
 						</form>
-						내용 <input type="text" name="reply_contents" id="replyContents" value="${replyVO.reply_contents }">			
+						내용 <input type="text" name="reply_contents" id="replyContents" value="${replyVO.reply_contents }" class="form-control">			
 					</div>
 			
 					<button id="replyAdd" onclick="reply_add()" class="btn btn-default">추가</button>

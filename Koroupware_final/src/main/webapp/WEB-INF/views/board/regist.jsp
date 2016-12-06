@@ -133,7 +133,7 @@ $(document).ready(function(){
 
 <form action="regist" method="post">
 	<input type="hidden" value="${category_no }" name="category_no" id="category_no"/>
-	<table>
+	<table class="table table-bordered table-hover">
 		<tr>
 			<td width="70" align="center">작성자</td>
 			<td>
@@ -143,7 +143,7 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 			<td width="70" align="center">제목</td>
-			<td><input type="text" name="board_title" id="board_title"></td>
+			<td><input type="text" name="board_title" id="board_title" class="form-control"></td>
 		</tr>
 		<tr>
 			<td></td>

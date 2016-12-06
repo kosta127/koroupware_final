@@ -42,18 +42,18 @@
 	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
 	<input type="hidden" name="searchType" value="${cri.searchType}">
 	<input type="hidden" name="keyword" value="${cri.keyword}">
-	<table>
+	<table class="table table-bordered table-hover">
 		<tr>
 			<td>제목</td>
-			<td><input type="text" name="board_title"></td>
+			<td><input type="text" name="board_title" class="form-control"></td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><textarea rows="10" cols="5" name="board_contents"></textarea> </td>
+			<td><textarea rows="10" cols="5" name="board_contents" placeholder="내용 입력"></textarea> </td>
 		</tr>
 	</table>
-	<button type="submit" value="수정" onclick="modify_success()">수정</button>
-	<button type="submit" value="취소" onclick="modify_cancel">취소</button>
+	<button type="submit" value="수정" onclick="modify_success()" class="btn btn-default">수정</button>
+	<button type="submit" value="취소" onclick="modify_cancel" class="btn btn-default">취소</button>
 </form>
 </body>
 </html>

@@ -21,6 +21,6 @@ public interface BoardDAO {
 	public int getBoardNo()throws Exception;
 	public List<String> getAttach(int board_no)throws Exception;
 	public void deleteAttach(int board_no)throws Exception;
-	public void updateRecCnt(int board_no)throws Exception;
+	//public void updateRecCnt(int board_no)throws Exception;
 	
 }

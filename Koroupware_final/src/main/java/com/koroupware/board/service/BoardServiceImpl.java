@@ -60,7 +60,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO boardRead(int board_no) throws Exception {
 		dao.updateViewCnt(board_no);
-		dao.updateRecCnt(board_no);
+		//dao.updateRecCnt(board_no);
 		
 		return dao.boardSelect(board_no);
 	}
@@ -80,9 +80,9 @@ public class BoardServiceImpl implements BoardService {
 		return dao.getAttach(board_no);
 	}
 
-	@Override
+	/*@Override
 	public void recModifyCnt(int board_no) throws Exception {
 		dao.updateRecCnt(board_no);
-	}
+	}*/
 
 }

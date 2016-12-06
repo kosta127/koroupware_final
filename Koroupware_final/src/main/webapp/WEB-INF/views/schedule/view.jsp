@@ -18,63 +18,71 @@
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <!-- printTool -->
 <script src="/resources/printTool/jQuery.print.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 function monthDown(){
 	var setYear = $("#setYear").text();//2016
 	var setMonth = $("#setMonth").text();//12
 	
+	//숫자로 변환
 	var numYear = parseInt(setYear, 10);
 	var numMonth = parseInt(setMonth, 10);
-	
-	var year =${year};
-	var month=${month};
-	
-	var startDay = ${startDay};
-	var endDay = ${endDay};
-	var day = $("#day").text();
-	var numDay = parseInt(day, 10);
-	alert(startDay);
-	
-	for(var i=1;i<endDay;i++){
-		if((startDay-2+i)%7==0){
-			$("#day").text(numDay);
-		}else if((startDay-1+i)%7==0){
-			$("#day").text(numDay);
-		}else{
-			$("#day").text(numDay);
-		}
-	}
 	
 	numMonth--;
 	
 	if(numMonth<1){
-		numYear-=1
+		numYear-=1;
 		numMonth=12;
-		
-		year = numYear;
-		month = numMonth;
 	}
+	
 	$("#setYear").text(numYear);
 	$("#setMonth").text(numMonth);
+	
+	var startDay = ${startDay};//12월의 시작요일
+	var endDay = ${endDay};//12월의 끝날
+	
+	var numStart = parseInt(startDay, 10);
+	numStart = 
+	
+
+	alert(numStart);
+	
+	var day = $("#day").text();
+	var numDay = parseInt(day, 10);
+	
+	for(var i=1;i<endDay;i++){
+		if((startDay-2+i)%7==0){
+			i++;
+			$("#day").text(i);
+		}else if((startDay-1+i)%7==0){
+			i++;
+			$("#day").text(i);
+		}else{
+			i++;
+			$("#day").text(i);
+		}
+	}
+	 
 }
 function monthUp(){
 	var setYear = $("#setYear").text();//2016
 	var setMonth = $("#setMonth").text();//12
+	
 	var numYear = parseInt(setYear, 10);
 	var numMonth = parseInt(setMonth, 10);
 	
 	numMonth++;
 	
 	if(numMonth>12){
-		numYear+=1
+		numYear+=1;
 		numMonth=1;
 	}
 	$("#setYear").text(numYear);
 	$("#setMonth").text(numMonth);
 }
 
-</script>
+</script> -->
+
 </head>
 <body>
 <!-- 달력상단부분 -->
@@ -83,7 +91,7 @@ function monthUp(){
 <h1>${endDay }</h1>
 <h1>${year }</h1>
 <h1>${month }</h1>
-
+<h1>${schedule_start }</h1>
 
 
 <form action="view" method="get">
@@ -126,12 +134,12 @@ function monthUp(){
 				<c:choose>
 					<c:when test="${(startDay-2+day)%7==0}">
 						<td align="right">
-							<a href='<c:url value="regist/${year}/${month }/${day }/${schedule_start }"></c:url>'>
+							<a href='<c:url value="regist/${year}/${month}/${day}"></c:url>'>
 								<font color="red" id="day">${day }</font>
 							</a>	<br>
 							<c:forEach items="${list }" var="scheduleVO">
-								<input type="hidden" name="schedule_start" value="${scheduleVO.schedule_start }">
-									<c:if test="${scheduleVO.schedule_start == day }">
+								<input type="hidden" name="schedule_start" value="${schedule_start }">
+									<c:if test="${schedule_start ==day}">
 										<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>
 									</c:if>
 							</c:forEach>
@@ -139,18 +147,18 @@ function monthUp(){
 					</c:when>
 					<c:when test="${(startDay-1+day)%7==0}">
 						<td align="right">
-							<a href='<c:url value="regist/${year}/${month }/${day }"></c:url>'>
+							<a href='<c:url value="regist/${year}/${month}/${day}"></c:url>'>
 								<font color="blue" id="day">${day }</font>
 							</a><br>
 							<c:forEach items="${list }" var="scheduleVO">
 								<input type="hidden" name="schedule_start" value="${scheduleVO.schedule_start }">
 									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>		
-							</c:forEach>
+							</c:forEach> 
 						</td>
 					</c:when>
 					<c:otherwise>
 						<td align="right" id="day">
-							<a href='<c:url value="regist/${year}/${month }/${day }"></c:url>'>${day }</a><br>
+							<a href='<c:url value="regist/${year}/${month}/${day}"></c:url>'>${day }</a><br>
 							<c:forEach items="${list }" var="scheduleVO">
 								<input type="hidden" name="schedule_start" value="${scheduleVO.schedule_start }">
 									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>

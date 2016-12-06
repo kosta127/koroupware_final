@@ -1,7 +1,9 @@
-package com.koroupware.elecauth.domain;
+package com.koroupware.doc.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
+
 
 
 public class DocVO implements Serializable{
@@ -13,7 +15,16 @@ public class DocVO implements Serializable{
 	private int emp_no;
 	private String doc_formYN;
 	private Date doc_deldate;
+	private String[] files;
 	
+	
+	
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	public Date getDoc_deldate() {
 		return doc_deldate;
 	}
@@ -64,8 +75,10 @@ public class DocVO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Doc [doc_no=" + doc_no + ", doc_title=" + doc_title + ", doc_explain=" + doc_explain + ", doc_contents="
-				+ doc_contents + ", doc_con_period=" + doc_con_period + ", emp_no=" + emp_no + ", doc_formYN="
-				+ doc_formYN + "]";
+		return "DocVO [doc_no=" + doc_no + ", doc_title=" + doc_title + ", doc_explain=" + doc_explain
+				+ ", doc_contents=" + doc_contents + ", doc_con_period=" + doc_con_period + ", emp_no=" + emp_no
+				+ ", doc_formYN=" + doc_formYN + ", doc_deldate=" + doc_deldate + ", files=" + Arrays.toString(files)
+				+ "]";
 	}
+	
 }

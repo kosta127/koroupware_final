@@ -27,6 +27,7 @@
 		<beans:constructor-arg value="C://upload"/>
 	</beans:bean>
 	
+   
 	<beans:bean id="tilesViewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass"
@@ -67,8 +68,14 @@
 		<interceptor>
 			<mapping path="/search/searchDoc" />
 			<mapping path="/search/Person"/>
+			
 			<mapping path="/board/list"/>
 			<mapping path="/board/regist"/>
+			
+			<mapping path="/elecauth/eleauthList"/>
+        	<mapping path="/elecauth/regist"/>         
+         	<mapping path="/elecauth/elecauthRead"/>       
+         
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 	</interceptors>

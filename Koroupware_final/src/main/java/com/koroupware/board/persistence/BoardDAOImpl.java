@@ -96,9 +96,9 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
-	@Override
+	/*@Override
 	public void updateRecCnt(int board_no) throws Exception {
 		sqlSession.update(namespace+".updateRecCnt", board_no);
-	}
+	}*/
 
 }

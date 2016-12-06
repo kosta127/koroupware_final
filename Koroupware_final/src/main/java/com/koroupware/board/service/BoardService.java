@@ -16,5 +16,5 @@ public interface BoardService {
 	public List<BoardVO> listCriteria(SearchCriteria cri)throws Exception;
 	public int listCountCriteria(SearchCriteria cri)throws Exception;
 	public List<String> getAttach(int board_no)throws Exception;
-	public void recModifyCnt(int board_no)throws Exception;
+	//public void recModifyCnt(int board_no)throws Exception;
 }

@@ -82,7 +82,9 @@ public class ScheduleController {
 		
 		ScheduleVO scheduleVO = new ScheduleVO();
 		
-		
+		if(scheduleVO.getSchedule_start()!=null){
+			scheduleVO.setSchedule_start(scheduleVO.getSchedule_start());
+		}
 		
 		model.addAttribute("emp_no", emp.getEmp_no());
 		model.addAttribute("year", schedule.getYear());//현재년도
@@ -90,12 +92,13 @@ public class ScheduleController {
 		model.addAttribute("startDay", schedule.getStartDay());
 		model.addAttribute("endDay", schedule.getEndDay());
 		model.addAttribute("day", schedule.getDay());
-		
+		model.addAttribute("schedule_start", scheduleVO.getSchedule_start());
 		
 		return "/schedule/view";
 	}
+
 	
-	@RequestMapping(value="/view/{schedule_start}", method=RequestMethod.GET)
+	/*@RequestMapping(value="/view", method=RequestMethod.POST)
 	public String viewGet(HttpSession session, ScheduleDTO schedule, RedirectAttributes rttr, @PathVariable("schedule_start")Timestamp schedule_start)throws Exception{
 		System.out.println("viewGet");
 		EmpDTO emp = (EmpDTO)session.getAttribute("login");
@@ -164,7 +167,7 @@ public class ScheduleController {
 		rttr.addAttribute("list", service.scheduleList(scheduleVO));
 		
 		return "redirect:/schedule/view";
-	}
+	}*/
 	
 	/*@RequestMapping(value="/view", method=RequestMethod.POST)
 	public String viewPOST(HttpSession session, @ModelAttribute("schduleDTO") ScheduleDTO schedule, Model model)throws Exception{
@@ -253,25 +256,27 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/regist/{year}/{month}/{day}",  method = RequestMethod.POST)
 	public String registPOST(HttpSession session, ScheduleVO schedule, Model model,
-			@PathVariable int year, @PathVariable int month, 
-			@PathVariable int day)throws Exception{
+			@PathVariable int year, @PathVariable int month, @PathVariable int day, RedirectAttributes rttr)throws Exception{
 		System.out.println("postregist");
 		System.out.println("schedule tostring"+schedule.toString());
 		EmpDTO emp = (EmpDTO)session.getAttribute("login");
 		
 		schedule.setSchedule_start(new Timestamp(year, month - 1, day,0,0,0,0));
+		
 		Timestamp schedule_start = schedule.getSchedule_start();
+		
+		
+		schedule.setEmp_no(emp.getEmp_no());
+		
 		
 		service.scheduleRegist(schedule);
 		
-		schedule.setEmp_no(emp.getEmp_no());
-
-		
-		/*rttr.addAttribute("year", year);
+		rttr.addAttribute("year", year);
 		rttr.addAttribute("month", month);
-		rttr.addAttribute("day", day);*/
+		rttr.addAttribute("day", day);
+		rttr.addAttribute("schedule_start", schedule.getSchedule_start());
 		
-		return "schedule/view"+schedule_start;
+		return "redirect:/schedule/view";
 	}
 
 }
