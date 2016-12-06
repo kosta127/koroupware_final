@@ -70,8 +70,8 @@
 
 
 	<c:if test="${login.emp_no != elecauthRead.emp_no}">
-		<c:if test="${ea.approval_list_pass ==null }">
-			<c:forEach var="c" items="${elecauthReadApproval }">
+		<c:forEach var="c" items="${elecauthReadApproval }">
+			<c:if test="${c.approval_list_pass ==null }">
 			<c:if test="${login.emp_no==c.emp_no }">
 				<form action="elecauthOkReport">
 					<input type="hidden" name="emp_no" value="${c.emp_no }">
@@ -81,7 +81,7 @@
 					</div>				
 				</form>	
 				<form action="elecauthNoReport">
-					<input type="hidden" name="emp_no" value="c.emp_no">
+					<input type="hidden" name="emp_no" value="${c.emp_no }">
 					<input type="hidden" name="elec_auth_no" value="${elecauthRead.elec_auth_no }">
 					<div>
 						<input type="submit" class="btn btn-danger" value="°ÅºÎ">	
@@ -89,8 +89,8 @@
 				</form>	
 							
 			</c:if>
-			</c:forEach>
-		</c:if>
+			</c:if>
+		</c:forEach>		
 	</c:if>
 
 	<c:if test="${login.emp_no== elecauthRead.emp_no}">
