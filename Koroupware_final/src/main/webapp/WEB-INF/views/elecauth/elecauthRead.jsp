@@ -67,13 +67,14 @@
 	</table>
 	<br>
 
-
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd a hh:mm" var="today" /> 
 
 	<c:if test="${login.emp_no != elecauthRead.emp_no}">
 		<c:forEach var="c" items="${elecauthReadApproval }">
 			<c:if test="${c.approval_list_pass ==null }">
 			<c:if test="${login.emp_no==c.emp_no }">
-			<c:if test="${elecauthRead.elec_auth_enddate>SYSDATE }">
+			<c:if test="${elecauthRead.elec_auth_enddate>now}">
 				<form action="elecauthOkReport">
 					<input type="hidden" name="emp_no" value="${c.emp_no }">
 					<input type="hidden" name="elec_auth_no" value="${elecauthRead.elec_auth_no }">
