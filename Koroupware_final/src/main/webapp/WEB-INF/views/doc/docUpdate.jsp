@@ -21,7 +21,7 @@
 </head>
 <body>
 		
-			<form action="/doc/doc_hisRegist/${doc_no}/${doc_box_no}/${emp_no}" method="get">
+			<form action="/doc/docUpdate/${doc_no}/${doc_box_no}/${emp_no}" method="post">
 				 <div class="row">
 		  		<div class="col-sm-3 text">
 				문서명 : <input type="text" name="doc_title"><br>

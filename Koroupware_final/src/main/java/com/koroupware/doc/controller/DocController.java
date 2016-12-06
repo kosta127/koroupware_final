@@ -44,6 +44,7 @@ public class DocController {
 	
 	@RequestMapping("/docList/{doc_box_no}/{emp_no}")
 	public String listDoc(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
+		System.out.println("fdfd");
 		List<DocVO> list = service.docList();
 		model.addAttribute("list",list);
 		model.addAttribute("emp_no",emp_no);
@@ -53,7 +54,7 @@ public class DocController {
 	
 	@RequestMapping(value="/docRegist/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
 	public String docRegistGET(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
-		
+		System.out.println("ffff");
 		model.addAttribute("emp_no",emp_no);
 		model.addAttribute("doc_box_no",doc_box_no);
 		return "/doc/docRegist";
@@ -73,22 +74,26 @@ public class DocController {
 		return "redirect:/doc/docList/"+doc_box_no+"/"+emp_no;
 	}
 	
-	@RequestMapping(value="/docUpdate/{doc_no}/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
+	@RequestMapping(value="/docUpdate/{doc_no}/{doc_box_no}/{emp_no}", method=RequestMethod.GET)
 	public String docUpdateGET(@PathVariable("doc_no") int doc_no,@PathVariable("doc_box_no") int doc_box_no,
 				@PathVariable("emp_no") int emp_no,Model model){
-		System.out.println("dfsfs");
+		//System.out.println("ok");
 		model.addAttribute("doc_no",doc_no);
 		model.addAttribute("doc_box_no",doc_box_no);
 		model.addAttribute("emp_no",emp_no);
+		
 		return "/doc/docUpdate";
 	}
 	
-	@RequestMapping(value="/docUpdate/{doc_no}/{doc_box_no}/{emp_no}",method=RequestMethod.POST)
+	@RequestMapping(value="/docUpdate/{doc_no}/{doc_box_no}/{emp_no}", method=RequestMethod.POST)
 	public String docUpdatePOST(DocVO vo,@PathVariable("emp_no") int emp_no,
-			@PathVariable("doc_no") int doc_no,@PathVariable("doc_box_no") int doc_box_no) throws Exception{
-		
+			@PathVariable("doc_no") int doc_no,@PathVariable("doc_box_no") int doc_box_no,Model model) throws Exception{
+		System.out.println(vo);
+		model.addAttribute("doc_no",doc_no);
+		model.addAttribute("doc_box_no",doc_box_no);
+		model.addAttribute("emp_no",emp_no);
 		service.docModify(vo);
-		return "/doc/doc_hisRegist/"+doc_no+"/"+doc_box_no+"/"+emp_no;
+		return "/doc/doc_hisRegist";
 	}
 	
 	@RequestMapping("/getAttach/{doc_no}")

@@ -64,8 +64,8 @@
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				success: function(data){
 					var decode = decodeURIComponent(data);
-					var div = $("<div style='overflow:scroll;' class='content'></div>");
-					$(".uploadedList div").remove();
+					var div = $("<div style='overflow:scroll;' class='text'></div>");
+					$("div .text").remove();
 					div.html(decode).appendTo(".uploadedList");
 				}
 				
@@ -73,8 +73,8 @@
 
 			
 	});
-		
-		$(".uploadedList").on("click",".content", function(){
+	
+		$(".uploadedList").on("click",".text", function(){
 			$(this).remove();
 		});
 	});
@@ -93,20 +93,20 @@ function fn_back(){
 			<table border="1"  class="table table-hover">
 		<tr height="30">
 			<th>문서제목</th>
-			<td>${doc.doc_title }</td>
+			<td>${doc.doc_title}</td>
 		</tr>
 		<tr height="30">
 			<th>작성자</th>
-			<td>${emp_name }</td>
+			<td>${emp_name}</td>
 		</tr>
 		
 		<tr height="30">
 			<th>문서설명</th>
-			<td>${doc.doc_explain }</td>
+			<td>${doc.doc_explain}</td>
 		</tr>
 		<tr height="30">
 			<th>문서내용</th>
-			<td>${doc.doc_contents }</td>
+			<td>${doc.doc_contents}</td>
 		</tr>
 	</table>
 	<label>첨부 파일</label>
