@@ -56,6 +56,9 @@
 			<mapping path="/search/searchDoc" />
 			<mapping path="/search/Person"/>
 			
+			<mapping path="/board/list"/>
+         	<mapping path="/board/regist"/>
+         	
 			<mapping path="/elecauth/eleauthList"/>
 			<mapping path="/elecauth/regist"/>			
 			<mapping path="/elecauth/elecauthRead"/>			

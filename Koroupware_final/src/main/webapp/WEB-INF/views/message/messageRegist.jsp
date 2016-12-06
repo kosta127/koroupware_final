@@ -30,7 +30,9 @@ $(document).ready(function(){
 			window.open("/message/messageSearch/"+emp_no,"test","width=600,height=300,location=yes");
 		})
 		$("#emp_name").click(function(){
+			
 			if($(this).is(":checked")){
+				
 				$(".receiver_name").attr("value","${emp_name}");
 				var html = "<input type='hidden' name='message_receiver_no' value="+${emp_no}+">";
 				$("form").prepend(html);
@@ -63,21 +65,41 @@ function receiver(receiver){
 <style type="text/css">
 	.form {
 		margin-top: 110px;
+		 box-shadow: 3px 3px 3px 3px lightgray;
+		 padding: 15px; 
 	} 
+	textarea {
+		margin-top: 10px;
+	}
+	.message-back-button{
+		margin-left: -10px;
+	}
 </style>
 </head>
 <body>
 	<div class="row">
 		<div class="col-md-3"></div>
-		<div class="col-md-8 form">
+		<div class="col-md-5 form">
 			<form action="/message/messageRegist/${emp_no}" method="post">
-
-		받는사람 : <input type="checkbox" name="emp_name" id="emp_name"> 내게 쓰기
+		<b>받는사람 :</b> <input type="checkbox" name="emp_name" id="emp_name"> 내게 쓰기
 		<input type="text" name="message_receiver_name" class="receiver_name">
-		<button class="search">검색</button><br>
-		<textarea name="message_contents" rows="5" cols="55" title="쪽지내용 입력"></textarea><br>
+		<button class="btn btn-primary search">검색</button>
+		<br>
+		 <div class="row">
+		  <div class="col-sm-12 text">	
+		<textarea name="message_contents" rows="8" cols="10" class="form-control" title="쪽지내용 입력"
+			style="resize:none;"></textarea><br>
+		</div></div>
+		<div class="col-md-6"></div>
+		<div class="col-md-6">
+		<div class="col-md-2"></div>
+		<div class="col-md-5">
 		<input type="submit" value="전송" class="btn btn-default">
-		<input type="button" value="돌아가기" onclick="fn_receivedmessageList()" class="btn btn-default">
+		</div>
+		<div class="col-md-5">
+		<input type="button" value="돌아가기" onclick="fn_receivedmessageList()" class="btn btn-default message-back-button">
+		</div>
+		</div>
 	</form>
 	</div>
 		<div class="col-md-1"></div>

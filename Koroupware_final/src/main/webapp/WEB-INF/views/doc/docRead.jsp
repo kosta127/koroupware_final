@@ -84,12 +84,16 @@ function fn_back(){
 	history.back(-1);
 }
 </script>
-<title>Insert title here</title>
+<style type="text/css">
+	.blank {
+		height: 50px;
+	}
+</style>
 
 </head>
 <body>
-	
-		
+		<div class="col-md-12 blank"></div>
+		<div>
 			<table border="1"  class="table table-hover">
 		<tr height="30">
 			<th>문서제목</th>
@@ -115,6 +119,8 @@ function fn_back(){
 		<input type="submit" value="수정하기" class="btn btn-default">
 		<input type="button" value="돌아가기" class="btn btn-default" onclick="fn_back()">
 	</form>
+		</div>
+		
 	
 	
 </body>

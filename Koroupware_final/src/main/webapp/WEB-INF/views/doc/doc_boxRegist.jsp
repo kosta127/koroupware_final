@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,19 +27,25 @@
 		history.go(-1);
 	}
 </script>
-
+<style type="text/css">
+	.blank{
+		height: 50px;
+	}
+</style>
 </head>
 <body>
-	
-	
+		<div class="col-md-12 blank"></div>
+		<div>
 		<form action="/doc/doc_boxRegist" method="post">
-		<input type="hidden" name="emp_no" value="${emp_no }">
-		<input type="text" name="doc_box_name" class="form-control">
+		<input type="hidden" name="emp_no" value="${emp_no }" >
+		<input type="text" name="doc_box_name" class="form-control" placeholder="문서함명을 입력하세요">
 		<br>
 		<input type="submit" value="생성" class="btn btn-default">
 		<input type="button" value="돌아가기" class="btn btn-default" onclick="fn_back()">
 		</form>
-
+		
+		</div>
+		
 	
 </body>
 </html>
