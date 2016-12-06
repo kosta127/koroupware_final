@@ -33,7 +33,7 @@ $(function(){
 		newsCompanyList = newsCompanies;
 		
 		var $wrapdiv = $('<div>').attr('id', 'newsCompany_div')
-								.addClass('form-group').appendTo('#todaynews_div');
+								.addClass('form-group').prependTo('#todaynews_div');
 		var $label = $('<label>').attr('for', 'newsCompanyList')
 							.text('뉴스사').appendTo($wrapdiv);
 		var $selectList = $('<select>').attr('id', 'newsCompanyList')
@@ -60,6 +60,7 @@ $(function(){
 		}
 	}
 	
+	//뉴스 목록 가져오기
 	function getNewsList(newsCompanyNo, rssUrl){
 		console.log('get news list -> ' + newsCompanyNo )
 		var newsListAttr = {
@@ -77,6 +78,7 @@ $(function(){
 	
 	function showNews(data){
 		//뉴스목록만듦
+		var $newsListDiv = $('#news_list_div');
 		$.each(data, function(idx, item){
 			var category = (item.category==null)?'':item.category;
 			var newsHtml = '<div class="newsdesc">';
@@ -86,10 +88,12 @@ $(function(){
 			newsHtml += '<span class="link">'+item.link+'</span>';
 			newsHtml += '</div>';
 			var newsObj = $(newsHtml);
-			
-			$('#todaynews_div').append(newsObj);
+
+			//$newsListDiv.find('div').remove();
+			$newsListDiv.append(newsObj);
 			newsObj.on('click', function(){
 				selectedNews = item;
+				//뉴스 원문 가져오기
 				$.ajax({
 					url: '/todaynews/newsRead',
 					type: 'post',

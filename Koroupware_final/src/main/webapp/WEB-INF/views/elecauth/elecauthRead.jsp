@@ -24,10 +24,9 @@
 
 <title>Insert title here</title>
 </head>
-<body>
-
+<body>	
 	<br>
-
+	<div id="contents">
 	<input type="hidden" name="elec_auth_no"
 		value=${elecauthRead.elec_auth_no }>
 	<input type="hidden" name="emp_no" value=${login.emp_no }>
@@ -55,7 +54,7 @@
 	<br>
 	<br>
 
-	<h3>상세입력</h3>
+	<h3>상세내용</h3>
 	<table class="table table-bordered" id="table3" border=1 width=60%>
 		<tr>
 			<td width=15%>제목</td>
@@ -104,7 +103,7 @@
 	</c:if>
 	<br>
 
-	<h3>@결재 진행 상태</h3>
+	<h3>결재 진행 상태</h3>
 	<table class="table table-bordered" id="table4" border=1 width=60%>
 		<tr>
 			<th width=20%>분류</th>
@@ -126,7 +125,7 @@
 	</table>
 	<br>
 
-	<h3>@참조자</h3>
+	<h3>참조자</h3>
 	<table class="table table-bordered" id="table5" border=1 width=60%>
 		<tr>
 			<th width=33%>분류</th>
@@ -141,9 +140,8 @@
 			</tr>
 		</c:forEach>
 	</table> 
-
+	</div>
 	<input id="printButton" type="button" class="btn btn-success"
 		name="print2" value="인쇄">
-
 </body>
 </html>

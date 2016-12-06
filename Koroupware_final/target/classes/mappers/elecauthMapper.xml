@@ -5,7 +5,7 @@
 
 <mapper namespace="com.koroupware.mappers.ElecauthMapper">
 	
-	<!-- 전자결재 리스트 조회 added by moonyong -->
+	<!-- 전자결재 리스트 조회 added by moonyong & jirung -->
 	<select id="elecauthList" resultType="ElecauthListVO" parameterType="ElecauthListCond">
 	<![CDATA[ 
 		SELECT ea.elec_auth_no, ea.elec_auth_title, ea.elec_auth_regdate, ea.elec_auth_enddate,
