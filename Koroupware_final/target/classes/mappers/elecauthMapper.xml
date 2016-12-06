@@ -167,7 +167,7 @@
   		AND e.emp_no = #{emp_no}
 	</select>
 	
-	<select id="docListSelect" resultType="DocVO">
+	<select id="docListSelect" resultType="ElecauthDocVO">
 		SELECT doc_title, doc_no, doc_contents
 			FROM doc
 			WHERE doc_formyn = 'Y'

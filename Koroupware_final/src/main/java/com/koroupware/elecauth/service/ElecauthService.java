@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
-import com.koroupware.elecauth.domain.DocVO;
+import com.koroupware.elecauth.domain.ElecauthDocVO;
 import com.koroupware.elecauth.domain.ElecauthDeleteVO;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
 import com.koroupware.elecauth.domain.ElecauthListVO;
@@ -32,7 +32,7 @@ public interface ElecauthService {
 			List<ApprovalListVO> approvals,
 			List<ElecauthReferrerVO> referrers) throws Exception; //added by jirung
 	public EmpDetailVO empDetailRead(int emp_no) throws Exception; //added by jirung
-	public List<DocVO> docListSelect() throws Exception; //added by jirung
+	public List<ElecauthDocVO> docListSelect() throws Exception; //added by jirung
 	public List<EmpDetailVO> empListSelect() throws Exception; //added by jirung
 	
 	public int getElecauthNo() throws Exception; 

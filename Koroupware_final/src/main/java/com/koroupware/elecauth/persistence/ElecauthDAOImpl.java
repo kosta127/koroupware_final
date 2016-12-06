@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
-import com.koroupware.elecauth.domain.DocVO;
+import com.koroupware.elecauth.domain.ElecauthDocVO;
 import com.koroupware.elecauth.domain.ElecauthDeleteVO;
 import com.koroupware.elecauth.domain.ElecauthListCond;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
@@ -85,7 +85,7 @@ public class ElecauthDAOImpl implements ElecauthDAO {
 	}
 
 	@Override
-	public List<DocVO> docListSelect() throws Exception {
+	public List<ElecauthDocVO> docListSelect() throws Exception {
 		// 양식으로 쓸 문서를 조회해옴
 		return sqlSession.selectList(namespace+".docListSelect");
 	}

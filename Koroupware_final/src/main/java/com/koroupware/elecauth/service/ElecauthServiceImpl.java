@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.koroupware.elecauth.domain.ApprovalListVO;
 import com.koroupware.elecauth.domain.ApprovalPrimaryVO;
-import com.koroupware.elecauth.domain.DocVO;
+import com.koroupware.elecauth.domain.ElecauthDocVO;
 import com.koroupware.elecauth.domain.ElecauthDeleteVO;
 import com.koroupware.elecauth.domain.ElecauthListCond;
 import com.koroupware.elecauth.domain.ElecauthReadVO;
@@ -77,7 +77,7 @@ public class ElecauthServiceImpl implements ElecauthService {
 	}
 
 	@Override
-	public List<DocVO> docListSelect() throws Exception {
+	public List<ElecauthDocVO> docListSelect() throws Exception {
 		// 양식으로 쓸 문서 목록 조회
 		return dao.docListSelect();
 	}

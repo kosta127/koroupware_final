@@ -3,7 +3,7 @@ package com.koroupware.elecauth.domain;
 import java.util.Date;
 
 
-public class DocVO{
+public class ElecauthDocVO{
 	private int doc_no;
 	private String doc_title;
 	private String doc_explain;
