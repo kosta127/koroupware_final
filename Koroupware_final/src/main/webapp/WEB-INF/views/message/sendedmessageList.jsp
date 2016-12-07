@@ -25,6 +25,7 @@ function fn_receivedmessageList(){
 .blank {
 	height: 50px;
 }
+
 .send-table{
 margin-top:15px;
  box-shadow: 2px 2px 2px 2px lightgray; 

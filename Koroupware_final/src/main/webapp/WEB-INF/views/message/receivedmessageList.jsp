@@ -40,6 +40,7 @@
 <body>
 	<div class="col-md-12 blank"></div>
 	<div>
+	
 	<form action="/message/messageRemove/received/${emp_no}" method="post" class="messageForm">
 	<input type="button" value="쪽지쓰기" onclick="fn_messageRegist()" class="btn btn-default">
 	<input type="button" value="보낸쪽지" onclick="fn_sendedmessageList()" class="btn btn-default">
