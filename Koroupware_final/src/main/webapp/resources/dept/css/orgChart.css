@@ -8,3 +8,47 @@
    font-weight : bold;
    margin-left: 400px;
 }
+
+.empTreeImage{
+	width: 100px;
+	height: 100px;
+}
+
+.img-circle{
+	width: 250px;
+	height: 250px;
+}
+
+.navs{
+	margin: 20px;
+}
+
+.navs *{
+	font-size: 30px;
+	margin: 20px;
+	font-weight: bold;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.panel-title > a{
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.navs > a:hover{
+	background-color: #f8e97e;
+	text-decoration: none;
+	border-radius: 8px;
+
+}
+
+#orgChartTreeSection{
+	display: none;
+}
+
+.panel-body > span{
+	margin: 10px;
+	font-size: 15px;
+}

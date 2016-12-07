@@ -22,7 +22,6 @@ public class DocManagmentController {
 	@RequestMapping(value="/doc_managementRemove/{doc_box_no}/{doc_no}/{emp_no}",method=RequestMethod.GET)
 	public String doc_managementDelete(@PathVariable("doc_box_no") int doc_box_no,@PathVariable("emp_no") int emp_no,
 				DocManagementVO vo,RedirectAttributes rttr) throws Exception{
-		System.out.println(vo.toString());
 		service.docRemove(vo);
 		rttr.addAttribute("emp_no",emp_no);
 		return "redirect:/doc/doc_boxRead/"+doc_box_no+"/"+emp_no;

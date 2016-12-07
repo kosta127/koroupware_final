@@ -19,11 +19,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<h1>${emp_no}</h1>
-			<form action="/doc/doc_hisRegist/${doc_no}/${emp_no}/${doc_box_no}" method="post">
-			
-				변경사유 : <input type="text" name="doc_his_reason_change"><br>
-				재개정여부 : <input type="text" name="doc_his_revise"><br>
+
+			<form action="/doc/doc_hisRegist/${doc_no}/${doc_box_no}/${emp_no}" method="post">
+			 <div class="row">
+		  		<div class="col-sm-3 text">
+				변경사유 : <input type="text" name="doc_his_reason_change" class="form-control"><br>
+				재개정여부 : <input type="text" name="doc_his_revise" class="form-control"><br>
+				</div>
+				</div>
 			<input type="submit" value="수정완료" class="btn btn-default">
 			<input type="button" value="돌아가기" onclick="fn_back()" class="btn btn-default">
 			</form>

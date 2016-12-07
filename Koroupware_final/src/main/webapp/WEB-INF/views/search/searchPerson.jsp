@@ -18,7 +18,6 @@
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
-					<h2>${login.emp_no}</h2>
 					<h3 class="box-title">검색 결과</h3>
 				</div>
 

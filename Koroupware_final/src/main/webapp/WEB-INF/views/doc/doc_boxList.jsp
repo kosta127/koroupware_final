@@ -12,10 +12,17 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<style type="text/css">
+	.blank{
+		height : 50px;
+	}
+</style>
 </head>
 
 <body>
+		<div class="col-md-12 blank"></div>
+		<div>
+		
 	
 		<table border="1" cellpadding="0" cellspacing="0" class="table table-hover">
 		<tr height="30">
@@ -39,7 +46,7 @@
 		<input type="submit" value="문서함 생성" class="btn btn-default">
 	</form>
 
-		
+		</div>
 
 	
 </body>

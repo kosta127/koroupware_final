@@ -197,6 +197,18 @@ input {
 .void-top-div {
 	margin-top: 15px;
 }
+
+body{
+	background-image: url("/displayFile?fileName=desktop.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+}
+
+.right-form, .left-form{
+	background-color: white;
+
+}
 </style>
 <script type="text/javascript">
 	function cancel() {

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.koroupware.emp.domain.EmpVO;
 import com.koroupware.member.dto.EmpDTO;
-import com.koroupware.search.domain.Criteria;
 import com.koroupware.search.domain.SearchVO;
 import com.koroupware.search.persistence.SearchDao;
 
@@ -23,7 +22,7 @@ public class SearchServiceImpl implements SearchService{
 		System.out.println(cri);
 		
 		List<EmpDTO> list = dao.listCriteriaPerson(cri);
-		System.out.println("리스트서치 서비스 :"+ list);
+
 		return list;
 	}
 

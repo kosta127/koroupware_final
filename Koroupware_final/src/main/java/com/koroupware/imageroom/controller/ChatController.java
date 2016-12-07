@@ -60,6 +60,8 @@ public class ChatController {
 		
 		return entity;
 	}
+	
+	
 	/*
 	@ResponseBody
 	@RequestMapping(value="/", method=RequestMethod.GET)

@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 function webrtc() {
-   window.open("http://localhost:8082/webrtc", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=10000,width=400,height=400");
+   window.open("http://192.168.0.13:8082/webrtc", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=10000,width=400,height=400");
 }
 </script>
-<style type="text/css">
+<style type="text/css">	
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 .nav-sidebar .sidebar-blue a { 
     cursor: default;
@@ -76,25 +76,32 @@ function webrtc() {
 
 .sidebar-center-void{
 	margin-top: 30px;
-	margin-bottom: 30px
+	margin-bottom: 52px;
+	
 }
 
 </style>
 </head>
-<body> 
-      <div class="nav-sidebar">
-        	<ul class="nav tabs">
-          <li class="sidebar-blue"><a href="/elecauth/elecauthList">전자결재</a></li>
-          <li class="sidebar-red"><a href="/doc/doc_boxList/${login.emp_no}">문서</a></li>
-          <li class="sidebar-green"><a href="">게시판</a></li>
-          <li class="sidebar-orange"><a href="/dept/List">조직도</a></li> 
-          <li class="sidebar-blue"><a href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>    
-           <li class="sidebar-red"><a onclick="webrtc()">화상회의</a></li>
-          <li class="sidebar-green"><a href="http://localhost:8082/imageroom/lobby?emp_no=${login.emp_no}">그림회의</a></li>
-          <li class="sidebar-orange"><a href="">이메일</a></li>                           
+<body>
+	<div class="nav-sidebar">
+		<ul class="nav tabs">
+			<li class="sidebar-blue"><a href="/elecauth/elecauthList">전자결재</a></li>
+			<li class="sidebar-red"><a
+				href="/doc/doc_boxList/${login.emp_no}">문서</a></li>
+			<li class="sidebar-green"><a href="/community/list">커뮤니티</a></li>
+			<li class="sidebar-orange"><a href="/dept/List">조직도</a></li>
+			<li class="sidebar-blue"><a
+				href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>
+			<li class="sidebar-red"><a onclick="webrtc()">화상회의</a></li>
+			<li class="sidebar-green"><a
+				href="http://192.168.0.13:8082/imageroom/lobby?emp_no=${login.emp_no}">그림회의</a></li>
+			<li class="sidebar-orange"><a href="">이메일</a></li>
+			<li class="sidebar-blue"><a href="/schedule/view">일정</a></li>
+			<li class="sidebar-red"><a href="/attend/attendList/${login.emp_no}">출석확인</a></li>
+			<li class="sidebar-green"><a href="/estimate/est_do">인사평가</a></li>      
 		</ul>
-      </div>
-      <div class="col-md-12 sidebar-center-void"></div>
-      
+	</div>
+	<div class="col-md-12 sidebar-center-void"></div>
+
 </body>
 </html>

@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.koroupware.board.domain.PageMaker;
 import com.koroupware.member.dto.EmpDTO;
-import com.koroupware.search.domain.Criteria;
-import com.koroupware.search.domain.PageMaker;
 import com.koroupware.search.domain.SearchVO;
 import com.koroupware.search.service.SearchService;
 
@@ -44,7 +43,6 @@ public class SearchController {
 	
 	@RequestMapping(value="/searchPerson", method=RequestMethod.GET)
 	public void SearchContent(@ModelAttribute("cri") SearchVO cri, Model model) throws Exception{
-		System.out.println(searchContent);
 		cri.setSearch_content(searchContent);
 		List<EmpDTO> list = service.listSearchPerson(cri);
 		
@@ -59,7 +57,6 @@ public class SearchController {
 	
 	@RequestMapping(value="/searchDoc", method=RequestMethod.GET)
 	public void SearchDoc(@ModelAttribute("cri") SearchVO cri, Model model) throws Exception{
-		System.out.println(searchContent);
 		cri.setSearch_content(searchContent);
 		List<EmpDTO> list = service.listSearchDoc(cri);
 		

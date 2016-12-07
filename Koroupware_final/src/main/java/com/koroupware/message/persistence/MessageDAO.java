@@ -18,4 +18,5 @@ public interface MessageDAO {
 	public List<MessageVO> listsendedMessage(int message_sender_no);
 	public List<EmpVO> searchEmp(String searchKeyword); 
 	public void deleteMessage(int message_no);
+	public MessageVO selectMessage(int message_no);
 }

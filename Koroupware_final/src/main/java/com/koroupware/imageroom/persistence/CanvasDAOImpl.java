@@ -20,8 +20,6 @@ public class CanvasDAOImpl implements CanvasDAO{
 
 	@Override
 	public void imageCaptureInsert(ImageCaptureVO imageCapture) {
-		System.out.println(imageCapture);
-		
 		session.insert(NAMESPACE + ".imageCaptureInsert", imageCapture);
 	}
 

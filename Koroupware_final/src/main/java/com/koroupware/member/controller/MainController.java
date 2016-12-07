@@ -31,33 +31,24 @@ public class MainController {
 	/* 처음 시작시 "/" 로 uri 접근 --> login.jsp로 접근 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(/*Locale locale, Model model*/) {
-		System.out.println("처음");
 		return "login";
 	}
 	
 	@RequestMapping(value="/logInter", method = RequestMethod.GET)
 	public String logInter(EmpVO vo, Model model, HttpSession session)throws Exception{
-		System.out.println("asdfasdfasdf");
 		return "/loginPost";
 	}
 	
 	//로그인 jsp에서  정보 입력시 ---> loginPost로 옴  :: 데이터와 일치시 메인으로 이동
 	@RequestMapping(value="/loginPost", method=RequestMethod.POST)
 	public String loginPost(EmpVO vo, Model model, HttpSession session)throws Exception{
-		System.out.println(vo.getEmp_no());
-		System.out.println("가지고 온 아디"+vo.getEmp_id());
-		System.out.println("가지고 온 비번"+vo.getEmp_password());
-		System.out.println("fffff");
 		EmpDTO dto = service.login(vo);
 		
 		if(dto == null){
-			System.out.println("로그인 실패");
 			return "login";
 		}
-		System.out.println(dto.toString());
-		model.addAttribute("loginDTO", dto);
-		System.out.println("로그인 성공");
 		
+		model.addAttribute("loginDTO", dto);
 		return "home";
 	}
 	
@@ -67,7 +58,6 @@ public class MainController {
 		Object obj = session.getAttribute("login");//로그인한 세션 가지고 오기 (인터셉터를 통해...)
 		
 		if(obj != null){
-			System.out.println("세션에 넣은 obj에  login이 있을 경우.. 제거...");
 			EmpDTO dto = (EmpDTO) obj;
 			session.removeAttribute("login");
 			session.invalidate();
@@ -80,7 +70,7 @@ public class MainController {
 				response.addCookie(loginCookie);
 			}
 		}
-		System.out.println("?????????????????");
+
 		return "login";
 	}
 	

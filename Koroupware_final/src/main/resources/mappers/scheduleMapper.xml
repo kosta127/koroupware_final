@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.board.mappers.ScheduleMapper">
+
+	<insert id="insertSchedule" parameterType="ScheduleVO">
+		insert into schedule(
+		schedule_no, schedule_regdate, schedule_title, schedule_contents,
+		emp_no, schedule_start
+		)values(
+		#{schedule_no}, SYSDATE, #{schedule_title}, #{schedule_contents}, #{emp_no},
+		#{schedule_start}
+		)
+	</insert>
+
+	<select id="maxNumber" resultType="Integer">
+		select max(schedule_no) from
+		schedule
+	</select>
+
+	<select id="listSchedule" resultType="ScheduleVO">
+		select SCHEDULE_NO, SCHEDULE_DISTINCT, SCHEDULE_REGDATE, SCHEDULE_DELDATE  
+				, SCHEDULE_TITLE, SCHEDULE_START, SCHEDULE_END
+				, SCHEDULE_ALARM, SCHEDULE_CONTENTS, EMP_NO
+				, to_char(SCHEDULE_START,'yy/mm/dd') as SCHEDULE_START_String
+		from schedule 
+		where EMP_NO=#{emp_no}
+	</select>
+</mapper>  
+

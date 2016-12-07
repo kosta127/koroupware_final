@@ -13,5 +13,6 @@ public interface MessageService {
 	public String receiver_nameGet(int emp_no);
 	public List<EmpVO> empSearch(String searchKeyword);
 	public void messageRemove(int message_no);
+	public MessageVO messageRead(int message_no);
 	
 }

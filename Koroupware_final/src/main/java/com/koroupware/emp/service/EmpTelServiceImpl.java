@@ -26,7 +26,6 @@ public class EmpTelServiceImpl implements EmpTelService {
    @Override
    public void signUp(EmpVO empVo, TelVO telVo) throws Exception { //회원가입
       empDao.create(empVo); //회원생성
-      System.out.println("회원생성");
       telDao.create(telVo); //회원전화생성
    }
 

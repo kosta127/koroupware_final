@@ -34,4 +34,5 @@ public class NewsReader {
 		}
 		return sb.toString();
 	}
+	
 }

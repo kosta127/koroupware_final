@@ -51,7 +51,7 @@
 			</div>
 			<!-- 모달 다이얼로그 -->
 		</div>
-		<nav>
+		<nav class="navs">
 			<a id="orgChartListSort" href="#">부서별</a>
 			<a id="orgChartTreeSort" href="#">트리</a>
 		</nav>
@@ -88,7 +88,7 @@
 			</c:forEach>
 			<!-- 모달 전체 윈도우 -->
 		</section>
-		<section id="orgChartTreeSection" class="horizontalTreeTop row hidden orgChartTreeSection">
+		<section id="orgChartTreeSection" class="horizontalTreeTop row orgChartTreeSection">
 		</section>
 	</div>
 </body>

@@ -20,6 +20,20 @@
 <script src="/resources/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/signUp/css/signUp.css">
 	<script type="text/javascript" src="/resources/signUp/js/signUp.js"></script>
+	<style type="text/css">
+	
+		body{
+			background-image: url("/displayFile?fileName=desktop.jpg");
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 100%;
+		}
+		
+		.center-form{
+			background-color: white;
+		
+		}
+	</style>
 </head>
 <body>
 <div class="col-md-2"></div> <!-- 왼쪽 여백 div -->

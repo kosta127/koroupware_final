@@ -13,10 +13,8 @@ $(function(){
 				$myModalLabel.html("<span>" + e.dept_name + " - " + e.emp_name +
 						e.office_name + " (" + e.position_name + ")<span>");
 						
-				var imgTag = toSmallImgLink(e.emp_img);
-				
 				html += "<div>"
-	 			html += "<img src='" + imgTag + "'/><br>";
+	 			html += "<img class='img-circle' src='/displayFile?fileName=" + e.emp_img + "'/><br>";
 				html += "<span>아이디 : " + e.emp_id + "</span><br>";
 				html += "<span>이메일 : " + e.emp_email + "</span><br>";
 				html += "<span>주소 : " + e.emp_address + "</span><br>";
@@ -65,13 +63,25 @@ $(function(){
 	});
 
 	$("#orgChartListSort").on("click", function(){
-		$("#orgChartListSection").removeClass("hidden");
+		$("#orgChartTreeSection").fadeOut( "fast", function() {
+			$("#orgChartListSection").fadeIn("fast");
+		});
+		
+		/*
 		$("#orgChartTreeSection").addClass("hidden");
+		$("#orgChartListSection").removeClass("hidden");
+		*/
 	});
 
 	$("#orgChartTreeSort").on("click", function(){
+		$("#orgChartListSection").fadeOut( "fast", function() {
+			$("#orgChartTreeSection").fadeIn("fast");
+		});
+		
+		/*
 		$("#orgChartListSection").addClass("hidden");
 		$("#orgChartTreeSection").removeClass("hidden");
+		*/
 	});
 
 	function toSmallImgLink(emp_img){
@@ -90,10 +100,9 @@ $(function(){
 		$(".horizontalTreeTop").zooTree(jsonData, {
 		    forceCreate: true,
 		    render: function(data) {
-		   		var imgTag = toSmallImgLink(data.emp_img);
-
 		    	var $div = $("<a href='#myModal' data-toggle='modal'>")
-		    		.append("<img src='"+ imgTag +"'/><br/>")
+		    		.append("<img class='empTreeImage img-rounded' " +
+		    				"src='/displayFile?fileName=" + data.emp_img + "'/><br/>")
 	    			.append(data.dept_name + " ")
 	    			.append(data.emp_name + " ")
 	    			.append(data.office_name)

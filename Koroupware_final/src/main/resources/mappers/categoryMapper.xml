@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koroupware.board.mappers.CategoryMapper">
+
+	<insert id="categoryInsert" parameterType="CategoryVO">
+		insert into category(
+			category_no, category_name, category_regdate, community_no
+		)
+		values(
+			seq_category.NEXTVAL, #{category_name}, SYSDATE, #{community_no}
+		)
+	</insert>
+	
+	<select id="categoryList" resultType="CategoryVO" parameterType="int">
+		select c.category_name, c.category_no, cm.community_no
+		from category c, community cm
+  		where c.community_no = cm.community_no
+  			and c.community_no = #{community_no}
+	</select>	
+	
+	<select id="maxNumber" resultType="Integer">
+		select MAX(category_no) from category
+	</select>
+	
+</mapper>  
+
