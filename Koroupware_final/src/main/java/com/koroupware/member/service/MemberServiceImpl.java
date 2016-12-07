@@ -50,7 +50,6 @@ public class MemberServiceImpl implements MemberService{
 	//회원가입 서비스
 	@Override
 	public void SignUp(EmpVO empVO) throws Exception {
-	 System.out.println(empVO.getEmp_id());
 	 dao.SignUp(empVO);
 	}
 

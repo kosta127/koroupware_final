@@ -28,9 +28,15 @@
 		location.href="/doc/doc_boxList/${emp_no}";
 	}
 </script>
+<style type="text/css">
+	.blank{
+		height: 50px;
+	}
+</style>
 </head>
 <body>
-		
+		<div class="col-md-12 blank"></div>
+		<div>
 		<a href="/doc/doc_boxUpdate/${doc_box.doc_box_no}/${emp_no }">${doc_box.doc_box_name}</a>
 		<table border="1" cellpadding="0" cellspacing="0" class="table table-hover">
 		<tr height="30">
@@ -48,6 +54,8 @@
 			</table>
 			<input type="button" value="문서 전체 목록" onclick="fn_listDoc()" class="btn btn-default">
 			<input type="button" value="돌아가기" class="btn btn-default" onclick="fn_listDoc_box()">
+		
+		</div>
 		
 	
 </body>

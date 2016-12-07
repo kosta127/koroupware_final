@@ -24,14 +24,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object empDTO= modelMap.get("loginDTO");
-			System.out.println("  postHandler : "+empDTO);
 			
 		if(empDTO != null){
-			System.out.println("new login success");
 			session.setAttribute(LOGIN, empDTO);
 			
 			if(request.getParameter("useCookie") != null){
-				System.out.println("remember 버튼 누름");
 				Cookie loginCookie = new Cookie("loginCookie", session.getId());
 				loginCookie.setPath("/");
 				loginCookie.setMaxAge(60 * 60 * 24 * 7);
@@ -49,11 +46,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute(LOGIN) != null){
-			System.out.println("clear login data before");
-			System.out.println("로그 인터 실패");
 			session.removeAttribute(LOGIN);
 		}
-		System.out.println("로그 인터 성송");
+
 		return true;
 	}
 

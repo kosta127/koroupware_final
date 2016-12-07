@@ -29,10 +29,8 @@ public class AttendController {
 
 	@RequestMapping(value = "/attendList/{emp_no}", method = RequestMethod.GET)
 	public String attendList(@PathVariable("emp_no") int emp_no, AttendVO attendVO, Model model) throws Exception {
-		System.out.println("출석 리스트 컨트롤 : " + emp_no);
 		List<AttendDTO> list = service.attendList(emp_no);
 
-		System.out.println("마지막으로 컨트롤 값 :" + list);
 		model.addAttribute("attendList", list);
 		return "attend/attendCheck";
 	}
@@ -58,11 +56,9 @@ public class AttendController {
 
 		String todayHour = formatter05.format(new Date());
 		String todayMinute = formatter06.format(new Date());
-		System.out.println(todayHour);//저녁이인지 알아야함..
 		cal.set(Calendar.YEAR, Integer.parseInt(todate03));
 		switch (Integer.parseInt(todate02)) {
 		case 1:
-			System.out.println("1월");
 			cal.set(Calendar.MONTH, Calendar.JANUARY);
 			break;
 		case 2:
@@ -107,21 +103,13 @@ public class AttendController {
 
 		AttendVO vo = service.attendCheck(attendVO);
 		if (vo == null) {
-			System.out.println("출석 가능합니다.");
-
 			if (cal.get(Calendar.DAY_OF_WEEK) == 1 || cal.get(Calendar.DAY_OF_WEEK) == 7) {
-				System.out.println("출석한 요일 ::" + Calendar.DAY_OF_WEEK);
-				System.out.println("주말");
 			} else {
-				System.out.println("평일");
-
 				if (Integer.parseInt(todayHour) >= 9 && Integer.parseInt(todayMinute) > 0) {
-					System.out.println("지각");
 					attendVO.setLate(1);
 					service.addAttend(attendVO);
 					result = "late";
 				} else {
-					System.out.println("정상 출근");
 					attendVO.setLate(0);
 					service.addAttend(attendVO);
 					result = "attend";
@@ -130,11 +118,9 @@ public class AttendController {
 
 			}
 		} else {
-			System.out.println("이미 출석 했습니다.");
 			result = "already";
 		}
 
-		System.out.println(result);
 		return result;
 
 	}

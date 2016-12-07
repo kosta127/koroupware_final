@@ -31,126 +31,123 @@ import com.koroupware.emp.service.EmpTelService;
 
 @Controller
 public class EmpDataUpdateController {
-   @Resource(name = "uploadPath")
-   private String uploadPath;
-   
-   @Inject
-   private EmpTelService empTelService;
-   
-   @RequestMapping(value="/empDataUpdate", method=RequestMethod.GET)
-   public String empDataUpdatePage(@RequestParam("emp_no") int emp_no, Model model) throws Exception{ //회원정보수정 페이지
-      System.out.println(emp_no);
-      model.addAttribute("emp", empTelService.empList(emp_no));
-      return "empDataUpdate/empDataForm";
-   }
-   
-   @RequestMapping(value="/empDataUpdate/update", method=RequestMethod.POST)
-   public String empDataUpdate(EmpVO empVo) throws Exception{ //회원정보수정 확인
-      empTelService.empDataUpdate(empVo);
-      System.out.println("정보수정");
-      return "redirect:/";
-   }
-   
-   @RequestMapping(value="/empDataUpdate/uploadAjax", method=RequestMethod.POST)
-   @ResponseBody
-   public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception{
-      ResponseEntity<String> entity = null;
-      entity = new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
-               HttpStatus.CREATED);
-      return entity;
-   }
-   
-      @RequestMapping(value="/empDataUpdate/displayFile")
-      @ResponseBody
-      public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
-         InputStream in = null;
-         ResponseEntity<byte[]> entity = null;
-         // logger.info("FILE NAME: " + fileName);
-         try {
+	@Resource(name = "uploadPath")
+	private String uploadPath;
 
-            String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
-            MediaType mType = MediaUtils.getMediaType(formatName);
+	@Inject
+	private EmpTelService empTelService;
 
-            HttpHeaders headers = new HttpHeaders();
+	@RequestMapping(value = "/empDataUpdate", method = RequestMethod.GET)
+	public String empDataUpdatePage(@RequestParam("emp_no") int emp_no, Model model) throws Exception { // 회원정보수정
+		model.addAttribute("emp", empTelService.empList(emp_no));
+		return "empDataUpdate/empDataForm";
+	}
 
-            in = new FileInputStream(uploadPath + "\\" + fileName);
+	@RequestMapping(value = "/empDataUpdate/update", method = RequestMethod.POST)
+	public String empDataUpdate(EmpVO empVo) throws Exception { // 회원정보수정 확인
+		empTelService.empDataUpdate(empVo);
+		return "redirect:/";
+	}
 
-            if (mType != null) {
-               headers.setContentType(mType);
-            } else {
+	@RequestMapping(value = "/empDataUpdate/uploadAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
+		ResponseEntity<String> entity = null;
+		entity = new ResponseEntity<>(
+				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
+				HttpStatus.CREATED);
+		return entity;
+	}
 
-               fileName = fileName.substring(fileName.indexOf("_") + 1);
-               headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-               headers.add("Content-Disposition",
-                     "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
-            }
+	@RequestMapping(value = "/empDataUpdate/displayFile")
+	@ResponseBody
+	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		// logger.info("FILE NAME: " + fileName);
+		try {
 
-            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
-         } catch (Exception e) {
-            e.printStackTrace();
-            entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-         } finally {
-            in.close();
-         }
-         return entity;
-      }
-      
-      @ResponseBody
-      @RequestMapping(value="/empDataUpdate/deleteFile", method=RequestMethod.POST)
-      public ResponseEntity<String> deleteFile(String fileName) {
-         String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
-         MediaType mType = MediaUtils.getMediaType(formatName);
+			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+			MediaType mType = MediaUtils.getMediaType(formatName);
 
-         if (mType != null) {
-            String front = fileName.substring(0, 12);
-            String end = fileName.substring(14);
-            new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
-         }
-         new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+			HttpHeaders headers = new HttpHeaders();
 
-         return new ResponseEntity<String>("deleted", HttpStatus.OK);
-      }
-      
-      @RequestMapping(value="/empDataUpdate/addTel", method=RequestMethod.POST)
-      @ResponseBody
-      public ResponseEntity<String> addTel(@RequestBody TelDTO telDTO) throws Exception{
-         ResponseEntity<String> entity = null;
-         try {
-            empTelService.addTel(telDTO);
-            entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-         } catch (Exception e) {
-            e.printStackTrace();
-            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-         }
-         return entity;
-      }
-       
+			in = new FileInputStream(uploadPath + "\\" + fileName);
 
-      @RequestMapping(value="/empDataUpdate/{emp_no}", method=RequestMethod.GET)
-      @ResponseBody
-      public ResponseEntity<List<TelDTO>> telList(@PathVariable("emp_no") Integer emp_no) throws Exception{
-         ResponseEntity<List<TelDTO>> entity = null;
-         System.out.println("ajax"+emp_no);
-         try {
-            entity = new ResponseEntity<>(empTelService.telList(emp_no), HttpStatus.OK);
-         } catch (Exception e) {
-            e.printStackTrace();
-            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-         }
-         return entity;
-      }
-      
-      @RequestMapping(value="/empDataUpdate/{tel_no}", method=RequestMethod.DELETE)
-      public ResponseEntity<String> removeTel(@PathVariable("tel_no") Integer tel_no){
-         ResponseEntity<String> entity = null;
-         try {
-            empTelService.deleteTel(tel_no);
-            entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-         } catch (Exception e) {
-            e.printStackTrace();
-            entity = new ResponseEntity<>(
-                  e.getMessage(), HttpStatus.BAD_REQUEST);
-         }
-         return entity; 
-      }
+			if (mType != null) {
+				headers.setContentType(mType);
+			} else {
+
+				fileName = fileName.substring(fileName.indexOf("_") + 1);
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Disposition",
+						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/empDataUpdate/deleteFile", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteFile(String fileName) {
+		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+		MediaType mType = MediaUtils.getMediaType(formatName);
+
+		if (mType != null) {
+			String front = fileName.substring(0, 12);
+			String end = fileName.substring(14);
+			new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
+		}
+		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/empDataUpdate/addTel", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> addTel(@RequestBody TelDTO telDTO) throws Exception {
+		ResponseEntity<String> entity = null;
+		try {
+			empTelService.addTel(telDTO);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	@RequestMapping(value = "/empDataUpdate/{emp_no}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<TelDTO>> telList(@PathVariable("emp_no") Integer emp_no) throws Exception {
+		ResponseEntity<List<TelDTO>> entity = null;
+		System.out.println("ajax" + emp_no);
+		try {
+			entity = new ResponseEntity<>(empTelService.telList(emp_no), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	@RequestMapping(value = "/empDataUpdate/{tel_no}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> removeTel(@PathVariable("tel_no") Integer tel_no) {
+		ResponseEntity<String> entity = null;
+		try {
+			empTelService.deleteTel(tel_no);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

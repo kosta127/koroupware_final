@@ -5,6 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
+	$(function(){
+		$(".search-button").click(function(){
+			$("#searchForm").submit();
+		});
+		
+	});
+
 	function logout() {
 		location.href = '/logout';
 	}
@@ -176,7 +183,6 @@ text-decoration :none;
 }
 .header-search-span{
 font-family: 'Noto Sans KR', sans-serif; 
-	font-size: 15px;
 }
 .header-search-div{
  	margin-top: 15px;
@@ -187,7 +193,7 @@ font-family: 'Noto Sans KR', sans-serif;
   margin-top: 5px; 
 }
 .search-button{
-	margin-top: 3px;
+	/* margin-top: 3px; */
 	font-family: 'Noto Sans KR', sans-serif; 
 }
 .logout-button{
@@ -201,43 +207,41 @@ font-family: 'Noto Sans KR', sans-serif;
 	height: 60px;
 	margin-top: -17px;
 }
+.for-inline{
+	display: inline;
+}
 </style>
 </head>
 <body>
 <div class="col-md-1 main-font">
-<a href="/main" class="hidden-xs hidden-sm">
-<span class="main-font1">K</span><span class="main-font2">o</span><span class="main-font3">r</span><span class="main-font4">o</span><span class="main-font5">u</span><span class="main-font6">p</span><span class="main-font7">w</span><span class="main-font8">a</span><span class="main-font9">r</span><span class="main-font10">e</span>
-</a>
-<a href="/main" class="hidden-md hidden-lg">
-<span class="main-font1-1">K</span><span class="main-font2-1">o</span><span class="main-font3-1">r</span><span class="main-font4-1">o</span><span class="main-font5-1">u</span><span class="main-font6-1">p</span><span class="main-font7-1">w</span><span class="main-font8-1">a</span><span class="main-font9-1">r</span><span class="main-font10-1">e</span>
-</a>
+	<a href="/main" class="hidden-xs hidden-sm">
+	<span class="main-font1">K</span><span class="main-font2">o</span><span class="main-font3">r</span><span class="main-font4">o</span><span class="main-font5">u</span><span class="main-font6">p</span><span class="main-font7">w</span><span class="main-font8">a</span><span class="main-font9">r</span><span class="main-font10">e</span>
+	</a>
+	<a href="/main" class="hidden-md hidden-lg">
+	<span class="main-font1-1">K</span><span class="main-font2-1">o</span><span class="main-font3-1">r</span><span class="main-font4-1">o</span><span class="main-font5-1">u</span><span class="main-font6-1">p</span><span class="main-font7-1">w</span><span class="main-font8-1">a</span><span class="main-font9-1">r</span><span class="main-font10-1">e</span>
+	</a>
 </div>
 <div class="col-md-1"></div>
 <div class="col-md-6">
-		<form action="/search/search" method="post">
+		<form id="searchForm" action="/search/search" method="post" class="form-inline">
 			<div class="col-md-12 header-search-div">
-				<div class="col-md-4 header-search">
+				<div class="for-inline">
 					<span class="header-search-span">회원/부서 검색</span>
-					<select name="keyField">
-					<option value="emp_name">사원</option>
-					<option value="doc_name">문서</option>
-				</select>
-				</div>
-				
-				<div class="col-md-6">
+					<select name="keyField" class="form-control">
+						<option value="emp_name">사원</option>
+						<option value="doc_name">문서</option>
+					</select>
 					<input type="text" class="form-control search-text" name="search_content">
-				</div>
-				<div class="col-md-2">
-					<input type="submit" class="btn btn-block search-button"><i
-						class="glyphicon glyphicon-search"><input type="button" class="btn btn-info" onclick="attend()" value="출석체크"></i>
-						
+					<button class="btn search-button btn-lg">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
 				</div>
 			</div>
-				</form>
+		</form>
 				
 		</div>
 <div class="col-md-4">
-<div class="col-md-3"></div>
+<div class="col-md-2"></div>
 <div class="col-md-3 emp_img">
 <img class="header-emp-img block img-rounded" src="/displayFile?fileName=${login.emp_img}"/>
 </div>
@@ -245,8 +249,9 @@ font-family: 'Noto Sans KR', sans-serif;
 <div class="col-md-3 emp_name">
 <a href="/empDataUpdate?emp_no=${login.emp_no }"><span class="header-emp-name block">${login.emp_name }</span></a>
 </div>
-<div class="col-md-3 header-button">
-<button onclick="logout()" class="btn btn-block logout-button btn-lg"><i class="glyphicon glyphicon-off"></i></button>
+<div class="col-md-4 header-button">
+<button type="button" class="btn btn-lg" onclick="attend()"><i class="glyphicon glyphicon-ok"></i></button>
+<button onclick="logout()" class="btn logout-button btn-lg"><i class="glyphicon glyphicon-off"></i></button>
 </div>
 </div>
 </body>

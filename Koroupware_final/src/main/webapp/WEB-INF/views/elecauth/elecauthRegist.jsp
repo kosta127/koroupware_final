@@ -31,7 +31,7 @@
 		<div class="page-header">
 			<h3>결재작성</h3>
 		</div>
-		<form id="elec_auth_form" action="regist/0" method="post" class="form-horizontal">
+		<form id="elec_auth_form" action="/elecauth/regist/0" method="post" class="form-horizontal">
 			<!-- 작성자 -->
 			<div id="emp_div" class="form-group">
 				<label for="emp_name" class="col-xs-2 col-lg-2 control-label">안건 작성자</label> 

@@ -19,13 +19,11 @@ public class CategoryDAOImpl implements CategoryDAO {
 	
 	@Override
 	public int categoryInsert(CategoryVO category) throws Exception {
-		System.out.println("dao");
 		return sqlSession.insert(namespace+".categoryInsert", category);
 	}
 
 	@Override
 	public List<CategoryVO> categoryList(int community_no) throws Exception {
-		System.out.println("dao"+community_no);
 		return sqlSession.selectList(namespace+".categoryList", community_no);
 	}
 

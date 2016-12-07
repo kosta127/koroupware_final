@@ -20,7 +20,6 @@ public class SimpleCORSFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("in filter");
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		
 		httpResponse.setHeader("Access-Control-Allow-Origin", "*");

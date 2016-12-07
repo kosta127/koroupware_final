@@ -26,9 +26,15 @@
 	}
 
 </script>
+<style type="text/css">
+	.blank{
+		height: 50px;
+	}
+</style>
 </head>
 <body>
-		
+		<div class="col-md-12 blank"></div>
+		<div>
 		<form action="/doc/doc_managementRegist/${doc_box_no}/${emp_no}" method="post">
 		<table border="1" cellpadding="0" cellspacing="0" id="checklist" class="table table-hover">
 			<tr height="30">
@@ -58,6 +64,8 @@
 			<input type="button" value="문서수정이력보기" class="btn btn-default" onclick="fn_listDocHis()">
 			<input type="button" value="돌아가기" class="btn btn-default" onclick="fn_detailDoc_box()">
 			</form>
+		</div>
+		
 	
 		
 	

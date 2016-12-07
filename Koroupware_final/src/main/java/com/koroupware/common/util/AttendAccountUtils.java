@@ -16,49 +16,47 @@ public class AttendAccountUtils {
 		int total = 0;
 		
 		int lastDay = (new Date(year, month, 0)).getDate(); // 날짜와 월만 가지고 오면 됨
-		System.out.println(lastDay);// 마지막 달
-
+		
 		Calendar cal = Calendar.getInstance();
 
 		cal.set(Calendar.YEAR, year);
-		System.out.println(cal.get(Calendar.YEAR) + "년");
 		switch (month) {
-		case 1:
-			cal.set(Calendar.MONTH, Calendar.JANUARY);
-			break;
-		case 2:
-			cal.set(Calendar.MONTH, Calendar.FEBRUARY);
-			break;
-		case 3:
-			cal.set(Calendar.MONTH, Calendar.MARCH);
-			break;
-		case 4:
-			cal.set(Calendar.MONTH, Calendar.APRIL);
-			break;
-		case 5:
-			cal.set(Calendar.MONTH, Calendar.MAY);
-			break;
-		case 6:
-			cal.set(Calendar.MONTH, Calendar.JUNE);
-			break;
-		case 7:
-			cal.set(Calendar.MONTH, Calendar.JULY);
-			break;
-		case 8:
-			cal.set(Calendar.MONTH, Calendar.AUGUST);
-			break;
-		case 9:
-			cal.set(Calendar.MONTH, Calendar.SEPTEMBER);
-			break;
-		case 10:
-			cal.set(Calendar.MONTH, Calendar.OCTOBER);
-			break;
-		case 11:
-			cal.set(Calendar.MONTH, Calendar.NOVEMBER);
-			break;
-		case 12:
-			cal.set(Calendar.MONTH, Calendar.DECEMBER);
-			break;
+			case 1:
+				cal.set(Calendar.MONTH, Calendar.JANUARY);
+				break;
+			case 2:
+				cal.set(Calendar.MONTH, Calendar.FEBRUARY);
+				break;
+			case 3:
+				cal.set(Calendar.MONTH, Calendar.MARCH);
+				break;
+			case 4:
+				cal.set(Calendar.MONTH, Calendar.APRIL);
+				break;
+			case 5:
+				cal.set(Calendar.MONTH, Calendar.MAY);
+				break;
+			case 6:
+				cal.set(Calendar.MONTH, Calendar.JUNE);
+				break;
+			case 7:
+				cal.set(Calendar.MONTH, Calendar.JULY);
+				break;
+			case 8:
+				cal.set(Calendar.MONTH, Calendar.AUGUST);
+				break;
+			case 9:
+				cal.set(Calendar.MONTH, Calendar.SEPTEMBER);
+				break;
+			case 10:
+				cal.set(Calendar.MONTH, Calendar.OCTOBER);
+				break;
+			case 11:
+				cal.set(Calendar.MONTH, Calendar.NOVEMBER);
+				break;
+			case 12:
+				cal.set(Calendar.MONTH, Calendar.DECEMBER);
+				break;
 
 		}
 

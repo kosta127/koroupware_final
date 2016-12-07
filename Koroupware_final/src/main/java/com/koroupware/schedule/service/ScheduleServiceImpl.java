@@ -18,9 +18,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	
 	@Override
 	public void scheduleRegist(ScheduleVO schedule) throws Exception {
-		System.out.println("service");
 		dao.scheduleInsert(schedule);
-		
 	}
 
 	@Override

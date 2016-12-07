@@ -12,6 +12,7 @@ public class ScheduleVO {
 	private Timestamp schedule_start;
 	private Timestamp schedule_end;
 	private int emp_no;
+	private String schedule_start_String;
 	
 	public int getSchedule_no() {
 		return schedule_no;
@@ -67,12 +68,20 @@ public class ScheduleVO {
 	public void setEmp_no(int emp_no) {
 		this.emp_no = emp_no;
 	}
+	
+	public String getSchedule_start_String() {
+		return schedule_start_String;
+	}
+	public void setSchedule_start_String(String schedule_start_String) {
+		this.schedule_start_String = schedule_start_String;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleVO [schedule_no=" + schedule_no + ", schedule_distinct=" + schedule_distinct
 				+ ", schedule_regdate=" + schedule_regdate + ", schedule_deldate=" + schedule_deldate
 				+ ", schedule_title=" + schedule_title + ", schedule_contents=" + schedule_contents
-				+ ", schedule_start=" + schedule_start + ", schedule_end=" + schedule_end + ", emp_no=" + emp_no + "]";
+				+ ", schedule_start=" + schedule_start + ", schedule_end=" + schedule_end + ", emp_no=" + emp_no
+				+ ", schedule_start_String=" + schedule_start_String + "]";
 	}
 	
 	

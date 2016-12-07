@@ -16,9 +16,9 @@
 <!-- printTool -->
 <script src="/resources/printTool/jQuery.print.js"></script>
 <script type="text/javascript">
-	function cancel(){
+/* 	function cancel(){
 		location.href="view";
-	}
+	} */
 </script>
 </head>
 <body>
@@ -36,10 +36,12 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="text" ${schedule_contents } name="schedule_contents"></td>
+				<td><input type="text" value="${schedule_contents }" name="schedule_contents"></td>
 			</tr>
 		</table>
-		
+		<input type="hidden" name="year" value="${year}">
+		<input type="hidden" name="month" value="${month}">
+		<input type="hidden" name="day" value="${day}">
 		<input type="submit" class="btn btn-primary" value="등록">
 		<input type="button" class="btn btn-primary" onclick="cancel()" value="취소">
 	</form>

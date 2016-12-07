@@ -5,16 +5,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+.check-table{
+ 
+ text-align: center;
+ border-radius: 3px;
+   box-shadow: 2px 2px 2px 2px lightgray; 
+ 
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>'${login.emp_name}' 사원의 출석 현황</h1>
-	<table border="1px">
-		<tr>
+	<h2>'${login.emp_name}' 사원의 출석 현황</h2>
+	<table class="table table-striped check-table">
+		<tr> 
 			<td>회원 번호</td>
 			<td>날짜</td>
 			<td>지각여부</td>
 			<td>출석여부</td>
+			<td>비고</td>
 		</tr>
 		<c:forEach items="${attendList}" var="List">
 			<tr>
@@ -38,6 +48,7 @@
 						 x
 						</c:when>
 					</c:choose></td>
+					<td></td>
 			</tr>
 		</c:forEach>
 

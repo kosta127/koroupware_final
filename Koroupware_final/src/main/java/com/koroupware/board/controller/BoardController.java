@@ -118,7 +118,6 @@ public class BoardController {
 	public String remove(@RequestParam("board_no") int board_no, 
 						@ModelAttribute("cri") SearchCriteria cri, 
 						RedirectAttributes rttr)throws Exception{
-		System.out.println("remove");
 		service.boardRemove(board_no);
 		
 		rttr.addAttribute("page", cri.getPage());
@@ -137,7 +136,6 @@ public class BoardController {
 		model.addAttribute(service.boardRead(board_no));
 
 		cri.setCategory_no(cri.getCategory_no());
-		System.out.println("mod"+cri.getCategory_no());
 		
 		return "/board/modify";
 	}
@@ -159,7 +157,6 @@ public class BoardController {
 	@RequestMapping("/getAttach/{board_no}")
 	@ResponseBody
 	public List<String> getAttach(@PathVariable("board_no")int board_no)throws Exception{
-		System.out.println("controller"+board_no);
 		return service.getAttach(board_no);
 	}
 	

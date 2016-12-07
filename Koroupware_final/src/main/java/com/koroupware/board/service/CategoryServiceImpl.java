@@ -17,14 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	public void categoryRegist(CategoryVO category) throws Exception {
-		System.out.println("service");
 		dao.categoryInsert(category);
-		
 	}
 
 	@Override
 	public List<CategoryVO> categoryList(int community_no) throws Exception {
-		
 		return dao.categoryList(community_no);
 	}
 

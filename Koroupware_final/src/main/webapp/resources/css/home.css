@@ -1,0 +1,24 @@
+
+#news_list_div{
+	height : 265px;
+	overflow: auto;
+}
+
+
+#myclip_div{
+	height : 345px;
+	overflow: auto;
+}
+.center-point-section{
+	margin-top: 6px;
+}
+
+.shadow{
+	 box-shadow: 0.5px 0.5px 2px 2px lightgray;
+	 padding: 5px;
+	 margin-top: 20px;
+}
+
+.margin-main{
+	width: 30px;
+}

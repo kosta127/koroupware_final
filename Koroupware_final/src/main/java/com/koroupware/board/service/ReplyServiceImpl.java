@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.koroupware.board.domain.ReplyDTO;
 import com.koroupware.board.domain.ReplyVO;
 import com.koroupware.board.persistence.ReplyDAO;
 
@@ -17,13 +18,17 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	@Override
 	public void replyRegist(ReplyVO vo) throws Exception {
-		System.out.println("3");
 		dao.replyInsert(vo);
 		
 	}
-
+/*
 	@Override
 	public List<ReplyVO> replyList(int board_no) throws Exception {
+		return dao.replyList(board_no);
+	}
+*/
+	@Override
+	public List<ReplyDTO> replyList(int board_no) throws Exception {
 		return dao.replyList(board_no);
 	}
 

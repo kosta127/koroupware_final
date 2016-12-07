@@ -32,11 +32,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("login")==null){
-			System.out.println("au실패");
 			response.sendRedirect("/");
 			return false;
 		}
-		System.out.println("au성공");
+
 		return true;
 	}	
 }

@@ -3,12 +3,14 @@
 $(function() {
 	$("#okReport").on("click", function() {
 		var elec_auth_no=$(":input:hidden[name=elec_auth_no]").val();
-		location.href= "/elecauth/elecauthOkReport/"+elec_auth_no;
+		var emp_no=$(":input:hidden[name=emp_no]").val();
+		location.href= "/elecauth/elecauthOkReport/"+elec_auth_no, emp_no;
 	});
 
 	$("#noReprot").on("click", function() {
 		var elec_auth_no=$(":input:hidden[name=elec_auth_no]").val();
-		location.href= "/elecauth/elecauthNoReport/"+elec_auth_no;
+		var emp_no=$(":input:hidden[name=emp_no]").val();
+		location.href= "/elecauth/elecauthNoReport/"+elec_auth_no, emp_no;
 	});
 
 	

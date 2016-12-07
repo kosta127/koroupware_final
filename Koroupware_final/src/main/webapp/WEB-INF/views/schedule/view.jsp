@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -82,28 +82,37 @@ function monthUp(){
 }
 
 </script> -->
-
+<style type="text/css">
+.day{
+	font-size: 22px;
+}
+.cal-table{
+  box-shadow: 2px 2px 2px 2px lightgray; 
+}
+td{
+	vertical-align: top;
+}
+#setYear, #setMonth{
+	font-size: 30px;
+}
+</style>
 </head>
 <body>
 <!-- 달력상단부분 -->
-<h1>${emp_no}</h1>
-<h1>${startDay }</h1>
-<h1>${endDay }</h1>
-<h1>${year }</h1>
-<h1>${month }</h1>
-<h1>${schedule_start }</h1>
 
 
 <form action="view" method="get">
 <input type="hidden" name="year">
 <input type="hidden" name="month">
-<table>
+<table class="table">
 	<tr>
 		<td align="center">
 			<a onclick="monthDown()">◀</a>
-				<label id="setYear">${year }</label>년
-				<label id="setMonth">${month}</label>월 
+				<label id="setYear">${year }년</label>
+				<label id="setMonth">${month}월 </label>
 			<a onclick="monthUp()">▶</a>
+			
+			
 		</td>
 	</tr>
 </table> 
@@ -112,8 +121,8 @@ function monthUp(){
 
 
 <br>
-
-<table border="1">
+ 
+<table class="table table-bordered cal-table ">
 		<tr>
 			<td width="100" align="center"><font color="red">일</font></td>
 			<td width="100" align="center">월</td>
@@ -122,6 +131,7 @@ function monthUp(){
 			<td width="100" align="center">목</td>
 			<td width="100" align="center">금</td>
 			<td width="100" align="center"><font color="blue">토</font></td>
+			
 		</tr>
 		<!-- 해당 월의 첫째 줄의 공백 표시 -->
 		<tr>
@@ -135,34 +145,79 @@ function monthUp(){
 					<c:when test="${(startDay-2+day)%7==0}">
 						<td align="right">
 							<a href='<c:url value="regist/${year}/${month}/${day}"></c:url>'>
-								<font color="red" id="day">${day }</font>
+								<font color="red" class="day">${day }</font>
 							</a>	<br>
-							<c:forEach items="${list }" var="scheduleVO">
-								<input type="hidden" name="schedule_start" value="${schedule_start }">
-									<c:if test="${schedule_start ==day}">
-										<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>
-									</c:if>
+							<c:set var="time" value="${year}/${month}/${day}"></c:set>
+							
+							<c:forEach items="${list }" var="scheduleVO">								
+								<c:set var="temp_day" value="${fn:substring(scheduleVO.schedule_start_String, 6, 8)}"></c:set>
+								<c:choose>
+									<c:when test="${fn:startsWith(temp_day, '0') }">
+										<c:set var="zero_removed_day" value="${fn:substring(temp_day, 1, 2)}"></c:set>
+									</c:when>
+									<c:otherwise>
+										<c:set var="zero_removed_day" value="${temp_day}"></c:set>
+									</c:otherwise>
+								</c:choose>
+								<c:set var="for_compare_time" value="${year}/${month}/${zero_removed_day}"></c:set>
+								<c:if test="${for_compare_time == time}">
+									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
+								</c:if>
+								<%-- <c:if test="${scheduleVO.schedule_start_String == time}">
+									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>
+								</c:if> --%>
+								<%-- zzz<br>svo org : ${scheduleVO.schedule_start_String }<br> time : ${time }<br>org : ${temp_day}<br>zero removed : ${zero_removed_day }<br>${for_compare_time}<br><br> --%>
 							</c:forEach>
 						</td>
 					</c:when>
 					<c:when test="${(startDay-1+day)%7==0}">
 						<td align="right">
 							<a href='<c:url value="regist/${year}/${month}/${day}"></c:url>'>
-								<font color="blue" id="day">${day }</font>
+								<font color="blue" class="day">${day }</font>
 							</a><br>
+							<c:set var="time" value="${year}/${month}/${day}"></c:set>
 							<c:forEach items="${list }" var="scheduleVO">
-								<input type="hidden" name="schedule_start" value="${scheduleVO.schedule_start }">
-									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>		
-							</c:forEach> 
+								<c:set var="temp_day" value="${fn:substring(scheduleVO.schedule_start_String, 6, 8)}"></c:set>
+								<c:choose>
+									<c:when test="${fn:startsWith(temp_day, '0') }">
+										<c:set var="zero_removed_day" value="${fn:substring(temp_day, 1, 2)}"></c:set>
+									</c:when>
+									<c:otherwise>
+										<c:set var="zero_removed_day" value="${temp_day}"></c:set>
+									</c:otherwise>
+								</c:choose>
+								<c:set var="for_compare_time" value="${year}/${month}/${zero_removed_day}"></c:set>
+								<c:if test="${for_compare_time == time}">
+									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
+								</c:if><%-- 
+								<c:if test="${scheduleVO.schedule_start_String == time}">
+									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>
+								</c:if> --%>
+							</c:forEach>
 						</td>
 					</c:when>
 					<c:otherwise>
-						<td align="right" id="day">
-							<a href='<c:url value="regist/${year}/${month}/${day}"></c:url>'>${day }</a><br>
+						<td align="right" >
+							<a class="day" href='<c:url value="regist/${year}/${month}/${day}"></c:url>'>${day }</a><br>
+							<c:set var="time" value="${year}/${month}/${day}"></c:set>
+							${scheduleVO.schedule_start }
 							<c:forEach items="${list }" var="scheduleVO">
-								<input type="hidden" name="schedule_start" value="${scheduleVO.schedule_start }">
+								<c:set var="temp_day" value="${fn:substring(scheduleVO.schedule_start_String, 6, 8)}"></c:set>
+								<c:choose>
+									<c:when test="${fn:startsWith(temp_day, '0') }">
+										<c:set var="zero_removed_day" value="${fn:substring(temp_day, 1, 2)}"></c:set>
+									</c:when>
+									<c:otherwise>
+										<c:set var="zero_removed_day" value="${temp_day}"></c:set>
+									</c:otherwise>
+								</c:choose>
+								<c:set var="for_compare_time" value="${year}/${month}/${zero_removed_day}"></c:set>
+								<c:if test="${for_compare_time == time}">
+									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
+								</c:if><%-- 
+								<c:if test="${scheduleVO.schedule_start_String == time}">
 									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>
-								
+								</c:if> --%>
 							</c:forEach>
 						</td>	
 					</c:otherwise>
@@ -177,4 +232,3 @@ function monthUp(){
 </table> 
 </form>
 </body>
-</html>

@@ -32,7 +32,7 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String viewGet1(HttpSession session, ScheduleDTO schedule, Model model)throws Exception{
-		System.out.println("viewGet1");
+		//, ScheduleVO vo 지웟음 am 07:08
 		EmpDTO emp = (EmpDTO)session.getAttribute("login");
 		
 		Calendar cal = Calendar.getInstance(); //현재 날짜 가져오기
@@ -80,25 +80,25 @@ public class ScheduleController {
 		
 		int emp_no = emp.getEmp_no();	
 		
-		ScheduleVO scheduleVO = new ScheduleVO();
-		
-		if(scheduleVO.getSchedule_start()!=null){
-			scheduleVO.setSchedule_start(scheduleVO.getSchedule_start());
-		}
-		
 		model.addAttribute("emp_no", emp.getEmp_no());
-		model.addAttribute("year", schedule.getYear());//현재년도
+		model.addAttribute("year", (schedule.getYear() + "").substring(2));//현재년도
 		model.addAttribute("month", schedule.getMonth());//현재월
 		model.addAttribute("startDay", schedule.getStartDay());
 		model.addAttribute("endDay", schedule.getEndDay());
-		model.addAttribute("day", schedule.getDay());
-		model.addAttribute("schedule_start", scheduleVO.getSchedule_start());
+		model.addAttribute("currentDay", currentDay);
+		//model.addAttribute("schedule_start", vo.getSchedule_start());
+		
+		ScheduleVO ScheduleVO = new ScheduleVO();
+		
+		ScheduleVO.setEmp_no(emp_no);
+		
+		model.addAttribute("list", service.scheduleList(ScheduleVO));
 		
 		return "/schedule/view";
 	}
 
 	
-	/*@RequestMapping(value="/view", method=RequestMethod.POST)
+	@RequestMapping(value="/view", method=RequestMethod.POST)
 	public String viewGet(HttpSession session, ScheduleDTO schedule, RedirectAttributes rttr, @PathVariable("schedule_start")Timestamp schedule_start)throws Exception{
 		System.out.println("viewGet");
 		EmpDTO emp = (EmpDTO)session.getAttribute("login");
@@ -157,17 +157,17 @@ public class ScheduleController {
 			
 		System.out.println(schedule_start);
 		
-		
 		rttr.addAttribute("emp_no", emp.getEmp_no());
-		rttr.addAttribute("year", schedule.getYear());//현재년도
+		rttr.addAttribute("year", (schedule.getYear() + "").substring(2));//현재년도
 		rttr.addAttribute("month", schedule.getMonth());//현재월
 		rttr.addAttribute("startDay", schedule.getStartDay());
 		rttr.addAttribute("endDay", schedule.getEndDay());
-		rttr.addAttribute("day", schedule.getDay());
+		rttr.addAttribute("currentDay", schedule.getDay());
+		
 		rttr.addAttribute("list", service.scheduleList(scheduleVO));
 		
 		return "redirect:/schedule/view";
-	}*/
+	}
 	
 	/*@RequestMapping(value="/view", method=RequestMethod.POST)
 	public String viewPOST(HttpSession session, @ModelAttribute("schduleDTO") ScheduleDTO schedule, Model model)throws Exception{
@@ -257,24 +257,22 @@ public class ScheduleController {
 	@RequestMapping(value="/regist/{year}/{month}/{day}",  method = RequestMethod.POST)
 	public String registPOST(HttpSession session, ScheduleVO schedule, Model model,
 			@PathVariable int year, @PathVariable int month, @PathVariable int day, RedirectAttributes rttr)throws Exception{
-		System.out.println("postregist");
-		System.out.println("schedule tostring"+schedule.toString());
 		EmpDTO emp = (EmpDTO)session.getAttribute("login");
-		
+
+	
 		schedule.setSchedule_start(new Timestamp(year, month - 1, day,0,0,0,0));
 		
-		Timestamp schedule_start = schedule.getSchedule_start();
-		
+		SimpleDateFormat format = new SimpleDateFormat("yy/MM/dd");
+		String date = format.format(schedule.getSchedule_start());
 		
 		schedule.setEmp_no(emp.getEmp_no());
-		
 		
 		service.scheduleRegist(schedule);
 		
 		rttr.addAttribute("year", year);
 		rttr.addAttribute("month", month);
 		rttr.addAttribute("day", day);
-		rttr.addAttribute("schedule_start", schedule.getSchedule_start());
+		rttr.addAttribute("schedule_start", date);
 		
 		return "redirect:/schedule/view";
 	}

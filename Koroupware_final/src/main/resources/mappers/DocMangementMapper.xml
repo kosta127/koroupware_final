@@ -8,10 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertDoc_management" parameterType="DocManagementVO">
 		insert into doc_management(
-			doc_management_no,doc_no,doc_box_no
+			doc_no,doc_box_no
 		)
 		values(
-			seq_doc_management.NEXTVAL,#{doc_no},#{doc_box_no}
+			#{doc_no},#{doc_box_no}
 		)
 	</insert>
 	

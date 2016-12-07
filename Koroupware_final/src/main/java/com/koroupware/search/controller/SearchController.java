@@ -43,7 +43,6 @@ public class SearchController {
 	
 	@RequestMapping(value="/searchPerson", method=RequestMethod.GET)
 	public void SearchContent(@ModelAttribute("cri") SearchVO cri, Model model) throws Exception{
-		System.out.println(searchContent);
 		cri.setSearch_content(searchContent);
 		List<EmpDTO> list = service.listSearchPerson(cri);
 		
@@ -58,7 +57,6 @@ public class SearchController {
 	
 	@RequestMapping(value="/searchDoc", method=RequestMethod.GET)
 	public void SearchDoc(@ModelAttribute("cri") SearchVO cri, Model model) throws Exception{
-		System.out.println(searchContent);
 		cri.setSearch_content(searchContent);
 		List<EmpDTO> list = service.listSearchDoc(cri);
 		

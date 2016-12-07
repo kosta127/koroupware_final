@@ -22,7 +22,7 @@ public class SearchServiceImpl implements SearchService{
 		System.out.println(cri);
 		
 		List<EmpDTO> list = dao.listCriteriaPerson(cri);
-		System.out.println("리스트서치 서비스 :"+ list);
+
 		return list;
 	}
 

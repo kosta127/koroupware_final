@@ -23,7 +23,6 @@ public class CategoryController {
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
 	public void registCategory(@RequestParam("community_no") int community_no, Model model){
-		System.out.println("registGET");
 		model.addAttribute("community_no", community_no);
 	}
 	
@@ -31,8 +30,6 @@ public class CategoryController {
 	public String categoryPOST(@RequestParam("community_no") int community_no,
 			   					@RequestParam("category_name") String category_name,
 			   					RedirectAttributes rttr)throws Exception{
-		System.out.println("registPOST");
-		
 		CategoryVO category = new CategoryVO();
 		
 		category.setCommunity_no(community_no);
@@ -40,10 +37,8 @@ public class CategoryController {
 		
 		service.categoryRegist(category);
 		
-		System.out.println("1");
 		rttr.addAttribute("community_no", community_no);
 		/*rttr.addFlashAttribute("community_no", community_no);*/
-		System.out.println(community_no);
 		return "redirect:/category/list";
 	}
 	

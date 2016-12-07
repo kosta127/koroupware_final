@@ -98,7 +98,7 @@
 
 		</c:forEach>
 	</table>
-	<button id='newBtn' class="btn btn-default">게시판 생성</button>
+	<button id='newBtn' class="btn btn-default">게시글 작성</button>
 	<!-- 페이징처리 -->
 	<div class="box-footer">
 

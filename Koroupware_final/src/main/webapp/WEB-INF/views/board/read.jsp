@@ -298,10 +298,10 @@
 <body>
 <div class="table-responsive">
 	<div class="readTable">
-			<!-- <div class='popup back' style="display: none;"></div>
+			<div class='popup back' style="display: none;"></div>
 			<div id="popup_front" class='popup front' style="display: none;">
 				<img id="popup_img">
-			</div> -->
+			</div>
 			<div class="col-md-8">
 				<form method="post" action="modify">
 					<input type="hidden" name="board_no" value="${boardVO.board_no }">

@@ -37,10 +37,6 @@ public class ElecauthController {
 	public String elecauthList(Model model, HttpSession session, HttpServletRequest request,
 			 @RequestParam(value="kind", required=false) String kindFlag, 
 			 @RequestParam(value="receive", required=false) String receiveFlag)throws Exception{
-		
-		System.out.println("kind -> "+kindFlag );
-		System.out.println("receive -> "+receiveFlag);
-		
 		//default
 		if(kindFlag==null){
 			kindFlag = "wait";
@@ -145,6 +141,4 @@ public class ElecauthController {
 		
 		return "redirect:/elecauth/elecauthList";
 	}
-	
-	
 }

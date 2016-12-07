@@ -21,7 +21,6 @@ public class DocHisController {
 	
 	@RequestMapping(value="/doc_hisList/{emp_no}/{doc_box_no}",method=RequestMethod.GET)
 	public String doc_hisList(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
-		System.out.println("dfd");
 		List<DocHisVO> list = service.doc_hisList();
 		model.addAttribute("list",list);
 		return "/doc/doc_hisList";

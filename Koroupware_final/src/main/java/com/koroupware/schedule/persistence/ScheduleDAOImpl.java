@@ -20,7 +20,6 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	
 	@Override
 	public void scheduleInsert(ScheduleVO schedule) throws Exception {
-		System.out.println("dao");
 		Integer value = sqlsession.selectOne(namespace+".maxNumber");
 		
 		if(value==null){

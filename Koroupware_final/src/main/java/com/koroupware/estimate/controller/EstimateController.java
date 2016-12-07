@@ -28,7 +28,6 @@ public class EstimateController {
 
 	@RequestMapping(value = "/est_do", method = RequestMethod.GET)
 	public String est_start() {
-		System.out.println("머냐??");
 		return "/estimate/est_start";
 
 	}
@@ -140,30 +139,16 @@ public class EstimateController {
 					// 1분기 계산
 					account = totalResult.round(a,3)*100;
 					forth_quater= forth_quater + account;
-					System.out.println(i+"월  확률 :" + account);
 				}
-				
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 1분기 총합은???"+ first_quater);
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+ "의 1분기 마무리 : "+first_quater/3);
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 총합은???"+ secont_quater);
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 마무리 : "+secont_quater/3);
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 총합은???"+ third_quater);
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 마무리 : "+third_quater/3);
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 총합은???"+ forth_quater);
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 마무리 : "+forth_quater/3);
-				System.out.println("-------------------------------");
-				System.out.println(" ");
-				
 				
 				future_quater = (((first_quater/3)-(secont_quater/3))+((secont_quater/3)-(third_quater/3))+((third_quater/3)-(forth_quater/3)))/3;
 				final_quater = ((first_quater/3)+(secont_quater/3)+(third_quater/3)+(forth_quater/3))/4;
 				future_quater = final_quater+ future_quater;
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 예측값 : "+future_quater);
-				System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 최종 평균 : "+final_quater);
+
 				resultVO.setQuarterfirst(first_quater/3);
 				resultVO.setQuartersecond(secont_quater/3);
 				resultVO.setQuarterthird(third_quater/3);
-				System.out.println("데이터 넣음");
+
 				resultVO.setQuarterforth(forth_quater/3);
 				resultVO.setFinalquarter(final_quater);
 				resultVO.setFuture_quater(future_quater);
@@ -182,19 +167,15 @@ public class EstimateController {
 				
 		
 			}else{
-				System.out.println("이미 넣었음");
 				return "redirect:/estimate/estimate_output";
-				
 			}
 	}
 		
 		for(int k= 0; k<emp_count; k++){
 			attendVO.setEmp_no(attendDept_EmpList.get(k).getEmp_no());
-			System.out.println("사원 번호 : "+ attendDept_EmpList.get(k).getEmp_no());
 			
 			//1분기
 			for(int i=1; i<=3; i++){
-			System.out.println(attendDept_EmpList.get(k).getEmp_no());
 			attendVO.count(attendDept_EmpList.get(k).getEmp_no(), year, i);
 
 			int count = service.attendCount(attendVO);
@@ -206,10 +187,8 @@ public class EstimateController {
 			
 			// 1분기 계산
 			account = totalResult.round(a,3)*100;
-			System.out.println(i+"월  확률 :" + account);
 			
 			first_quater= first_quater + account;	
-			System.out.println("현재 가지고 있는 분기 점수 : "+ first_quater);
 		}
 		
 
@@ -225,7 +204,6 @@ public class EstimateController {
 			// 1분기 계산
 			account = totalResult.round(a,3)*100;
 			secont_quater= secont_quater + account;
-			System.out.println(i+"월  확률 :" + account);
 		}
 
 		
@@ -241,7 +219,6 @@ public class EstimateController {
 			// 1분기 계산
 			account = totalResult.round(a,3)*100;
 			third_quater= third_quater + account;
-			System.out.println(i+"월  확률 :" + account);
 		}
 
 		//4분기
@@ -256,32 +233,11 @@ public class EstimateController {
 			// 1분기 계산
 			account = totalResult.round(a,3)*100;
 			forth_quater= forth_quater + account;
-			System.out.println(i+"월  확률 :" + account);
 		}
-		
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 1분기 총합은???"+ first_quater);
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+ "의 1분기 마무리 : "+first_quater/3);
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 총합은???"+ secont_quater);
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 마무리 : "+secont_quater/3);
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 총합은???"+ third_quater);
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 마무리 : "+third_quater/3);
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 총합은???"+ forth_quater);
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 2분기 마무리 : "+forth_quater/3);
-		System.out.println("-------------------------------");
-		System.out.println(" ");
-		
-		
+
 		future_quater = (((first_quater/3)-(secont_quater/3))+((secont_quater/3)-(third_quater/3))+((third_quater/3)-(forth_quater/3)))/3;
 		final_quater = ((first_quater/3)+(secont_quater/3)+(third_quater/3)+(forth_quater/3))/4;
 		future_quater = final_quater+ future_quater;
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 예측값 : "+future_quater);
-		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 최종 평균 : "+final_quater);
-		
-		
-
-		
-		
-		
 		
 		first_quater=0;
 		secont_quater=0;
@@ -290,7 +246,7 @@ public class EstimateController {
 		final_quater=0;
 		future_quater=0;
 		}
-		//model.addAttribute("AttendQuaterList", AttendQuaterList);
+
 		return "redirect:/estimate/estimate_output";
 	}
 
@@ -329,26 +285,20 @@ public class EstimateController {
 
 		for (int k = 0; k < emp_count; k++) {
 			attendVO.setEmp_no(attendDept_EmpList.get(k).getEmp_no());
-			System.out.println("사원 번호 : " + attendDept_EmpList.get(k).getEmp_no());
 
 			// 1분기
 			for (int i = 1; i <= 3; i++) {
-				System.out.println(attendDept_EmpList.get(k).getEmp_no());
 				attendVO.count(attendDept_EmpList.get(k).getEmp_no(), year, i);
 
 				int count = service.attendCount(attendVO);
 
 				resultTotal = totalResult.dateTotal(year, i);
-				System.out.println((double) count);
-				System.out.println((double) resultTotal);
 				double a = (double) count / (double) resultTotal;
 
 				// 1분기 계산
 				account = totalResult.round(a, 3) * 100;
-				System.out.println(i + "월  확률 :" + account);
 
 				first_quater = first_quater + account;
-				System.out.println("현재 가지고 있는 분기 점수 : " + first_quater);
 			}
 
 			// 2분기
@@ -363,7 +313,6 @@ public class EstimateController {
 				// 1분기 계산
 				account = totalResult.round(a, 3) * 100;
 				secont_quater = secont_quater + account;
-				System.out.println(i + "월  확률 :" + account);
 			}
 
 			// 3분기
@@ -378,7 +327,6 @@ public class EstimateController {
 				// 1분기 계산
 				account = totalResult.round(a, 3) * 100;
 				third_quater = third_quater + account;
-				System.out.println(i + "월  확률 :" + account);
 			}
 
 			// 4분기
@@ -393,32 +341,18 @@ public class EstimateController {
 				// 1분기 계산
 				account = totalResult.round(a, 3) * 100;
 				forth_quater = forth_quater + account;
-				System.out.println(i + "월  확률 :" + account);
 			}
-
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 1분기 총합은???" + first_quater);
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 1분기 마무리 : " + first_quater / 3);
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 2분기 총합은???" + secont_quater);
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 2분기 마무리 : " + secont_quater / 3);
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 2분기 총합은???" + third_quater);
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 2분기 마무리 : " + third_quater / 3);
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 2분기 총합은???" + forth_quater);
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 2분기 마무리 : " + forth_quater / 3);
-			System.out.println("-------------------------------");
-			System.out.println(" ");
-
+			
 			future_quater = (((first_quater / 3) - (secont_quater / 3)) + ((secont_quater / 3) - (third_quater / 3))
 					+ ((third_quater / 3) - (forth_quater / 3))) / 3;
 			final_quater = ((first_quater / 3) + (secont_quater / 3) + (third_quater / 3) + (forth_quater / 3)) / 4;
 			future_quater = final_quater + future_quater;
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 예측값 : " + future_quater);
-			System.out.println(attendDept_EmpList.get(k).getEmp_no() + "의 최종 평균 : " + final_quater);
 
 			if (AttendQuaterList.size() == 0) {
 				resultVO.setQuarterfirst(first_quater / 3);
 				resultVO.setQuartersecond(secont_quater / 3);
 				resultVO.setQuarterthird(third_quater / 3);
-				System.out.println("데이터 넣음");
+				
 				resultVO.setQuarterforth(forth_quater / 3);
 				resultVO.setFinalquarter(final_quater);
 				resultVO.setFuture_quater(future_quater);
@@ -432,7 +366,7 @@ public class EstimateController {
 						resultVO.setQuarterfirst(first_quater / 3);
 						resultVO.setQuartersecond(secont_quater / 3);
 						resultVO.setQuarterthird(third_quater / 3);
-						System.out.println("데이터 넣음");
+
 						resultVO.setQuarterforth(forth_quater / 3);
 						resultVO.setFinalquarter(final_quater);
 						resultVO.setFuture_quater(future_quater);
@@ -440,8 +374,7 @@ public class EstimateController {
 						resultVO.setResult_year(year);
 						service.insertAttendQuater(resultVO);
 					} else {
-						System.out.println("이미 넣었음");
-
+						//System.out.println("이미 넣었음");
 					}
 				}
 
@@ -459,9 +392,11 @@ public class EstimateController {
 	@RequestMapping(value = "/estimate_output", method = RequestMethod.GET)
 	public String output_estimate(Model model) throws Exception {
 		List<ResultDTO> AttendQuaterList = service.AttendQuaterDTOList();
+		/*
 		for (int i = 0; i < AttendQuaterList.size(); i++) {
 			System.out.println("예측값 출력 : " + AttendQuaterList.get(i).getFuture_quater());
 		}
+		*/
 		model.addAttribute("list", AttendQuaterList);
 		return "/estimate/attend_est_table";
 	}
@@ -469,7 +404,6 @@ public class EstimateController {
 	@RequestMapping(value = "/graph/graph_result")
 	public @ResponseBody List<ResultDTO> resultGraph(Model model) throws Exception {
 		List<ResultDTO> AttendQuaterList = service.AttendQuaterDTOList();
-		System.out.println(AttendQuaterList);
 		return AttendQuaterList;
 	}
 }
