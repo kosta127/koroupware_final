@@ -10,7 +10,7 @@
 	</insert>
 
 	<select id="attendCheck" resultType="AttendVO">
-		select emp_no, to_char(attend_date,'yyyy/MM/dd') attend_date from attend
+		select emp_no, to_char(attend_date,'yyyy-MM-dd') attend_date from attend
 		where emp_no=#{emp_no} and attend_date=#{attend_date}
 	</select>
 

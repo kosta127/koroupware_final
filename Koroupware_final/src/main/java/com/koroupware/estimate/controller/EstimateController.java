@@ -27,10 +27,17 @@ public class EstimateController {
 	@Inject
 	private EstimateService service;
 	
-	@RequestMapping(value = "/est_do", method = RequestMethod.GET)
-	public String est_start(){
-		System.out.println("머냐??");
-		return "/estimate/est_start";
+	@RequestMapping(value = "/est_do/{emp_no}", method = RequestMethod.GET)
+	public @ResponseBody int est_start(@PathVariable("emp_no") int emp_no) throws Exception{
+		int result = service.est_check(emp_no);
+		return result;
+		
+	}
+	
+	@RequestMapping(value = "/est_list", method = RequestMethod.GET)
+	public String est_list() throws Exception{
+		
+		return "/estimate/est_list";
 		
 	}
 	
@@ -263,7 +270,7 @@ public class EstimateController {
 			System.out.println(i+"월  확률 :" + account);
 			
 			first_quater= first_quater + account;	
-			System.out.println("현재 가지고 있는 분기 점수 : "+ first_quater);
+			
 		}
 		
 
@@ -279,7 +286,7 @@ public class EstimateController {
 			// 1분기 계산
 			account = totalResult.round(a,3)*100;
 			secont_quater= secont_quater + account;
-			System.out.println(i+"월  확률 :" + account);
+		
 		}
 
 		
@@ -295,7 +302,7 @@ public class EstimateController {
 			// 1분기 계산
 			account = totalResult.round(a,3)*100;
 			third_quater= third_quater + account;
-			System.out.println(i+"월  확률 :" + account);
+			
 		}
 
 		//4분기
@@ -310,7 +317,7 @@ public class EstimateController {
 			// 1분기 계산
 			account = totalResult.round(a,3)*100;
 			forth_quater= forth_quater + account;
-			System.out.println(i+"월  확률 :" + account);
+			
 		}
 		
 		System.out.println(attendDept_EmpList.get(k).getEmp_no()+"의 1분기 총합은???"+ first_quater);

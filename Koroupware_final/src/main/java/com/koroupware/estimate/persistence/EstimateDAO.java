@@ -21,4 +21,6 @@ public interface EstimateDAO {
 
 	List<ResultDTO> attendQuaterDTOList();
 
+	int est_check(int emp_no);
+
 }

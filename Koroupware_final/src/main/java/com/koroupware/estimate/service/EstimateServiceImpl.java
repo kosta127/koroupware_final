@@ -53,4 +53,10 @@ public class EstimateServiceImpl implements EstimateService{
 		List<ResultDTO> list = estimateDAO.attendQuaterDTOList();
 		return list;
 	}
+
+	@Override
+	public int est_check(int emp_no) throws Exception {
+		int result = estimateDAO.est_check(emp_no);
+		return result;
+	}
 }

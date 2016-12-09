@@ -51,4 +51,8 @@
 		VALUES(#{emp_no}, #{result_year},#{quarterfirst}, #{quartersecond}, #{quarterthird},
 		#{quarterforth}, #{finalquarter},#{future_quater})
 	</insert>
+	
+	<select id="est_check" resultType="Integer" parameterType="Integer">
+		select emp_no from emp where POSITION_NO>1 and EMP_NO=#{emp_no}
+	</select>
 </mapper>

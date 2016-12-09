@@ -58,4 +58,12 @@ public class EstimateDAOImpl implements EstimateDAO{
 		return list;
 	}
 
+	@Override
+	public int est_check(int emp_no) {
+		System.out.println("값은?? :: "+emp_no);
+		int result = sqlSession.selectOne(namespace+".est_check", emp_no);
+		System.out.println(result);
+		return result;
+	}
+
 }

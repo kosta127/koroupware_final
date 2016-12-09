@@ -20,5 +20,7 @@ public interface EstimateService {
 	public void insertAttendQuater(ResultVO resultVO) throws Exception;
 
 	public List<ResultDTO> AttendQuaterDTOList() throws Exception;
+
+	public int est_check(int emp_no)throws Exception;
 	
 }
