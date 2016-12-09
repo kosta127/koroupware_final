@@ -69,47 +69,5 @@
 		<button class="btn btn-primary center-point-section" id="search_btn">중간지점 탐색</button>
 	</div>
 	<!-- 중간지점 찾기 끝-->
-<body>
-	<!-- 오늘의 뉴스 시작 -->
-	<div id="main_news" class="col-md-6 shadow">
-		<ul id="news_tab" class="nav nav-tabs">
-			    <li id="news_latest"><a href="#">최신 뉴스</a></li>
-			    <li id="news_myclip"><a href="#">내가 스크랩한 뉴스</a></li>
-	 		</ul> 
-	 		    
-	 		<!-- 최신 뉴스 -->
-			<div id="todaynews_div"><div id="news_list_div"></div></div>
-			
-			<!-- 내가 스크랩한 뉴스 --> 
-			<div id="myclip_div">
-				<table class="table table-hover">
-					<thead id="myclip_thead">
-						<tr> 
-							<td>번호</td>
-							<td>카테고리</td>
-							<td>제목</td>
-							<td>스크랩날짜</td>
-						</tr>
-					</thead>
-					<tbody id="myclip_tbody"></tbody>
-				</table>
-			</div>
-	</div>
-	<!-- 오늘의 뉴스 끝 -->
-	<div class="col-md-1 margin-main"><!-- 여백용 --></div>
-	<!-- 중간지점 찾기 시작 -->  
-	<div id="main_map" class="col-md-5 shadow">
-		<div class="map_wrap">
-			<div id="map"
-				style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-			<ul id="category">
-				<li id="SW8"><span class="category_bg subway"></span> 지하철</li>
-				<li id="CE7"><span class="category_bg cafe"></span> 카페</li>
-			</ul>
-		</div>
-		
-		<button class="btn btn-primary center-point-section" id="search_btn">중간지점 탐색</button>
-	</div>
-	<!-- 중간지점 찾기 끝-->
 </body>
 </html>
