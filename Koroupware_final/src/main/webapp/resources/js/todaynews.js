@@ -270,10 +270,11 @@ $(function(){
 	
 	//스크랩한 뉴스 목록 만듦
 	function makeMyClipList(data){
-		console.log(data);
+		console.log(data.length);
 		var $tbody = $('#myclip_tbody').html('');
+		var datasize = data.length;
 		$.each(data, function(idx, item){
-			$('<tr>').append($('<td>').text(idx+1))
+			$('<tr>').append($('<td>').text(datasize))
 					.append($('<td>').text((item.category==null)?
 							"":item.category))
 					.append($('<td>').text(item.title))
@@ -287,6 +288,7 @@ $(function(){
 						selectedNews = item;
 					})
 					.appendTo($tbody);
+			datasize--;
 		});
 	}
 	

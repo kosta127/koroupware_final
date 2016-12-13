@@ -21,6 +21,9 @@
 	box-shadow: 0px 0px 0.3px 0.3px lightgray;
 }
 
+.margin-top{
+	margin-top: 20px;
+}
 
 .copyright{
 	font-family: 'Nanum Pen Script', serif;
@@ -34,9 +37,13 @@
 	background: black;
 }
 
+.remove_margin{
+	margin-left: 0;
+}
+
 </style>
-<body class="footer-body">
-	<div class="footer-all">
+<body class="footer-body remove_margin">
+	<div class="footer-all remove_margin">
 		<div class="col-md-12 footer-void"></div>
 		<div class="col-md-12 con2">
 			<address>

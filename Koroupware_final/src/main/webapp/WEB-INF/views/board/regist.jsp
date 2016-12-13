@@ -130,7 +130,7 @@ $(document).ready(function(){
 </style>
 </head>
 <body>
-
+<br><br>
 <form action="regist" method="post">
 	<input type="hidden" value="${category_no }" name="category_no" id="category_no"/>
 	<table class="table table-bordered table-hover">
@@ -168,7 +168,7 @@ $(document).ready(function(){
 		<button type="submit" class="btn btn-primary" onclick="cancel()">취소</button>
 	</div>
 </form>
-
-
+<br>
+<br>
 </body>
 </html>

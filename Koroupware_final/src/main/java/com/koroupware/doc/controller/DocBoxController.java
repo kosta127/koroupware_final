@@ -3,6 +3,7 @@ package com.koroupware.doc.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.koroupware.doc.domain.DocBoxVO;
 import com.koroupware.doc.domain.DocVO;
 import com.koroupware.doc.service.DocBoxService;
+import com.koroupware.member.dto.EmpDTO;
 
 @Controller
 @RequestMapping("/doc/*")
@@ -34,14 +36,16 @@ public class DocBoxController {
 	
 	
 	@RequestMapping(value="/doc_boxRegist", method=RequestMethod.GET)
-	public void doc_boxRegistGET(@RequestParam("emp_no") int emp_no,Model model){
+	public void doc_boxRegistGET(Model model, HttpSession session){
+		EmpDTO dto = (EmpDTO) session.getAttribute("login");
+		int emp_no = dto.getEmp_no();		
 		model.addAttribute("emp_no",emp_no);
 	}
 	
 	@RequestMapping(value="/doc_boxRegist", method=RequestMethod.POST)
 	public String doc_boxRegistPOST(DocBoxVO vo){
 		service.doc_boxRegist(vo);
-		return "redirect:/doc/doc_boxList/"+vo.getEmp_no();
+		return "redirect:/doc/docList/"+vo.getEmp_no();
 	}
 	
 	@RequestMapping(value="/doc_boxRead/{doc_box_no}/{emp_no}", method=RequestMethod.GET)

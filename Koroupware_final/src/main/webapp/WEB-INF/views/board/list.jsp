@@ -76,27 +76,29 @@
 	<form action="regist" method="get">
 	<input type="hidden" value="${category_no }" name="category_no">
 	<br><br><br>
-	<table class="table table-bordered table-hover">
-		<tr height="30">
-			<td width="50" align="center">NO</td>
-			<td width="300" align="center">제목</td>
-			<td width="250" align="center">작성자</td>
-			<td width="150" align="center">등록일</td>
-			<td width="100" align="center">조회수</td>
-		</tr>
-		<c:forEach items="${list}" var="boardVO">
-
-			<tr>
-				<td>${boardVO.board_no}</td>
-				<td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&board_no=${boardVO.board_no}&category_no=${category_no}'>
-						${boardVO.board_title} </a></td>
-				<td><input type="hidden" value="${emp_no }">${emp_name}</td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-						value="${boardVO.board_regdate}" /></td>
-				<td><span class="badge bg-red">${boardVO.board_hit }</span></td>
+	<table class="table table-hover">
+		<thead>
+			<tr height="30">
+				<th width="50" align="center">NO</th>
+				<th width="300" align="center">제목</th>
+				<th width="250" align="center">작성자</th>
+				<th width="150" align="center">등록일</th>
+				<th width="100" align="center">조회수</th>
 			</tr>
-
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="boardVO">
+				<tr>
+					<td>${boardVO.board_no}</td>
+					<td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&board_no=${boardVO.board_no}&category_no=${category_no}'>
+							${boardVO.board_title} </a></td>
+					<td><input type="hidden" value="${emp_no }">${emp_name}</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+							value="${boardVO.board_regdate}" /></td>
+					<td><span class="badge bg-red">${boardVO.board_hit }</span></td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	<button id='newBtn' class="btn btn-default">게시글 작성</button>
 	<!-- 페이징처리 -->

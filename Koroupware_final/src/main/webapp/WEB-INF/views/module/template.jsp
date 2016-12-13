@@ -22,6 +22,10 @@
 .main-leftMenubar{
  box-shadow: 0px 0.3px 0.3px 0px lightgray; 
 }
+
+.main-footer{
+	margin-left: 0;
+}
 </style>
 </head>
 <body> 
@@ -38,7 +42,7 @@
 	<tiles:insertAttribute name="body"/>
 	</div>
 	<!-- 푸터영역 -->
-	<div class="main-footer col-md-12">
+	<div class="main-footer col-md-12 ">
 	<tiles:insertAttribute name="footer"/>
     </div>
 </body>

@@ -39,6 +39,6 @@ public class DocManagmentController {
 			vo.setDoc_no(doc_no[i]);
 			service.doc_managementRegist(vo);
 		}
-		return "redirect:/doc/doc_boxRead/"+doc_box_no+"/"+emp_no;
+		return "redirect:/doc/docList/"+emp_no;
 	}
 }

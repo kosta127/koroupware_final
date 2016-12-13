@@ -16,11 +16,13 @@
 <link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<!--  -->
 <script src="/resources/js/elecauthList.js"></script>
 <link href="/resources/css/elecauthList.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
+	<br>
 	<form id="flag_form">
 		<input type="hidden" id="kind" name="kind" value="${kind }">
 		<input type="hidden" id="receive" name="receive" value="${receive }">
@@ -51,7 +53,7 @@
 				</div>
 			</div>
 
-			<table class="table table-bordered table-hover">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>문서번호</th>

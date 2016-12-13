@@ -87,7 +87,7 @@ function webrtc() {
 		<ul class="nav tabs">
 			<li class="sidebar-blue"><a href="/elecauth/elecauthList">전자결재</a></li>
 			<li class="sidebar-red"><a
-				href="/doc/doc_boxList/${login.emp_no}">문서</a></li>
+				href="/doc/docList/${login.emp_no}">문서</a></li>
 			<li class="sidebar-green"><a href="/community/list">커뮤니티</a></li>
 			<li class="sidebar-orange"><a href="/dept/List">조직도</a></li>
 			<li class="sidebar-blue"><a

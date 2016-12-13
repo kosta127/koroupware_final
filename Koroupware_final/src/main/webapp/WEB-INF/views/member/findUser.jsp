@@ -5,12 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="/lib/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./css/Findform.css"/>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-<script src="//code.jquery.com/jquery.min.js"></script>
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>아이디/비밀번호 찾기</title>
 
 </head>
@@ -34,13 +35,15 @@
 		<div class="row2">
 			<div class="col-xs-5">
 				<span class="find-pass-search">비밀번호 찾기</span>
-				<form action="FindPwd" method="post">
+				<form action="/FindPwd" method="post">
 						<span class="my-id">아이디</span> 
 						<input type="text" name="emp_id" class="input-id form-control">
 						<span class="residentnumber">주민번호</span> 
 						<input type="text" name="emp_residentnumber" class="form-control">
 					
 					<br> <input type="submit" class="find-pass btn btn-primary" value="비밀번호 찾기">
+					
+					<input type="submit" value="Zzzzzz">
 				</form>
 			</div>
 		</div>

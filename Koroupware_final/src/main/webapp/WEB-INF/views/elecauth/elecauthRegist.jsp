@@ -27,7 +27,7 @@
 <title>전자결재 - 결재 작성</title>
 </head>
 <body>
-	<div class="container">
+	<div class="col-md-11">
 		<div class="page-header">
 			<h3>결재작성</h3>
 		</div>

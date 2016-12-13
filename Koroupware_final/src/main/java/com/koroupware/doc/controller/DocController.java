@@ -19,9 +19,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koroupware.doc.domain.DocBoxVO;
 import com.koroupware.doc.domain.DocVO;
+import com.koroupware.doc.service.DocBoxService;
 import com.koroupware.doc.service.DocService;
 
 @Controller
@@ -30,6 +33,9 @@ public class DocController {
 	
 	@Inject
 	private DocService service;
+	
+	@Inject
+	private DocBoxService docBoxService;
 	
 	@RequestMapping(value="/docRead/{doc_no}/{doc_box_no}/{emp_no}",method=RequestMethod.GET)
 	public String docRead(@PathVariable("emp_no") int emp_no,@PathVariable("doc_no") int doc_no,
@@ -42,12 +48,21 @@ public class DocController {
 		return "/doc/docRead";
 	}
 	
-	@RequestMapping("/docList/{doc_box_no}/{emp_no}")
-	public String listDoc(Model model,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no){
-		List<DocVO> list = service.docList();
-		model.addAttribute("list",list);
-		model.addAttribute("emp_no",emp_no);
-		model.addAttribute("doc_box_no",doc_box_no);
+	@RequestMapping("/docList/{emp_no}")
+	public String listDoc(Model model, @PathVariable("emp_no") int emp_no,
+			@RequestParam(value="doc_box_no",required=false) Integer doc_box_no){
+		List<DocVO> list = null;
+		List<DocBoxVO> docBoxList = docBoxService.doc_boxList(emp_no);
+		//System.out.println("docboxno => " +doc_box_no);
+		if(doc_box_no == null || doc_box_no == 0){
+			list = service.docList();
+		}else{
+			list = docBoxService.doc_boxRead(doc_box_no);
+			model.addAttribute("doc_box_no", doc_box_no);
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("boxlist", docBoxList);
+		model.addAttribute("emp_no", emp_no);
 		return "/doc/docList";
 	}
 	
@@ -60,6 +75,7 @@ public class DocController {
 	
 	@RequestMapping(value="/docRegist/{doc_box_no}/{emp_no}",method=RequestMethod.POST)
 	public String docRegistPOST(DocVO vo,@PathVariable("emp_no") int emp_no,@PathVariable("doc_box_no") int doc_box_no) throws Exception{
+		System.out.println(vo);
 		service.docRegist(vo);
 		return "redirect:/doc/docList/"+emp_no+"/"+doc_box_no;
 	}
