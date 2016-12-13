@@ -22,7 +22,7 @@
 	rel='stylesheet' type='text/css'>
 <script src="/resources/js/docList.js"></script>
 <title>Insert title here</title>
-<style type="text/css">
+<style type="text/css"> 
 .blank {
 	height: 50px;
 }
