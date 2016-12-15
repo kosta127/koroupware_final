@@ -74,20 +74,14 @@
 			<c:if test="${c.approval_list_pass ==null }">
 			<c:if test="${login.emp_no==c.emp_no }">
 			<c:if test="${elecauthRead.elec_auth_enddate>now}">
-				<form action="elecauthOkReport">
-					<input type="hidden" name="emp_no" value="${c.emp_no }">
-					<input type="hidden" name="elec_auth_no" value="${elecauthRead.elec_auth_no }">
-					<div>
-						<input type="submit" class="btn btn-info" value="½ÂÀÎ">
-					</div>				
-				</form>	
-				<form action="elecauthNoReport">
-					<input type="hidden" name="emp_no" value="${c.emp_no }">
-					<input type="hidden" name="elec_auth_no" value="${elecauthRead.elec_auth_no }">
-					<div>
-						<input type="submit" class="btn btn-danger" value="°ÅºÎ">	
-					</div>				
-				</form>	
+				<div id="appr_reject_div" class="avoid-this">
+					<form id="appr_reject_form" class="form-inline">
+						<input type="hidden" name="emp_no" value="${c.emp_no }">
+						<input type="hidden" name="elec_auth_no" value="${elecauthRead.elec_auth_no }">
+					</form>	
+					<input type="button" class="btn btn-info" value="½ÂÀÎ">
+					<input type="button" class="btn btn-danger" value="°ÅºÎ">		
+				</div>
 			</c:if>				
 			</c:if>
 			</c:if>
@@ -95,7 +89,7 @@
 	</c:if>
 
 	<c:if test="${login.emp_no== elecauthRead.emp_no}">
-		<form action="elecauthDelete">
+		<form action="elecauthDelete" class="form-inline avoid-this">
 			<input type="hidden" name="elec_auth_no" value=${elecauthRead.elec_auth_no }>
 			 <input type="hidden" name="emp_no" value=${login.emp_no }> 
 			 <input type="submit" class="btn btn-warning" value="»èÁ¦">
@@ -141,7 +135,7 @@
 		</c:forEach>
 	</table> 
 	</div>
-	<input id="printButton" type="button" class="btn btn-success"
+	<input id="printButton" type="button" class="btn btn-success avoid-this"
 		name="print2" value="ÀÎ¼â">
 </body>
 </html>

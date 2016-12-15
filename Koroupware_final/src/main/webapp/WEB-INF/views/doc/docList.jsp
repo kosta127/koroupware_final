@@ -85,10 +85,12 @@ table{
 			</table>
 			
 			<c:if test="${doc_box_no!=null }">
-				<input type="submit" id="add_doc_into_box_btn" value="문서함에 문서 추가" class="btn btn-default">
-				<input type="button" id="add_doc_btn" value="문서등록" class="btn btn-default"> 
-				<input type="button" id="list_his_btn" value="문서수정이력보기"
-					class="btn btn-default"> 
+				<div class="pull-right">
+					<input type="submit" id="add_doc_into_box_btn" value="문서함에 문서 추가" class="btn btn-default">
+					<input type="button" id="add_doc_btn" value="문서등록" class="btn btn-default"> 
+					<input type="button" id="list_his_btn" value="문서수정이력보기"
+						class="btn btn-default"> 
+				</div>
 			</c:if>
 				<!-- <input
 				type="button" value="돌아가기" class="btn btn-default"

@@ -62,7 +62,6 @@ $(function(){
 	
 	//뉴스 목록 가져오기
 	function getNewsList(newsCompanyNo, rssUrl){
-		console.log('get news list -> ' + newsCompanyNo )
 		var newsListAttr = {
 				url: '/todaynews/newsList',
 				type: 'post',
@@ -102,10 +101,9 @@ $(function(){
 						'newsUrl' : item.link,
 						'charset' : selectedNewsCompany.news_company_charset
 					},
-					//async: false,
 					success: showNewsDetail
 				});
-			})
+			});
 		});
 	}
 	
@@ -154,12 +152,12 @@ $(function(){
 			    type: 'inline'
 			  },
 			  closeOnContentClick: false,
-			  /*callbacks: {
+			  callbacks: {
 				    close: function() {
 				    	selectedNews = null;
 				    	selectedNewsDetail = null;
 				    }
-				  },*/
+				  },
 			  mainClass: 'my-mfp-zoom-in'
 			}, 0);
 		
