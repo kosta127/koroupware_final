@@ -33,11 +33,13 @@ public class UploadController {
 	
 	@RequestMapping(value="/uploadForm",method=RequestMethod.GET)
 	public void uploadForm(){
+		System.out.println("uploadForm");
 		
 	}
 	
 	@RequestMapping(value="/uploadForm",method=RequestMethod.POST)
 	public String uploadForm(MultipartFile file, Model model) throws Exception{
+		System.out.println("uploadForm2");
 		String saveName = uploadFile(file.getOriginalFilename(), file.getBytes());
 		model.addAttribute("saveName",saveName);
 		
@@ -46,6 +48,7 @@ public class UploadController {
 	
 	private String uploadFile(String originalName,byte[] fileData) throws Exception
 	{
+		System.out.println("uploadFile");
 		UUID uid = UUID.randomUUID();
 		String saveName = uid.toString() + "_" + originalName;
 		File target = new File(uploadPath,saveName);
@@ -54,14 +57,14 @@ public class UploadController {
 	}
 	
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
-	public void uploadAjax(){}
+	public void uploadAjax(){System.out.println("uploadAjax");}
 	
 	
 	@ResponseBody
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST,
 					produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
-
+		System.out.println("uploadAjax2");
 		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),HttpStatus.CREATED);
 	}
 	
@@ -75,7 +78,7 @@ public class UploadController {
 	 @ResponseBody
 	  @RequestMapping("/displayFile")
 	  public ResponseEntity<byte[]>  displayFile(@RequestParam("fileName") String fileName)throws Exception{
-	    
+		  System.out.println("displayFile");
 	    InputStream in = null; 
 	    ResponseEntity<byte[]> entity = null;
 	    
@@ -116,6 +119,7 @@ public class UploadController {
 	  @ResponseBody
 	  @RequestMapping(value="/deleteFile",method=RequestMethod.POST)
 	  public ResponseEntity<String> deleteFile(String fileName){
+		  System.out.println("deleteFile");
 		 String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 		    
 		    MediaType mType = MediaUtils.getMediaType(formatName);
@@ -137,6 +141,7 @@ public class UploadController {
 	  @ResponseBody
 	  	@RequestMapping(value="/deleteAllFiles",method=RequestMethod.POST)
 	  	public ResponseEntity<String> deleteFile(@RequestParam("files[]") String[] files){
+		  System.out.println("deleteAllFiles");
 		  if(files == null || files.length == 0) {
 			  return new ResponseEntity<String>("deleted",HttpStatus.OK);
 		  }

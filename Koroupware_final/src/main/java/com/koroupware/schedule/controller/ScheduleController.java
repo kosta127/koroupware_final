@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.koroupware.dept.domain.DeptVO;
 import com.koroupware.member.dto.EmpDTO;
+import com.koroupware.schedule.domain.JoinListDTO;
 import com.koroupware.schedule.domain.ScheduleDTO;
 import com.koroupware.schedule.domain.ScheduleVO;
 import com.koroupware.schedule.service.ScheduleService;
@@ -34,6 +36,14 @@ public class ScheduleController {
 	public String viewGet1(HttpSession session, ScheduleDTO schedule, Model model)throws Exception{
 		//, ScheduleVO vo 지웟음 am 07:08
 		EmpDTO emp = (EmpDTO)session.getAttribute("login");
+		DeptVO dept = new DeptVO();
+		
+		JoinListDTO joinList = new JoinListDTO();
+		joinList.setEmp_name(emp.getEmp_name());
+		joinList.setDept_name(dept.getDept_name());
+		
+		System.out.println(joinList.getEmp_name());
+		System.out.println(joinList.getDept_name());
 		
 		Calendar cal = Calendar.getInstance(); //현재 날짜 가져오기
 		
@@ -273,6 +283,45 @@ public class ScheduleController {
 		rttr.addAttribute("month", month);
 		rttr.addAttribute("day", day);
 		rttr.addAttribute("schedule_start", date);
+		
+		return "redirect:/schedule/view";
+	}
+	
+	@RequestMapping(value="/detail/{year}/{month}/{day}/{schedule_no}", method=RequestMethod.GET)
+	public String detailGET(@PathVariable int year, @PathVariable int month, @PathVariable int day,
+							@PathVariable int schedule_no, Model model)throws Exception{
+		System.out.println("detailGet");
+		
+		model.addAttribute("scheduleVO", service.scheduleRead(schedule_no));
+		
+		return "/schedule/detail";
+	}
+	
+	@RequestMapping(value="/delete/{schedule_no}", method={RequestMethod.GET, RequestMethod.POST})
+	public String delete(@PathVariable int schedule_no, RedirectAttributes rttr)throws Exception{
+		System.out.println("tetetetetet");
+		service.scheduleRemove(schedule_no);
+		
+		System.out.println("delete"+schedule_no);
+		rttr.addAttribute("schedule_no", schedule_no);
+		
+		return "redirect:/schedule/view";
+	}
+	
+	@RequestMapping(value="/modify/{year}/{month}/{day}/{schedule_no}", method=RequestMethod.GET)
+	public String updateGet(@PathVariable int year, @PathVariable int month, @PathVariable int day,
+							@PathVariable("schedule_no")int schedule_no, Model model)throws Exception{
+		System.out.println("updateGet");
+		
+		model.addAttribute(service.scheduleRead(schedule_no));
+		return "/schedule/modify";
+	}
+	
+	@RequestMapping(value="/modify/{year}/{month}/{day}/{schedule_no}", method=RequestMethod.POST)
+	public String updatePOST(ScheduleVO schedule)throws Exception{
+		System.out.println("post");
+		service.scheduleModify(schedule);
+		
 		
 		return "redirect:/schedule/view";
 	}

@@ -27,6 +27,20 @@
 				, to_char(SCHEDULE_START,'yy/mm/dd') as SCHEDULE_START_String
 		from schedule 
 		where EMP_NO=#{emp_no}
+		and schedule_deldate is null
 	</select>
+	
+	<select id="detailSchedule" resultType="ScheduleVO">
+		select * from schedule where schedule_no = #{schedule_no}
+	</select>
+	
+	<update id="deleteSchedule">
+		update schedule set schedule_deldate=SYSDATE where schedule_no = #{schedule_no}
+	</update>
+	
+	<update id="updateSchedule" parameterType="ScheduleVO">
+		update schedule set schedule_title=#{schedule_title}, schedule_contents=#{schedule_contents} 
+			where schedule_no=#{schedule_no}
+	</update>
 </mapper>  
 

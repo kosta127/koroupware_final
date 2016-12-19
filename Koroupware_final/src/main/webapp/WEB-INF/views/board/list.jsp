@@ -50,7 +50,7 @@
 		<div class='box-body'>
 			<div class="col-xs-2">
 				<select name="searchType" class="form-control">
-					<option value="n"
+					<option  value="n"
 						<c:out value="${cri.searchType == null?'selected':''}"/>>
 						---</option>
 					<option value="t"

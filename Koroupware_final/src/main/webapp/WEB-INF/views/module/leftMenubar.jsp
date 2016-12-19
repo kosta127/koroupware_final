@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 function webrtc() {
-   window.open("http://192.168.0.13:8082/webrtc", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=10000,width=400,height=400");
+   window.open("http://localhost:8082/webrtc", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=10000,width=400,height=400");
 }
 </script>
 <style type="text/css">	
@@ -94,7 +94,7 @@ function webrtc() {
 				href="/message/receivedmessageList/${login.emp_no}">쪽지</a></li>
 			<li class="sidebar-red"><a onclick="webrtc()">화상회의</a></li>
 			<li class="sidebar-green"><a
-				href="http://192.168.0.13:8082/imageroom/lobby?emp_no=${login.emp_no}">그림회의</a></li>
+				href="http://localhost:8082/imageroom/lobby?emp_no=${login.emp_no}">그림회의</a></li>
 			<li class="sidebar-orange"><a href="">이메일</a></li>
 			<li class="sidebar-blue"><a href="/schedule/view">일정</a></li>
 			<li class="sidebar-red"><a href="/attend/attendList/${login.emp_no}">출석확인</a></li>

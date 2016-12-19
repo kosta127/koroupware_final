@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,34 +18,38 @@
 <!-- printTool -->
 <script src="/resources/printTool/jQuery.print.js"></script>
 <script type="text/javascript">
-/* 	function cancel(){
-		location.href="view";
-	} */
+function cancel(){
+		location.href="/schedule/view";
+	}
 </script>
 </head>
 <body>
-<h1>${emp_no }</h1>
-<h1>${day }</h1>
 	<form method="post">
-		<table border="1">
+		<table class="table table-bordered table-hover">
 			<tr>
-				<td>ÀÏÀÚ</td>
-				<td>${year}³â${month}¿ù${day}ÀÏ</td>
+				<td>ì¼ì</td>
+				<td>${year}ë…„${month}ì›”${day}ì¼</td>
 			</tr>
 			<tr>
-				<td>Á¦¸ñ</td>
-				<td><input type="text" value="${schedule_title }" name="schedule_title"></td>
+				<td>ì œëª©</td>
+				<td><input type="text" value="${schedule_title }" name="schedule_title" class="form-control"></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td><input type="text" value="${schedule_contents }" name="schedule_contents"></td>
+				<td colspan="2""><textarea value="${schedule_contents }" name="schedule_contents" class="form-control"></textarea></td>
 			</tr>
 		</table>
+		
+		<select name="joinList" class="form-control">
+			<option value="dept_name"
+				<c:out value="${dept_name }"/>>
+			</option>	
+			</select>
+		
 		<input type="hidden" name="year" value="${year}">
 		<input type="hidden" name="month" value="${month}">
 		<input type="hidden" name="day" value="${day}">
-		<input type="submit" class="btn btn-primary" value="µî·Ï">
-		<input type="button" class="btn btn-primary" onclick="cancel()" value="Ãë¼Ò">
+		<input type="submit" class="btn btn-primary" value="ë“±ë¡">
+		<input type="button" class="btn btn-primary" onclick="cancel()" value="ì·¨ì†Œ">
 	</form>
 	
 </body>

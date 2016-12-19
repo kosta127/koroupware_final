@@ -18,7 +18,7 @@
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <!-- printTool -->
 <script src="/resources/printTool/jQuery.print.js"></script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 
 function monthDown(){
 	var setYear = $("#setYear").text();//2016
@@ -42,10 +42,8 @@ function monthDown(){
 	var endDay = ${endDay};//12월의 끝날
 	
 	var numStart = parseInt(startDay, 10);
-	numStart = 
 	
 
-	alert(numStart);
 	
 	var day = $("#day").text();
 	var numDay = parseInt(day, 10);
@@ -81,7 +79,7 @@ function monthUp(){
 	$("#setMonth").text(numMonth);
 }
 
-</script> -->
+</script>
 <style type="text/css">
 .day{
 	font-size: 22px;
@@ -108,8 +106,8 @@ td{
 	<tr>
 		<td align="center">
 			<a onclick="monthDown()">◀</a>
-				<label id="setYear">${year }년</label>
-				<label id="setMonth">${month}월 </label>
+				<label id="setYear">${year }</label>년
+				<label id="setMonth">${month}</label>월
 			<a onclick="monthUp()">▶</a>
 			
 			
@@ -133,6 +131,7 @@ td{
 			<td width="100" align="center"><font color="blue">토</font></td>
 			
 		</tr>
+		
 		<!-- 해당 월의 첫째 줄의 공백 표시 -->
 		<tr>
 		
@@ -140,9 +139,10 @@ td{
 			<td></td>
 		</c:forEach>
 		
+		<!-- 1~해당월의 마지막날짜 -->
 		<c:forEach var="day" begin="1" end="${endDay }">			
 				<c:choose>
-					<c:when test="${(startDay-2+day)%7==0}">
+					<c:when test="${(startDay-2+day)%7==0}"><!-- 일요일 -->
 						<td align="right">
 							<a href='<c:url value="regist/${year}/${month}/${day}"></c:url>'>
 								<font color="red" class="day">${day }</font>
@@ -161,12 +161,8 @@ td{
 								</c:choose>
 								<c:set var="for_compare_time" value="${year}/${month}/${zero_removed_day}"></c:set>
 								<c:if test="${for_compare_time == time}">
-									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
+									<a href="detail/${year}/${month}/${day}/${scheduleVO.schedule_no}" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
 								</c:if>
-								<%-- <c:if test="${scheduleVO.schedule_start_String == time}">
-									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>
-								</c:if> --%>
-								<%-- zzz<br>svo org : ${scheduleVO.schedule_start_String }<br> time : ${time }<br>org : ${temp_day}<br>zero removed : ${zero_removed_day }<br>${for_compare_time}<br><br> --%>
 							</c:forEach>
 						</td>
 					</c:when>
@@ -188,11 +184,8 @@ td{
 								</c:choose>
 								<c:set var="for_compare_time" value="${year}/${month}/${zero_removed_day}"></c:set>
 								<c:if test="${for_compare_time == time}">
-									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
-								</c:if><%-- 
-								<c:if test="${scheduleVO.schedule_start_String == time}">
-									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>
-								</c:if> --%>
+									<a href="detail/${year}/${month}/${day}/${scheduleVO.schedule_no}" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
+								</c:if>
 							</c:forEach>
 						</td>
 					</c:when>
@@ -213,11 +206,8 @@ td{
 								</c:choose>
 								<c:set var="for_compare_time" value="${year}/${month}/${zero_removed_day}"></c:set>
 								<c:if test="${for_compare_time == time}">
-									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
-								</c:if><%-- 
-								<c:if test="${scheduleVO.schedule_start_String == time}">
-									<a href="#" id="schedule">제목:${scheduleVO.schedule_title }</a>
-								</c:if> --%>
+									<a href="detail/${year}/${month}/${day}/${scheduleVO.schedule_no}" id="schedule">제목:${scheduleVO.schedule_title }</a><br>
+								</c:if>
 							</c:forEach>
 						</td>	
 					</c:otherwise>

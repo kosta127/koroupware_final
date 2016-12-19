@@ -26,7 +26,6 @@ public class ChatController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ResponseEntity<String> chatPOST(ImageRoomHisVO vo){
 		ResponseEntity<String> entity = null;
-		
 		System.out.println(vo);
 		
 		try {

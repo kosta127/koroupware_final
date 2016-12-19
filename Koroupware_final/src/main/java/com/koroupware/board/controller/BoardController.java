@@ -50,7 +50,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
-	public String insertPOST(HttpSession session, @RequestParam("category_no") int category_no, BoardVO board, RedirectAttributes rttr)throws Exception{
+	public String insertPOST(HttpSession session, @RequestParam("category_no") int category_no, 
+								BoardVO board, RedirectAttributes rttr)throws Exception{
 		
 		EmpDTO emp = (EmpDTO)session.getAttribute("login");
 		
